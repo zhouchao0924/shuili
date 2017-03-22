@@ -1,0 +1,67 @@
+<style type="text/css">
+    .end {
+        cursor: pointer;
+        background: #90b8f9;
+        margin-right: 5px;
+    }
+    .new {
+        background: #90b8f9;
+        padding: 5px;
+        margin-right: 10px;
+        line-height: 24px;
+    }
+
+</style>
+
+<div class="col-md-8 container" ng-click="showspace()" style="width:514px;height:34px;border:1px solid #ccc;padding:5px;">
+    <span class="new" value="{{checklabel.attrKey}}" ng-repeat="checklabel in checklabels track by $index">{{checklabel.attValue}}
+        <a href="javascript:;" ng-click="dellabel($index)">
+            <i class="fa fa-times"></i>
+        </a>
+    </span>
+</div>
+<div class="panel panel-default space" style="display:none;">
+    <div class="form-group col-md-11" style="margin-top:10px;">
+        <div class="col-md-8">
+            <div class="input-group">
+                <input type="text" class="form-control" name="search" placeholder="输入搜索" ng-model="query1">
+                <span class="input-group-btn">
+                    <button class="btn btn-default">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <button class="btn blue" ng-click="addbiaoqian()">
+                <i class="fa fa-plus"></i>添加新标签
+            </button>
+        </div>
+    </div>
+    <div class="form-group col-md-11">
+        <div class="col-md-12">
+            <label class="control-label col-md-3">
+                当前标签
+            </label>
+            <div class="col-md-3" style="margin-bottom:5px;" ng-repeat="biaoqian in repeatOptions|filter:query1" ng-click="changecolor($index)">
+                <input type="button" class="form-control" status="{{biaoqian.idDesc}}" value="{{biaoqian.valueDesc}}"/>
+            </div>
+            <div class="col-md-8 newbiaoqian" style="margin-bottom:5px;display:none;">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="newlabel" maxlength="4" placeholder="输入4字以内新标签"/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-success" ng-click="savenewlabel()">
+                            <i class="fa fa-check"></i>
+                        </button>
+                        <button class="btn btn-default" ng-click="hidenewlabel()">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="btn spinner-up btn-xs default" style="width:100%;" ng-click="hidespace()">
+        <i class="fa fa-angle-up"></i>收起
+    </button>
+</div>

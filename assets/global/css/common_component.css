@@ -1,0 +1,161 @@
+/*
+confirm弹框
+ */
+.mr10 {
+	margin-right: 10px;
+}
+.p10 {
+    padding: 10px;
+}
+.confirm-message {
+	min-width: 140px;
+    padding: 10px;
+    z-index: 99999;
+    position: absolute;
+    background-color: #FFF;
+    border: 1px solid #eee;
+    border-radius: 4px !important;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-50px);
+}
+.confirm-message .confirm-message-arrow {
+	width: 10px;
+    height: 10px;
+    position: absolute;
+    margin: -16px auto 0 auto;
+    background-color: #FFF;
+    border-top: 1px solid #eee;
+    border-left: 1px solid #eee;
+}
+.confirm-message .confirm-message-title {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.confirm-message .confirm-message-btn-container {
+	text-align: right;
+}
+
+/*
+alert提示
+ */
+.vi-message {
+    width: 400px;
+    color: #FFF;
+    padding: 8px;
+    text-align: center;
+    position: fixed;
+    top: 50px;
+    z-index: 9999999;
+    border-radius: 4px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+}
+.vi-message-success {
+    background-color: #55d98d;
+}
+.vi-message-info {
+    background-color: #5dade2;
+}
+.vi-message-warn {
+    background-color: #f4d03f;
+}
+.vi-message-error {
+    background-color: #ec7063;
+}
+
+/*
+dialog
+ */
+.vi-dialog-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+    z-index:9999998;
+}
+.vi-dialog {
+    margin-bottom: 20px;
+    background-color: #FFF;
+    border: 1px solid #eee;
+    border-radius: 4px !important;
+    z-index: 9999999;
+    position: absolute;
+    top: 10%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    animation: dialogAnimation .3s;
+    -moz-animation: dialogAnimation .3s; /* Firefox */
+    -webkit-animation: dialogAnimation .3s; /* Safari and Chrome */
+    -o-animation: dialogAnimation .3s; /* Opera */
+}
+@keyframes dialogAnimation {
+    from {
+        opacity: 0;
+        top: 0;
+    }
+    to {
+        opacity: 1;
+        top: 10%;
+    }
+}
+@-moz-keyframes dialogAnimation {
+    from {
+        opacity: 0;
+        top: 0;
+    }
+    to {
+        opacity: 1;
+        top: 10%;
+    }
+}
+@-webkit-keyframes dialogAnimation {
+    from {
+        opacity: 0;
+        top: 0;
+    }
+    to {
+        opacity: 1;
+        top: 10%;
+    }
+}
+@-o-keyframes dialogAnimation {
+    from {
+        opacity: 0;
+        top: 0;
+    }
+    to {
+        opacity: 1;
+        top: 10%;
+    }
+}
+.vi-dialog-header, .vi-dialog-content{
+    border-bottom: 1px solid #e9e9e9;
+}
+.vi-dialog-title {
+    font-size: 20px;
+}
+.vi-dialog-close {
+    color: #bfcbd9;
+    font-size: 25px;
+    line-height: 28px;
+    float: right;
+    cursor: pointer;
+}
+.vi-dialog-close:hover {
+    color: #333;
+}
+.vi-dialog-footer {
+    padding: 10px;
+    text-align: right;
+}
+.vi-dialog-modal {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: fixed;
+    opacity: 0.5;
+    background-color: #000;
+}

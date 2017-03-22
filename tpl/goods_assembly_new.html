@@ -1,0 +1,101 @@
+<style type="text/css">
+    #lianjiefu {
+        background-color: white;
+        background: none;
+        border: none;
+        min-width: auto;
+    }
+
+    .nav-tabs> li {
+        width: 200px;
+        text-align: center;
+    }
+</style>
+<!-- BEGIN PAGE HEADER-->
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet box blue-madison">
+            <div class="portlet-title">
+                <div class="caption"> <i class="fa fa-globe"></i>选择类目 </div>
+                <div class="tools">
+                    <a href="javascript:;" class="reload"></a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <form id="searchForm" class="col-md-12 form-horizontal">
+                        <div class="row" style="margin-top:50px;">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">类目搜索：</label>
+                                    <div class="col-md-5">
+                                        <input type="text" class="form-control" ng-model="searchname" placeholder="输入类目" /> </div>
+                                    <div class="col-md-3"> <a href="" class="btn blue" ng-click="searchassembly()" ng-disabled="!searchname">
+                                            快速找到类目
+                                        </a> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="visibility">
+                            <div class="col-md-11">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3"></label>
+                                    <div class="col-md-2">
+                                        <select class="form-control" multiple="multiple" style="height:300px;" ng-options="item as item.categoryDto.name for item in tree" ng-model="selectone" ng-change="querytwo(selectone)"> </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select class="form-control" multiple="multiple" style="height:300px;" ng-options="sonitem as sonitem.categoryDto.name for sonitem in childrenitem" ng-model="selecttwo" ng-change="querythree(selecttwo)"> </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select class="form-control" multiple="multiple" style="height:300px;" ng-options="greatgrandsonitem as greatgrandsonitem.categoryDto.name for greatgrandsonitem in grandsonitem" ng-model="selectthree" ng-change="querylast()">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="!visibility">
+                            <div class="col-md-11">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3"></label>
+                                    <div class="col-md-6" style="border:1px solid #ccc">
+                                        <div class="col-md-11">
+                                            <div class="form-group" style="margin:20px 0 10px 20px;">
+                                                <div class="col-md-8"> 匹配到<span class="form-control-static" style="color:red;font-weight:bold;">&nbsp;{{namelist.length}}&nbsp;</span>个类目，如无合适类目 </div>
+                                                <div class="col-md-4"> <span class="form-control-static">
+                                                        <a href="#" ng-click="selectassembly()">请重新选择分类</a>
+                                                    </span> </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-10">
+                                                    <div class="radio-list" ng-repeat="t in totallist">
+                                                        <label>
+                                                            <input type="radio" name="gender" value="" ng-click="todetail(t.id)" bn-uniform/>{{t.name}}</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-11">
+                                <div class="form-group">
+                                    <label class="control-label col-md-5"></label>
+                                    <div class="col-md-3"> <a class="btn red" ng-disabled="!selectone && !searchname" ng-click="hideModal()">
+                                            下一步，填写信息
+                                        </a> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+</div>
+<!-- END MAIN CONTENT -->

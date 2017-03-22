@@ -1,0 +1,106 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+	<ul class="page-breadcrumb">
+		<li>
+			<i class="fa fa-home"></i>
+			<a href="#/dashboard.html">首页</a>
+			<i class="fa fa-angle-right"></i>
+		</li>
+		<li>
+			<a href="#">概况</a>
+		</li>
+	</ul>
+</div>
+<h3 class="page-title">
+	概况
+</h3>
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<div ng-controller="DashboardController">
+	<!-- BEGIN DASHBOARD STATS -->
+	<div class="row">
+		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			<div class="dashboard-stat blue-madison">
+				<div class="visual">
+					<i class="fa fa-comments"></i>
+				</div>
+				<div class="details">
+					<div class="number">
+						{{boardDetail.productCount}}
+					</div>
+					<div class="desc">
+						商品
+					</div>
+				</div>
+				<a class="more" href="#/allgoods">
+					更多
+					<i class="m-icon-swapright m-icon-white"></i>
+				</a>
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			<div class="dashboard-stat red-intense">
+				<div class="visual">
+					<i class="fa fa-bar-chart-o"></i>
+				</div>
+				<div class="details">
+					<div class="number">
+						{{boardDetail.suitCount}}
+					</div>
+					<div class="desc">
+						套装
+					</div>
+				</div>
+				<a class="more" href="#/suits">
+					更多
+					<i class="m-icon-swapright m-icon-white"></i>
+				</a>
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			<div class="dashboard-stat green-haze">
+				<div class="visual">
+					<i class="fa fa-shopping-cart"></i>
+				</div>
+				<div class="details">
+					<div class="number">
+						{{boardDetail.orderCount}}
+					</div>
+					<div class="desc">
+						订单
+					</div>
+				</div>
+				<a class="more" href="#/orders/">
+					更多
+					<i class="m-icon-swapright m-icon-white"></i>
+				</a>
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			<div class="dashboard-stat purple-plum">
+				<div class="visual">
+					<i class="fa fa-globe"></i>
+				</div>
+				<div class="details">
+					<div class="number">
+						{{boardDetail.adviceCount}}
+					</div>
+					<div class="desc">
+						意见反馈
+					</div>
+				</div>
+				<a class="more" href="#/feedbacks">
+					更多
+					<i class="m-icon-swapright m-icon-white"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+	<!-- END DASHBOARD STATS -->
+</div>
+<!-- END MAIN CONTENT -->
+<!-- BEGIN MAIN JS & CSS -->
+<script>
+	// Index.init(); Tasks.initDashboardWidget();
+</script>
+<!-- BEGIN MAIN JS & CSS -->

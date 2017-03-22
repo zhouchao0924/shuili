@@ -1,0 +1,18 @@
+<div class="page-sidebar navbar-collapse collapse">
+	<ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" ng-class="{'page-sidebar-menu-closed': settings.layout.pageSidebarClosed}">
+		<li ng-repeat="v in leftmenuList.children">
+			<a href="{{v.url}}">
+				<i class="{{v.icon}}"></i>
+				<span class="title">{{v.name}}</span>
+				<span class="arrow" ng-if="v.children.length"></span>
+			</a>
+			<ul class="sub-menu" ng-if="v.children.length">
+				<li ng-repeat="o in v.children">
+					<a href="{{o.url}}">
+						<span class="title">{{o.name}}</span>
+					</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</div>
