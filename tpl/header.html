@@ -2,12 +2,13 @@
 <div class="page-header-inner">
 	<!-- BEGIN LOGO -->
 	<div class="page-logo">
-		<a href="#/">
-		<img src="assets/admin/layout/img/logo.png" alt="logo" class="logo-default"/>
-		</a>
-<!-- 		<div class="menu-toggler sidebar-toggler">
-	
-		</div> -->
+		<!-- <a href="#/">
+			<img src="assets/admin/layout/img/logo.png" alt="logo" class="logo-default"/>
+		</a> -->
+		<h3 style="display:inline-block;color:white;margin-top:10px;" class="logo-default">{{orgName}}</h3>
+		<!-- <div class="menu-toggler sidebar-toggler"> -->
+		<!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+		<!-- </div> -->
 	</div>
 	<!-- END LOGO -->
 	<!-- BEGIN HEADER SEARCH BOX -->
@@ -16,39 +17,39 @@
 		<div class="input-group">
 			<input type="text" class="form-control" placeholder="Search..." name="query">
 			<span class="input-group-btn">
-			<a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
+				<a href="javascript:;" class="btn submit">
+					<i class="icon-magnifier"></i>
+				</a>
 			</span>
 		</div>
 	</form>
 	<!-- END HEADER SEARCH BOX -->
 	<!-- BEGIN RESPONSIVE MENU TOGGLER -->
-	<a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
-	</a>
+	<a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"></a>
 	<!-- END RESPONSIVE MENU TOGGLER -->
 	<!-- BEGIN TOP NAVIGATION MENU -->
 	<div class="top-menu">
-		<ul class="nav navbar-nav">
-			<li class="dropdown dropdown-user" ng-repeat="item in menuList" style="padding:0 10px;">
-				<a href="javascript:;" class="dropdown-toggle" dropdown-menu-hover data-toggle="dropdown" data-close-others="true" ng-click="pushmenu(item)" style="color:white">{{item.name}}
-				</a>
-			</li>
+		<ul class="nav navbar-nav pull-right">
 			<!-- BEGIN USER LOGIN DROPDOWN -->
 			<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
 			<li class="dropdown dropdown-user">
 				<a href="#" class="dropdown-toggle" dropdown-menu-hover data-toggle="dropdown" data-close-others="true">
-				<img alt="" class="img-circle" src="assets/admin/layout/img/avatar3_small.jpg"/>
-				<span class="username username-hide-on-mobile">
-				 </span>
-				<i class="fa fa-angle-down"></i>
+					<!-- <img alt="" class="img-circle" src="assets/admin/layout/img/avatar3_small.jpg"/> -->
+					<span class="username username-hide-on-mobile"></span>
+					<i class="fa fa-angle-down"></i>
 				</a>
 				<ul class="dropdown-menu dropdown-menu-default">
 					<li>
 						<a href="change_password.html">
-						<i class="icon-key"></i> 修改密码 </a>
+							<i class="icon-key"></i>
+							修改密码
+						</a>
 					</li>
 					<li id="quit" ng-click="quit()">
 						<a href="javascript:;">
-						<i class="icon-logout"></i> 退出 </a>
+							<i class="icon-logout"></i>
+							退出
+						</a>
 					</li>
 				</ul>
 			</li>
