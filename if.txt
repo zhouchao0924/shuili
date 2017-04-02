@@ -80,3 +80,11 @@
         }
         ...
     ]
+
+7.设置当前管理的地区
+    url:/user/setCurrentArea
+    method:get
+    request:{
+        "streetId":int //对应6接口中乡镇列表中的id
+    }
+    response:{}
