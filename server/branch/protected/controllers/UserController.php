@@ -10,7 +10,7 @@ class UserController extends Controller{
      */
     public function actionLogin(){
         $params = $this->getAjaxRequestParam();
-        $name = isset($params['name'])&&!empty($params['name'])?trim($params['name']):"";
+        $name = isset($params['userName'])&&!empty($params['userName'])?trim($params['userName']):"";
         $password = isset($params['password'])&&!empty($params['password'])?trim($params['password']):"";
         $clientComponent = new ClientComponent();
         $userId = $clientComponent->getUserId();
@@ -49,7 +49,7 @@ class UserController extends Controller{
      */
     public function actionAddUser(){
         $params = $this->getAjaxRequestParam();
-        $name = isset($params['name'])&&!empty($params['name'])?trim($params['name']):"";
+        $name = isset($params['userName'])&&!empty($params['userName'])?trim($params['userName']):"";
         $password = isset($params['password'])&&!empty($params['password'])?trim($params['password']):"";
         $desc = isset($params['desc'])&&!empty($params['desc'])?trim($params['desc']):"";
         $roleId = isset($params['roleId'])&&!empty($params['roleId'])?intval($params['roleId']):0;
@@ -105,18 +105,45 @@ class UserController extends Controller{
     /**
      * 获取管理员管理的地区
      */
-    public function actionGetAdminManageDistrict($adminId){
+    public function actionGetManageArea(){
         $clientComponent = new ClientComponent();
-        $userInfo = $clientComponent->getUserInfo();
-
-        if(empty($userInfo)){
+        $userId = $clientComponent->getUserId();
+        if($userId <= 0){
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户未登录",ErrorCode::ERROR_USER_NOT_LOGIN,array()));
         }
 
         $userModel = new UserModel();
-        if($userModel->isCommonAdmin($adminId) == false){
-            return $this->renderAjaxResponse($this->getAjaxResponse(false,"管理员信息错误",ErrorCode::ERROR_COMMON_ERROR,array()));
+        $area = $userModel->getManageArea($userId);
+        $manageArea = array();
+        if(!empty($area)){
+            foreach ($area as $value){
+                $manageArea[] = $value;
+            }
         }
-        $userModel->getAdminManageDistrict($adminId);
+
+        return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,$manageArea));
+    }
+
+    public function actionSetCurrentArea(){
+        $params = $this->getAjaxRequestParam();
+        $streetId = isset($params['streetId'])?intval($params['streetId']):0;
+
+        if($streetId <= 0){
+            return $this->renderAjaxResponse($this->getAjaxResponse(false,"参数错误",ErrorCode::ERROR_PARAMS,array()));
+        }
+        $client = new ClientComponent();
+
+        $userId = $client->getUserId();
+        if($userId <= 0){
+            return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户未登录",ErrorCode::ERROR_USER_NOT_LOGIN,array()));
+        }
+        $userModel = new UserModel();
+        if(!$userModel->isUserManageArea($userId,$streetId)){
+            return $this->renderAjaxResponse($this->getAjaxResponse(false,"无对应权限",ErrorCode::ERROR_USER_DENY,array()));
+        }
+
+        $client->setCurrentArea($streetId);
+
+        return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,array()));
     }
 }

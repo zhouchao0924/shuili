@@ -11,11 +11,11 @@ class ClientComponent{
 	
 	/**
 	 * 生成用户sessionkey
-	 * @param array $userInfo
+	 * @param array $userId
 	 * @return string
 	 */
-	private function _getSessionKey($userInfo){
-		$key = "wp.client.".time().$userInfo['id'].rand(100000, 999999);
+	private function _getSessionKey($userId){
+		$key = "wp.client.".time().$userId.rand(100000, 999999);
 		$map = "0123456789abcdefghijklmnopqrstuvwxyz";
 		$bit = rand(0,strlen($map)-1);
 		return $map[$bit].md5($key);
@@ -26,7 +26,7 @@ class ClientComponent{
 	 * @param array $userInfo
 	 */
 	public function setUserInfo($userInfo){
-		$userKey = $this->_getSessionKey($userInfo);
+		$userKey = $this->_getSessionKey($userInfo['id']);
 		$data = array(
 			'userId'=>$userInfo['id'],
 			'userName'=>$userInfo['name'],
@@ -34,6 +34,7 @@ class ClientComponent{
 			'expirTime'=>time() + self::EXPIRE_TIME_DEFAULT,
             'roleId'=>$userInfo['role_id'],
             'super'=>$userInfo['super'],
+            'currentArea'=>0,
 		);
 
 
@@ -43,6 +44,15 @@ class ClientComponent{
 		CookieComponent::setCookie(CookieComponent::$userName, $userInfo['name'].time());
         CookieComponent::setCookie("tmp", $userInfo['name'].time());
 	}
+
+	public function setCurrentArea($streetId){
+        $userKey = CookieComponent::getCookie(CookieComponent::$sessionId);
+        $cacheInfo = MemCacheComponent::getCacheByKey($userKey);
+        $cacheInfo['currentArea'] = $streetId;
+
+        MemCacheComponent::setCache($userKey, $cacheInfo, self::EXPIRE_TIME_DEFAULT);
+    }
+
 	/**
 	 * 获取client user信息
 	 */

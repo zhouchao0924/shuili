@@ -74,18 +74,41 @@ class UserModel {
         $this->getUserDao()->update($cols,$conditions,$params);
     }
 
-    public function getAdminManageDistrict($userId){
+    private function formatManageArea($list){
+        if(empty($list)){
+            return array();
+        }
+        $area = array();
+
+        foreach ($list as $row){
+            if(!isset($area[$row['district_id']])){
+                $area[$row['district_id']] = array(
+                    'id'=>$row['district_id'],
+                    'name'=>$row['district_name'],
+                    'list'=>array(),
+                );
+            }
+            $area[$row['district_id']]['list'][] = array(
+                'id'=>$row['street_id'],
+                'name'=>$row['street_name'],
+            );
+        }
+        return $area;
+    }
+
+    public function getManageArea($userId){
         $conditions = array(
             "and",
-            "admin_id=:adminId",
+            "user_id=:userId",
             "del_flag=0",
         );
         $params = array(
-            ":adminId"=>$userId,
+            ":userId"=>$userId,
         );
 
-        $list = WpAdminAreaDao::getInstance("WpAdminArea")->select("*",$conditions,$params,true,"id desc");
-        
+        $list = WpUserManageAreaDao::getInstance("WpUserManageArea")->select("*",$conditions,$params,true,"id desc");
+
+        return $this->formatManageArea($list);
     }
 
     private function getUserById($userId){
@@ -104,6 +127,25 @@ class UserModel {
     public function isCommonAdmin($userId){
         $userInfo = $this->getUserById($userId);
         if(empty($userInfo) || $userInfo['admin'] == 1){
+            return false;
+        }
+        return true;
+    }
+
+    public function isUserManageArea($userId,$streetId){
+        $conditions = array(
+            "and",
+            "user_id = :userId",
+            "del_flag = 0",
+            "street_id = :streetId",
+        );
+        $params = array(
+            ":userId"=>$userId,
+            ":streetId"=>$streetId,
+        );
+
+        $data = WpUserManageAreaDao::getInstance("WpUserManageArea")->select("*",$conditions,$params,false);
+        if(empty($data)){
             return false;
         }
         return true;

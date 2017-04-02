@@ -9,6 +9,7 @@ class ErrorCode {
     CONST ERROR_LOGIN_FAILED = 40003;//用户名或密码错误
     CONST ERROR_USER_LOGIN = 40004;//用户已登录
     CONST ERROR_USER_NOT_LOGIN = 40005;//用户已登录
+    CONST ERROR_USER_DENY = 40006;//无权限
 
     CONST ERROR_COMMON_ERROR = 40006;//通用错误
 }

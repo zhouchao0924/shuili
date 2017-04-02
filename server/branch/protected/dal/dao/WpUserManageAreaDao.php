@@ -5,9 +5,9 @@
  * Date: 17/3/29
  * Time: 22:03
  */
-class WpAdminAreaDao extends Dao{
+class WpUserManageAreaDao extends Dao{
     public function getTableName()
     {
-        return "wp_admin_area";
+        return "wp_user_manage_area";
     }
 }

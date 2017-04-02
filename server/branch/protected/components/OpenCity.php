@@ -6,6 +6,9 @@
  * Time: 22:08
  */
 class OpenCity{
+    CONST PROVINCE_ID = 11;
+    CONST CITY_ID=88;
+    CONST DISTRICT_ID=865;
     //开放的城市列表
     public $list = array(
         array(
