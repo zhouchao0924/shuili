@@ -14,11 +14,11 @@
     url:/user/login
     method:get
     request:{
-        "name":string,
+        "userName":string,
         "password":string
     }
     response:{
-        "name":string
+        "userName":string
         "userId":int
     }
 
@@ -31,4 +31,52 @@
     }
 
 3.检查是否登录
-    
+    url:/user/isLogin
+    method:get
+    request:{
+    }
+    response:{
+        "userId":int 
+        "userName":string
+    }
+
+4.添加用户
+    url:/user/addUser
+    method:get
+    request:{
+        "userName":string
+        "password":string
+        "desc":string
+        "roleId":int
+    }
+    response:{
+    }
+
+5.重置密码(自己给自己重置)
+    url:/user/resetPassword
+    method:get
+    request:{
+        "password":string
+    }
+    response:{
+    }
+
+6.获取已管理的地区信息
+    url:/user/getManageArea
+    method:get
+    request:{
+    }
+    response:{
+        [
+            "districtId":int 地区id
+            "districtName":string 地区名
+            list:[ //乡镇列表
+                {
+                    "id":int 乡镇id
+                    "name":string 乡镇名称
+                }
+                ...
+            ]
+        ]
+        ...
+    }
