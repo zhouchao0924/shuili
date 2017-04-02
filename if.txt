@@ -66,17 +66,17 @@
     method:get
     request:{
     }
-    response:{
-        [
-            "districtId":int 地区id
-            "districtName":string 地区名
-            list:[ //乡镇列表
+    response:[
+        {
+            "id":int 地区id
+            "name":string 地区名
+            "list":[ //乡镇列表
                 {
                     "id":int 乡镇id
                     "name":string 乡镇名称
                 }
                 ...
             ]
-        ]
+        }
         ...
-    }
+    ]
