@@ -1,5 +1,4 @@
 <?php
-use Qiniu\json_decode;
 /**
  * Controller is the customized base controller class.
  * All controller classes for this application should extend from this base class.
@@ -10,6 +9,21 @@ class Controller extends CController
 	CONST DATA_FORMAT_JSON = "json";
 	CONST DATA_FORMAT_BASE64 = "base64";
     public $ua = "";
+    public $loginTrue = false;
+    public $cityId = 0;
+    public $isSuper = false;
+    public $cityInfo=array();
+    public $response = array('success'=>'true','message'=>'','url'=>'');
+    public $role = array();
+    public $orgList = array();
+    public $adminId = 0;
+    public $adminName = "";
+    public $orgId = 0;
+    /**
+     * controller + action 需要的权限，所有key全部小写
+     * @var unknown
+     */
+    private $actionAuth = array();
 	public static $hostList = array(
         "www.shuili.com"=>array(
             "name"=>"www.shuili.com",
@@ -351,21 +365,6 @@ class Controller extends CController
 		header("Cache-Control: max-age={$exprieTime}");
 		header("Expires: ".gmdate('D, d M Y H:i:s \G\M\T',time()+$exprieTime));
 	}
-	/**
-	 * 转到登录页面
-	 */
-	public function redirectLogin(){
-		header("Location: ".$this->createUrl("user/login"));
-		Yii::app()->end();
-	}
-
-	/**
-	 * 转到pc首页
-	 */
-	public function redirectPC(){
-	    header("Location: ".$this->createUrl("/"));
-	    Yii::app()->end();
-	}
 
 	/**
 	 *
@@ -388,68 +387,6 @@ class Controller extends CController
 	        header('Access-Control-Allow-Origin: ' . $this->getHost());
 	        header('Access-Control-Allow-Credentials: true');
 	    }
-	}
-
-	public function init(){
-	    CookieComponent::setCookie(CookieComponent::$cityCode,"169",CookieComponent::COOKIE_EXPIRE_WEEK);
-        CookieComponent::setCookie(CookieComponent::$cityName,"武汉市",CookieComponent::COOKIE_EXPIRE_WEEK);
-	    $this->allowAjaxDomain();
-        $host = strtolower($this->getHost());
-        if(isset($_SERVER['HTTP_USER_AGENT'])){
-            $this->ua = trim(strtolower($_SERVER['HTTP_USER_AGENT']));
-            $pos = strpos($this->ua,self::UA_WECHAT);
-            if($pos !== false){
-                $this->pageHeader['ua'] = "weChat";
-                $this->pageHeader['isWeChat'] = true;
-            }
-        }
-        //检查ua是否需要跳转到m站或者pc
-        foreach (self::$uaMap as $value){
-            $ps = stripos($this->ua,$value);
-            if($ps !== false){
-                $this->isM = true;
-                break;
-            }
-        }
-        if(!isset(self::$hostList[$host])){
-            if($this->isM){
-                $this->host = self::$hostList['wap.tiaojie.com']['name'];
-            }else{
-                $this->host = self::$hostList['www.tiaojie.com']['name'];
-            }
-            $this->redirectPC();
-            return;
-        }
-
-        if(strtolower($_SERVER['REQUEST_METHOD']) == "get"){
-            $hostInfo = self::$hostList[$host];
-            if($this->isM && $hostInfo['viewPrefix'] != "m"){
-                $mUrl = "http://".self::$hostList['wap.tiaojie.com']['name'].$_SERVER['REQUEST_URI'];
-                header("Location: ".$mUrl);
-                Yii::app()->end();
-                return;
-            }
-            if($this->isM == false && $hostInfo['viewPrefix'] != "pc"){
-                $mUrl = "http://".self::$hostList['www.tiaojie.com']['name'].$_SERVER['REQUEST_URI'];
-                header("Location: ".$mUrl);
-                Yii::app()->end();
-                return;
-            }
-        }
-        $this->main = self::$hostList[$host]['main'];
-        if(isset($this->pageHeader)){
-            $this->pageHeader['logo'] = $this->createUrl('images/common/logo.png');
-        }
-        $this->pageHeader['homePage'] = "http://".self::$hostList[$host]['name'];
-        $clientComponent = new ClientComponent();
-        $userId = $clientComponent->getUserId();
-        if($userId > 0){
-            $this->pageHeader['isLogin'] = true;
-            $this->pageHeader['userId'] = $userId;
-            $mailModel = new MailModel();
-            $info = $mailModel->getMailUnReadCount($userId);
-            $this->pageHeader['mailUnReadCount'] = $info['cnt'];
-        }
 	}
 
 	/**
@@ -516,4 +453,8 @@ class Controller extends CController
         $this->pageHeader['title'] = $title;
     }
 
+    public function init(){
+        $this->allowAjaxDomain();
+        $this->noBrowserCache();
+    }
 }

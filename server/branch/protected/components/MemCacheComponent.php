@@ -25,7 +25,7 @@ class MemCacheComponent{
 	 * 获取cache
 	 */
 	public static function getCacheInstance(){
-		if(!self::$cache){
+		if(self::$cache == NULL){
 			self::$cache = Yii::app()->cache;
 		}
 		return self::$cache;

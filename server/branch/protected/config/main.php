@@ -26,7 +26,6 @@ return array(
 	),
 
 	'modules'=>array(
-		'cms',
 		// uncomment the following to enable the Gii tool
 		/*
 		'gii'=>array(
@@ -49,11 +48,15 @@ return array(
 // 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 // 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 // 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+                'city/list/<proviceId:\d+>'=>'area/getCityListAjax',
+                'district/list/<cityId:\d+>'=>'area/getDistrictListAjax',
+                'province/list'=>'area/getProvinceListAjax',
+                'street/list/<districtId:\d+>'=>'area/GetStreatListAjax'
 			),
 		),
 		// uncomment the following to use a MySQL database
 		'db'=>array(
-            'connectionString' => 'mysql:host=localhost;port=3306;dbname=tj',
+            'connectionString' => 'mysql:host=localhost;port=3306;dbname=sl',
             'emulatePrepare' => true,
             'username' => 'mysql',
             'password' => 'mysql',

@@ -61,9 +61,9 @@ final class CookieComponent{
 	public static function setCookie($name, $value, $expire = self::COOKIE_EXPIRE_WEEK){
 		$cookie = new CHttpCookie($name, $value);
 		$cookie->expire = time() + $expire;
-		$cookie->domain = self::getCookieDomain();
-		$cookie->path = "/";
-		$cookies = self::getCookies();
+//		$cookie->domain = self::getCookieDomain();
+//		$cookie->path = "/";
+//		$cookies = self::getCookies();
 		Yii::app()->request->cookies[$name] = $cookie;
 	}
 	

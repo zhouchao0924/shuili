@@ -32,7 +32,6 @@ final class CommonComponent{
 	 * @return Ambigous <string, unknown>
 	 */
 	public static function getClientIp(){
-		return "117.62.149.7";
 		if(self::$clientIp){
 			return self::$clientIp;
 		}
@@ -95,7 +94,7 @@ final class CommonComponent{
 	 * 用户：手机号码/邮箱
 	 * 管理员：数字+字母
 	 */
-	public static function checkUserNameFormat($name,$userType=self::USER_M_USER){
+	public static function checkUserNameFormat($name,$userType=self::USER_CMS_ADMIN){
 		$len = strlen($name);
 		if($len <6 || $len > 22){
 			return false;

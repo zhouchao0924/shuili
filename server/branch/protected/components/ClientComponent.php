@@ -15,7 +15,7 @@ class ClientComponent{
 	 * @return string
 	 */
 	private function _getSessionKey($userInfo){
-		$key = "tj.client.".time().$userInfo['id'].rand(100000, 999999);
+		$key = "wp.client.".time().$userInfo['id'].rand(100000, 999999);
 		$map = "0123456789abcdefghijklmnopqrstuvwxyz";
 		$bit = rand(0,strlen($map)-1);
 		return $map[$bit].md5($key);
@@ -27,22 +27,21 @@ class ClientComponent{
 	 */
 	public function setUserInfo($userInfo){
 		$userKey = $this->_getSessionKey($userInfo);
-		//$userType = isset($userInfo['type'])?$userInfo['type']:self::USER_TYPE_WECHAT;
 		$data = array(
 			'userId'=>$userInfo['id'],
-			'userName'=>$userInfo['nickName'],
-			'userType'=>"",
+			'userName'=>$userInfo['name'],
 			'createTime'=>time(),
 			'expirTime'=>time() + self::EXPIRE_TIME_DEFAULT,
-            'provinceId'=>$userInfo['province'],
-            'cityId'=>$userInfo['city'],
-            'districtId'=>$userInfo['district'],
-            'streetId'=>$userInfo['street'],
-            'communityId'=>$userInfo['community'],
+            'roleId'=>$userInfo['role_id'],
+            'super'=>$userInfo['super'],
 		);
-		MemCacheComponent::setCache($userKey, $data, self::EXPIRE_TIME_DEFAULT);
+
+
+        MemCacheComponent::setCache($userKey, $data, self::EXPIRE_TIME_DEFAULT);
+
 		CookieComponent::setCookie(CookieComponent::$sessionId, $userKey);
-		CookieComponent::setCookie(CookieComponent::$userName, $userInfo['nickName']);
+		CookieComponent::setCookie(CookieComponent::$userName, $userInfo['name'].time());
+        CookieComponent::setCookie("tmp", $userInfo['name'].time());
 	}
 	/**
 	 * 获取client user信息
@@ -50,19 +49,7 @@ class ClientComponent{
 	public function getClientUserInfo(){
 		$this->_userId = 0;
 		$this->_userInfo = null;
-// 		$data = array(
-// 			'userId'=>1,
-// 			'userName'=>"user-test",
-// 			'userType'=>PopularData::USER_TYPE_REGISTER,
-// 			'createTime'=>time(),
-// 			'expirTime'=>time() + self::EXPIRE_TIME_DEFAULT,
-// 		);
-// 		$this->_userInfo = $data;
-// 		$this->_userId = $data['userId'];
-		
-// 		return;
-		
-		
+
 		$userKey = CookieComponent::getCookie(CookieComponent::$sessionId,"");
 		if(empty($userKey)){
 			return ;
@@ -84,10 +71,9 @@ class ClientComponent{
 		if(empty($userKey)){
 			return ;
 		}
-		MemCacheComponent::deleteCache($userKey);
-		CookieComponent::delCookie(CookieComponent::$sessionId);
+        MemCacheComponent::deleteCache($userKey);
+        CookieComponent::delCookie(CookieComponent::$sessionId);
 		CookieComponent::delCookie(CookieComponent::$userName);
-		
 		$this->_userId = 0;
 		return ;
 	}
@@ -115,6 +101,17 @@ class ClientComponent{
 	    }
 	    return $this->_userInfo;
 	}
+
+	public function isSuper(){
+        if($this->_userId == 0){
+            $this->getClientUserInfo();
+        }
+        if(empty($this->_userInfo) || $this->_userInfo['super'] == 0){
+            return false;
+        }
+        return true;
+    }
+
 	/**
 	 * 获取当前的城市信息
 	 */
