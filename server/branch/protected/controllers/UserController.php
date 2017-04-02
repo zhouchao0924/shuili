@@ -30,6 +30,20 @@ class UserController extends Controller{
         return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,array()));
     }
 
+    public function actionIsLogin(){
+        $clientComponent = new ClientComponent();
+        $userId = $clientComponent->getUserId();
+        if($userId <= 0){
+            return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户未登录",ErrorCode::ERROR_USER_NOT_LOGIN,array()));
+        }
+
+        $userInfo = $clientComponent->getUserInfo();
+        unset($userInfo['createTime']);
+        unset($userInfo['expirTime']);
+
+        return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,array()));
+    }
+
     /**
      * 添加用户
      */
@@ -98,9 +112,7 @@ class UserController extends Controller{
         if(empty($userInfo)){
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户未登录",ErrorCode::ERROR_USER_NOT_LOGIN,array()));
         }
-//        if($clientComponent->isSuper() == false){
-//            return $this->renderAjaxResponse($this->getAjaxResponse(false,"登录用户权限不够",ErrorCode::ERROR_COMMON_ERROR,array()));
-//        }
+
         $userModel = new UserModel();
         if($userModel->isCommonAdmin($adminId) == false){
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"管理员信息错误",ErrorCode::ERROR_COMMON_ERROR,array()));

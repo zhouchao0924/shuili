@@ -120,26 +120,14 @@ return array(
 		),
 
 	   'qiniu'=>array(
-	            'accessKey'=>'aaa',
-	            'secretKey'=>'bbb',
+	            'accessKey'=>'mxbdgu_LTMTwQfdL5An47bIokSv8Wl6WMLbeYgKf',
+	            'secretKey'=>'qKqgyIkicIbsFNrqSBTdgW3hQat1jvkbZozLHxXW',
                 'bucket' => array(
-                    'private'=>array(//私有库 存储用户信息
+                    'public'=>array(
                        'bucket'=>'privateuser',
-                       'baseUrl'=>'http://aaa.bb.clouddn.com',
-                       'host'=> 'aaa.bb.clouddn.com',
+                       'baseUrl'=>'http://onrnzg8zq.bkt.clouddn.com',
+                       'host'=> 'onrnzg8zq.bkt.clouddn.com',
                        'isPublic'=>false,
-                    ),
-                    'public'=>array(//公共推送库 存储新闻活动等等图片
-                        'bucket'=>'pulbicimage',
-                        'baseUrl'=>'http://aaa.bb.clouddn.com',
-                        'host'=> 'aaa.bb.clouddn.com',
-                        'isPublic'=>true,
-                    ),
-                    'common'=>array(//基础素材库站内用 站内通用数据
-                        'bucket'=>'publiccommon',
-                        'baseUrl'=>'aaa.bb.clouddn.com',
-                        'host'=> 'aaa.bb.clouddn.com',
-                        'isPublic'=>true,
                     ),
                 )
 		  ),
