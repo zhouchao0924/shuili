@@ -91,6 +91,13 @@ return array(
                     'logFile'=>'wx.log',
                     'maxFileSize'=>102400000,
                 ),
+                array(
+                    'class'=>'CFileLogRoute',
+                    'levels'=>'info',
+                    'categories'=>'m.csv.*',
+                    'logFile'=>'wx.log',
+                    'maxFileSize'=>102400000,
+                ),
 //                array(
 //                    //'class'=>'CFileLogRoute',
 //                    'class'=>'ext.yii-debug-toolbar.YiiDebugToolbarRoute',

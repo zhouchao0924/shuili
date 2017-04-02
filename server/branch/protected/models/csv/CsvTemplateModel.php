@@ -8,7 +8,7 @@
 class CsvTemplateModel{
     protected $headSkipLine = 1;
     /**
-     * @var CmsTemplateConfig
+     * @var CsvTemplateConfig
      */
     private $config;
 
@@ -17,10 +17,15 @@ class CsvTemplateModel{
     }
 
     public function parse($lineArray) {
-        foreach ($lineArray as $key=>$value){
-            $this->config->setConfigLine($value);
+        try{
+            foreach ($lineArray as $key=>$value){
+                $this->config->setConfigLine($value);
+            }
+        }catch (Exception $e){
+            Yii::log("parse csv data failed."+$e->getTraceAsString(),CLogger::LEVEL_ERROR,"m.csv.parse");
+            throw new CsvParseFailedException($e->getMessage());
         }
 
-        return $this->config->printData();
+        return $this->config->getData();
     }
 }

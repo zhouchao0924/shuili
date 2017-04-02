@@ -32,6 +32,7 @@ class TestController extends Controller {
             ),
         );
         echo "<pre>";
-        $csv->parse($array);
+        $data = $csv->parse($array);
+        print_r($data);
     }
 }
