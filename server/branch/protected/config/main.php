@@ -23,6 +23,7 @@ return array(
 		'application.components.*',
 		'application.dal.dao.*',
 		'application.dal.iao.*',
+        'application.models.csv.*',
 	),
 
 	'modules'=>array(
