@@ -88,3 +88,15 @@
         "streetId":int //对应6接口中乡镇列表中的id
     }
     response:{}
+
+8.获取附件长传token
+    url:/attachment/getUploadTokenAjax
+    method:get
+    request:{
+        
+    }
+    response:{
+        "token":string
+        "key":string
+        "domain":string
+    }
