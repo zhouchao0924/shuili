@@ -27,7 +27,7 @@ class UserController extends Controller{
         if($result != ErrorCode::SUCCESS){
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户名或密码错误",$result,array()));
         }
-        return $this->renderAjaxResponse($this->getAjaxResponse(false,"success",ErrorCode::SUCCESS,array()));
+        return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,array()));
     }
 
     /**
@@ -56,7 +56,7 @@ class UserController extends Controller{
         if($result != ErrorCode::SUCCESS){
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"添加用户错误",$result,array()));
         }
-        return $this->renderAjaxResponse($this->getAjaxResponse(false,"添加成功",ErrorCode::SUCCESS,array()));
+        return $this->renderAjaxResponse($this->getAjaxResponse(true,"添加成功",ErrorCode::SUCCESS,array()));
     }
 
     /**
