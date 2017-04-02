@@ -1,0 +1,9 @@
+######################接口文档########################
+请求参数放在data={json}这样的格式中get、post均为此格式
+返回统一格式：
+{
+    "success":bool,//true：正确，false：错误
+    "code":int, //对应错误码 0 表示正确
+    "message":string,//对应的message
+    "data":{} //json object
+}
