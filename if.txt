@@ -89,7 +89,7 @@
     }
     response:{}
 
-8.获取附件长传token
+8.获取附件上传token
     url:/attachment/getUploadTokenAjax
     method:get
     request:{
