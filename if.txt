@@ -1,0 +1,90 @@
+###################################################接口文档################################################################
+请求参数放在data={json}这样的格式中get、post均为此格式
+返回统一格式：
+{
+    "success":bool,//true：正确，false：错误
+    "code":int, //对应错误码 0 表示正确
+    "message":string,//对应的message
+    "data":{} //json object
+}
+一下接口中响应只列出data部分内容分别对应request，response
+###########################################################################################################################
+
+1.登录
+    url:/user/login
+    method:get
+    request:{
+        "userName":string,
+        "password":string
+    }
+    response:{
+        "userName":string
+        "userId":int
+    }
+
+2.登出
+    url:/user/logout
+    method:get
+    request:{
+    }
+    response:{
+    }
+
+3.检查是否登录
+    url:/user/isLogin
+    method:get
+    request:{
+    }
+    response:{
+        "userId":int 
+        "userName":string
+    }
+
+4.添加用户
+    url:/user/addUser
+    method:get
+    request:{
+        "userName":string
+        "password":string
+        "desc":string
+        "roleId":int
+    }
+    response:{
+    }
+
+5.重置密码(自己给自己重置)
+    url:/user/resetPassword
+    method:get
+    request:{
+        "password":string
+    }
+    response:{
+    }
+
+6.获取已管理的地区信息
+    url:/user/getManageArea
+    method:get
+    request:{
+    }
+    response:[
+        {
+            "id":int 地区id
+            "name":string 地区名
+            "list":[ //乡镇列表
+                {
+                    "id":int 乡镇id
+                    "name":string 乡镇名称
+                }
+                ...
+            ]
+        }
+        ...
+    ]
+
+7.设置当前管理的地区
+    url:/user/setCurrentArea
+    method:get
+    request:{
+        "streetId":int //对应6接口中乡镇列表中的id
+    }
+    response:{}
