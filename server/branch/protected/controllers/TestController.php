@@ -35,4 +35,11 @@ class TestController extends Controller {
         $data = $csv->data2Db($array);
         print_r($data);
     }
+
+    public function actionX(){
+        $csv = new CsvTemplateModel(new TestCsvTemplateConfig());
+        $data = $csv->queryRecords(1,1,"222");
+        echo "<pre>";
+        print_r($data);
+    }
 }

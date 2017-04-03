@@ -52,7 +52,8 @@ return array(
                 'city/list/<proviceId:\d+>'=>'area/getCityListAjax',
                 'district/list/<cityId:\d+>'=>'area/getDistrictListAjax',
                 'province/list'=>'area/getProvinceListAjax',
-                'street/list/<districtId:\d+>'=>'area/GetStreatListAjax'
+                'street/list/<districtId:\d+>'=>'area/GetStreatListAjax',
+                'attachment/exportCSVExample/<csvType:\d+>'=>'attachment/exportCSVExample',
 			),
 		),
 		// uncomment the following to use a MySQL database
@@ -63,7 +64,7 @@ return array(
             'password' => 'mysql',
             'charset' => 'utf8',
 //            'enableProfiling'=>true, //分析sql语句
-//            'enableParamLogging'=>true, //日志中显示每次传参的参数
+            'enableParamLogging'=>true, //日志中显示每次传参的参数
 		),
 
 		'cache'=>array(

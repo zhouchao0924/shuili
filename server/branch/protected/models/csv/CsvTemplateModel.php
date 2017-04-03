@@ -7,6 +7,10 @@
  */
 class CsvTemplateModel{
     protected $headSkipLine = 1;
+
+    public static $csvTypeMAP = array(
+        0=>"TestCsvTemplateConfig",
+    );
     /**
      * @var CsvTemplateConfig
      */
@@ -36,5 +40,9 @@ class CsvTemplateModel{
         }
 
         return ;
+    }
+
+    public function queryRecords($page,$streetId,$searchText="",$perPageCount=20){
+        return $this->config->getRecords($page,$streetId,$searchText,$perPageCount);
     }
 }

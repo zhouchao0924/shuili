@@ -38,4 +38,36 @@ class AttachmentController extends Controller{
             )
         );
     }
+
+    /**
+     * 导出csv模板样例
+     * @param $csvType
+     * @return string|void
+     */
+    public function actionExportCSVExample($csvType){
+        if($csvType >= count(CsvTemplateModel::$csvTypeMAP)){
+            return $this->renderAjaxResponse($this->getAjaxResponse(false, "参数错误", ErrorCode::ERROR_CLIENT_PARAMS_ERROR, array()));
+        }
+        $clientComponent = new ClientComponent();
+        $userId = $clientComponent->getUserId();
+        if($userId <= 0){
+            return $this->renderAjaxResponse($this->getAjaxResponse(false, "用户未登录", ErrorCode::ERROR_USER_NOT_LOGIN,array()));
+        }
+
+        $csvModel = new CsvTemplateModel::$csvTypeMAP[$csvType]();
+        $fileName = $csvModel->getExampleCsvFileName();
+        $filePath = dirname(__FILE__)."/../models/csv/example/".$fileName;
+        if(!is_file($filePath)){
+            return;
+        }
+        $file = fopen($filePath,"r");
+        $length = filesize($filePath);
+        header('Content-type: application/csv');
+        header('Content-Disposition: attachment; filename="'.$fileName.'"');
+        while(($line = fread($file,4096))){
+            echo $line;
+        }
+        fclose($file);
+        return;
+    }
 }
