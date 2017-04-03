@@ -18,6 +18,12 @@ abstract class CsvTemplateConfig{
      */
     public abstract function getExampleCsvFileName();
 
+    /**
+     * 获取搜索框中对应的数据库表查询字段名称
+     * @return mixed
+     */
+    public abstract function getSearchTextTableColName();
+
     private function parseKey($key){
         $keys = array();
         $tmp = explode(",",$key);
@@ -108,5 +114,75 @@ abstract class CsvTemplateConfig{
 
     public function data2Db($extra = array()){
         return $this->getDao()->transactionInsert($this->data, $extra);
+    }
+
+    private function getTotalCount($searchText, $streetId){
+        $conditions = array(
+            "and",
+            "street_id=:streetId",
+        );
+        $params = array(
+            ":streetId"=>$streetId,
+        );
+        if(!empty($searchText)){
+            $sk = ":".$this->getSearchTextTableColName();
+            $conditions[] = $this->getSearchTextTableColName().' like '.$sk;
+            $params[$sk] = "%".$searchText."%";
+        }
+
+        $count = $this->getDao()->select("count(*) as cnt",$conditions,$params,false);
+        return $count['cnt'];
+    }
+
+    /**
+     * 分表查询
+     * @param string $searchText
+     */
+    public function getRecords($page , $streetId, $searchText = "",$perPageCount = 20){
+        if($page <= 0){
+            $page = 1;
+        }
+        $totalCount = $this->getTotalCount($searchText,$streetId);
+
+        $start = ($page -1) * $perPageCount;
+        $data = array(
+            "totalPage"=>ceil($totalCount/$perPageCount),
+            "totalCount"=>$totalCount,
+            "page"=>$page,
+            "list"=>array(),
+        );
+        if($start >= $totalCount){
+            return $data;
+        }
+
+        $conditions = array(
+            "and",
+            "street_id=:streetId",
+        );
+        $params = array(
+            ":streetId"=>$streetId,
+        );
+        if(!empty($searchText)){
+            $sk = ":".$this->getSearchTextTableColName();
+            $conditions[] = $this->getSearchTextTableColName().' like '.$sk;
+            $params[$sk] = "%".$searchText."%";
+        }
+
+        $dataRows = $this->getDao()->select("*",$conditions,$params,true,"id desc","",$start,$perPageCount);
+
+        if(!empty($dataRows)){
+            foreach ($dataRows as $key=>$value){
+                $tmp = array();
+                foreach($value as $k => $v){
+                    if(isset($this->itemList[$k]) && is_array($this->itemList[$k])){
+                        $tmp[$k] = json_decode($v,true);
+                    }else{
+                        $tmp[$k] = $v;
+                    }
+                }
+                $data['list'][] = $tmp;
+            }
+        }
+        return $data;
     }
 }

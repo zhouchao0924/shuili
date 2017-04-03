@@ -64,7 +64,7 @@ return array(
             'password' => 'mysql',
             'charset' => 'utf8',
 //            'enableProfiling'=>true, //分析sql语句
-//            'enableParamLogging'=>true, //日志中显示每次传参的参数
+            'enableParamLogging'=>true, //日志中显示每次传参的参数
 		),
 
 		'cache'=>array(

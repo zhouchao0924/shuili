@@ -34,4 +34,9 @@ class TestCsvTemplateConfig extends CsvTemplateConfig{
     {
         return "test.csv";
     }
+
+    public function getSearchTextTableColName()
+    {
+        return "ab";
+    }
 }

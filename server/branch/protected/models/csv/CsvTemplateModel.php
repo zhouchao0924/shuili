@@ -41,4 +41,8 @@ class CsvTemplateModel{
 
         return ;
     }
+
+    public function queryRecords($page,$streetId,$searchText="",$perPageCount=20){
+        return $this->config->getRecords($page,$streetId,$searchText,$perPageCount);
+    }
 }
