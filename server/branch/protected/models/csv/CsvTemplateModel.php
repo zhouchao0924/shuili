@@ -7,6 +7,10 @@
  */
 class CsvTemplateModel{
     protected $headSkipLine = 1;
+
+    public static $csvTypeMAP = array(
+        0=>"TestCsvTemplateConfig",
+    );
     /**
      * @var CsvTemplateConfig
      */

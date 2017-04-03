@@ -132,7 +132,7 @@ class UserController extends Controller{
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"参数错误",ErrorCode::ERROR_PARAMS,array()));
         }
         $client = new ClientComponent();
-
+        
         $userId = $client->getUserId();
         if($userId <= 0){
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户未登录",ErrorCode::ERROR_USER_NOT_LOGIN,array()));

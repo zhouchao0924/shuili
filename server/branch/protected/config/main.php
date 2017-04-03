@@ -52,7 +52,8 @@ return array(
                 'city/list/<proviceId:\d+>'=>'area/getCityListAjax',
                 'district/list/<cityId:\d+>'=>'area/getDistrictListAjax',
                 'province/list'=>'area/getProvinceListAjax',
-                'street/list/<districtId:\d+>'=>'area/GetStreatListAjax'
+                'street/list/<districtId:\d+>'=>'area/GetStreatListAjax',
+                'attachment/exportCSVExample/<csvType:\d+>'=>'attachment/exportCSVExample',
 			),
 		),
 		// uncomment the following to use a MySQL database

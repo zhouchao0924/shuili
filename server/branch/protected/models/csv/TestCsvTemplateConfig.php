@@ -29,4 +29,9 @@ class TestCsvTemplateConfig extends CsvTemplateConfig{
     public function getDao(){
         return WpCsvTestDao::getInstance("WpCsvTest");
     }
+
+    public function getExampleCsvFileName()
+    {
+        return "test.csv";
+    }
 }

@@ -11,6 +11,13 @@ abstract class CsvTemplateConfig{
     protected $data = array();
     protected $newLine = false;
 
+    /**
+     * 获取csv导出模板样例
+     * 只要给出对应的文件名即可,路径统一放在models/csv/example/目录下
+     * @return string
+     */
+    public abstract function getExampleCsvFileName();
+
     private function parseKey($key){
         $keys = array();
         $tmp = explode(",",$key);
