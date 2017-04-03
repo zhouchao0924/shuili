@@ -20,7 +20,7 @@ class TestController extends Controller {
                 "9",
             ),
             array(
-                "11",
+                "11'",
                 "21",
                 "31",
                 "41",
@@ -32,7 +32,7 @@ class TestController extends Controller {
             ),
         );
         echo "<pre>";
-        $data = $csv->parse($array);
+        $data = $csv->data2Db($array);
         print_r($data);
     }
 }

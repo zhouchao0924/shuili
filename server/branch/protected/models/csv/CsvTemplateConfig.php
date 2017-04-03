@@ -82,11 +82,24 @@ abstract class CsvTemplateConfig{
         }
     }
 
+    public function clearData(){
+        $this->data = array();
+    }
+
     public function printData(){
         print_r($this->data);
     }
 
     public function getData(){
         return $this->data;
+    }
+
+    /**
+     * @return WpCsvBaseDao
+     */
+    public abstract function getDao();
+
+    public function data2Db($extra = array()){
+        return $this->getDao()->transactionInsert($this->data, $extra);
     }
 }

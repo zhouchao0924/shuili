@@ -7,7 +7,7 @@
  */
 class TestCsvTemplateConfig extends CsvTemplateConfig{
     protected $itemList = array(
-        "id"=>"id",
+        "ab"=>"ab",
         "name"=>array(
             "name-1"=>"name-1",
             "name-2"=>"name-2"
@@ -25,4 +25,8 @@ class TestCsvTemplateConfig extends CsvTemplateConfig{
             ),
         )
     );
+
+    public function getDao(){
+        return WpCsvTestDao::getInstance("WpCsvTest");
+    }
 }
