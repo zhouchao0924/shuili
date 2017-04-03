@@ -1,4 +1,5 @@
 <?php
+phpinfo();
 //    $c = file_get_contents("/tmp/tt.txt");
 //    $t = explode("\n",$c);
 //    echo "<pre>";

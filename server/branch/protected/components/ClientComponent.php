@@ -54,6 +54,21 @@ class ClientComponent{
     }
 
 	/**
+	 * 获取当前用户的管理城市
+	 * @return int
+	 */
+	public function getCurrentArea(){
+		$userKey = CookieComponent::getCookie(CookieComponent::$sessionId);
+		$cacheInfo = MemCacheComponent::getCacheByKey($userKey);
+		if(isset($cacheInfo['currentArea']) && !empty($cacheInfo['currentArea'])){
+			$streetId = $cacheInfo['currentArea'];
+		}else{
+			$streetId = 0;
+		}
+		return $streetId;
+	}
+
+	/**
 	 * 获取client user信息
 	 */
 	public function getClientUserInfo(){
