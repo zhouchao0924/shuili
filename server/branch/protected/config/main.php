@@ -23,7 +23,7 @@ return array(
 		'application.components.*',
 		'application.dal.dao.*',
 		'application.dal.iao.*',
-        'application.models.csv.*',
+        'application.models.excel.*',
 	),
 
 	'modules'=>array(
@@ -53,7 +53,7 @@ return array(
                 'district/list/<cityId:\d+>'=>'area/getDistrictListAjax',
                 'province/list'=>'area/getProvinceListAjax',
                 'street/list/<districtId:\d+>'=>'area/GetStreatListAjax',
-                'attachment/exportCSVExample/<csvType:\d+>'=>'attachment/exportCSVExample',
+                'attachment/exportExample/<excelType:\d+>'=>'attachment/exportExample',
 			),
 		),
 		// uncomment the following to use a MySQL database
@@ -94,9 +94,9 @@ return array(
                 ),
                 array(
                     'class'=>'CFileLogRoute',
-                    'levels'=>'info',
-                    'categories'=>'m.csv.*',
-                    'logFile'=>'wx.log',
+                    'levels'=>'info,error,warning',
+                    'categories'=>'m.excel.*',
+                    'logFile'=>'excel.log',
                     'maxFileSize'=>102400000,
                 ),
 //                array(

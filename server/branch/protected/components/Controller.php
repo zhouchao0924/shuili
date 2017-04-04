@@ -457,4 +457,26 @@ class Controller extends CController
         $this->allowAjaxDomain();
         $this->noBrowserCache();
     }
+
+    public function getUploadFileInfo(){
+        if(empty($_FILES)){
+            return array();
+        }
+        if($_FILES['efile']['error'] > 0){
+            return array();
+        }
+        return array(
+            "fileFullPath"=>$_FILES['efile']['tmp_name'],
+            "type"=>$_FILES['efile']['type'],
+            "size"=>$_FILES['efile']['size']
+        );
+    }
+
+    public function renderBadParamsAjaxResponse(){
+        return $this->renderAjaxResponse($this->getAjaxResponse(false,"参数错误",ErrorCode::ERROR_PARAMS,array()));
+    }
+
+    public function renderUserNotLoginAjaxResponse(){
+        return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户未登录",ErrorCode::ERROR_USER_NOT_LOGIN,array()));
+    }
 }

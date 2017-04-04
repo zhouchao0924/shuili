@@ -1,4 +1,7 @@
 <?php
+echo mb_convert_encoding("河流名称,河流等级,起点,讫点,河长(m),现状,管理范围,备注","gb2312","utf-8");
+
+die;
 phpinfo();
 //    $c = file_get_contents("/tmp/tt.txt");
 //    $t = explode("\n",$c);

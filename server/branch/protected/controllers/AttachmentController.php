@@ -40,12 +40,12 @@ class AttachmentController extends Controller{
     }
 
     /**
-     * 导出csv模板样例
-     * @param $csvType
+     * excel模板
+     * @param $excelType
      * @return string|void
      */
-    public function actionExportCSVExample($csvType){
-        if($csvType >= count(CsvTemplateModel::$csvTypeMAP)){
+    public function actionExportExample($excelType){
+        if($excelType >= count(ExcelTemplateModel::$excelTypeMAP)){
             return $this->renderAjaxResponse($this->getAjaxResponse(false, "参数错误", ErrorCode::ERROR_CLIENT_PARAMS_ERROR, array()));
         }
         $clientComponent = new ClientComponent();
@@ -54,9 +54,9 @@ class AttachmentController extends Controller{
             return $this->renderAjaxResponse($this->getAjaxResponse(false, "用户未登录", ErrorCode::ERROR_USER_NOT_LOGIN,array()));
         }
 
-        $csvModel = new CsvTemplateModel::$csvTypeMAP[$csvType]();
-        $fileName = $csvModel->getExampleCsvFileName();
-        $filePath = dirname(__FILE__)."/../models/csv/example/".$fileName;
+        $excelModel = new ExcelTemplateModel::$excelTypeMAP[$excelType]();
+        $fileName = $excelModel->getExampleExcelFileName();
+        $filePath = dirname(__FILE__)."/../models/excel/example/".$fileName;
         if(!is_file($filePath)){
             return;
         }
