@@ -175,23 +175,24 @@ abstract class ExcelTemplateConfig{
             foreach ($dataRows as $key=>$value){
                 $tmp = array();
                 foreach($value as $k => $v){
+                    $uk = $this->formatKey($k);
                     if(isset($this->itemList[$k])){
                         if(is_array($this->itemList[$k])){
-                            $tmp[$k] = json_decode($v, true);
-                            if(empty($tmp[$k])){
-                                $tmp[$k] = array();
+                            $tmp[$uk] = json_decode($v, true);
+                            if(empty($tmp[$uk])){
+                                $tmp[$uk] = array();
                             }
                         }else{
-                            $tmp[$k] = $v;
+                            $tmp[$uk] = $v;
                         }
                     }elseif(isset($this->printExtraItem[$k])){
                         if(is_array($this->printExtraItem[$k])){
-                            $tmp[$k] = json_decode($v, true);
-                            if(empty($tmp[$k])){
-                                $tmp[$k] = array();
+                            $tmp[$uk] = json_decode($v, true);
+                            if(empty($tmp[$uk])){
+                                $tmp[$uk] = array();
                             }
                         }else{
-                            $tmp[$k] = $v;
+                            $tmp[$uk] = $v;
                         }
                     }
                 }
@@ -199,5 +200,21 @@ abstract class ExcelTemplateConfig{
             }
         }
         return $data;
+    }
+
+    private function formatKey($key){
+        $tmp = explode("_",trim($key));
+        $cnt = count($tmp);
+        if($cnt == 1){
+            return $key;
+        }
+
+        $k = $tmp[0];
+
+        for($i = 1; $i<$cnt;$i++){
+            $k .= ucfirst($tmp[$i]);
+        }
+
+        return $k;
     }
 }
