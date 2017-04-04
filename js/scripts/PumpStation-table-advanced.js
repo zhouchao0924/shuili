@@ -46,7 +46,7 @@ var PumpStationAdvanced = function() {
 				};
 				Metronic.blockUI({message: '<div style="background:rgba(0,0,0,0.3);padding:10px;font-size:16px;font-weight:bold;color:#fff;">正在加载...</div>', textOnly: true});
 				$.ajax({
-					url: Metronic.host + '/arter/queryArterList/' + a.userId + '/' + a.sessionId,
+					url:,
 					type: 'POST',
 					dataType: 'json',
 					data: JSON.stringify(params),

@@ -24,51 +24,408 @@
 				</div>
 			</div>
 			<div class="portlet-body">
-				<div class="row">
-					<form id="searchForm" class="form-horizontal">
-						<div class="form-group">
-							<label class="control-label col-md-1">搜索：</label>
-							<div class="col-md-3">
-								<input type="text" class="form-control" ng-model="searchDetail.name" placeholder="请输入名称检索"/>
+				<ul id="Tabs" class="nav nav-tabs">
+					<li class="active" type="table" style="width:200px;text-align:center;">
+						<a href="#shuiku" data-toggle="tab">
+							水库</a>
+					</li>
+					<li type="chart" style="width:200px;text-align:center;">
+						<a href="#shantang" data-toggle="tab">
+							山塘
+						</a>
+					</li>
+					<li type="chart" style="width:200px;text-align:center;">
+						<a href="#xiaoshuidian" data-toggle="tab">
+							小水电
+						</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div id="shuiku" class="form-horizontal tab-pane active">
+						<div class="portlet-body">
+							<div class="row">
+								<form id="searchForm" class="form-horizontal">
+									<div class="form-group">
+										<label class="control-label col-md-1">搜索：</label>
+										<div class="col-md-3">
+											<input type="text" class="form-control" ng-model="searchDetail.name" placeholder="请输入名称检索"/>
+										</div>
+										<div class="col-md-2">
+											<button class="btn blue" type="button" id="searchBtn">搜索</button>
+										</div>
+										<div class="col-md-4">
+											<button class="btn blue" type="button">导出样表</button>
+											<button class="btn blue" type="button">数据导入</button>
+										</div>
+									</div>
+								</form>
 							</div>
-							<div class="col-md-2">
-								<button class="btn blue" type="button" id="searchBtn">搜索</button>
-							</div>
-							<div class="col-md-4">
-								<button class="btn blue" type="button">导出样表</button>
-								<button class="btn blue" type="button">数据导入</button>
-							</div>
+							<table class="table table-striped table-bordered table-hover" id="sample_1">
+								<thead>
+									<tr>
+										<th rowspan="2" style="vertical-align:middle;">
+											序号
+										</th>
+										<th rowspan="2" style="vertical-align:middle;">
+											水库名称
+										</th>
+										<th rowspan="2" style="vertical-align:middle;">
+											工程规模
+										</th>
+										<th rowspan="2" style="vertical-align:middle;">
+											集雨面积<br>（km²）
+										</th>
+										<th colspan="6" style="text-align:center;background:#cccccc;border-top:1px solid black;border-left:1px solid black;">
+											有关特性<br>水位及库容
+										</th>
+										<th colspan="4" style="text-align:center;background:#cccccc;border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;">
+											大坝
+										</th>
+										<th colspan="3" style="text-align:center;background:#cccccc;border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;">
+											泄洪设施
+										</th>
+										<th colspan="4" style="text-align:center;background:#cccccc;border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;">
+											输水设备
+										</th>
+										<th colspan="2" style="text-align:center;background:#cccccc;border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;">
+											洪水标准及<br>最大下泄流量
+										</th>
+										<th colspan="2" style="text-align:center;background:#cccccc;border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;">
+											汛限控制水位
+										</th>
+										<th rowspan="2" style="vertical-align:middle;">
+											备注
+										</th>
+										<th rowspan="2" style="vertical-align:middle;">
+											全景图
+										</th>
+										<th rowspan="2" style="vertical-align:middle;">
+											照片
+										</th>
+										<th rowspan="2" style="vertical-align:middle;">
+											管理责任人
+										</th>
+										<th rowspan="2" style="vertical-align:middle;">
+											巡查人员
+										</th>
+										<th rowspan="2" style="vertical-align:middle;">
+											操作
+										</th>
+									</tr>
+									<tr>
+										<th style="text-align:center;border-left:1px solid black;border-bottom:1px solid black;">
+											校对水位<br>（m）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											总库容<br>（万m³）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											设计水位<br>（m）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											相应库容<br>（万m³）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											正常水位<br>（m）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											正常库容<br>（万m³）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;border-left:1px solid black;">
+											坝型
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											坝顶高程<br>（m）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											坝高<br>（m）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											坝长<br>（m）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;border-left:1px solid black;">
+											型式
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											堰顶高程<br>（m）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											宽度<br>（m）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											型式
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											尺寸<br>（m）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											进口高程<br>（m）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											出口高程<br>（m）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											设计标准最大<br>下泄流量（m³/s）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											校核标准最大<br>下泄流量（m³/s）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											梅汛期
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											台汛期
+										</th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
 						</div>
-					</form>
+					</div>
+					<div id="shantang" class="form-horizontal tab-pane ">
+						<div class="portlet-body">
+							<div class="row">
+								<form id="searchForm" class="form-horizontal">
+									<div class="form-group">
+										<label class="control-label col-md-1">搜索：</label>
+										<div class="col-md-3">
+											<input type="text" class="form-control" ng-model="searchDetail.name" placeholder="请输入名称检索"/>
+										</div>
+										<div class="col-md-2">
+											<button class="btn blue" type="button" id="searchBtn">搜索</button>
+										</div>
+										<div class="col-md-4">
+											<button class="btn blue" type="button">导出样表</button>
+											<button class="btn blue" type="button">数据导入</button>
+										</div>
+									</div>
+								</form>
+							</div>
+							<table class="table table-striped table-bordered table-hover" id="sample_2">
+								<thead>
+									<tr>
+										<th rowspan="2" style="vertical-align:middle;">
+											序号
+										</th>
+										<th rowspan="2" style="vertical-align:middle;">
+											山塘名称
+										</th>
+										<th rowspan="2" style="vertical-align:middle;">
+											集雨面积<br>（km²）
+										</th>
+										<th colspan="5" style="text-align:center;background:#cccccc;border-top:1px solid black;border-left:1px solid black;">
+											有关特性<br>水位及库容
+										</th>
+										<th colspan="4" style="text-align:center;background:#cccccc;border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;">
+											大坝
+										</th>
+										<th colspan="3" style="text-align:center;background:#cccccc;border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;">
+											泄洪设施
+										</th>
+										<th colspan="4" style="text-align:center;background:#cccccc;border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;">
+											输水设备
+										</th>
+										<th rowspan="2" style="vertical-align:middle;">
+											备注
+										</th>
+										<th rowspan="2" style="vertical-align:middle;">
+											照片
+										</th>
+										<th colspan="2" style="vertical-align:middle;">
+											管理责任人
+										</th>
+										<th colspan="2" style="vertical-align:middle;">
+											巡查人员
+										</th>
+										<th rowspan="2" style="vertical-align:middle;">
+											操作
+										</th>
+									</tr>
+									<tr>
+										<th style="text-align:center;border-left:1px solid black;border-bottom:1px solid black;">
+											校对水位<br>（m）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											总库容<br>（万m³）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											设计水位<br>（m）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											正常水位<br>（m）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											正常库容<br>（万m³）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;border-left:1px solid black;">
+											坝型
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											坝顶高程<br>（m）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											坝高<br>（m）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											坝长<br>（m）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;border-left:1px solid black;">
+											型式
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											堰顶高程<br>（m）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											宽度<br>（m）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											型式
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											尺寸<br>（m）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											进口高程<br>（m）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											出口高程<br>（m）
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											姓名
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											手机
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											姓名
+										</th>
+										<th style="text-align:center;border-bottom:1px solid black;">
+											手机
+										</th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
+						</div>
+					</div>
+					<div id="xiaoshuidian" class="form-horizontal tab-pane">
+						<div class="portlet-body">
+							<div class="row">
+								<form id="searchForm" class="form-horizontal">
+									<div class="form-group">
+										<label class="control-label col-md-1">搜索：</label>
+										<div class="col-md-3">
+											<input type="text" class="form-control" ng-model="searchDetail.name" placeholder="请输入名称检索"/>
+										</div>
+										<div class="col-md-2">
+											<button class="btn blue" type="button" id="searchBtn">搜索</button>
+										</div>
+										<div class="col-md-4">
+											<button class="btn blue" type="button">导出样表</button>
+											<button class="btn blue" type="button">数据导入</button>
+										</div>
+									</div>
+								</form>
+							</div>
+							<table class="table table-striped table-bordered table-hover" id="sample_3">
+								<thead>
+									<tr>
+										<th style="vertical-align:middle;text-align:center;border-bottom:1px solid black;">
+											电站
+										</th>
+										<th style="vertical-align:middle;text-align:center;border-bottom:1px solid black;">
+											所在
+										</th>
+										<th style="vertical-align:middle;text-align:center;border-bottom:1px solid black;">
+											流域
+										</th>
+										<th style="vertical-align:middle;text-align:center;border-bottom:1px solid black;">
+											开发
+										</th>
+										<th style="vertical-align:middle;text-align:center;border-bottom:1px solid black;">
+											集雨面积
+										</th>
+										<th style="vertical-align:middle;text-align:center;border-bottom:1px solid black;">
+											发电引水
+										</th>
+										<th style="vertical-align:middle;text-align:center;border-bottom:1px solid black;">
+											设计
+										</th>
+										<th rowspan="2" style="vertical-align:middle;">
+											设计流量
+										</th>
+										<th style="vertical-align:middle;border-bottom:1px solid black;">
+											装机容量
+										</th>
+										<th colspan="2" style="text-align:center;background:#cccccc;border:1px solid black;">
+											厂房位置
+										</th>
+										<th rowspan="2" style="text-align:center;vertical-align:middle;">
+											投产年月
+										</th>
+										<th rowspan="2" style="text-align:center;vertical-align:middle;">
+											改造情况
+										</th>
+										<th rowspan="2" style="text-align:center;vertical-align:middle;">
+											所有制
+										</th>
+										<th rowspan="2" style="text-align:center;vertical-align:middle;">
+											备注
+										</th>
+										<th rowspan="2" style="text-align:center;vertical-align:middle;">
+											全景图
+										</th>
+										<th colspan="3" style="text-align:center;background:#cccccc;border:1px solid black;">
+											管理责任人
+										</th>
+									</tr>
+									<tr>
+										<th style="text-align:center;">
+											名称
+										</th>
+										<th style="text-align:center;">
+											乡镇
+										</th>
+										<th style="text-align:center;">
+											（溪）
+										</th>
+										<th style="text-align:center;">
+											方式
+										</th>
+										<th style="text-align:center;">
+											（km²）
+										</th>
+										<th style="text-align:center;">
+											长度（m）
+										</th>
+										<th style="text-align:center;">
+											水头（m）
+										</th>
+										<th style="text-align:center;">
+											（KW）
+										</th>
+										<th style="text-align:center;">
+											经度
+										</th>
+										<th style="text-align:center;">
+											纬度
+										</th>
+										<th style="text-align:center;">
+											照片
+										</th>
+										<th style="text-align:center;">
+											姓名
+										</th>
+										<th style="text-align:center;">
+											手机
+										</th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
+						</div>
+					</div>
 				</div>
-				<table class="table table-striped table-bordered table-hover" id="sample_3">
-					<thead>
-						<tr>
-							<th>
-								艺术家编号
-							</th>
-							<th>
-								艺术家昵称
-							</th>
-							<th>
-								类型
-							</th>
-							<!-- <th>
-                                联系电话
-                            </th> -->
-							<th>
-								职业简介
-							</th>
-							<th>
-								发布作品数量
-							</th>
-							<th width="120">
-								操作
-							</th>
-						</tr>
-					</thead>
-					<tbody></tbody>
-				</table>
 			</div>
 		</div>
 		<!-- END EXAMPLE TABLE PORTLET-->
