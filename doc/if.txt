@@ -182,3 +182,15 @@
                  content=""，//文章类容html
                  addTime,//创建时间
               }
+
+13. 获取用户左侧菜单列表
+    url:/user/getMenu
+    method:get
+    request:{
+    }
+    response:{
+        [
+            //menu列表
+        ],
+        ...
+    }
