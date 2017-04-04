@@ -11,6 +11,7 @@ class ExcelTemplateModel{
     //这个地方时k->类 k为excel类型 用来做统一的图片上传等
     public static $excelTypeMAP = array(
         0=>"RiverwayExcelTemplateConfig",
+        1=>"DrinkingWaterExcelTemplateConfig",
     );
     /**
      * @var ExcelTemplateConfig
