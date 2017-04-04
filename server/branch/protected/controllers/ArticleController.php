@@ -30,7 +30,7 @@ class ArticleController extends Controller{
     /**
      * 获取文章列表（根据type）
      */
-    public function actionGetArticleListAjax($cityId,$articleType){
+    public function actionGetArticleListAjax($articleType){
 
         $client = new ClientComponent();
 
@@ -38,7 +38,12 @@ class ArticleController extends Controller{
         if($userId <= 0){
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户未登录",ErrorCode::ERROR_USER_NOT_LOGIN,array()));
         }
-        $returnList = ArticleModel::getInstance()->getArticleList($cityId,$articleType);
+
+        $streetId = $client->getCurrentArea();
+        if($streetId <= 0){
+            return $this->renderAjaxResponse($this->getAjaxResponse(false,"管理的城市id不存在",ErrorCode::ERROR_USER_DENY,array()));
+        }
+        $returnList = ArticleModel::getInstance()->getArticleList($streetId,$articleType);
         $this->renderAjaxResponse($this->getAjaxResponse(true, "success", ErrorCode::SUCCESS, $returnList));
 
     }

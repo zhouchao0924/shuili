@@ -10,17 +10,17 @@ class ArticleModel extends BaseModel{
      * 获取文章列表
      * @param articleType $
      */
-    public function getArticleList($cityId,$articleType){
+    public function getArticleList($streetId,$articleType){
 
         $conditions = array(
             "and",
             "article_type = :articleType",
-            "city_id = :cityId",
+            "street_id = :streetId",
             "del_flag = 0",
         );
         $params = array(
             ":articleType"=>$articleType,
-            ":cityId"=>$cityId,
+            ":streetId"=>$streetId,
         );
         $list = $this->_getWpArticleDao()->select("*",$conditions,$params,false);
         $returnList = array();
