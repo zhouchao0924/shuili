@@ -123,6 +123,10 @@ class UserController extends Controller{
         return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,$manageArea));
     }
 
+    /**
+     * 设置当前管理的县镇
+     * @return string
+     */
     public function actionSetCurrentArea(){
         $params = $this->getAjaxRequestParam();
         $streetId = isset($params['streetId'])?intval($params['streetId']):0;
@@ -144,5 +148,13 @@ class UserController extends Controller{
         $client->setCurrentArea($streetId);
 
         return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,array()));
+    }
+
+    /**
+     * 获取菜单列表
+     * @return string
+     */
+    public function actionGetMenu(){
+        return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,AuthDefine::genTreeLinkIndex($this->roleId)));
     }
 }
