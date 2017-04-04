@@ -26,7 +26,7 @@ class RiverwayController extends Controller{
             if (empty($data)) {
                 return $this->renderAjaxResponse($this->getAjaxResponse(false,"empty file",ErrorCode::ERROR_COMMON_ERROR,array()));
             }
-            $csv = new ExcelTemplateModel(new RiverwayExcelTemplateConfig());
+            $excel = new ExcelTemplateModel(new RiverwayExcelTemplateConfig());
             $extra = array(
                 'street_id' => $client->getCurrentArea(),
                 'district_id' => OpenCity::DISTRICT_ID,
@@ -36,7 +36,7 @@ class RiverwayController extends Controller{
                 'add_user_id' => $userId,
                 'add_user_name' => $userInfo['userName'],
             );
-            $csv->data2Db($data, $extra);
+            $excel->data2Db($data, $extra);
             return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,array()));
         }catch (Exception $e){
             return $this->renderAjaxResponse($this->getAjaxResponse(false,$e->getMessage(),ErrorCode::ERROR_COMMON_ERROR,array()));

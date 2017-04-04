@@ -11,6 +11,7 @@ class OperatorLogModel {
             'user_id'=>$userId,
             'user_name'=>$userName,
             'create_time'=>date("Y-m-d H:i:s"),
+            'desc'=>$desc,
         );
         WpOperatorLogDao::getInstance("WpOperatorLog")->baseInsert($cols);
     }

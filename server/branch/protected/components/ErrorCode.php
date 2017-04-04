@@ -12,4 +12,6 @@ class ErrorCode {
     CONST ERROR_USER_DENY = 40006;//无权限
 
     CONST ERROR_COMMON_ERROR = 40006;//通用错误
+
+    CONST ERROR_NO_AUTH = 40007;//没有权限
 }

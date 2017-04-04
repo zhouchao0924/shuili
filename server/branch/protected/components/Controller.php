@@ -14,16 +14,13 @@ class Controller extends CController
     public $isSuper = false;
     public $cityInfo=array();
     public $response = array('success'=>'true','message'=>'','url'=>'');
-    public $role = array();
+    public $roleId = -1;
     public $orgList = array();
-    public $adminId = 0;
-    public $adminName = "";
+    public $userId = 0;
+    public $userName = "";
     public $orgId = 0;
-    /**
-     * controller + action 需要的权限，所有key全部小写
-     * @var unknown
-     */
-    private $actionAuth = array();
+    public $client;
+
 	public static $hostList = array(
         "www.shuili.com"=>array(
             "name"=>"www.shuili.com",
@@ -57,7 +54,7 @@ class Controller extends CController
 	 */
 	public $breadcrumbs=array();
 
-    protected $city = array("name"=>"武汉","id"=>169);
+    protected $city = array("name"=>"浙江","id"=>88);
 
 	/**
 	 * 公共头部
@@ -109,6 +106,17 @@ class Controller extends CController
 	private $_cssVersion = 2017022201;
 	private $_jsVersion = 2017022201;
 	protected $dataType = null;
+
+    /**
+     * controller + action 需要的权限，所有key全部小写
+     * @var unknown
+     */
+    private $actionAuth = array(
+            "user"=>array(
+                'adduser'=>AuthDefine::AUTH_ADMIN,
+            ),
+    );
+
 	/**
 	 * 获得request的参数，如果无参数则返回默认值
 	 * @access public
@@ -456,6 +464,7 @@ class Controller extends CController
     public function init(){
         $this->allowAjaxDomain();
         $this->noBrowserCache();
+        return true;
     }
 
     public function getUploadFileInfo(){
@@ -478,5 +487,43 @@ class Controller extends CController
 
     public function renderUserNotLoginAjaxResponse(){
         return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户未登录",ErrorCode::ERROR_USER_NOT_LOGIN,array()));
+    }
+
+    public function filters(){
+        return array('InitAuth','CheckAuth');
+    }
+
+    public function filterInitAuth($filterChain){
+        if(trim(strtolower(Yii::app()->getRequest()->getPathInfo()),"/") == strtolower("user/login")){
+            return $filterChain->run();
+        }
+
+        $client = new ClientComponent();
+        $userInfo = $client->getUserInfo();
+        if(empty($userInfo)){
+            $this->renderUserNotLoginAjaxResponse();
+            return false;
+        }
+
+        $this->userId = $userInfo['userId'];
+        $this->userName = $userInfo['userName'];
+        $this->roleId = $userInfo['roleId'];
+        $this->isSuper = ($userInfo['super']>0)?true:false;
+        return $filterChain->run();
+    }
+
+    public function filterCheckAuth($filterChain){
+        $controller = strtolower($this->getId());
+        $action = strtolower($this->getAction()->id);
+        if($this->isSuper){
+            return $filterChain->run();
+        }
+        if(isset($this->actionAuth[$controller]) && isset($this->actionAuth[$controller][$action])){
+            if($this->roleId < isset($this->actionAuth[$controller][$action])){
+                $this->renderAjaxResponse($this->getAjaxResponse(false,"没有操作权限",ErrorCode::ERROR_NO_AUTH,array()));
+                return false;
+            }
+        }
+        return $filterChain->run();
     }
 }
