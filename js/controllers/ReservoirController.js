@@ -10,6 +10,10 @@ MetronicApp.controller('ReservoirController', [
 		$scope.$on('$viewContentLoaded', function() {
 			// initialize core components
 			Metronic.initAjax();
+			$('#Tabs a').click(function(e) {
+				e.preventDefault();
+				var index = $(this).parent().index();
+			});
 			// set default layout mode
 			$rootScope.settings.layout.pageBodySolid = false;
 			$rootScope.settings.layout.pageSidebarClosed = false;
