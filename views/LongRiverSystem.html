@@ -24,60 +24,334 @@
 				</div>
 			</div>
 			<div class="portlet-body">
-				<div class="row">
-					<form id="searchForm" class="form-horizontal">
-						<div class="form-group">
-							<label class="control-label col-md-1">搜索：</label>
-							<div class="col-md-3">
-								<input type="text" class="form-control" ng-model="searchDetail.name" placeholder="请输入名称检索"/>
+				<ul id="Tabs" class="nav nav-tabs">
+					<li class="active" type="table" style="width:20%;text-align:center;">
+						<a href="#hzzjcxx" data-toggle="tab">
+							河长制基础信息</a>
+					</li>
+					<li type="chart" style="width:20%;text-align:center;">
+						<a href="#hdpsktjb" data-toggle="tab">
+							河道排水口统计表
+						</a>
+					</li>
+					<li type="chart" style="width:20%;text-align:center;">
+						<a href="#szjcjbxx" data-toggle="tab">
+							水质监测基本情况
+						</a>
+					</li>
+					<li type="chart" style="width:20%;text-align:center;">
+						<a href="#szjccg" data-toggle="tab">
+							水质监测成果
+						</a>
+					</li>
+					<li type="chart" style="width:20%;text-align:center;">
+						<a href="#rhpwktj" data-toggle="tab">
+							入河排污水（口）统计
+						</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div id="hzzjcxx" class="form-horizontal tab-pane active">
+						<div class="portlet-body">
+							<div class="row">
+								<form id="searchForm" class="form-horizontal">
+									<div class="form-group">
+										<label class="control-label col-md-1">搜索：</label>
+										<div class="col-md-3">
+											<input type="text" class="form-control" ng-model="searchDetail.name" placeholder="请输入名称检索"/>
+										</div>
+										<div class="col-md-2">
+											<button class="btn blue" type="button" id="searchBtn">搜索</button>
+										</div>
+										<div class="col-md-4">
+											<button class="btn blue" type="button">导出样表</button>
+											<button class="btn blue" type="button">数据导入</button>
+										</div>
+									</div>
+								</form>
 							</div>
-							<div class="col-md-2">
-								<button class="btn blue" type="button" id="searchBtn">搜索</button>
-							</div>
-							<div class="col-md-4">
-								<button class="btn blue" type="button">导出样表</button>
-								<button class="btn blue" type="button">数据导入</button>
-							</div>
+							<table class="table table-striped table-bordered table-hover" id="sample_3">
+								<thead>
+									<tr>
+										<th>
+											河道名称
+										</th>
+										<th>
+											编号
+										</th>
+										<th>
+											长度
+										</th>
+										<th>
+											河道起点
+										</th>
+										<th>
+											河道终点
+										</th>
+										<th>
+											河长
+										</th>
+										<th>
+											职务
+										</th>
+										<th>
+											河长联系方式
+										</th>
+										<th>
+											河道警长
+										</th>
+										<th>
+											河道警长联系方式
+										</th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
 						</div>
-					</form>
+					</div>
+					<div id="hdpsktjb" class="form-horizontal tab-pane ">
+						<div class="portlet-body">
+							<div class="row">
+								<form id="searchForm" class="form-horizontal">
+									<div class="form-group">
+										<label class="control-label col-md-1">搜索：</label>
+										<div class="col-md-3">
+											<input type="text" class="form-control" ng-model="searchDetail.name" placeholder="请输入名称检索"/>
+										</div>
+										<div class="col-md-2">
+											<button class="btn blue" type="button" id="searchBtn">搜索</button>
+										</div>
+										<div class="col-md-4">
+											<button class="btn blue" type="button">导出样表</button>
+											<button class="btn blue" type="button">数据导入</button>
+										</div>
+									</div>
+								</form>
+							</div>
+							<table class="table table-striped table-bordered table-hover" id="sample_3">
+								<thead>
+									<tr>
+										<th>
+											序号
+										</th>
+										<th>
+											编号
+										</th>
+										<th>
+											河道级别
+										</th>
+										<th>
+											河流名称
+										</th>
+										<th>
+											雨水口
+										</th>
+										<th>
+											污水口
+										</th>
+										<th>
+											雨污混排区
+										</th>
+										<th>
+											排水口总数
+										</th>
+										<th>
+											污水口平面位置图
+										</th>
+										<th>
+											入河排污（水）口统计表
+										</th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
+						</div>
+					</div>
+					<div id="szjcjbxx" class="form-horizontal tab-pane ">
+						<div class="portlet-body">
+							<div class="row">
+								<form id="searchForm" class="form-horizontal">
+									<div class="form-group">
+										<label class="control-label col-md-1">搜索：</label>
+										<div class="col-md-3">
+											<input type="text" class="form-control" ng-model="searchDetail.name" placeholder="请输入名称检索"/>
+										</div>
+										<div class="col-md-2">
+											<button class="btn blue" type="button" id="searchBtn">搜索</button>
+										</div>
+										<div class="col-md-4">
+											<button class="btn blue" type="button">导出样表</button>
+											<button class="btn blue" type="button">数据导入</button>
+										</div>
+									</div>
+								</form>
+							</div>
+							<table class="table table-striped table-bordered table-hover" id="sample_3">
+								<thead>
+									<tr>
+										<th>
+											序号
+										</th>
+										<th>
+											河道名称
+										</th>
+										<th>
+											监测点位置
+										</th>
+										<th>
+											经纬度
+										</th>
+										<th>
+											水质监测成果表
+										</th>
+										<th>
+											图片
+										</th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
+						</div>
+					</div>
+					<div id="szjccg" class="form-horizontal tab-pane ">
+						<div class="portlet-body">
+							<div class="row">
+								<form id="searchForm" class="form-horizontal">
+									<div class="form-group">
+										<label class="control-label col-md-1">搜索：</label>
+										<div class="col-md-3">
+											<input type="text" class="form-control" ng-model="searchDetail.name" placeholder="请输入名称检索"/>
+										</div>
+										<div class="col-md-2">
+											<button class="btn blue" type="button" id="searchBtn">搜索</button>
+										</div>
+										<div class="col-md-4">
+											<button class="btn blue" type="button">导出样表</button>
+											<button class="btn blue" type="button">数据导入</button>
+										</div>
+									</div>
+								</form>
+							</div>
+							<table class="table table-striped table-bordered table-hover" id="sample_3">
+								<thead>
+									<tr>
+										<th>
+											时间
+										</th>
+										<th>
+											监测点
+										</th>
+										<th>
+											位置
+										</th>
+										<th>
+											水温
+										</th>
+										<th>
+											PH值
+										</th>
+										<th>
+											浊度
+										</th>
+										<th>
+											化学需氧量（COD）
+										</th>
+										<th>
+											氨氮(NH3-N)
+										</th>
+										<th>
+											总磷(以P计)
+										</th>
+										<th>
+											总氮（以N计）
+										</th>
+										<th>
+											其他
+										</th>
+										<th>
+											结论
+										</th>
+										<th>
+											备注
+										</th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
+						</div>
+					</div>
+					<div id="rhpwktj" class="form-horizontal tab-pane ">
+						<div class="portlet-body">
+							<div class="row">
+								<form id="searchForm" class="form-horizontal">
+									<div class="form-group">
+										<label class="control-label col-md-1">搜索：</label>
+										<div class="col-md-3">
+											<input type="text" class="form-control" ng-model="searchDetail.name" placeholder="请输入名称检索"/>
+										</div>
+										<div class="col-md-2">
+											<button class="btn blue" type="button" id="searchBtn">搜索</button>
+										</div>
+										<div class="col-md-4">
+											<button class="btn blue" type="button">导出样表</button>
+											<button class="btn blue" type="button">数据导入</button>
+										</div>
+									</div>
+								</form>
+							</div>
+							<table class="table table-striped table-bordered table-hover" id="sample_3">
+								<thead>
+									<tr>
+										<th rowspan="2">
+											序号
+										</th>
+										<th rowspan="2">
+											排污口名称
+										</th>
+										<th rowspan="2">
+											排污（水）口位置
+										</th>
+										<th rowspan="2">
+											排入水体名称
+										</th>
+										<th rowspan="2">
+											污染源
+										</th>
+										<th rowspan="2">
+											所在村
+										</th>
+										<th colspan="2">
+											排放方式
+										</th>
+										<th colspan="6">
+											入河方式
+										</th>
+										<th rowspan="2">
+											排水口处理方式
+										</th>
+										<th rowspan="2">
+											照片
+										</th>
+										<th rowspan="2">
+											备注
+										</th>
+									</tr>
+									<tr>
+										<th>连续</th>
+										<th>间歇</th>
+										<th>明渠</th>
+										<th>管道</th>
+										<th>泵站</th>
+										<th>涵闸</th>
+										<th>潜设</th>
+										<th>其他</th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
+						</div>
+					</div>
 				</div>
-				<table class="table table-striped table-bordered table-hover" id="sample_3">
-					<thead>
-						<tr>
-							<th>
-								河道名称
-							</th>
-							<th>
-								编号
-							</th>
-							<th>
-								长度
-							</th>
-							<th>
-								河道起点
-							</th>
-							<th>
-								河道终点
-							</th>
-							<th>
-								河长
-							</th>
-							<th>
-								职务
-							</th>
-							<th>
-								河长联系方式
-							</th>
-							<th>
-								河道警长
-							</th>
-							<th>
-								河道警长联系方式
-							</th>
-						</tr>
-					</thead>
-					<tbody></tbody>
-				</table>
 			</div>
 		</div>
 		<!-- END EXAMPLE TABLE PORTLET-->

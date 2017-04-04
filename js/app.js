@@ -222,7 +222,7 @@ MetronicApp.config([
 			url: "/PumpStation",
 			templateUrl: "views/PumpStation.html?v=" + MetronicApp.version,
 			data: {
-				pageTitle: '河道'
+				pageTitle: '泵站'
 			},
 			controller: "PumpStationController",
 			resolve: {
