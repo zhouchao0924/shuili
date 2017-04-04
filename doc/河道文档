@@ -14,34 +14,34 @@
         "page":int //当前页号 从1开始
     }
     response:{
-        totalPage: 1,
-        totalCount: "1",
-        page: 1,
+        totalPage: int,
+        totalCount: int,
+        page: int,
         list: [
             {
-                id: int //i
-                name: "长江",
-                level: "国家",
-                start: "青藏高原",
-                end: "上海",
-                length: "10000",
-                current_situation: {
-                width: 2000,
-                bottomHeigh: 100,
-                damHeight: 200,
-                waterArea: 200000
+                id: int //id 用在编辑图片 删除等操作是做id键
+                name: string //河流名称,
+                level: string //河流级别,
+                start: string //起点,
+                end: string //终点,
+                length: string//长度,
+                currentSituation: {//现状
+                    width: string //宽度,
+                    bottomHeigh: string //河底高程,
+                    damHeight: string //堤坝高程,
+                    waterArea: string //水域面积
                 },
-                plan_situation: {
-                width: 3000,
-                bottomHeigh: 200,
-                damHeight: 300,
-                waterArea: 300000
+                planSituation: {
+                    width: string //宽度,
+                    bottomHeigh: string //河底高程,
+                    damHeight: string //堤坝高程,
+                    waterArea: string //水域面积
                 },
-                manage_rank: "中国",
-                full_image: [ ],
-                image: [ ],
-                desc: "中国长江",
-                create_time: "2017-04-04 13:43:32"
+                manageRank: string //管理范围,
+                fullImage: [ ],//全景图片url
+                image: [ ],//图片url
+                desc: string //描述信息,
+                createTime: datestring //创建时间
             },
             ...
         ]
