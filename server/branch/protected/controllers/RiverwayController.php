@@ -6,6 +6,10 @@
  * Time: 13:06
  */
 class RiverwayController extends Controller{
+    /**
+     * 导入
+     * @return string
+     */
     public function actionImport(){
         $uploadInfo = $this->getUploadFileInfo();
         if(empty($uploadInfo)){
@@ -39,6 +43,10 @@ class RiverwayController extends Controller{
         }
     }
 
+    /**
+     * 获取分页数据列表
+     * @return string
+     */
     public function actionGetList(){
         $params = $this->getAjaxRequestParam();
         $searchText = isset($params['text'])?trim($params['text']):"";
