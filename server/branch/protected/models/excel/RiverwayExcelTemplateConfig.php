@@ -15,13 +15,13 @@ class RiverwayExcelTemplateConfig extends ExcelTemplateConfig{
         'length'=>'长度',
         'current_situation'=>array(
             'width'=>'河宽',
-            'bottomHeigh'=>'河底高程',
+            'bottomHeight'=>'河底高程',
             'damHeight'=>'堤坝高程',
             'waterArea'=>'水域面积',
         ),
         'plan_situation'=>array(
             'width'=>'河宽',
-            'bottomHeigh'=>'河底高程',
+            'bottomHeight'=>'河底高程',
             'damHeight'=>'堤坝高程',
             'waterArea'=>'水域面积',
         ),

@@ -5,8 +5,8 @@
  * Date: 17/4/3
  * Time: 10:06
  */
-class WpCsvTestDao extends WpCsvBaseDao{
+class WpDrinkingWaterDao extends WpCsvBaseDao{
     public function getTableName(){
-        return "wp_csv_test";
+        return "wp_drinking_water";
     }
 }
