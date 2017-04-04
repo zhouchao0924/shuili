@@ -1,0 +1,48 @@
+1.导入excel
+    url:/riverway/import
+    method:post 提交文件 文件字段名“efile”
+    request:{
+    }
+    response:{
+    }
+
+2.获取列表
+    url:/riverway/getList
+    method:get
+    request:{
+        "text":string //搜索的文本 没有搜索文本传""空字符串
+        "page":int //当前页号 从1开始
+    }
+    response:{
+        totalPage: 1,
+        totalCount: "1",
+        page: 1,
+        list: [
+            {
+                id: int //i
+                name: "长江",
+                level: "国家",
+                start: "青藏高原",
+                end: "上海",
+                length: "10000",
+                current_situation: {
+                width: 2000,
+                bottomHeigh: 100,
+                damHeight: 200,
+                waterArea: 200000
+                },
+                plan_situation: {
+                width: 3000,
+                bottomHeigh: 200,
+                damHeight: 300,
+                waterArea: 300000
+                },
+                manage_rank: "中国",
+                full_image: [ ],
+                image: [ ],
+                desc: "中国长江",
+                create_time: "2017-04-04 13:43:32"
+            },
+            ...
+        ]
+}
