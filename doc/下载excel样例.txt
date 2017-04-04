@@ -1,0 +1,10 @@
+1. 下载excel模板 - 文件下载
+    url:/attachment/exportExample/${excelType}
+    method:get
+    request:{
+    }
+    response:{
+    }
+
+    ${excelType}后直接用一下数字替换：
+        0 = 河道模板
