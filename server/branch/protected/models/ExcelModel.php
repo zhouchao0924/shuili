@@ -23,10 +23,29 @@ class ExcelModel{
         for ($row = ($skipRows +1); $row <= $highestRow; $row++){
             $tmp = array();
             for ($column = 0; $column < $highestColumn; $column++) {//列数是以第0列开始
-                $tmp[] = $sheet->getCellByColumnAndRow($column, $row)->getValue();
+                $item = $sheet->getCellByColumnAndRow($column, $row)->getValue();
+                if($item instanceof PHPExcel_RichText){
+                    $item = $item->__toString();
+                }
+                if(empty($item)){
+                    $item = "";
+                }
+                $tmp[] = $item;
             }
             $excelDataArray[] = $tmp;
         }
-        return $excelDataArray;
+
+        $data = array();
+        if(!empty($excelDataArray)){
+            foreach($excelDataArray as $value){
+                foreach ($value as $k=>$v){
+                    if(!empty($v)){
+                        $data[] = $value;
+                        break;
+                    }
+                }
+            }
+        }
+        return $data;
     }
 }

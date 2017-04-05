@@ -18,12 +18,14 @@ class RiverwayExcelTemplateConfig extends ExcelTemplateConfig{
             'bottomHeight'=>'河底高程',
             'damHeight'=>'堤坝高程',
             'waterArea'=>'水域面积',
+            'waterVolume'=>'水域容积',
         ),
         'plan_situation'=>array(
             'width'=>'河宽',
             'bottomHeight'=>'河底高程',
             'damHeight'=>'堤坝高程',
             'waterArea'=>'水域面积',
+            'waterVolume'=>'水域容积',
         ),
         'manage_rank'=>'管理范围',
         'desc'=>'描述'

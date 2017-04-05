@@ -86,13 +86,19 @@ abstract class ExcelTemplateConfig{
         if(empty($this->itemIndex)){
             $this->makeItemIndex();
         }
-        if(count($lineArray) != count($this->itemIndex)){
+
+        if(count($lineArray) < count($this->itemIndex)){
             throw new ExcelLineDataNotMatchException();
         }
 
         $this->newLine = true;
+        $count = 0;
         foreach ($lineArray as $k => $v){
             $this->$k = $v;
+            $count++;
+            if($count >= count($this->itemIndex)){
+                break;
+            }
         }
     }
 

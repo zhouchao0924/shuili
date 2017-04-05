@@ -5,7 +5,7 @@
  * Date: 17/4/4
  * Time: 13:06
  */
-class DrinkingWaterController extends Controller{
+class FarmWaterProjectController extends Controller{
     /**
      * 导入
      * @return string
@@ -22,11 +22,11 @@ class DrinkingWaterController extends Controller{
         }
         $userInfo = $client->getUserInfo();
         try {
-            $data = ExcelModel::parseExcel(4, $uploadInfo['fileFullPath']);
+            $data = ExcelModel::parseExcel(2, $uploadInfo['fileFullPath']);
             if (empty($data)) {
                 return $this->renderAjaxResponse($this->getAjaxResponse(false,"empty file",ErrorCode::ERROR_COMMON_ERROR,array()));
             }
-            $excel = new ExcelTemplateModel(new DrinkingWaterExcelTemplateConfig());
+            $excel = new ExcelTemplateModel(new FarmWaterProjectExcelTemplateConfig());
             $extra = array(
                 'street_id' => $client->getCurrentArea(),
                 'district_id' => OpenCity::DISTRICT_ID,
@@ -52,10 +52,10 @@ class DrinkingWaterController extends Controller{
         $searchText = isset($params['text'])?trim($params['text']):"";
         $page = isset($params['page'])?intval($params['page']):1;
 
-        $excelModel = new ExcelTemplateModel(new DrinkingWaterExcelTemplateConfig());
+        $excelModel = new ExcelTemplateModel(new FarmWaterProjectExcelTemplateConfig());
         $client = new ClientComponent();
         $streetId = $client->getCurrentArea();
-        $data = $excelModel->queryRecords($page,$streetId,$searchText);
+        $data = $excelModel->queryRecords($page,$streetId,$searchText,1);
 
         return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,$data));
     }
