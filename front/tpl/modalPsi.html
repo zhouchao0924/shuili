@@ -1,0 +1,95 @@
+<div class="modal fade" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog" style="width:80%;">
+        <div class="modal-content">
+            <div class="modal-header" ng-show="modalTitle">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">{{modalTitle}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="portlet-body form">
+                    <ng-form class="form-horizontal" name="confirmTime">
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label class="control-label col-md-2">采购订单号：</label>
+                                <div class="col-md-3">
+                                    <select class="form-control" id="orderNum" ng-model="orderNum" ng-options="m for m in listDatas" ng-change="selectorderNum(orderNum)" select2></select>
+                                </div>
+                                <label class="control-label col-md-2 no-padding-right" ng-show="orderNum">采购单名称：</label>
+                                <div class="col-md-3" ng-show="orderNum">
+                                    <span class="form-control-static" ng-model="orderNum">{{orderName}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-show="orderNum">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <input type="checkbox" ng-click="allchecked($event,modalDatas)" ng-model="all" bn-uniform>
+                                            </th>
+                                            <th>
+                                                货物信息
+                                            </th>
+                                            <th>
+                                                已提货（追踪码主码 | 包裹码）
+                                            </th>
+                                            <th>
+                                                点击勾选本次提货（追踪码主码 | 包裹码）
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="m in modalDatas">
+                                            <td style="vertical-align:middle;">
+                                                <input type="checkbox" ng-model="m.isSelected" ng-click="Mselect($event,m,modalDatas)" bn-uniform>
+                                            </td>
+                                            <td>
+                                            	<div style="float:left;margin-right:10px;">
+                                                <img ng-src="{{m.cargoImage}}?imageView2/1/w/110/h/90">
+                                            	</div>
+                                                <span>货号：{{m.cargoNum}}</span>
+                                                <br>
+                                                <span>货名：{{m.cargoName}}</span>
+                                                <br>
+                                                <span>厂家型号：{{m.cargoManufacturerModel}}</span>
+                                                <br>
+                                                <span>供应商：{{m.cargoSupplierName}}</span>
+                                            </td>
+                                            <td>
+                                            	<li ng-repeat="c in m.pickPackage" style="list-style-type:none;">
+                                                    <span class="form-control-static" style="margin-right:10px;">
+                                                        {{c.pid}}
+                                                    </span>
+                                                    <span class="form-control-static">|</span>
+                                                    <span class="form-control-static" ng-repeat="d in c.uidList" style="margin-left:10px;">
+                                                        {{d.pid}}
+                                                    </span>
+                                                </li>
+                                            </td>
+                                            <td>
+                                                <li ng-repeat="c in m.lineHualPackage" style="list-style-type:none;">
+                                                    <span class="form-control-static" style="margin-right:10px;">
+                                                        <input type="checkbox" ng-model="c.isSelected" ng-click="Cselect($event,c,m,modalDatas)" bn-uniform>{{c.pid}}
+                                                    </span>
+                                                    <span class="form-control-static">|</span>
+                                                    <span class="form-control-static" ng-repeat="d in c.uidList" style="margin-left:10px;">
+                                                        <input type="checkbox" ng-model="d.isSelected" ng-click="Dselect(d,c,m,modalDatas)" bn-uniform>{{d.pid}}
+                                                    </span>
+                                                </li>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </ng-form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn default" data-dismiss="modal">返回</button>
+                <button type="button" class="btn blue" ng-click="modalOk()">确认</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

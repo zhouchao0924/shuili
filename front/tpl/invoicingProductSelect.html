@@ -1,0 +1,63 @@
+<div class="modal fade bs-modal-lg" tabindex="-1" role="basic" aria-hidden="true">
+	<style type="text/css">
+	.spinner>div{width: 150px;}.spinner .btn{margin-right: 0;}
+	</style>
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+				<h4 class="modal-title">{{modalTitle}}</h4>
+			</div>
+			<div class="modal-body">
+				<table class="table table-bordered">
+					<tr>
+						<th width="41">
+							<input type="checkbox" class="group-checkable" ng-click="allOrNone($event)"  data-set=".checkboxes" />
+						</th>
+						<th width="132">商品图片</th>
+						<th width="220">商品信息</th>
+						<th ng-repeat="n in tableInfo">{{n.name}}</th>
+					</tr>
+					<tr ng-repeat="n in productList">
+						<td>
+							<input type="checkbox" class="checkboxes" ng-model="n.checked" ng-disabled="n.disabled" />
+						</td>
+						<td align="center"><a href="#/edit-good-detail/{{n.productId}}" target="_blank"><img ng-src="{{n.thumbnail}}" /></a></td>
+						<td>
+							编号：{{n.productNum}}<br/>
+							品牌：{{n.brandNameP}}-{{n.brandName}}<br/>
+							名称：{{n.productName}}<br/>
+							厂家编号：{{n.factoryNo}}
+						</td>
+						<td ng-repeat="m in tableInfo | limitTo:tableInfo.length-1">
+							{{n[m.field]}}
+						</td>
+						<td>
+							<div ng-if="!n.disabled" class="spinner">
+								<div class="input-group">
+									<div class="spinner-buttons input-group-btn">
+										<button type="button" class="btn spinner-up blue">
+										<i class="fa fa-plus"></i>
+										</button>
+									</div>
+									<input type="text" class="spinner-input form-control" ng-model="n.productCount" readonly>
+									<div class="spinner-buttons input-group-btn">
+										<button type="button" class="btn spinner-down red">
+										<i class="fa fa-minus"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn default" data-dismiss="modal">返回</button>
+				<button type="button" class="btn blue" ng-click="modalOk();">确认</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>

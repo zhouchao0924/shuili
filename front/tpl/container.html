@@ -1,0 +1,58 @@
+<style type="text/css">
+    .margin-row {
+        margin-top: 10px;
+    }
+    .select-input {
+        width: 100px;
+    }
+    .customtextdiv {
+        width: 100px;
+        display: inline-block;
+    }
+    .no-padding-right {
+        padding-right: 0;
+    }
+    .table-text-center {
+        vertical-align: middle!important;
+        text-align: center!important;
+    }
+</style>
+<div ng-repeat="n in vm">
+    <div class="col-md-6 margin-main-row label-margin" ng-if="n.propertyType==='text' && (!n.propertyDesc)">
+        <div class="form-group">
+            <div class="list">
+                <label class="control-label col-md-4" star-required1>{{n.propertyName}}：</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control form-input" ng-model="n.propertyValue" input-error/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group margin-main-row" ng-if="n.propertyType==='check'">
+        <label class="control-label col-md-2">{{n.propertyName}}：</label>
+        <div class="col-md-10" ng-if="n.propertyDesc">
+            <span class="form-control-static">{{n.propertyDesc}}</span>
+        </div>
+        <label class="control-label col-md-2" ng-if="n.propertyDesc"></label>
+        <div class="col-md-10">
+            <div class="col-md-3 margin-row" ng-repeat="m in n.templatePropertyValueList">
+                <input type="checkbox" class="checkboxes" ng-model="m.isChecked" ng-click="$parent.IsTheme($event,m,n.templatePropertyValueList,vm)" bn-uniform/>
+                <span ng-if="!m.isChange" ng-click="m.isChange=true;">{{m.propertyValue}}</span>
+                <input type="text" class="select-input" ng-model="m.propertyValue" ng-if="m.isChange" ng-blur="m.isChange=false;" ng-required="m.isCheck" input-error/>
+            </div>
+            <div class="col-md-12"></div>
+        </div>
+    </div>
+    <div class="col-md-6 margin-main-row" ng-if="n.propertyType==='select'">
+        <div class="form-group">
+            <label class="control-label col-md-4">{{n.propertyName}}：</label>
+            <div class="col-md-4">
+                <select class="form-control" ng-options="m.id as m.propertyValue for m in n.templatePropertyValueList" ng-model="n.propertyValue" select2 clear-model>
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <container vm="n.childrenSpuTemplateProperty"></container>
+    <input type="text" class="form-control" ng-model="n.propertyId" value="{{n.propertyId}}" ng-init="n.propertyId = n.propertyId" style="display:none;"/>
+</div>

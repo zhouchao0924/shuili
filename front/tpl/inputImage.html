@@ -1,0 +1,22 @@
+<div class="fileinput fileinput-new" data-provides="fileinput">
+    <div class="fileinput-new thumbnail" style="width: 150px; height: 120px;margin-right:5px;">
+        <img class="showImg" ng-show="src" ng-src="{{src}}" alt=""/>
+    </div>
+    <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 150px; max-height: 120px;">
+        <img class="showImg" ng-show="ngModel" ng-src="{{ngModel|imageTrim}}" alt=""/>
+    </div>
+    <div>
+        <span class="btn btn-xs default btn-file">
+            <span class="fileinput-new">
+                选择图片
+            </span>
+            <span class="fileinput-exists">
+                更改图片
+            </span>
+            <input type="file" class="fileupload" name="...">
+        </span>
+        <a href="javascript:;" class="btn btn-xs red fileinput-exists" data-dismiss="fileinput">
+            删除图片
+        </a>
+    </div>
+</div>

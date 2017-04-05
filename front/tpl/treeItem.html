@@ -1,0 +1,27 @@
+<!-- 图标获取和切换 -->
+<i ng-click="itemExpended(item, $event);" class="{{getItemIcon(item)}}"></i>
+<!-- <input type="checkbox" ng-model="item.$$isChecked" class="check-box" ng-if="canChecked" ng-change="warpCallback('itemCheckedChanged', item, $event)" bn-uniform> -->
+<!-- 名称 -->
+<span class="text-field" ng-click="itemExpended(item, $event);"
+ng-show="!(item.categoryDto.id === null) && !item.$$isEdit" style="padding:3px;display:inline-block;width:100px;">{{item.categoryDto.name}}</span>
+<input type="text" name="{{item.categoryDto.id}}" ng-model="item.categoryDto.name" ng-show="item.$$isEdit||(item.categoryDto.id === null)" ng-blur="saveNewitem(item,$event)">
+
+<!-- 修改图标 -->
+<a href="javascript:;" ng-click="Edititem(item, $event);"><i class="fa fa-edit"></i></a>
+
+<!-- 添加子类目 -->
+<small style="margin-left:20px;"><a href="javascript:;" ng-click="Additem(item, $event);"> +添加子类目</a></small>
+
+<!-- 配置属性 -->
+<a href="javascript:;" ng-click="toedititem(item,$event)" ng-show="isLeaf(item)||(item === treeData[$index])" style="position:absolute;right:300px;margin-top:3px;">配置属性</a>
+
+<!-- 删除类目 -->
+<a href="javascript:;" ng-click="Delitem(item, $event);"
+style="position:absolute;right:100px;margin-top:3px;">删除</a>
+
+<!-- 递归循环 -->
+<ul ng-if="!isLeaf(item)" ng-show="item.$$isExpend">
+    <li ng-repeat="item in item.categoryTreeNodeDtos" ng-include="'tpl/treeItem.html'" style="margin:8px;"></li>
+</ul>
+
+<hr ng-show="(item === treeData[$index])">
