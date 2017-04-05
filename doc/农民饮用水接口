@@ -19,38 +19,38 @@
         page: int,
         list: [
             {
-                id:,
-                stationName: "唐李张村",
-                location: "唐李张村",
-                coverRange: "唐李张村",
-                coverPeopleCount: "1700",
-                capacity: "365",
+                id: string //id,
+                stationName: string //供水站名称,
+                location: stirng //所在村庄,
+                coverRange: string //收益片区,
+                coverPeopleCount: string //收益人数,
+                capacity: string //供水规模,
                 waterSourceInfo: {
-                name: "唐李张村山塘",
-                cat: "山（2）",
-                space: 0.75,
-                capacity: 0.75,
-                other: {
-                irrigation: "",
-                electricity: ""
-                }
+                    name: string //名称,
+                    cat: string //类型,
+                    space: string //积水面积,
+                    capacity: string //正常库容,
+                    other: {
+                        irrigation: string //灌溉,
+                        electricity: string //发电,
+                    }
                 },
                 processTechnology: {
-                technology: "压力滤器",
-                cat: [ ]
+                    technology: string //工艺,
+                    cat: string //型号,
                 },
                 disinfectionMethod: {
-                technology: "二氧化氯",
-                cat: "高纯型50g"
+                    technology: string //工艺,
+                    cat: string //型号,
                 },
-                pipeDiameter: "dn160",
-                managerUser: "张松茂",
-                managerUserCell: "13558208675",
-                buildTime: "2015年",
+                pipeDiameter: string //陪睡管管网直径,
+                managerUser: string //管理人员,
+                managerUserCell: string //管理人员电话,
+                buildTime: string //建成时间,
                 fullImage: [ ],
-                image: [ ],
-                desc: "",
-                createTime: "2017-04-05 21:25:54"
+                image: [ ],//图片
+                desc: string //描述,
+                createTime: string //时间,
             },
             ...
         ]
