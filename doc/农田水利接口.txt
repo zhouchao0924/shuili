@@ -1,0 +1,36 @@
+1.导入excel
+    url:/farmWaterProject/import
+    method:post 提交文件 文件字段名“efile”
+    request:{
+    }
+    response:{
+    }
+
+2.获取列表
+    url:/farmWaterProject/getList
+    method:get
+    request:{
+        "text":string //搜索的文本 没有搜索文本传""空字符串
+        "page":int //当前页号 从1开始
+    }
+    response:{
+        totalPage: int,
+        totalCount: int,
+        page: int,
+        list: [
+            {
+                id: int //id 用在编辑图片 删除等操作是做id键
+                cat: string //醒目类型
+                name: string //项目名称,
+                location: string //建设地点,
+                buildArea: string //建设面积,
+                buildItems: string//建设内容,
+                buildTime: string //建设年份,
+                projectImage: string //项目布置图,
+                image: [ ],//图片url
+                desc: string //描述信息,
+                createTime: datestring //时间
+            },
+            ...
+        ]
+}
