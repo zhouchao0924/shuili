@@ -1,0 +1,57 @@
+1.导入excel
+    url:/drinkingWater/import
+    method:post 提交文件 文件字段名“efile”
+    request:{
+    }
+    response:{
+    }
+
+2.获取列表
+    url:/drinkingWater/getList
+    method:get
+    request:{
+        "text":string //搜索的文本 没有搜索文本传""空字符串
+        "page":int //当前页号 从1开始
+    }
+    response:{
+        totalPage: int,
+        totalCount: int,
+        page: int,
+        list: [
+            {
+                id:,
+                stationName: "唐李张村",
+                location: "唐李张村",
+                coverRange: "唐李张村",
+                coverPeopleCount: "1700",
+                capacity: "365",
+                waterSourceInfo: {
+                name: "唐李张村山塘",
+                cat: "山（2）",
+                space: 0.75,
+                capacity: 0.75,
+                other: {
+                irrigation: "",
+                electricity: ""
+                }
+                },
+                processTechnology: {
+                technology: "压力滤器",
+                cat: [ ]
+                },
+                disinfectionMethod: {
+                technology: "二氧化氯",
+                cat: "高纯型50g"
+                },
+                pipeDiameter: "dn160",
+                managerUser: "张松茂",
+                managerUserCell: "13558208675",
+                buildTime: "2015年",
+                fullImage: [ ],
+                image: [ ],
+                desc: "",
+                createTime: "2017-04-05 21:25:54"
+            },
+            ...
+        ]
+}
