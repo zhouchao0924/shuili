@@ -10,7 +10,7 @@ MetronicApp.config([
 	function($ocLazyLoadProvider) {
 		$ocLazyLoadProvider.config({
 			// global configs go here
-		}); 
+		});
 	}
 ]);
 /* Setup global settings */
@@ -135,6 +135,84 @@ MetronicApp.config([
 								'assets/global/plugins/morris/morris.css?v=' + MetronicApp.version,
 								'assets/admin/pages/css/tasks.css?v=' + MetronicApp.version,
 								'js/controllers/DashboardController.js?v=' + MetronicApp.version
+							]
+						});
+					}
+				]
+			}
+		}).state('YYTown', {
+			url: "/YYTown",
+			templateUrl: "views/YYTown.html?v=" + MetronicApp.version,
+			data: {
+				pageTitle: '余姚乡镇'
+			},
+			controller: "YYTownController",
+			resolve: {
+				deps: [
+					'$ocLazyLoad',
+					function($ocLazyLoad) {
+						return $ocLazyLoad.load({
+							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
+							files: [
+								'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/all.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=' + MetronicApp.version,
+								// 'js/scripts/Reservoir-table-advanced.js?v=' + MetronicApp.version,
+								'js/controllers/YYTownController.js?v=' + MetronicApp.version
+							]
+						});
+					}
+				]
+			}
+		}).state('BasicInformation', {
+			url: "/BasicInformation",
+			templateUrl: "views/BasicInformation.html?v=" + MetronicApp.version,
+			data: {
+				pageTitle: '基本情况'
+			},
+			controller: "BasicInformationController",
+			resolve: {
+				deps: [
+					'$ocLazyLoad',
+					function($ocLazyLoad) {
+						return $ocLazyLoad.load({
+							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
+							files: [
+								'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/all.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=' + MetronicApp.version,
+								// 'js/scripts/Reservoir-table-advanced.js?v=' + MetronicApp.version,
+								'js/controllers/BasicInformationController.js?v=' + MetronicApp.version
+							]
+						});
+					}
+				]
+			}
+		}).state('GEOInfo', {
+			url: "/GEOInfo",
+			templateUrl: "views/GEOInfo.html?v=" + MetronicApp.version,
+			data: {
+				pageTitle: '地理信息'
+			},
+			controller: "GEOInfoController",
+			resolve: {
+				deps: [
+					'$ocLazyLoad',
+					function($ocLazyLoad) {
+						return $ocLazyLoad.load({
+							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
+							files: [
+								'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/all.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=' + MetronicApp.version,
+								// 'js/scripts/Reservoir-table-advanced.js?v=' + MetronicApp.version,
+								'js/controllers/GEOInfoController.js?v=' + MetronicApp.version
 							]
 						});
 					}
