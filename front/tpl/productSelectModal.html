@@ -1,0 +1,169 @@
+<style>
+    .form-group {
+        margin-left: 0 !important;
+    }
+    .form-group .control-label {
+        padding-right: 0;
+        padding-left: 0;
+    }
+    .table .btn-reduce {
+        margin: 0;
+    }
+</style>
+<div class="modal fade bs-modal-lg" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="portlet-body form-horizontal">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label col-md-1">品牌</label>
+                            <div class="col-md-4 form-inline">
+                                <select id="allBrands" class="form-control" ng-model="brands[0]" ng-options="brand as brand.name for brand in brandsAll" select2 style="min-width: 110px;" clear-model>
+                                    <option value="">请选择品牌</option>
+                                </select>
+                                <select id="secondBrands" class="form-control" ng-show="brands[0].nodes" ng-model="brands[1]" ng-options="brand as brand.name for brand in brands[0].nodes" select2="#allBrands" clear-model>
+                                    <option value="">请选择</option>
+                                </select>
+                                <!-- <input type="hidden" name="brandType" value="{{secondBrands.brandId}}" />
+                                <input type="hidden" name="brandType" value="{{goodDetail.fidBrand}}" /> -->
+                            </div>
+                            <label class="control-label col-md-1">品类</label>
+                            <div class="col-md-5 form-inline">
+                                <select id="categoryFirst" class="form-control" name="choosePrd" ng-model="types[0]" ng-options="category as category.productTypeName for category in categorys" select2 style="min-width: 90px;" clear-model>
+                                    <option value="">请选择</option>
+                                </select>
+                                <select id="categorySecond" class="form-control" name="choosePrdS" ng-show="types[0].nodes" ng-model="types[1]" ng-options="category as category.productTypeName for category in types[0].nodes" select2="#categoryFirst" clear-model>
+                                    <option value="">请选择</option>
+                                </select>
+                                <select id="categoryThird" class="form-control" name="choosePrdT" ng-show="types[0].nodes && types[1].nodes" ng-model="types[2]" ng-options="category as category.productTypeName for category in types[1].nodes" select2="#categorySecond" clear-model>
+                                    <option value="">请选择</option>
+                                </select>
+                                <select class="form-control" name="choosePrdF" ng-show="types[0].nodes && types[1].nodes && types[2].nodes" ng-model="types[3]" ng-options="category as category.productTypeName for category in types[2].nodes" select2="#categoryThird" clear-model>
+                                    <option value="">请选择</option>
+                                </select>
+                                <!--  <input type="hidden" name="cateType" value="{{productsFirst.typeKey}}" />
+                                <input type="hidden" name="cateType" value="{{productsSecond.typeKey}}" />
+                                <input type="hidden" name="cateType" value="{{productsThird.typeKey}}" />
+                                <input type="hidden" name="cateType" value="{{productsFour.typeKey}}" /> -->
+                            </div>
+                            <div class="col-md-1 ">
+                                <range-show-arrow range-area="#rangeArea"></range-show-arrow>
+                                <!-- <span class="form-control-static font-green pull-right" ng-click="changeRangeShow()"><i class="fa" ng-class="{'fa-arrow-down':!rangeShow,'fa-arrow-up':rangeShow}"></i></span> -->
+                            </div>
+                        </div>
+                        <form name="rangeArea">
+                            <div class="form-group">
+                                <label class="control-label col-md-1">商品编号</label>
+                                <div class="col-md-1">
+                                    <input type="text" class="form-control" name="modelNo" ng-model="modelNum" style="width: 80px;" clear-model/>
+                                </div>
+                                <label class="control-label col-md-2">厂家编号</label>
+                                <div class="col-md-1">
+                                    <input type="text" class="form-control" name="serialNo" ng-model="serialNum" style="width: 80px;" clear-model/>
+                                </div>
+                                <label class="control-label col-md-1">风格</label>
+                                <div class="col-md-2">
+                                    <select class="form-control" name="chooseStyle" ng-model="styleId" ng-options="style.styleId as style.styleName for style in styles" select2 clear-model>
+                                        <option value="">请选择</option>
+                                    </select>
+                                    <!--  <span class="col-md-6 pd0" ng-show="styleFirst.list.length">
+                                            <select class="form-control" name="chooseStyle2" ng-model="styleSecond" ng-options="style.styleName for style in styleFirst.list"><option value="">请选择</option></select>
+                                        </span> -->
+                                    <!-- <input type="hidden" name="stylesType" value="{{styleFirst.styleId}}" />
+                                    <input type="hidden" name="stylesType" value="{{styleSecond.styleId}}" /> -->
+                                </div>
+                                <label class="control-label col-md-1">商品状态</label>
+                                <div class="col-md-2">
+                                    <select class="form-control" ng-model="stateVal" select2 clear-model>
+                                        <option value="">请选择</option>
+                                        <option value="0">下架</option>
+                                        <option value="1">上架</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-1">价格区间</label>
+                                <div class="col-md-3 form-inline">
+                                    <input type="text" class="form-control" name="priceStart" ng-model="lowPrice" placeholder="" style="width: 80px;" clear-model>
+                                    <span class="form-control-static fl">
+                                        -
+                                    </span>
+                                    <input type="text" class="form-control" name="priceEnd" ng-model="highPrice" placeholder="" style="width: 80px;" clear-model>
+                                </div>
+                                <label class="control-label col-md-1">商品名称</label>
+                                <div class="col-md-2">
+                                    <!-- <div class="input-group"> -->
+                                    <input type="text" class="form-control" name="productName" ng-model="pName" clear-model/>
+                                    <!-- <span class="input-group-btn">
+                                        <button class="btn blue" type="button" id="search">搜索</button>
+                                    </span> -->
+                                    <!-- </div> -->
+                                </div>
+                                <label class="control-label col-md-1">入库时间</label>
+                                <div class="col-md-4 form-inline" style="padding-right:0px;">
+                                    <div id="datetimepicker1" class="input-group date form_datetime" style="width: 120px;">
+                                        <input type="text" size="16" readonly class="form-control" name="startTime" ng-model="stTime" clear-model>
+                                        <span class="input-group-btn">
+                                            <button class="btn default date-set" type="button">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <span class="form-control-static fl">
+                                        -
+                                    </span>
+                                    <div id="datetimepicker2" class="input-group date form_datetime" style="width: 120px;">
+                                        <input type="text" size="16" readonly class="form-control" name="endTime" ng-model="edTime" clear-model>
+                                        <span class="input-group-btn">
+                                            <button class="btn default date-set" type="button">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="form-group">
+                            <div class="col-md-offset-1 col-md-11">
+                                <button class="btn blue" type="button" id="search" ng-click="search()">搜索</button>
+                                <button class=" btn blue " type="button " clear-model-click>清空</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-striped table-bordered table-hover " id="sample_3">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" class="group-checkable" data-set="#sample_3 .checkboxes" value=""/>
+                                </th>
+                                <th>
+                                    商品编号
+                                </th>
+                                <th>
+                                    商品名称
+                                </th>
+                                <th>
+                                    品类
+                                </th>
+                                <th>
+                                    厂家编号
+                                </th>
+                                <th>
+                                    品牌
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <button type="button" class="btn default " data-dismiss="modal">取消</button>
+                <button type="button" class="btn blue " ng-click="goodsDialogOK(); ">确定</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

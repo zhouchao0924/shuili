@@ -1,0 +1,35 @@
+<div class="modal fade bs-modal-sm" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">订单类型</h4>
+            </div>
+            <div class="modal-body">
+                <div class="portlet-body form">
+                    <div class="form-horizontal" name="selectOrderType">
+                        <div class="form-body">
+                            <div class="radio-list">
+                                <label class="radio">
+                                    <input type="radio" name="orderType" ng-model="$parent.page.typeSel" value="1" checked /> 软装
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" name="orderType" ng-model="$parent.page.typeSel" value="2" checked/> 硬装
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" name="orderType" ng-model="$parent.page.typeSel" value="3" checked/> 全品家
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn default" data-dismiss="modal">返回</button>
+                <button type="button" class="btn blue" ng-click="selectOrderTypeOK()">确认</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

@@ -1,0 +1,117 @@
+<h3 class="page-title">
+	{{$state.current.data.pageTitle}}
+</h3>
+<div class="page-bar">
+	<ul class="page-breadcrumb">
+		<li>
+			<i class="fa fa-home"></i>
+			<a href="javascript:;">{{$state.current.data.pageTitle}}</a>
+		</li>
+	</ul>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<div class="row">
+	<div class="col-md-12">
+		<!-- BEGIN EXAMPLE TABLE PORTLET-->
+		<div class="portlet box blue-madison">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-globe"></i>{{$state.current.data.pageTitle}}
+				</div>
+				<div class="tools">
+					<a href="javascript:;" class="reload"></a>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="row">
+					<form id="searchForm" class="form-horizontal">
+						<div class="form-group">
+							<label class="control-label col-md-1">搜索：</label>
+							<div class="col-md-3">
+								<input type="text" class="form-control" ng-model="searchDetail.name" placeholder="请输入名称检索"/>
+							</div>
+							<div class="col-md-2">
+								<button class="btn blue" type="button" id="searchBtn">搜索</button>
+							</div>
+							<div class="col-md-4">
+								<button class="btn blue" type="button">导出样表</button>
+								<button class="btn blue" type="button">数据导入</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<table class="table table-striped table-bordered table-hover" id="sample_3">
+					<thead>
+						<tr>
+							<th rowspan="2" style="vertical-align:middle;background:#f3f3f3;">
+								序号
+							</th>
+							<th rowspan="2" style="vertical-align:middle;background:#f3f3f3;">
+								河流名称
+							</th>
+							<th rowspan="2" style="vertical-align:middle;background:#f3f3f3;">
+								河流等级
+							</th>
+							<th rowspan="2" style="vertical-align:middle;background:#f3f3f3;">
+								起点
+							</th>
+							<th rowspan="2" style="vertical-align:middle;background:#f3f3f3;">
+								讫点
+							</th>
+							<th rowspan="2" style="vertical-align:middle;background:#f3f3f3;">
+								河长（m）
+							</th>
+							<th colspan="4" style="text-align:center;background:#cccccc;border-top:1px solid black;border-left:1px solid black;">
+								现状情况
+							</th>
+							<th colspan="4" style="text-align:center;background:#cccccc;border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;">
+								导出样表
+							</th>
+							<th rowspan="2" style="vertical-align:middle;background:#f3f3f3;">
+								管理范围
+							</th>
+							<th rowspan="2" style="vertical-align:middle;background:#f3f3f3;">
+								全景照片
+							</th>
+							<th rowspan="2" style="vertical-align:middle;background:#f3f3f3;">
+								照片
+							</th>
+							<th rowspan="2" style="vertical-align:middle;background:#f3f3f3;">
+								备注
+							</th>
+						</tr>
+						<tr>
+							<th style="text-align:center;background:#f3f3f3;border-left:1px solid black;border-bottom:1px solid black;">
+								河宽（m）
+							</th>
+							<th style="text-align:center;background:#f3f3f3;border-bottom:1px solid black;">
+								河底高程（m）
+							</th>
+							<th style="text-align:center;background:#f3f3f3;border-bottom:1px solid black;">
+								堤坝高程（m）
+							</th>
+							<th style="text-align:center;background:#f3f3f3;border-bottom:1px solid black;">
+								水域面积（m³）
+							</th>
+							<th style="text-align:center;background:#f3f3f3;border-bottom:1px solid black;border-left:1px solid black;">
+								河宽（m）
+							</th>
+							<th style="text-align:center;background:#f3f3f3;border-bottom:1px solid black;">
+								河底高程（m）
+							</th>
+							<th style="text-align:center;background:#f3f3f3;border-bottom:1px solid black;">
+								堤坝高程（m）
+							</th>
+							<th style="text-align:center;background:#f3f3f3;border-bottom:1px solid black;border-right:1px solid black;">
+								水域面积（m³）
+							</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+		</div>
+		<!-- END EXAMPLE TABLE PORTLET-->
+	</div>
+</div>

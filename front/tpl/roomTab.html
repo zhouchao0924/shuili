@@ -1,0 +1,344 @@
+<!-- 该页面被空间和套装引用，修改请注意 -->
+<ng-form class="discountedForm" name="roomForm">
+    <div class="form-group">
+        <label class="control-label col-md-2" star-required>空间类型：</label>
+        <div class="col-md-4">
+            <select
+                class="form-control"
+                name="roomType"
+                ng-model="tab.room.roomType"
+                ng-options="m.serialnum as m.name for m in types"
+                ng-click="changeRoomType()"
+                ng-disabled="suitType === '组合套装'"
+                ng-required="true"
+                input-error
+                room-types
+                input-test="isRoomSel">
+                <option value="">请选择</option>
+            </select>
+        </div>
+        <label class="control-label col-md-2"></label>
+        <label class="control-label col-md-2">编号：</label>
+        <div class="col-md-2">
+            <span class="form-control-static">{{tab.room.roomId}}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" star-required>名称：</label>
+        <div class="col-md-4">
+            <input type="text" class="form-control" name="roomName" ng-model="tab.room.roomName" placeholder="请输入房间名称" ng-required="isRequiredTab()" input-error ng-disabled="isDisabled()"/>
+        </div>
+        <label class="control-label col-md-2"></label>
+        <label class="control-label col-md-2">面积：</label>
+        <!-- <div class="col-md-2">
+            <span class="form-control-static" ng-show="tab.type!=='新增空间'">{{tab.room.roomInfo.size}}平米</span>
+            <input type="text" class="form-control" name="size" ng-model="tab.room.size" ng-required="isRequiredTab()" input-error ng-disabled="isDisabled()" ng-if="tab.type==='新增空间'" number-val/>
+        </div> -->
+        <div class="col-md-2 form-inline">
+            <input type="text" class="form-control" name="size" ng-model="tab.room.size" style="max-width: 90px;" ng-required="isRequiredTab()" input-error ng-disabled="isDisabled()"/>
+            <span>
+                平米</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">进深：</label>
+        <!-- <div class="col-md-2">
+            <span class="form-control-static" ng-show="tab.type!=='新增空间'">{{tab.room.roomInfo.longth}}米</span>
+            <input type="text" class="form-control" name="longth" ng-model="tab.room.length" ng-required="isRequiredTab()" input-error ng-disabled="isDisabled()" ng-if="tab.type==='新增空间'" number-val />
+        </div> -->
+        <div class="col-md-2 form-inline">
+            <input type="text" class="form-control" name="length" ng-model="tab.room.length" style="max-width: 90px;" ng-required="isRequiredTab()" input-error ng-disabled="isDisabled()"/>
+            <span>
+                米</span>
+        </div>
+        <label class="control-label col-md-2">开间：</label>
+        <!-- <div class="col-md-2">
+            <span class="form-control-static" ng-show="tab.type!=='新增空间'">{{tab.room.roomInfo.width}}米</span>
+            <input type="text" class="form-control" name="width" ng-model="tab.room.width" ng-required="isRequiredTab()" input-error ng-disabled="isDisabled()" ng-if="tab.type==='新增空间'" number-val/>
+        </div> -->
+        <div class="col-md-2 form-inline">
+            <input type="text" class="form-control" name="width" ng-model="tab.room.roomInfo.width" style="max-width: 90px;" ng-required="isRequiredTab()" input-error ng-disabled="isDisabled()"/>
+            <span>
+                米</span>
+        </div>
+        <label class="control-label col-md-2">层高：</label>
+        <!-- <div class="col-md-2">
+            <span class="form-control-static" ng-show="tab.type!=='新增空间'">{{tab.room.roomInfo.height}}米</span>
+            <input type="text" class="form-control" name="height" ng-model="tab.room.height" ng-required="isRequiredTab()" input-error ng-disabled="isDisabled()" ng-if="tab.type==='新增空间'" number-val/>
+        </div> -->
+        <div class="col-md-2 form-inline">
+            <input type="text" class="form-control" name="height" ng-model="tab.room.height" style="max-width: 90px;" ng-required="isRequiredTab()" input-error ng-disabled="isDisabled()"/>
+            <span>
+                米</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">空间件数：</label>
+        <div class="col-md-2">
+            <span class="form-control-static">{{tab.room.productCnt}}件</span>
+        </div>
+        <label class="control-label col-md-2">单品总价：</label>
+        <div class="col-md-2">
+            <span class="form-control-static">{{tab.room.roomTotalPrice}}元</span>
+        </div>
+        <label class="control-label col-md-2" star-required>空间优惠价：</label>
+        <div class="col-md-2 form-inline">
+            <input
+                type="text"
+                class="form-control"
+                name="price"
+                ng-change="changePrice()"
+                ng-model="tab.room.roomPrice"
+                style="max-width: 90px;"
+                ng-required="isRequiredTab()"
+                input-error
+                ng-disabled="isDisabled()"
+                rmb-val
+                room-money-correct
+                room-money-correct2/>
+            <span>
+                元</span>
+        </div>
+    </div>
+    <hr>
+    <div class="form-group">
+        <label class="control-label col-md-2" star-required>商品列表：</label>
+        <div class="col-md-10">
+            <div class="cates">
+                <div class="col-md-12 infos" ng-repeat="goods in tab.room.productRoomList" enctype="multipart/form-data">
+                    <div ng-show="goods.visible">
+                        <span class="form-control-static char">
+                            <a href="#/edit-good-detail/{{goods.productId}}" target="_blank">{{goods.productId}}
+                                {{goods.productName}}</a>
+                            <span class="label label-sm label-danger" ng-if="!goods.status">已下架</span>
+                            ×
+                            {{goods.productCount}}
+                        </span>
+                        <span ng-click="editItem(tab.room.productRoomList)" class="btn btn-sm default operate3" ng-disabled="isDisabled()">
+                            <i class="fa fa-edit"></i>编辑</span>
+                    </div>
+                    <div ng-hide="goods.visible">
+                        <span class="col-md-9"><input type="text" class="form-control" ng-model="goods.productId" placeholder="请输入商品id"/></span>
+                        <span class="multi">&nbsp;&times;&nbsp;</span>
+                        <span class="col-md-2"><input type="number" class="form-control" name="productCount" ng-model="goods.productCount" placeholder="数量"/></span>
+                        <span ng-click="saveItem(tab.room.productRoomList)" class="btn btn-sm default operate3">
+                            <i class="fa fa-save"></i>保存</span>
+                    </div>
+                    <span ng-click="moveUp(tab.room.productRoomList,tab.room)" class="btn btn-sm default operate1" ng-disabled="isDisabled()">
+                        <i class="fa fa-long-arrow-up"></i>
+                        上移</span>
+                    <span ng-click="moveDown(tab.room.productRoomList,tab.room)" class="btn btn-sm default operate2" ng-disabled="isDisabled()">
+                        <i class="fa fa-long-arrow-down"></i>
+                        下移</span>
+                    <span ng-click="deleteItem(tab.room.productRoomList,tab.room)" class="btn btn-sm default delete" ng-disabled="isDisabled()">
+                        <i class="fa fa-trash-o"></i>删除</span>
+                </div>
+            </div>
+            <div class="add-area">
+                <span ng-click="addItem(tab.room.productRoomList,tab.room)" class="btn blue add" ng-disabled="isDisabled()">
+                    <i class="fa fa-plus"></i>添加</span>
+                <span class="col-md-9"><input type="text" name="productId" class="form-control" placeholder="请输入SKU ID" ng-disabled="isDisabled()" input-error ng-required="isRequiredProducts()" ng-model="tab.room.productId"></span>
+                <span class="multi">&nbsp;&times;&nbsp;</span>
+                <span class="col-md-2"><input type="text" name="productCount" class="form-control" value="1" placeholder="数量" ng-disabled="isDisabled()"/></span>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="form-group">
+        <label class="control-label col-md-2" star-required>适用风格：</label>
+        <div class="col-md-10 form-inline">
+            <select style="width:115px;" class="form-control" name="style" ng-model="tab.room.roomTags.style[0]" ng-options="style.styleId as style.styleName for style in styles" ng-required="isRequiredTab()" input-error ng-disabled="isDisabled()" room-styles>
+                <option value="">请选择</option>
+            </select>
+            <select style="width:115px;" class="form-control" ng-model="tab.room.roomTags.style[1]" ng-options="style.styleId as style.styleName for style in styles" ng-disabled="isDisabled()" room-styles>
+                <option value="">请选择</option>
+            </select>
+            <select style="width:115px;" class="form-control" ng-model="tab.room.roomTags.style[2]" ng-options="style.styleId as style.styleName for style in styles" ng-disabled="isDisabled()" room-styles>
+                <option value="">请选择</option>
+            </select>
+            <select style="width:115px;" class="form-control" ng-model="tab.room.roomTags.style[3]" ng-options="style.styleId as style.styleName for style in styles" ng-disabled="isDisabled()" room-styles>
+                <option value="">请选择</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" star-required>储物空间：</label>
+        <div class="col-md-10 form-inline">
+            <input type="text" class="form-control" name="storage" ng-model="tab.room.roomTags.storage[0]" placeholder="输入储物家具" style="width:115px;" ng-required="isRequiredTab()" input-error ng-disabled="isDisabled()"/>
+            <input type="text" class="form-control" ng-model="tab.room.roomTags.storage[1]" placeholder="输入储物家具" style="width:115px;" ng-disabled="isDisabled()"/>
+            <input type="text" class="form-control" ng-model="tab.room.roomTags.storage[2]" placeholder="输入储物家具" style="width:115px;" ng-disabled="isDisabled()"/>
+            <input type="text" class="form-control" ng-model="tab.room.roomTags.storage[3]" placeholder="输入储物家具" style="width:115px;" ng-disabled="isDisabled()"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" star-required>材质选择：</label>
+        <div class="col-md-10 form-inline">
+            <input type="text" class="form-control" name="material" ng-model="tab.room.roomTags.material[0]" placeholder="输入所用材质" style="width:115px;" ng-required="isRequiredTab()" input-error ng-disabled="isDisabled()"/>
+            <input type="text" class="form-control" ng-model="tab.room.roomTags.material[1]" placeholder="输入所用材质" style="width:115px;" ng-disabled="isDisabled()"/>
+            <input type="text" class="form-control" ng-model="tab.room.roomTags.material[2]" placeholder="输入所用材质" style="width:115px;" ng-disabled="isDisabled()"/>
+            <input type="text" class="form-control" ng-model="tab.room.roomTags.material[3]" placeholder="输入所用材质" style="width:115px;" ng-disabled="isDisabled()"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" star-required>气质标签：</label>
+        <div class="col-md-10 form-inline">
+            <input type="text" class="form-control" name="temperament" ng-model="tab.room.roomTags.temperament[0]" placeholder="输入适合气质" style="width:115px;" ng-required="isRequiredTab()" input-error ng-disabled="isDisabled()"/>
+            <input type="text" class="form-control" ng-model="tab.room.roomTags.temperament[1]" placeholder="输入适合气质" style="width:115px;" ng-disabled="isDisabled()"/>
+            <input type="text" class="form-control" ng-model="tab.room.roomTags.temperament[2]" placeholder="输入适合气质" style="width:115px;" ng-disabled="isDisabled()"/>
+            <input type="text" class="form-control" ng-model="tab.room.roomTags.temperament[3]" placeholder="输入适合气质" style="width:115px;" ng-disabled="isDisabled()"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" star-required>颜色搭配：</label>
+        <div class="col-md-10 form-inline">
+            <div class="input-group color colorpicker-default" data-color-format="rgba">
+                <input type="text" class="form-control" name="color_0" ng-model="tab.room.roomTags.colorStr[0]" placeholder="输入颜色" ng-required="isRequiredTab()" input-error ng-disabled="isDisabled()">
+                <span class="input-group-btn add-on">
+                    <button class="btn default" type="button">
+                        <i></i>&nbsp;</button>
+                </span>
+            </div>
+            <div class="input-group color colorpicker-default" data-color-format="rgba">
+                <input type="text" class="form-control" name="color_1" ng-model="tab.room.roomTags.colorStr[1]" placeholder="输入颜色" ng-required="false" ng-disabled="isDisabled()">
+                <span class="input-group-btn add-on">
+                    <button class="btn default" type="button">
+                        <i></i>&nbsp;</button>
+                </span>
+            </div>
+            <div class="input-group color colorpicker-default" data-color-format="rgba">
+                <input type="text" class="form-control" name="color_2" ng-model="tab.room.roomTags.colorStr[2]" placeholder="输入颜色" ng-required="false" ng-disabled="isDisabled()">
+                <span class="input-group-btn add-on">
+                    <button class="btn default" type="button">
+                        <i></i>&nbsp;</button>
+                </span>
+            </div>
+            <div class="input-group color colorpicker-default" data-color-format="rgba">
+                <input type="text" class="form-control" name="color_3" ng-model="tab.room.roomTags.colorStr[3]" placeholder="输入颜色" ng-required="false" ng-disabled="isDisabled()">
+                <span class="input-group-btn add-on">
+                    <button class="btn default" type="button">
+                        <i></i>&nbsp;</button>
+                </span>
+            </div>
+            <div class="input-group color colorpicker-default" data-color-format="rgba">
+                <input type="text" class="form-control" name="color_4" ng-model="tab.room.roomTags.colorStr[4]" placeholder="输入颜色" ng-required="false" ng-disabled="isDisabled()">
+                <span class="input-group-btn add-on">
+                    <button class="btn default" type="button">
+                        <i></i>&nbsp;</button>
+                </span>
+            </div>
+            <div class="input-group color colorpicker-default" data-color-format="rgba">
+                <input type="text" class="form-control" name="color_5" ng-model="tab.room.roomTags.colorStr[5]" placeholder="输入颜色" ng-required="false" ng-disabled="isDisabled()">
+                <span class="input-group-btn add-on">
+                    <button class="btn default" type="button">
+                        <i></i>&nbsp;</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" star-required>平面设计图：
+            <br>
+            <span style="font-size: 13px;">(<font class="text-danger">建议比例4:3</font>)</span>
+        </label>
+        <div class="col-md-4">
+            <div class="fileinput fileinput-new roomDesignImage" data-provides="fileinput" data-minwidth="250px" data-minheight="200px">
+                <div class="fileinput-new thumbnail">
+                    <img class="showImg" ng-show="tab.room.designImage.imageUrl" ng-src="{{tab.room.designImage.imageUrl}}" alt=""/>
+                </div>
+                <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                <div ng-hide="isDisabled()">
+                    <span class="btn btn-xs default btn-file">
+                        <span class="fileinput-new">选择图片</span>
+                        <span class="fileinput-exists">更改图片</span>
+                        <input class="fileupload" type="file" name="roomDesignImage" ng-model="tab.room.designImage.imageUrl" ng-required="isRequiredTab()" input-error ng-file-dirty>
+                    </span>
+                    <a href="javascript:;" class="btn btn-xs red fileinput-exists" data-dismiss="fileinput">
+                        删除图片
+                    </a>
+                </div>
+            </div>
+        </div>
+        <label class="control-label col-md-1" style="padding-right: 0;padding-left: 0;width: 90px;" star-required>设计简述：</label>
+        <div class="col-md-4">
+            <textarea name="feature" class="form-control" rows="9" maxlength="300" ng-model="tab.room.designImage.description" max-words="300" ng-required="isRequiredTab()" input-error ng-disabled="isDisabled()"></textarea>
+            <div class="form-group" style="margin:0;">
+                <span class="control-label pull-right"></span>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="form-group" ng-repeat="(key2, roomImage) in tab.room.roomImages track by roomImage.displayOrder">
+        <label class="control-label col-md-2">
+            <span ng-if="$first" star-required>场景图：</span>
+        </label>
+        <div id="img3" class="col-md-4 roomImage-div">
+            <div class="fileinput fileinput-new roomImages" data-provides="fileinput" data-minwidth="250px" data-minheight="200px">
+                <div class="fileinput-new thumbnail">
+                    <img class="showImg" ng-show="roomImage.imageUrl" ng-src="{{roomImage.imageUrl}}" alt=""/>
+                </div>
+                <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                <div ng-hide="isDisabled()">
+                    <span class="btn btn-xs default btn-file">
+                        <span class="fileinput-new">选择图片</span>
+                        <span class="fileinput-exists">更改图片</span>
+                        <input class="fileupload" type="file" name="roomImages_{{$index}}" ng-model="roomImage.imageUrl" ng-required="isRequiredTab()" input-error ng-file-dirty>
+                    </span>
+                    <a href="javascript:;" class="btn btn-xs red fileinput-exists" data-dismiss="fileinput">
+                        删除图片
+                    </a>
+                </div>
+            </div>
+            <label id="usedInDetail" class="check" style="display:block;">
+                <input type="checkbox" ng-model="roomImage.inDetailPage" ng-true-value="1" ng-false-value="0" ng-disabled="isDisabled()"/>
+                用于详情页</label>
+        </div>
+        <label class="control-label col-md-1" style="padding-right: 0;padding-left: 0;width: 90px;">
+            <span ng-if="$first">设计说明：</span>
+        </label>
+        <div class="col-md-4">
+            <textarea class="form-control" rows="9" maxlength="300" ng-model="roomImage.description" max-words="300" ng-disabled="isDisabled()"></textarea>
+            <div class="form-group" style="margin:0;">
+                <span class="control-label pull-right"></span>
+            </div>
+            <div class="form-group pull-right" style="margin:0;">
+                <a class="control-label text-primary" ng-click="moveImgUp($event,key2)" ng-hide="isDisabled()">上移</a>
+                <a class="control-label text-primary" ng-click="moveImgDown($event,key2)" ng-hide="isDisabled()">下移</a>
+                <a class="control-label text-primary" ng-click="delImg($event,key2)" ng-hide="isDisabled()">移除</a>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <span ng-click="addRoomImage($event)" class="btn green pull-right" style="margin-right: 3%;" ng-hide="isDisabled()">
+            <i class="fa fa-plus"></i>新增图文说明</span>
+    </div>
+    <hr ng-if="tab.type === '编辑空间'">
+    <div class="form-group" ng-if="tab.type === '编辑空间'">
+        <h4 class="control-label col-md-3">
+            <strong>该空间已被如下套装使用：</strong>
+        </h4>
+    </div>
+    <div class="form-group" ng-if="tab.type === '编辑空间'">
+        <label class="control-label col-md-2">全新套装：</label>
+        <div class="col-md-10">
+            <div class="form-control-static">
+                <div class="form-inline" ng-if="suitNew" ng-repeat="suit in suitNew">
+                    <a class="form-inline" ng-href="{{'#/edit-suits-detail/'+suit.suitId}}" target="_blank">{{suit.suitId}}
+                        {{suit.suitName}}</a>
+                </div>
+                <span ng-if="!suitNew.length" class="form-inline">无</span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" ng-if="tab.type === '编辑空间'">
+        <label class="control-label col-md-2">组合套装：</label>
+        <div class="col-md-10">
+            <div class="form-control-static">
+                <div class="form-inline" ng-if="suitMix" ng-repeat="suit in suitMix">
+                    <a class="" ng-href="{{'#/edit-suits-detail/'+suit.suitId}}" target="_blank">{{suit.suitId}}
+                        {{suit.suitName}}</a>
+                </div>
+                <span ng-if="!suitMix.length" class="form-inline">无</span>
+            </div>
+        </div>
+    </div>
+</ng-form>

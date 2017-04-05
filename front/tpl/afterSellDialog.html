@@ -1,0 +1,82 @@
+<div class="modal fade" id="sellAfter" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">{{modalTitle}}</h4>
+            </div> -->
+            <div class="modal-body">
+                <div class="portlet-body form">
+                    <ng-form class="form-horizontal" name="hardOrderDialog">
+                        <div class="form-body">
+                            <div class="form-group">
+                                <div class="col-md-6" style="border-right-width: 2px;
+                                border-right-color: rgba(204, 204, 204, 0.31);
+                                border-right-style: solid;">
+                                    <div class="form-group">
+                                        <h4 class="col-md-6"><strong>订单信息：</strong></h4>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 no-padding-right">订单编号：</label>
+                                        <div class="col-md-6">
+                                            <span class="form-control-static">{{orderNum}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 no-padding-right">所属项目：</label>
+                                        <div class="col-md-6">
+                                            <span class="form-control-static">{{buildingName || (buildingId | query:'/house/queryBuildHouseRel/')}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 no-padding-right">客户姓名：</label>
+                                        <div class="col-md-6">
+                                            <span class="form-control-static">{{purchaserName}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 no-padding-right">手机号码：</label>
+                                        <div class="col-md-6">
+                                            <span class="form-control-static">{{purchaserTel}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <h4 class="col-md-8"><strong>选择售后类型：</strong></h4>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group">
+                                        <div class="col-xs-12" style="height:25px;"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-5 col-md-offset-1">
+                                            <a class="btn btn-primary btn-block" button-steer ng-href="#/after-sell-new/{{type}}/{{orderId}}">退货退款</a>
+                                        </div>
+                                        <div class="col-md-5 ">
+                                            <a class="btn btn-primary btn-block" button-steer href="#/after-sell-new1/{{type}}/{{orderId}}">仅退款</a>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h4></h4>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-5 col-md-offset-1">
+                                            <a class="btn btn-primary btn-block" button-steer href="">换货</a>
+                                        </div>
+                                        <div class="col-md-5 ">
+                                            <a class="btn btn-primary btn-block" button-steer href="">维修</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-form>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

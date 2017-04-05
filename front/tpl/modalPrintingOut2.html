@@ -1,0 +1,32 @@
+<div class="modal fade" tabindex="-1" role="basic" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header" ng-show="modalTitle">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+				<h4 class="modal-title">{{modalTitle}}</h4>
+			</div>
+			<div class="modal-body">
+				<div class="portlet-body form">
+					<ng-form id="printingForm" action="#" class="form-horizontal" enctype="multipart/form-data">
+						<div class="form-group">
+							<label class="col-md-3 control-label"></label>
+							<div class="col-md-9">
+								<h4>涉及<span class="form-control-static" style="color:red;">{{modalDetail[6]}}</span>件货物，共<span class="form-control-static" style="color:red;">{{modalDetail[12]}}</span>张条码</h4>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">条码型号：</label>
+							<div class="col-md-6">
+								<select class="form-control" ng-model="barcodeType" ng-options="n.id as n.name for n in barcodeTypeList" required input-error disabled></select>
+							</div>
+						</div>
+					</ng-form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn default" data-dismiss="modal">返回</button>
+				<button type="button" class="btn blue" ng-click="modalOk()" validate-all>确认</button>
+			</div>
+		</div>
+	</div>
+</div>

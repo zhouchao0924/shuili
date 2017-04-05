@@ -1,0 +1,23 @@
+<style type="text/css">
+    .hide {
+        display: none!important;
+    }
+</style>
+
+<ul id="tabs" class="nav nav-tabs" ng-hide="{{hideTab==='true'}}">
+    <li ng-class="{'active': n.index == active}" ng-click="click(n.index)" ng-repeat="n in tabs">
+        <a href="" data-toggle="tab" aria-expanded="false">{{n.name}}</a>
+    </li>
+</ul>
+<div>
+    <table class="table table-striped table-bordered table-hover" id="sample_1">
+        <thead>
+            <tr>
+                <th ng-repeat="n in tableParams.title">{{n}}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>

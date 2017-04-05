@@ -1,0 +1,65 @@
+<div class="portlet box blue-madison">
+	<div class="portlet-title">
+		<div class="caption"> <i class="fa fa-globe"></i>工艺模板配置 </div>
+		<div class="tools">
+			<a href="javascript:;" class="reload"> </a>
+		</div>
+	</div>
+	<div class="portlet-body form-horizontal">
+		<button class="btn blue mb20" ng-show="templateData.groupId !== 0" ng-click="openApplyBuildingDialog()">应用到楼盘</button>
+		<ul id="tabs" class="nav nav-tabs">
+			<li ng-click="clickTab($index)" ng-class="{'active': curIndex === $index}" class="tab-view" ng-repeat="n in nodeList"> <a href="" style="text-align: center;">{{n}}</a> </li>
+		</ul>
+		<div class="portlet ">
+			<div class="portlet-body">
+				<form class="form-horizontal">
+					<div id="hardtable1" class="form-group">
+						<div class="col-md-12">
+							<table class="table table-bordered table-text-center tableleft">
+								<tr>
+									<th class="table-text-center" rowspan="2"> 工艺名称 </th>
+								</tr>
+								<tr> </tr>
+								<tr ng-repeat="n in template.craftTemplateVoList track by $index">
+									<td class="table-text-center headcol">
+										<input type="text" ng-model="n.name" />
+									</td>
+								</tr>
+							</table>
+							<table class="table table-bordered table-text-center tabletop">
+								<tr>
+									<th class="table-text-center">工艺天数</th>
+								</tr>
+							</table>
+							<div class="divtable tableright">
+								<table class="table table-bordered table-text-center " table-cell-drag>
+									<tr>
+										<th class="table-text-center" ng-repeat="n in days track by $index">{{$index+1}}</th>
+									</tr>
+									<tr ng-repeat="n in template.craftTemplateVoList track by $index">
+										<td id="{{n.name+$index}}" class="table-text-center" ng-repeat="m in days track by $index"></td>
+									</tr>
+								</table>
+							</div> <a class="plus1" ng-click="addRow()">+</a> <a class="plus2" ng-click="delRow()">-</a> </div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<vi-dialog title="应用到楼盘" width="600" ng-if="dialogVisible">
+		<div class="dialog-content pl20">
+			<div class="building-list" ng-repeat="n in $parent.craftTemplateBuildingList">
+				<input type="checkbox" 
+					id="input{{n.buildingId}}" 
+					ng-disabled="n.status == 3" 
+					ng-checked="n.status != 1"
+					value="{{n.buildingId}}">
+				<label for="input{{n.buildingId}}">{{n.buildingName}}</label>
+			</div>
+		</div>
+		<div class="dialog-footer">
+			<button class="btn primary" ng-click="$parent.$parent.dialogVisible = false">取消</button>
+			<button class="btn blue" ng-click="$parent.$parent.confirmApply()">确定</button>
+		</div>
+	</vi-dialog>
+</div>
