@@ -10,7 +10,7 @@ MetronicApp.config([
 	function($ocLazyLoadProvider) {
 		$ocLazyLoadProvider.config({
 			// global configs go here
-		});
+		}); 
 	}
 ]);
 /* Setup global settings */
