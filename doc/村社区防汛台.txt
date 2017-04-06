@@ -1,0 +1,189 @@
+1.导入社区防汛台基本情况excel
+    url:/flood/importBaseInfo
+    method:post 提交文件 文件字段名“efile”
+    request:{
+    }
+    response:{
+    }
+
+2.获取社区防汛台基本情况列表
+    url:/flood/getBaseInfoList
+    method:get
+    request:{
+        "text":string //搜索的文本 没有搜索文本传""空字符串
+        "page":int //当前页号 从1开始
+    }
+    response:{
+        totalPage: int,
+        totalCount: int,
+        page: int,
+        list: [
+            {
+                id: string //id,
+                manager: string //责任人,
+                village: stirng //村庄,
+                createTime: string //时间,
+            },
+            ...
+        ]
+}
+
+3.导入乡镇负责人excel
+    url:/flood/importFloodLeaderInfo
+    method:post 提交文件 文件字段名“efile”
+    request:{
+    }
+    response:{
+    }
+
+4.获取乡镇负责人列表
+    url:/flood/getFloodLeaderInfoList
+    method:get
+    request:{
+        "text":string //搜索的文本 没有搜索文本传""空字符串
+        "page":int //当前页号 从1开始
+    }
+    response:{
+        totalPage: int,
+        totalCount: int,
+        page: int,
+        list: [
+            {
+                id: string //id,
+                post: string //岗位,
+                leader: string //责任人,
+                job: string //责任人职务,
+                cell: string //电话,
+                uptime: string //更新时间,
+                desc: string //备注,
+                createTime: string //导入时间
+            },
+            ...
+        ]
+}
+
+5.导入责任人excel
+    url:/flood/importFloodOwnerInfo
+    method:post 提交文件 文件字段名“efile”
+    request:{
+    }
+    response:{
+    }
+
+6.获取责任人列表
+    url:/flood/getFloodOwnerInfoList
+    method:get
+    request:{
+        "text":string //搜索的文本 没有搜索文本传""空字符串
+        "page":int //当前页号 从1开始
+    }
+    response:{
+        totalPage: int,
+        totalCount: int,
+        page: int,
+        list: [
+            {
+                id: string // id,
+                job: string // 岗位,
+                village: string //村名 ,
+                owner: {
+                    name: string // 姓名,
+                    post: string // 职务,
+                    cell: string // 手机
+                },
+                desc: string // 备注,
+                createTime: string //创建时间 
+            },
+            ...
+        ]
+}
+
+7.导入网络负责人excel
+    url:/flood/importFloodNetworkOwnerInfo
+    method:post 提交文件 文件字段名“efile”
+    request:{
+    }
+    response:{
+    }
+
+8.获取网络负责人列表
+    url:/flood/getFloodNetworkOwnerInfoList
+    method:get
+    request:{
+        "text":string //搜索的文本 没有搜索文本传""空字符串
+        "page":int //当前页号 从1开始
+    }
+    response:{
+        totalPage: int,
+        totalCount: int,
+        page: int,
+        list: [
+            {
+                id: string //id,
+                village: string //村名,
+                networkName: string //网络名称,
+                networkType: string //网络类型,
+                owner: {
+                    name: string //名称,
+                    post: string //职务,
+                    cell: string //手机
+                },
+                desc: string //备注,
+                createTime: string //创建时间
+            },
+            ...
+        ]
+}
+
+9.导入危险区域人员转移单excel
+    url:/flood/importTransferPeopleInfo
+    method:post 提交文件 文件字段名“efile”
+    request:{
+    }
+    response:{
+    }
+
+10.获取危险区域人员转移单列表
+    url:/flood/getTransferPeopleList
+    method:get
+    request:{
+        "text":string //搜索的文本 没有搜索文本传""空字符串
+        "page":int //当前页号 从1开始
+    }
+    response:{
+        totalPage: int,
+        totalCount: int,
+        page: int,
+        list: [
+            {
+                id: string //id,
+                village: string //村名,
+                dangerArea: string //危险区名称,
+                cat: string //类别,
+                location: {//地点
+                    pos: string //位置,
+                    longitude: string //经度,
+                    latitude: string //纬度
+                },
+                people: {//危险区影人员
+                    householder: string //户主姓名,
+                    peopleCount: string //居住人数,
+                    cell: string //手机
+                },
+                transferOwner: {//转移责任人
+                    name: string //姓名,
+                    post: string //职务,
+                    cell: string //手机
+                },
+                transferLocation: {//转移地点
+                    posName: string //避灾场所名称,
+                    secureVerify: string //有无安全鉴定,
+                    manager: string //避灾场所管理员,
+                    cell: string //手机
+                },
+                desc: string //备注,
+                createTime: string //创建时间
+            },
+            ...
+        ]
+}
