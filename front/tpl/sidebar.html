@@ -1,6 +1,18 @@
 <div class="page-sidebar navbar-collapse collapse">
 	<ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" ng-class="{'page-sidebar-menu-closed': settings.layout.pageSidebarClosed}">
 		<!-- 首页 -->
+		<li>
+			<a href="#/YYTown">
+				<i class="icon-bar-chart"></i>
+				<span class="title">余姚乡镇</span>
+				<!-- <span class="arrow" ng-if="v.children.length"></span> -->
+			</a>
+			<!-- <ul class="sub-menu" ng-if="v.children.length">
+				<li ng-repeat="o in v.children">
+					<a href="{{o.url}}">{{o.name}}</a>
+				</li>
+			</ul> -->
+		</li>
 		<li class="heading">
 			<h3 class="uppercase" style="color:white;">水利信息</h3>
 		</li>
@@ -15,6 +27,12 @@
 					<a href="{{o.url}}">{{o.name}}</a>
 				</li>
 			</ul> -->
+		</li>
+		<li>
+			<a href="#/GEOInfo">
+				<i class="icon-bar-chart"></i>
+				<span class="title">地理信息</span>
+			</a>
 		</li>
 		<li>
 			<a href="#/Reservoir">
@@ -59,7 +77,7 @@
 			</a>
 		</li>
 		<li>
-			<a href="#/Irrigation ">
+			<a href="#/Irrigation">
 				<i class="icon-bar-chart"></i>
 				<span class="title">农田水利</span>
 			</a>
@@ -70,7 +88,7 @@
 				<span class="title">档案页</span>
 			</a>
 		</li>
-		<li>
+		<!-- <li>
 			<a href="#/VideoMonitoring">
 				<i class="icon-bar-chart"></i>
 				<span class="title">视频监控</span>
@@ -87,7 +105,7 @@
 				<i class="icon-bar-chart"></i>
 				<span class="title">雨情</span>
 			</a>
-		</li>
+		</li> -->
 		<li class="heading">
 			<h3 class="uppercase" style="color:white;">账户信息</h3>
 		</li>
