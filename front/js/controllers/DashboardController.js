@@ -4,7 +4,6 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
 		// initialize core components
 		Metronic.initAjax();
 		// 开始表单数据处理
-		var a = JSON.parse(window.localStorage.aijiaUserdata);
 		// $.ajax({
 		// 	url: Metronic.host + '/admin/home/'+a.userId+'/'+a.sessionId,
 		// 	type: 'POST',

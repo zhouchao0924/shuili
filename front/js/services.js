@@ -110,8 +110,7 @@ MetronicApp.constant('ConfData', {
 		}, {
 			id: 3,
 			name: '送货中'
-		}
-		, {
+		}, {
 			id: 4,
 			name: '送货完成'
 		}
@@ -312,7 +311,7 @@ MetronicApp.factory('userNow', [
 	'$window',
 	function($window) {
 		if (!$window.localStorage || !$window.localStorage.aijiaUserdata) {
-			$window.location.href = 'login.html';
+			// $window.location.href = 'login.html';
 			return
 		}
 		return {
@@ -1290,14 +1289,12 @@ MetronicApp.filter('trusted', [
 		};
 	}
 ]);
-
 //保留两位小数
 MetronicApp.filter('number2', function() {
 	return function(number) {
 		return number.toFixed(2);
 	};
 });
-
 // websocket获取电话状态
 MetronicApp.factory('wsCustomerPhone', [
 	'$window',
@@ -2267,7 +2264,6 @@ MetronicApp.factory('intoBarcode', [
 //         throw exception;
 //     };
 // }]);
-
 /*
 confirm弹框(created by sunhan on 2017/02/13)
 example:
@@ -2286,20 +2282,10 @@ MetronicApp.factory('confirmMessage', [
 			var triggerBtn = options.el;
 			var btnOffset = $(triggerBtn).offset();
 			var title = options.title || '确定要删除吗？';
-			var confirmMessage = angular.element(
-				'<div class="confirm-message">' +
-					'<div class="confirm-message-arrow"></div>' +
-					'<div>' +
-						'<div class="confirm-message-title">' 
-							+ title + 
-						'</div>' +
-						'<div class="confirm-message-btn-container">' +
-							'<button class="btn primary btn-xs cancel-btn mr10">取消</button>' +
-							'<button class="btn blue btn-xs confirm-btn">确定</button>' +
-						'</div>' +
-					'</div>' + 
-				'</div>'
-			);
+			var confirmMessage = angular.element('<div class="confirm-message">' +
+			'<div class="confirm-message-arrow"></div>' +
+			'<div>' +
+			'<div class="confirm-message-title">' + title + '</div>' + '<div class="confirm-message-btn-container">' + '<button class="btn primary btn-xs cancel-btn mr10">取消</button>' + '<button class="btn blue btn-xs confirm-btn">确定</button>' + '</div>' + '</div>' + '</div>');
 			$('.confirm-message').remove();
 			$document.find('body').append(confirmMessage);
 			var $confirmMsg = $('.confirm-message');
@@ -2312,22 +2298,14 @@ MetronicApp.factory('confirmMessage', [
 					'top': confirmTop,
 					'left': btnOffset.left - confirmWidth - 10
 				});
-				$confirmMsg.find('.confirm-message-arrow').css({
-					'transform': 'rotate(135deg)',
-					'right': '-6px',
-					'top': '46px'
-				});
+				$confirmMsg.find('.confirm-message-arrow').css({'transform': 'rotate(135deg)', 'right': '-6px', 'top': '46px'});
 			} else {
 				//弹窗在按钮右侧
 				$confirmMsg.offset({
-					'top': confirmTop, 
+					'top': confirmTop,
 					'left': btnOffset.left + triggerBtn.clientWidth + 10
 				});
-				$confirmMsg.find('.confirm-message-arrow').css({
-					'transform': 'rotate(-45deg)',
-					'left': '-6px',
-					'top': '46px'
-				});
+				$confirmMsg.find('.confirm-message-arrow').css({'transform': 'rotate(-45deg)', 'left': '-6px', 'top': '46px'});
 			}
 			$confirmMsg.find('.confirm-btn').click(function(event) {
 				options.confirmCallback();
@@ -2337,8 +2315,8 @@ MetronicApp.factory('confirmMessage', [
 				$confirmMsg.remove();
 			});
 			$confirmMsg.click(function(e) {
-				if (e.stopPropagation){
-					e.stopPropagation(); 
+				if (e.stopPropagation) {
+					e.stopPropagation();
 				} else {
 					e.cancelBubble = true;
 				}
@@ -2351,7 +2329,6 @@ MetronicApp.factory('confirmMessage', [
 		};
 	}
 ]);
-
 /*
 alert提示(created by sunhan on 2017/02/13)
 example:
@@ -2361,12 +2338,9 @@ MetronicApp.factory('alertMessage', [
 	"$document",
 	function($document) {
 		return function(type, content) {
-			var msgClass = 'vi-message' + '-' + type;
-			var message = angular.element(
-				'<div class="vi-message ' + msgClass + '">' +
-					'<div class="vi-message-content">' + content + '</div>' +
-				'</div>'
-			);
+			var msgClass = 'vi-message' +
+			'-' + type;
+			var message = angular.element('<div class="vi-message ' + msgClass + '">' + '<div class="vi-message-content">' + content + '</div>' + '</div>');
 			$('.vi-message').remove();
 			$document.find('body').append(message);
 			$message = $('.vi-message');

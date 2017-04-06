@@ -44,13 +44,29 @@ MetronicApp.controller('AppController', [
 				var a = JSON.parse(window.localStorage.aijiaUserdata);
 				$('.username').text(a.username);
 			}
-			// $scope.clearCache = function(){
-			//     var cache = $cacheFactory('cache');
-			//     cache.removeAll();
-			// }
 			$scope.quit = function() {
-				window.localStorage.removeItem('aijiaUserdata');
-				window.location.href = 'login.html';
+				$.ajax({
+					url: Metronic.host + '/user/logout',
+					type: 'GET',
+					dataType: 'json',
+					xhrFields: {
+						withCredentials: true
+					},
+					crossDomain: true,
+					data: {
+						data: JSON.stringify({})
+					},
+					success: function(data) {
+						if (data.success) {
+							window.location.href = "login.html";
+						} else {
+							alert(data.message);
+						}
+					},
+					error: function(xhr, data, status) {
+						alert('请检查网络');
+					}
+				})
 			};
 		});
 	}

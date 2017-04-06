@@ -5,8 +5,7 @@ MetronicApp.controller('IrrigationController', [
 	'settings',
 	'$timeout',
 	'$compile',
-	'ajax1',
-	function($rootScope, $scope, settings, $timeout, $compile, ajax) {
+	function($rootScope, $scope, settings, $timeout, $compile) {
 		$scope.$on('$viewContentLoaded', function() {
 			// initialize core components
 			Metronic.initAjax();
