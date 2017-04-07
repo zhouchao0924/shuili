@@ -20,6 +20,7 @@
     response:{
         "userName":string
         "userId":int
+        "roleId": string // 0 普通用户 1 管理员 2超级管理员
     }
 
 2.登出
@@ -38,6 +39,9 @@
     response:{
         "userId":int 
         "userName":string
+        roleId: string // 0 普通用户 1 管理员 2超级管理员
+        currentArea: string //当前管理区域id
+        currentAreaName: string //当前管理区域名称
     }
 
 4.添加用户
