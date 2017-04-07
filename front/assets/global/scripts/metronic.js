@@ -362,8 +362,8 @@ var Metronic = function() {
 	};
 	//* END:CORE HANDLERS *//
 	return {
-		host: 'http://192.168.1.11:10014/cms-web',
-		apihost: 'http://192.168.1.11:10014/cms-web',
+		host: 'http://139.199.27.165:8081/',
+		apihost: 'http://139.199.27.165:8081/',
 		init: function() {
 			//IMPORTANT!!!: Do not modify the core handlers call order.
 			//Core handlers

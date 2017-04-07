@@ -7,7 +7,7 @@ MetronicApp.version = '2016110502';
 /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
 MetronicApp.config([
 	'$ocLazyLoadProvider',
-	function ($ocLazyLoadProvider) {
+	function($ocLazyLoadProvider) {
 		$ocLazyLoadProvider.config({
 			// global configs go here
 		});
@@ -16,7 +16,7 @@ MetronicApp.config([
 /* Setup global settings */
 MetronicApp.factory('settings', [
 	'$rootScope',
-	function ($rootScope) {
+	function($rootScope) {
 		// supported languages
 		var settings = {
 			layout: {
@@ -36,21 +36,37 @@ MetronicApp.controller('AppController', [
 	'$scope',
 	'$rootScope',
 	'$cacheFactory',
-	function ($scope, $rootScope, $cacheFactory) {
-		$scope.$on('$viewContentLoaded', function () {
+	function($scope, $rootScope, $cacheFactory) {
+		$scope.$on('$viewContentLoaded', function() {
 			Metronic.initComponents(); // init core components
 			//Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive
 			if (window.localStorage.aijiaUserdata) {
 				var a = JSON.parse(window.localStorage.aijiaUserdata);
 				$('.username').text(a.username);
 			}
-			// $scope.clearCache = function(){
-			//     var cache = $cacheFactory('cache');
-			//     cache.removeAll();
-			// }
-			$scope.quit = function () {
-				window.localStorage.removeItem('aijiaUserdata');
-				window.location.href = 'login.html';
+			$scope.quit = function() {
+				$.ajax({
+					url: Metronic.host + '/user/logout',
+					type: 'GET',
+					dataType: 'json',
+					xhrFields: {
+						withCredentials: true
+					},
+					crossDomain: true,
+					data: {
+						data: JSON.stringify({})
+					},
+					success: function(data) {
+						if (data.success) {
+							window.location.href = "login.html";
+						} else {
+							alert(data.message);
+						}
+					},
+					error: function(xhr, data, status) {
+						alert('请检查网络');
+					}
+				})
 			};
 		});
 	}
@@ -64,8 +80,8 @@ initialization can be disabled and Layout.init() should be called on page load c
 MetronicApp.controller('HeaderController', [
 	'$scope',
 	'$rootScope',
-	function ($scope, $rootScope) {
-		$scope.$on('$includeContentLoaded', function () {
+	function($scope, $rootScope) {
+		$scope.$on('$includeContentLoaded', function() {
 			Layout.initHeader(); // init header
 		});
 	}
@@ -73,8 +89,8 @@ MetronicApp.controller('HeaderController', [
 /* Setup Layout Part - Sidebar */
 MetronicApp.controller('SidebarController', [
 	'$scope',
-	function ($scope) {
-		$scope.$on('$includeContentLoaded', function () {
+	function($scope) {
+		$scope.$on('$includeContentLoaded', function() {
 			// 首先渲染侧边栏
 			Layout.initSidebar(); // init sidebar
 		});
@@ -83,9 +99,9 @@ MetronicApp.controller('SidebarController', [
 /* Setup Layout Part - Quick Sidebar */
 MetronicApp.controller('QuickSidebarController', [
 	'$scope',
-	function ($scope) {
-		$scope.$on('$includeContentLoaded', function () {
-			setTimeout(function () {
+	function($scope) {
+		$scope.$on('$includeContentLoaded', function() {
+			setTimeout(function() {
 				QuickSidebar.init(); // init quick sidebar
 			}, 2000);
 		});
@@ -94,8 +110,8 @@ MetronicApp.controller('QuickSidebarController', [
 /* Setup Layout Part - Theme Panel */
 MetronicApp.controller('ThemePanelController', [
 	'$scope',
-	function ($scope) {
-		$scope.$on('$includeContentLoaded', function () {
+	function($scope) {
+		$scope.$on('$includeContentLoaded', function() {
 			Demo.init(); // init theme panel
 		});
 	}
@@ -103,8 +119,8 @@ MetronicApp.controller('ThemePanelController', [
 /* Setup Layout Part - Footer */
 MetronicApp.controller('FooterController', [
 	'$scope',
-	function ($scope) {
-		$scope.$on('$includeContentLoaded', function () {
+	function($scope) {
+		$scope.$on('$includeContentLoaded', function() {
 			Layout.initFooter(); // init footer
 		});
 	}
@@ -113,9 +129,9 @@ MetronicApp.controller('FooterController', [
 MetronicApp.config([
 	'$stateProvider',
 	'$urlRouterProvider',
-	function ($stateProvider, $urlRouterProvider) {
+	function($stateProvider, $urlRouterProvider) {
 		// Redirect any unmatched url
-		$urlRouterProvider.otherwise(function ($injector, $location) {
+		$urlRouterProvider.otherwise(function($injector, $location) {
 			window.location.href = 'login.html';
 		});
 		$stateProvider.state('dashboard', {
@@ -128,7 +144,7 @@ MetronicApp.config([
 			resolve: {
 				deps: [
 					'$ocLazyLoad',
-					function ($ocLazyLoad) {
+					function($ocLazyLoad) {
 						return $ocLazyLoad.load({
 							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
 							files: [
@@ -150,7 +166,7 @@ MetronicApp.config([
 			resolve: {
 				deps: [
 					'$ocLazyLoad',
-					function ($ocLazyLoad) {
+					function($ocLazyLoad) {
 						return $ocLazyLoad.load({
 							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
 							files: [
@@ -176,7 +192,7 @@ MetronicApp.config([
 			resolve: {
 				deps: [
 					'$ocLazyLoad',
-					function ($ocLazyLoad) {
+					function($ocLazyLoad) {
 						return $ocLazyLoad.load({
 							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
 							files: [
@@ -202,7 +218,7 @@ MetronicApp.config([
 			resolve: {
 				deps: [
 					'$ocLazyLoad',
-					function ($ocLazyLoad) {
+					function($ocLazyLoad) {
 						return $ocLazyLoad.load({
 							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
 							files: [
@@ -228,7 +244,7 @@ MetronicApp.config([
 			resolve: {
 				deps: [
 					'$ocLazyLoad',
-					function ($ocLazyLoad) {
+					function($ocLazyLoad) {
 						return $ocLazyLoad.load({
 							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
 							files: [
@@ -254,7 +270,7 @@ MetronicApp.config([
 			resolve: {
 				deps: [
 					'$ocLazyLoad',
-					function ($ocLazyLoad) {
+					function($ocLazyLoad) {
 						return $ocLazyLoad.load({
 							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
 							files: [
@@ -280,7 +296,7 @@ MetronicApp.config([
 			resolve: {
 				deps: [
 					'$ocLazyLoad',
-					function ($ocLazyLoad) {
+					function($ocLazyLoad) {
 						return $ocLazyLoad.load({
 							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
 							files: [
@@ -306,7 +322,7 @@ MetronicApp.config([
 			resolve: {
 				deps: [
 					'$ocLazyLoad',
-					function ($ocLazyLoad) {
+					function($ocLazyLoad) {
 						return $ocLazyLoad.load({
 							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
 							files: [
@@ -332,7 +348,7 @@ MetronicApp.config([
 			resolve: {
 				deps: [
 					'$ocLazyLoad',
-					function ($ocLazyLoad) {
+					function($ocLazyLoad) {
 						return $ocLazyLoad.load({
 							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
 							files: [
@@ -358,7 +374,7 @@ MetronicApp.config([
 			resolve: {
 				deps: [
 					'$ocLazyLoad',
-					function ($ocLazyLoad) {
+					function($ocLazyLoad) {
 						return $ocLazyLoad.load({
 							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
 							files: [
@@ -384,7 +400,7 @@ MetronicApp.config([
 			resolve: {
 				deps: [
 					'$ocLazyLoad',
-					function ($ocLazyLoad) {
+					function($ocLazyLoad) {
 						return $ocLazyLoad.load({
 							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
 							files: [
@@ -410,7 +426,7 @@ MetronicApp.config([
 			resolve: {
 				deps: [
 					'$ocLazyLoad',
-					function ($ocLazyLoad) {
+					function($ocLazyLoad) {
 						return $ocLazyLoad.load({
 							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
 							files: [
@@ -436,7 +452,7 @@ MetronicApp.config([
 			resolve: {
 				deps: [
 					'$ocLazyLoad',
-					function ($ocLazyLoad) {
+					function($ocLazyLoad) {
 						return $ocLazyLoad.load({
 							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
 							files: [
@@ -462,7 +478,7 @@ MetronicApp.config([
 			resolve: {
 				deps: [
 					'$ocLazyLoad',
-					function ($ocLazyLoad) {
+					function($ocLazyLoad) {
 						return $ocLazyLoad.load({
 							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
 							files: [
@@ -488,7 +504,7 @@ MetronicApp.config([
 			resolve: {
 				deps: [
 					'$ocLazyLoad',
-					function ($ocLazyLoad) {
+					function($ocLazyLoad) {
 						return $ocLazyLoad.load({
 							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
 							files: [
@@ -514,7 +530,7 @@ MetronicApp.config([
 			resolve: {
 				deps: [
 					'$ocLazyLoad',
-					function ($ocLazyLoad) {
+					function($ocLazyLoad) {
 						return $ocLazyLoad.load({
 							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
 							files: [
@@ -540,7 +556,7 @@ MetronicApp.config([
 			resolve: {
 				deps: [
 					'$ocLazyLoad',
-					function ($ocLazyLoad) {
+					function($ocLazyLoad) {
 						return $ocLazyLoad.load({
 							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
 							files: [
@@ -566,7 +582,7 @@ MetronicApp.config([
 			resolve: {
 				deps: [
 					'$ocLazyLoad',
-					function ($ocLazyLoad) {
+					function($ocLazyLoad) {
 						return $ocLazyLoad.load({
 							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
 							files: [
@@ -592,7 +608,7 @@ MetronicApp.config([
 			resolve: {
 				deps: [
 					'$ocLazyLoad',
-					function ($ocLazyLoad) {
+					function($ocLazyLoad) {
 						return $ocLazyLoad.load({
 							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
 							files: [
@@ -608,6 +624,44 @@ MetronicApp.config([
 					}
 				]
 			}
+		}).state('AddInformationManagement', {
+			url: "/AddInformationManagement",
+			templateUrl: "views/AddInformationManagement.html?v=" + MetronicApp.version,
+			data: {
+				pageTitle: '添加基本情况'
+			},
+			controller: "AddInformationManagementController",
+			resolve: {
+				deps: [
+					'$ocLazyLoad',
+					function($ocLazyLoad) {
+						return $ocLazyLoad.load({
+							name: 'MetronicApp', insertBefore: '#nins_before', // load the above css files before '#ng_load_plugins_before'
+							files: [
+								// 'assets/global/plugins/select2/select2.css',
+								'assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css?v=' + MetronicApp.version,
+								'assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/umeditor/themes/default/css/umeditor.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/umeditor/umeditor.config.js?v=' + MetronicApp.version,
+								'assets/global/plugins/umeditor/umeditor.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/umeditor/plupload/plupload.full.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/umeditor/qiniu.min.js?v=' + MetronicApp.version,
+								// 'assets/global/plugins/select2/select2.min.js',
+								'assets/global/plugins/datatables/all.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/bootbox/bootbox.min.js?v=' + MetronicApp.version,
+								'js/controllers/AddInformationManagementController.js?v=' + MetronicApp.version
+							]
+						});
+					}
+				]
+			}
 		})
 	}
 ]);
@@ -615,7 +669,7 @@ MetronicApp.run([
 	"$rootScope",
 	"settings",
 	"$state",
-	function ($rootScope, settings, $state) {
+	function($rootScope, settings, $state) {
 		$rootScope.$state = $state; // state to be accessed from view
 	}
 ]);

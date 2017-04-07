@@ -1,7 +1,6 @@
 var IrrigationAdvanced = function() {
 	var initTable3 = function($scope, $compile) {
 		var table = $('#sample_3');
-		var conditions = [];
 		var oTable = table.dataTable({
 			"language": {
 				"aria": {
@@ -38,38 +37,45 @@ var IrrigationAdvanced = function() {
 			"stateSave": true,
 			"serverSide": true,
 			"ajax": function(data, callback, settings) {
-				var a = JSON.parse(window.localStorage.aijiaUserdata);
 				var params = {
-					pageNo: data.start / data.length + 1,
-					pageSize: data.length,
-					conditions: conditions
+					page: data.start / data.length + 1,
+					text: ''
 				};
 				Metronic.blockUI({message: '<div style="background:rgba(0,0,0,0.3);padding:10px;font-size:16px;font-weight:bold;color:#fff;">正在加载...</div>', textOnly: true});
 				$.ajax({
-					url: Metronic.host + '/arter/queryArterList/' + a.userId + '/' + a.sessionId,
-					type: 'POST',
+					url: Metronic.host + 'farmWaterProject/getList',
+					type: 'GET',
 					dataType: 'json',
-					data: JSON.stringify(params),
+					xhrFields: {
+						withCredentials: true
+					},
+					crossDomain: true,
+					data: {
+						data: JSON.stringify(params)
+					},
 					success: function(datas) {
-						console.debug(datas, '艺术家列表');
-						if (datas.code == 1) {
+						if (datas.success) {
 							var arr = [];
-							$.each(datas.obj.list || [], function(i, n) {
+							$.each(datas.data.list || [], function(i, n) {
 								var temp = [
-									n.id,
-									n.nickName,
-									n.displayArtType,
-									n.brief,
-									n.artProductCount,
+									n.cat,
 									"",
-									n.artType
+									n.name,
+									n.location,
+									n.buildArea,
+									n.buildItems,
+									n.buildTime,
+									n.projectImage,
+									n.image,
+									n.desc,
+									n.id
 								];
 								arr.push(temp);
 							});
 							var d = {
 								data: arr,
-								recordsTotal: datas.obj.totalRecords,
-								recordsFiltered: datas.obj.totalRecords
+								recordsTotal: datas.data.totalCount,
+								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
 							table.find('tbody tr td:last-child').each(function(i, n) {
@@ -98,20 +104,7 @@ var IrrigationAdvanced = function() {
 		});
 		var tableWrapper = $('#sample_3_wrapper');
 		$('#searchBtn').click(function(e) {
-			var nickName = $('#nickName').val(),
-				mobile = $('#mobile').val();
-			if (nickName) {
-				conditions.push({'type': 1, 'condition': nickName})
-			}
-			if (mobile) {
-				conditions.push({'type': 2, 'condition': mobile})
-			}
 			table.DataTable().ajax.reload();
-		});
-		$("#clear").click(function(e) {
-			$('#nickName').val('');
-			$('#mobile').val('');
-			conditions = [];
 		});
 		//添加enter搜索的事件
 		$('body').bind('keydown', function(e) {
@@ -126,9 +119,7 @@ var IrrigationAdvanced = function() {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			console.log('me 1');
 			initTable3($scope, $compile);
-			console.log('me 2');
 		}
 	};
 }();
