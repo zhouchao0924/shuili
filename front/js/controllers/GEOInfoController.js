@@ -15,6 +15,41 @@ MetronicApp.controller('GEOInfoController', [
 			$rootScope.settings.layout.pageSidebarClosed = false;
 			// ArchiveAdvanced.init($scope, $compile);
 
+			//编辑器初始化
+			var articleUm = '';
+			var imgUrl = Metronic.host + 'attachment/getUploadTokenAjax';
+			window.UMEDITOR_CONFIG.UMEDITOR_HOME_URL = 'assets/global/plugins/umeditor/';
+			window.UMEDITOR_CONFIG.imageUrl = imgUrl;
+			$.ajax({
+				url: imgUrl,
+				type: 'GET',
+				dataType: 'json',
+				xhrFields: {
+					withCredentials: true
+				},
+				crossDomain: true,
+				data: {
+					data: JSON.stringify({})
+				},
+				success: function(datas) {
+					if (datas.success) {
+						window.QINIU_TOKEN = datas.data.token;
+						domins = datas.data.domain.replace("http://", "");
+						window.QINIU_BUCKET_DOMAIN = domins;
+						UM.clearCache('new-editor');
+						articleUm = UM.getEditor('new-editor', {UMEDITOR_HOME_URL: 'assets/global/plugins/umeditor/'});
+					} else if (datas.code == 50001) {
+						window.location.href = 'login.html';
+					} else {
+						alert(datas.message);
+						Metronic.unblockUI();
+					}
+				},
+				error: function(xhr, data, status) {
+					alert('请检查网络');
+				}
+			});
+
 			// alert(1);
 			window.initialize = function(){
 			  var mp = new window.BMap.Map('mapcontainer');
@@ -102,7 +137,6 @@ MetronicApp.controller('GEOInfoController', [
 			$('#edit').click(function(e){
 				$('#modaledit').modal('show');
 				$('#modalview').modal('hide');
-
 			});
 
 

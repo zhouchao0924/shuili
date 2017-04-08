@@ -251,6 +251,12 @@ MetronicApp.config([
 							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
 							files: [
 								// 'http://api.map.baidu.com/api?v=2.0&ak=gWUgzfPib0vllGaS7qILPisD',
+								'assets/global/plugins/umeditor/themes/default/css/umeditor.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/umeditor/umeditor.config.js?v=' + MetronicApp.version,
+								'assets/global/plugins/umeditor/umeditor.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/umeditor/plupload/plupload.full.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/umeditor/qiniu.min.js?v=' + MetronicApp.version,
+								
 								'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css?v=' + MetronicApp.version,
 								'assets/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css?v=' + MetronicApp.version,
 								'assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css?v=' + MetronicApp.version,
