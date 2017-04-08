@@ -1,6 +1,7 @@
-var InformationManagementAdvanced = function() {
+var FileInformationManagementAdvanced = function() {
 	var initTable3 = function($scope, $compile) {
 		var table = $('#sample_3');
+		var conditions = [];
 		var oTable = table.dataTable({
 			"language": {
 				"aria": {
@@ -39,24 +40,21 @@ var InformationManagementAdvanced = function() {
 			"ajax": function(data, callback, settings) {
 				var a = JSON.parse(window.localStorage.Userdata);
 				var params = {
-					articleType: 1
+					pageNo: data.start / data.length + 1,
+					pageSize: data.length,
+					conditions: conditions
 				};
 				Metronic.blockUI({message: '<div style="background:rgba(0,0,0,0.3);padding:10px;font-size:16px;font-weight:bold;color:#fff;">正在加载...</div>', textOnly: true});
 				$.ajax({
-					url: Metronic.host + '/article/getArticleListAjax',
-					type: 'GET',
+					url: Metronic.host + '/arter/queryArterList/' + a.userId + '/' + a.sessionId,
+					type: 'POST',
 					dataType: 'json',
-					xhrFields: {
-						withCredentials: true
-					},
-					crossDomain: true,
-					data: {
-						data: JSON.stringify({params})
-					},
+					data: JSON.stringify(params),
 					success: function(datas) {
-						if (datas.success) {
+						console.debug(datas, '艺术家列表');
+						if (datas.code == 1) {
 							var arr = [];
-							$.each(datas.data.list || [], function(i, n) {
+							$.each(datas.obj.list || [], function(i, n) {
 								var temp = [
 									n.id,
 									n.nickName,
@@ -100,7 +98,20 @@ var InformationManagementAdvanced = function() {
 		});
 		var tableWrapper = $('#sample_3_wrapper');
 		$('#searchBtn').click(function(e) {
+			var nickName = $('#nickName').val(),
+				mobile = $('#mobile').val();
+			if (nickName) {
+				conditions.push({'type': 1, 'condition': nickName})
+			}
+			if (mobile) {
+				conditions.push({'type': 2, 'condition': mobile})
+			}
 			table.DataTable().ajax.reload();
+		});
+		$("#clear").click(function(e) {
+			$('#nickName').val('');
+			$('#mobile').val('');
+			conditions = [];
 		});
 		//添加enter搜索的事件
 		$('body').bind('keydown', function(e) {
@@ -115,7 +126,9 @@ var InformationManagementAdvanced = function() {
 			if (!jQuery().dataTable) {
 				return;
 			}
+			console.log('me 1');
 			initTable3($scope, $compile);
+			console.log('me 2');
 		}
 	};
 }();
