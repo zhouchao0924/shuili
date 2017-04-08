@@ -7,6 +7,8 @@
  */
 class RiverDrainExtendExcelTemplateConfig extends ExcelTemplateConfig{
 
+    public static $id = 11;
+
     protected $itemList = array(
         'name'=>'排污口名称',
         'position'=>'排污口位置',
@@ -44,10 +46,10 @@ class RiverDrainExtendExcelTemplateConfig extends ExcelTemplateConfig{
      * @return mixed
      */
     public function getServiceTypeId() {
-        // TODO: Implement getServiceTypeId() method.
+        return self::$id;
     }
 
     protected function getTemplateName() {
-        // TODO: Implement getTemplateName() method.
+        return "河道排水统计";
     }
 }

@@ -4,7 +4,7 @@
  * @author yulongfei
  * @date 2017-04-08
  */
-class WaterQualityBaseDao extends WpCsvBaseDao{
+class WpWaterQualityBaseDao extends WpCsvBaseDao{
     public function getTableName(){
         return "water_quality_base";
     }

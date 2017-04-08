@@ -7,6 +7,8 @@
  */
 class RiverManagerBaseExcelTemplateConfig extends ExcelTemplateConfig{
 
+    public static $id = 7;
+
     protected $itemList = array(
         'name'=>'河道名称',
         'river_id'=>'编号',
@@ -38,5 +40,17 @@ class RiverManagerBaseExcelTemplateConfig extends ExcelTemplateConfig{
     public function getSearchTextTableColName()
     {
         return "name";
+    }
+
+    /**
+     * 获取类型id
+     * @return mixed
+     */
+    public function getServiceTypeId() {
+        return self::$id;
+    }
+
+    protected function getTemplateName() {
+        return "河长制基础信息";
     }
 }

@@ -631,7 +631,7 @@ MetronicApp.config([
 			url: "/InformationManagement",
 			templateUrl: "views/InformationManagement.html?v=" + MetronicApp.version,
 			data: {
-				pageTitle: '基本情况及档案信息管理'
+				pageTitle: '基本情况管理'
 			},
 			controller: "InformationManagementController",
 			resolve: {
@@ -686,6 +686,70 @@ MetronicApp.config([
 								'assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=' + MetronicApp.version,
 								'assets/global/plugins/bootbox/bootbox.min.js?v=' + MetronicApp.version,
 								'js/controllers/AddInformationManagementController.js?v=' + MetronicApp.version
+							]
+						});
+					}
+				]
+			}
+		}).state('FileInformationManagement', {
+			url: "/FileInformationManagement",
+			templateUrl: "views/FileInformationManagement.html?v=" + MetronicApp.version,
+			data: {
+				pageTitle: '档案信息管理'
+			},
+			controller: "FileInformationManagementController",
+			resolve: {
+				deps: [
+					'$ocLazyLoad',
+					function($ocLazyLoad) {
+						return $ocLazyLoad.load({
+							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
+							files: [
+								'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/all.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=' + MetronicApp.version,
+								'js/scripts/FileInformationManagement-table-advanced.js?v=' + MetronicApp.version,
+								'js/controllers/FileInformationManagementController.js?v=' + MetronicApp.version
+							]
+						});
+					}
+				]
+			}
+		}).state('AddFileInformationManagement', {
+			url: "/AddFileInformationManagement",
+			templateUrl: "views/AddFileInformationManagement.html?v=" + MetronicApp.version,
+			data: {
+				pageTitle: '添加档案信息'
+			},
+			controller: "AddFileInformationManagementController",
+			resolve: {
+				deps: [
+					'$ocLazyLoad',
+					function($ocLazyLoad) {
+						return $ocLazyLoad.load({
+							name: 'MetronicApp', insertBefore: '#nins_before', // load the above css files before '#ng_load_plugins_before'
+							files: [
+								// 'assets/global/plugins/select2/select2.css',
+								'assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css?v=' + MetronicApp.version,
+								'assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/umeditor/themes/default/css/umeditor.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/umeditor/umeditor.config.js?v=' + MetronicApp.version,
+								'assets/global/plugins/umeditor/umeditor.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/umeditor/plupload/plupload.full.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/umeditor/qiniu.min.js?v=' + MetronicApp.version,
+								// 'assets/global/plugins/select2/select2.min.js',
+								'assets/global/plugins/datatables/all.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/bootbox/bootbox.min.js?v=' + MetronicApp.version,
+								'js/controllers/AddFileInformationManagementController.js?v=' + MetronicApp.version
 							]
 						});
 					}
