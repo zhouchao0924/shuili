@@ -36,6 +36,7 @@ class ArticleModel extends BaseModel{
      */
     private function _formatWpArticleInfo($info){
         return array(
+            "id" => $info["id"],
             "title" => $info["title"],
             "isBoldTitle" =>$info["is_bold_title"],
             "titleImgUrl" =>$info["title_img_url"],
