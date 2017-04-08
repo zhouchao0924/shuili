@@ -1,11 +1,11 @@
 <?php
 /**
- * 山塘
+ * 水闸
  * @copyright (C) 2006-2017 Tuniu All rights reserved
  * @author yulongfei
  * @date 2017-04-06
  */
-class WaterConservancyExcelTemplateConfig extends ExcelTemplateConfig{
+class WaterGateExcelTemplateConfig extends ExcelTemplateConfig{
     public static $id = 5;
 
     protected $itemList = array(

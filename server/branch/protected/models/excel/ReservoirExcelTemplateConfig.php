@@ -65,7 +65,7 @@ class ReservoirTemplateConfig extends ExcelTemplateConfig{
     );
 
     public function getDao(){
-        return WpReservoirDao::getInstance("WpReservoirDao");
+        return WpReservoirDao::getInstance("WpReservoir");
     }
 
     public function getExampleExcelFileName()
