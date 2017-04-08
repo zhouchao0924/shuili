@@ -87,7 +87,7 @@ var InformationManagementAdvanced = function() {
 						} else if (datas.code == 3) {
 							window.location.href = 'login.html';
 						} else {
-							alert(datas.ext.msg);
+							alert(datas.message);
 							Metronic.unblockUI();
 						}
 					},
