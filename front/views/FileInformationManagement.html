@@ -27,16 +27,15 @@
 				<div class="row">
 					<form id="searchForm" class="form-horizontal">
 						<div class="form-group">
-							<label class="control-label col-md-1"></label>
+							<label class="control-label col-md-1">搜索：</label>
 							<div class="col-md-3">
 								<input type="text" class="form-control" ng-model="searchDetail.name" placeholder="请输入名称检索"/>
 							</div>
 							<div class="col-md-2">
 								<button class="btn blue" type="button" id="searchBtn">搜索</button>
-								<button class="btn default" type="button" id="emptyData">重置</button>
 							</div>
 							<div class="col-md-4">
-								<a href="#/AddInformationManagement" class="btn blue pull-right">添加基本情况</a>
+								<a href="#/AddInformationManagement" class="btn blue">添加基本情况</a>
 							</div>
 						</div>
 					</form>
@@ -45,13 +44,13 @@
 					<thead>
 						<tr>
 							<th>
-								序号
-							</th>
-							<th>
-								ID
+								新闻ID
 							</th>
 							<th>
 								标题
+							</th>
+							<th>
+								类型
 							</th>
 							<th>
 								发布时间
@@ -59,7 +58,7 @@
 							<th>
 								链接
 							</th>
-							<th width="200">
+							<th width="300">
 								操作
 							</th>
 						</tr>
