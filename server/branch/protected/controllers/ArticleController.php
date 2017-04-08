@@ -46,8 +46,13 @@ class ArticleController extends Controller{
         $params = $this->getAjaxRequestParam();
         $articleType = intval($params['articleType']);
         $client = new ClientComponent();
+
+        $userId = $client->getUserId();
+        if($userId <= 0){
+            return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户未登录",ErrorCode::ERROR_USER_NOT_LOGIN,array()));
+        }
+
         $streetId = $client->getCurrentArea();
-        $streetId = 1;
         if($streetId <= 0){
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"管理的城市id不存在",ErrorCode::ERROR_USER_DENY,array()));
         }
