@@ -7,6 +7,7 @@
  * Time: 22:40
  */
 class FloodOwnerInfoExcelTemplateConfig extends ExcelTemplateConfig{
+    public static $id = 14;
     protected $itemList = array(
         'village'=> '行政村名称',
         'job'=> '岗位',
@@ -35,5 +36,11 @@ class FloodOwnerInfoExcelTemplateConfig extends ExcelTemplateConfig{
     public function getSearchTextTableColName()
     {
         return "village";
+    }
+    public function getServiceTypeId(){
+        return self::$id;
+    }
+    protected function getTemplateName(){
+        return "乡镇街道防汛台责任人";
     }
 }

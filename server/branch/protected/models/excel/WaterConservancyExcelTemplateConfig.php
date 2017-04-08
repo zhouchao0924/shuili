@@ -6,7 +6,7 @@
  * @date 2017-04-06
  */
 class WaterConservancyExcelTemplateConfig extends ExcelTemplateConfig{
-
+    public static $id = 3;
     protected $itemList = array(
         'name'=>'电站名称',
 	  'township'=>'所在乡镇',
@@ -50,5 +50,11 @@ class WaterConservancyExcelTemplateConfig extends ExcelTemplateConfig{
     public function getSearchTextTableColName()
     {
         return "name";
+    }
+    public function getServiceTypeId(){
+        return self::$id;
+    }
+    protected function getTemplateName(){
+        return "小水电";
     }
 }

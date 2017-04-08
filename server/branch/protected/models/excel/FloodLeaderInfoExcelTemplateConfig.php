@@ -7,6 +7,7 @@
  * Time: 22:40
  */
 class FloodLeaderInfoExcelTemplateConfig extends ExcelTemplateConfig{
+    public static $id = 13;
     protected $itemList = array(
         'post'=> '岗位',
         'leader'=> '负责人',
@@ -33,5 +34,11 @@ class FloodLeaderInfoExcelTemplateConfig extends ExcelTemplateConfig{
     public function getSearchTextTableColName()
     {
         return "leader";
+    }
+    public function getServiceTypeId(){
+        return self::$id;
+    }
+    protected function getTemplateName(){
+        return "乡镇街道防汛台负责人";
     }
 }

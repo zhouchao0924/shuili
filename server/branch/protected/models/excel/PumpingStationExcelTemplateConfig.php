@@ -6,7 +6,7 @@
  * @date 2017-04-06
  */
 class PumpingStationExcelTemplateConfig extends ExcelTemplateConfig{
-
+    public static $id = 6;
 
     protected $itemList = array(
         'name'=>'水闸名称',
@@ -46,5 +46,12 @@ class PumpingStationExcelTemplateConfig extends ExcelTemplateConfig{
     public function getSearchTextTableColName()
     {
         return "name";
+    }
+
+    public function getServiceTypeId(){
+        return self::$id;
+    }
+    protected function getTemplateName(){
+        return "泵站";
     }
 }

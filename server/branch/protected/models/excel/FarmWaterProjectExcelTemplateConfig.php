@@ -7,6 +7,7 @@
  * Time: 22:40
  */
 class FarmWaterProjectExcelTemplateConfig extends ExcelTemplateConfig{
+    public static $id = 18;
     protected $itemList = array(
         'cat' =>'项目类型',
         'name' =>'项目名称',
@@ -36,5 +37,17 @@ class FarmWaterProjectExcelTemplateConfig extends ExcelTemplateConfig{
     public function getSearchTextTableColName()
     {
         return "name";
+    }
+
+    public function getServiceTypeId(){
+        return self::$id;
+    }
+
+    protected function getTemplateName(){
+        return "农田水利";
+    }
+
+    protected function getProjectImageColName(){
+        return "project_image";
     }
 }

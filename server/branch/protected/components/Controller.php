@@ -526,4 +526,8 @@ class Controller extends CController
         }
         return $filterChain->run();
     }
+
+    public function renderSuccessAjaxResponse(){
+        return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,array()));
+    }
 }

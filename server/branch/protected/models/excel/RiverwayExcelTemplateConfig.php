@@ -7,6 +7,7 @@
  * Time: 22:40
  */
 class RiverwayExcelTemplateConfig extends ExcelTemplateConfig{
+    public static $id = 4;
     protected $itemList = array(
         'name'=>'河流名称',
         'level'=>'河流等级',
@@ -50,5 +51,11 @@ class RiverwayExcelTemplateConfig extends ExcelTemplateConfig{
     public function getSearchTextTableColName()
     {
         return "name";
+    }
+    public function getServiceTypeId(){
+        return self::$id;
+    }
+    protected function getTemplateName(){
+        return "河道";
     }
 }
