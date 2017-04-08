@@ -19,16 +19,22 @@ MetronicApp.controller('GEOInfoController', [
 			window.initialize = function(){
 			  var mp = new window.BMap.Map('mapcontainer');
 				// console.log(mp,9999999);
-				var point = new window.BMap.Point(116.404, 39.915);
+				var point = new window.BMap.Point(116.404, 40.915);
 			  mp.centerAndZoom(point, 15);
 				var myIcon = new window.BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
 				   offset: new window.BMap.Size(10, 25),
 				   imageOffset: new window.BMap.Size(0, 0 - 1 * 25)   // 设置图片偏移
 				 });
 				var marker = new window.BMap.Marker(point,{icon:myIcon});        // 创建标注
-				marker.addEventListener("click", function(){
-				 alert("您点击了标注");
-				});
+				// marker.addEventListener("click", function(e){
+				// //  alert("您点击了标注");
+				// 	console.log(e,9999);
+				// 	if(e.overlay){
+				// 		$('#modalview').modal('show');
+				// 	}else{
+				//
+				// 	}
+				// });
 				mp.addOverlay(marker);
 
 				// var opts = {
@@ -40,8 +46,13 @@ MetronicApp.controller('GEOInfoController', [
 				// mp.openInfoWindow(infoWindow, mp.getCenter());      // 打开信息窗口
 
 				mp.addEventListener("click",function(e){
-					alert(e.point.lng + "," + e.point.lat);
-					$('.bs-modify-modal-lg').modal('show');
+					// alert(e.point.lng + "," + e.point.lat);
+					console.log(e,8888);
+					if(e.overlay){
+						$('#modalview').modal('show');
+					}else{
+						$('#modaladd').modal('show');
+					}
 				});
 
 
@@ -56,6 +67,43 @@ MetronicApp.controller('GEOInfoController', [
 
 			loadScript();
 
+			// 对话框事件
+			$('#cancel,#cancel2').click(function(e){
+				$('#modaladd').modal('hide');
+			});
+
+			// 添加事件
+			$('#makesure').click(function(e){
+				$.ajax({
+		      url: Metronic.host + '/user/getMenu',
+		      type: 'GET',
+		      dataType: 'json',
+		      xhrFields: {
+		       withCredentials: true
+		      },
+		      crossDomain: true,
+		      data: {
+		       data: JSON.stringify({})
+		      },
+		      success: function(datas) {
+		       if (datas.success) {
+		        // obj.UserdataMenuList = datas.data;
+		        // window.localStorage.Userdata = JSON.stringify(obj);
+		        // window.location.href = "index.html#/dashboard.html";
+		       }
+		      },
+		      error: function(xhr, data, status) {
+		      //  alert('请检查网络');
+		      }
+				});
+			});
+
+			// 编辑事件
+			$('#edit').click(function(e){
+				$('#modaledit').modal('show');
+				// $('#modalview').modal('hide');
+
+			});
 
 
 		});
