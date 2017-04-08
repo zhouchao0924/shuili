@@ -58,8 +58,28 @@ var Login = function() {
 						currentArea: datas.data.currentArea,
 						currentAreaName: datas.data.currentAreaName
 					};
-					window.localStorage.Userdata = JSON.stringify(obj);
-					window.location.href = "index.html#/dashboard.html";
+					$.ajax({
+						url: Metronic.host + '/user/getMenu',
+						type: 'GET',
+						dataType: 'json',
+						xhrFields: {
+							withCredentials: true
+						},
+						crossDomain: true,
+						data: {
+							data: JSON.stringify({})
+						},
+						success: function(datas) {
+							if (datas.success) {
+								obj.UserdataMenuList = datas.data;
+								window.localStorage.Userdata = JSON.stringify(obj);
+								window.location.href = "index.html#/dashboard.html";
+							}
+						},
+						error: function(xhr, data, status) {
+							alert('请检查网络');
+						}
+					});
 				}
 			},
 			error: function(xhr, data, status) {
@@ -95,8 +115,28 @@ var Login = function() {
 								roleId: datas.data.roleId,
 								userName: datas.data.userName
 							};
-							window.localStorage.Userdata = JSON.stringify(obj);
-							window.location.href = "index.html#/dashboard.html";
+							$.ajax({
+								url: Metronic.host + '/user/getMenu',
+								type: 'GET',
+								dataType: 'json',
+								xhrFields: {
+									withCredentials: true
+								},
+								crossDomain: true,
+								data: {
+									data: JSON.stringify({})
+								},
+								success: function(datas) {
+									if (datas.success) {
+										obj.UserdataMenuList = datas.data;
+										window.localStorage.Userdata = JSON.stringify(obj);
+										window.location.href = "index.html#/dashboard.html";
+									}
+								},
+								error: function(xhr, data, status) {
+									alert('请检查网络');
+								}
+							});
 						} else {
 							alert(datas.message);
 						}

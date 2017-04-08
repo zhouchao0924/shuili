@@ -92,6 +92,8 @@ MetronicApp.controller('SidebarController', [
 	function($scope) {
 		$scope.$on('$includeContentLoaded', function() {
 			// 首先渲染侧边栏
+			var a = JSON.parse(window.localStorage.Userdata);
+			$scope.MenuList = a.UserdataMenuList;
 			Layout.initSidebar(); // init sidebar
 		});
 	}
