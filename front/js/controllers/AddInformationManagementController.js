@@ -26,12 +26,6 @@ MetronicApp.controller('AddInformationManagementController', [
 					category: {
 						required: "请填写类型"
 					}
-					// province: {
-					// 	required: "请填写省市"
-					// },
-					// city: {
-					// 	required: "请填写城市"
-					// }
 				},
 				rules: {
 					adTitle: {
@@ -40,12 +34,6 @@ MetronicApp.controller('AddInformationManagementController', [
 					category: {
 						required: true
 					}
-					// province: {
-					// 	required: true
-					// },
-					// city: {
-					// 	required: true
-					// }
 				},
 				highlight: function(element) { // hightlight error inputs
 					$(element).parent().addClass('has-error'); // set error class to the control group
@@ -64,19 +52,19 @@ MetronicApp.controller('AddInformationManagementController', [
 			//init maxlength handler监视输入字符设置最大输入字数
 			$('.maxlength-handler').maxlength({limitReachedClass: "label label-danger", alwaysShow: true, threshold: 5});
 			var articleUm = '';
-			var imgUrl = Metronic.host + 'boss/getUploadTokenAjax';
+			var imgUrl = Metronic.host + 'attachment/getUploadTokenAjax';
 			window.UMEDITOR_CONFIG.UMEDITOR_HOME_URL = 'assets/global/plugins/umeditor/';
 			window.UMEDITOR_CONFIG.imageUrl = imgUrl;
 			$.ajax({
 				url: imgUrl,
-				type: 'POST',
+				type: 'GET',
 				dataType: 'json',
 				xhrFields: {
 					withCredentials: true
 				},
 				crossDomain: true,
 				data: {
-					data: JSON.stringify({bucket: 'public'})
+					data: JSON.stringify({})
 				},
 				success: function(datas) {
 					if (datas.success) {
@@ -118,13 +106,9 @@ MetronicApp.controller('AddInformationManagementController', [
 				if (count > 0) {
 					$('.fileinput-preview img').each(function(i, n) {
 						var file = $(n).parents('.fileinput').find(".fileupload")[0];
-						// $scope.num = $(n).parents('.fileinput').index();
-						// $scope.count = 0;
 						(function() {
-							// var x = $scope.num;
-							// 先保存图片
 							$.ajax({
-								url: Metronic.host + 'boss/getUploadTokenAjax',
+								url: Metronic.host + 'attachment/getUploadTokenAjax',
 								type: 'POST',
 								dataType: 'json',
 								xhrFields: {
@@ -132,10 +116,9 @@ MetronicApp.controller('AddInformationManagementController', [
 								},
 								crossDomain: true,
 								data: {
-									data: JSON.stringify({bucket: 'public'})
+									data: JSON.stringify({})
 								},
 								success: function(data) {
-									console.debug(data);
 									var token = data.data.token;
 									var key = data.data.key;
 									var domain = data.data.domain;
