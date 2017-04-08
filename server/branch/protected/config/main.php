@@ -133,10 +133,10 @@ return array(
 	            'secretKey'=>'qKqgyIkicIbsFNrqSBTdgW3hQat1jvkbZozLHxXW',
                 'bucket' => array(
                     'public'=>array(
-                       'bucket'=>'privateuser',
+                       'bucket'=>'shuili',
                        'baseUrl'=>'http://onrnzg8zq.bkt.clouddn.com',
                        'host'=> 'onrnzg8zq.bkt.clouddn.com',
-                       'isPublic'=>false,
+                       'isPublic'=>true,
                     ),
                 )
 		  ),
