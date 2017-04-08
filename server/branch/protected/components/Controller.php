@@ -500,12 +500,7 @@ class Controller extends CController
 
         $client = new ClientComponent();
         $userInfo = $client->getUserInfo();
-		$userInfo['userId'] = "111";
-		$userInfo['userName'] = "111";
-		$userInfo['roleId'] = "1";
-		$userInfo['userId'] = "111";
-
-		if(empty($userInfo)){
+        if(empty($userInfo)){
             $this->renderUserNotLoginAjaxResponse();
             return false;
         }
