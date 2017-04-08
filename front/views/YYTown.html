@@ -9,26 +9,13 @@
 		</li>
 	</ul>
 </div>
-<div class="">
+<div>
 	<div class="alert alert-info">
-		<strong></strong> 您可以管理和查看余姚 22个乡镇的水利信息
+		您可以管理和查看余姚&nbsp;{{CityList[0].list.length}}&nbsp;个乡镇的水利信息
 	</div>
-	<div class="">
-		<button type="button" class="btn btn-info" style="width:15%;margin-right:2%;margin-bottom:10px;height:50px;">马渚镇</button>
-		<button type="button" class="btn btn-info" style="width:15%;margin-right:2%;margin-bottom:10px;height:50px;">马渚镇</button>
-		<button type="button" class="btn btn-info" style="width:15%;margin-right:2%;margin-bottom:10px;height:50px;">马渚镇</button>
-		<button type="button" class="btn btn-info" style="width:15%;margin-right:2%;margin-bottom:10px;height:50px;">马渚镇</button>
-		<button type="button" class="btn btn-info" style="width:15%;margin-right:2%;margin-bottom:10px;height:50px;">马渚镇</button>
-		<button type="button" class="btn btn-info" style="width:15%;margin-right:2%;margin-bottom:10px;height:50px;">马渚镇</button>
-		<button type="button" class="btn btn-info" style="width:15%;margin-right:2%;margin-bottom:10px;height:50px;">马渚镇</button>
-		<button type="button" class="btn btn-info" style="width:15%;margin-right:2%;margin-bottom:10px;height:50px;">马渚镇</button>
-		<button type="button" class="btn btn-info" style="width:15%;margin-right:2%;margin-bottom:10px;height:50px;">马渚镇</button>
-		<button type="button" class="btn btn-info" style="width:15%;margin-right:2%;margin-bottom:10px;height:50px;">马渚镇</button>
-		<button type="button" class="btn btn-info" style="width:15%;margin-right:2%;margin-bottom:10px;height:50px;">马渚镇</button>
-		<button type="button" class="btn btn-info" style="width:15%;margin-right:2%;margin-bottom:10px;height:50px;">马渚镇</button>
-		<button type="button" class="btn btn-info" style="width:15%;margin-right:2%;margin-bottom:10px;height:50px;">马渚镇</button>
-		<button type="button" class="btn btn-info" style="width:15%;margin-right:2%;margin-bottom:10px;height:50px;">马渚镇</button>
-		<button type="button" class="btn btn-info" style="width:15%;margin-right:2%;margin-bottom:10px;height:50px;">马渚镇</button>
-		<button type="button" class="btn btn-info" style="width:15%;margin-right:2%;margin-bottom:10px;height:50px;">马渚镇</button>
+	<div>
+		<span ng-repeat="n in CityList[0].list">
+			<a href="" class="btn btn-info" ng-click="setCurrentArea(n.id)" style="width:15%;margin-right:2%;margin-bottom:10px;padding:20px;">{{n.name}}</a>
+		</span>
 	</div>
 </div>

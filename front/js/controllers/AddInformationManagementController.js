@@ -124,36 +124,34 @@ MetronicApp.controller('AddInformationManagementController', [
 										processData: false,
 										contentType: false,
 										success: function(data) {
-											if (data.success) {
-												$scope.newsDetail.titleImgUrl = domain + '/' + data.data.url;
-												var params = $scope.newsDetail;
-												params.content = articleUm.getContent();
-												$.ajax({
-													url: Metronic.host + 'article/addArticleAjax',
-													type: 'GET',
-													dataType: 'json',
-													xhrFields: {
-														withCredentials: true
-													},
-													crossDomain: true,
-													data: {
-														data: JSON.stringify(params)
-													},
-													success: function(data) {
-														if (data.success) {
-															window.location.href = '#/InformationManagement';
-														} else {
-															alert(data.message);
-														}
-													},
-													error: function(xhr, data, status) {
-														alert('请检查网络');
-													},
-													complete: function() {
-														Metronic.unblockUI();
+											$scope.newsDetail.titleImgUrl = domain + '/' + data.key;
+											var params = $scope.newsDetail;
+											params.content = articleUm.getContent();
+											$.ajax({
+												url: Metronic.host + 'article/addArticleAjax',
+												type: 'GET',
+												dataType: 'json',
+												xhrFields: {
+													withCredentials: true
+												},
+												crossDomain: true,
+												data: {
+													data: JSON.stringify(params)
+												},
+												success: function(data) {
+													if (data.success) {
+														window.location.href = '#/InformationManagement';
+													} else {
+														alert(data.message);
 													}
-												});
-											}
+												},
+												error: function(xhr, data, status) {
+													alert('请检查网络');
+												},
+												complete: function() {
+													Metronic.unblockUI();
+												}
+											});
 										}
 									});
 								},
