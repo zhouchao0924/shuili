@@ -248,6 +248,7 @@ MetronicApp.config([
 						return $ocLazyLoad.load({
 							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
 							files: [
+								// 'http://api.map.baidu.com/api?v=2.0&ak=gWUgzfPib0vllGaS7qILPisD',
 								'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css?v=' + MetronicApp.version,
 								'assets/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css?v=' + MetronicApp.version,
 								'assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css?v=' + MetronicApp.version,
