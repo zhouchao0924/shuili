@@ -1,3 +1,33 @@
+<style media="screen">
+	.box{
+		position: relative;
+	}
+	#mapcontainer{
+		width:100%;
+		height: 500px;
+	}
+	.toplabel{
+		position: absolute;
+		top:0;
+		left:0;
+		height:30px;
+		width:100%;
+		background: rgba(0,0,0,0.7);
+	}
+	.t-left{
+		font-size: 18px;
+		color:#fff;
+		float: left;
+		margin-left: 20px;
+		line-height: 30px;
+	}
+	.t-r{
+		line-height: 30px;
+		float: right;
+		margin-right: 20px;
+	}
+</style>
+
 <h3 class="page-title">
 	{{$state.current.data.pageTitle}}
 </h3>
@@ -8,4 +38,55 @@
 			<a href="javascript:;">{{$state.current.data.pageTitle}}</a>
 		</li>
 	</ul>
+</div>
+
+<div class="box">
+	<div id="mapcontainer">
+
+	</div>
+	<div class="toplabel">
+		<div class="t-left">
+			<span>马渚镇地理信息</span>
+		</div>
+		<div class="t-r">
+			<span class="label label-sm label-success">水库山塘</span>
+			<span class="label label-sm label-info">河道</span>
+			<span class="label label-sm label-danger">水闸</span>
+			<span class="label label-sm label-warning">泵站</span>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade bs-modify-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exchangeModalLabel">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+     <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title" id="gridSystemModalLabel">重置密码</h4>
+   </div>
+   <div class="modal-body">
+    <div class="container-fluid">
+     <div class="row">
+      <div class="form-group col-md-12">
+       <label class="control-label col-md-3">新密码:</label>
+       <div class="col-md-5 cates">
+        <input type="text" class="form-control" id="newpassword"/>
+       </div>
+      </div>
+      <div class="form-group col-md-12">
+       <label class="control-label col-md-3">确认新密码:</label>
+       <div class="col-md-5 cates">
+        <input type="text" class="form-control"/>
+       </div>
+		 </div>
+    </div>
+   </div>
+  </div>
+  <div class="modal-footer">
+   <button type="button" id="makesure3" class="btn btn-primary">确定保存</button>
+  </div>
+ </div>
+</div>
 </div>

@@ -1,0 +1,37 @@
+<?php
+/**
+ * 河长制基础信息
+ * @copyright (C) 2006-2017 Tuniu All rights reserved
+ * @author yulongfei
+ * @date 2017-04-06
+ */
+class WaterQualityBaseExcelTemplateConfig extends ExcelTemplateConfig{
+
+    protected $itemList = array(
+        'name'=>'河道名称',
+        'detecion_position'=>'监测点位置',
+        'latitude_longitude'=>'经纬度',
+        'image'=>'照片',
+    );
+
+    protected $printExtraItem = array(
+        'full_image'=>array(),
+        'image'=>array(),
+        'create_time'=>'',
+        'id'=>''
+    );
+
+    public function getDao(){
+        return WaterQualityBaseDao::getInstance("WaterQualityBase");
+    }
+
+    public function getExampleExcelFileName()
+    {
+        return "水质监测基本情况模板.xlsx";
+    }
+
+    public function getSearchTextTableColName()
+    {
+        return "name";
+    }
+}
