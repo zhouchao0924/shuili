@@ -14,3 +14,49 @@ serviceType      报表名称                     更新全景图     更新图�
 17                农民饮用水                   是             是 
 18                农田水利                                   是                是
 ########################################################################################################
+
+1.更新全景图
+    url:/attachment/updateFullImage
+    method:post 
+    request:{
+        "id":int //对应的获取数据的id
+        "url":string //url地址
+        "serviceType":int //应用头上的serviceType
+    }
+    response:{
+    }
+
+2.更新普通图片
+    url:/attachment/updateImage
+    method:post 
+    request:{
+        "id":int //对应的获取数据的id
+        "url":[//url地址数组
+            ...,
+            ...
+        ] 
+        "serviceType":int //应用头上的serviceType
+    }
+    response:{
+    }
+
+3.更新布置图
+    url:/attachment/updateProjectImage
+    method:post 
+    request:{
+        "id":int //对应的获取数据的id
+        "url":string //url地址
+        "serviceType":int //应用头上的serviceType
+    }
+    response:{
+    }
+
+4.删除记录
+    url:/table/deleteItem
+    method:post 
+    request:{
+        "id":int //对应的获取数据的id
+        "serviceType":int //应用头上的serviceType
+    }
+    response:{
+    }
