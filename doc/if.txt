@@ -198,3 +198,16 @@
         ],
         ...
     }
+14.获取用户列表
+    url:/user/getUserList
+    method:get
+    request:{
+
+    }
+    response:{
+                'id’:int,
+                'name’:string,
+                'createTime’:String,
+                'roleId’:String,
+                'desc' => $val['desc'],
+    }

@@ -163,4 +163,21 @@ class UserController extends Controller{
     public function actionGetMenu(){
         return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,AuthDefine::genTreeLinkIndex($this->roleId)));
     }
+
+    /**
+     * 获取用户列表
+     * @return string
+     */
+    public function actionUserList(){
+        $clientComponent = new ClientComponent();
+        $userId = $clientComponent->getUserId();
+        if($userId <= 0){
+            return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户未登录",ErrorCode::ERROR_USER_NOT_LOGIN,array()));
+        }
+
+
+        $userModel = new UserModel();
+        $userList = $userModel->getUserList();
+        return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,$userList));
+    }
 }

@@ -132,6 +132,32 @@ class UserModel {
         return true;
     }
 
+    public function getUserList(){
+
+        $conditions = array(
+            "and",
+            "del_flag = 0",
+        );
+        $params = array(
+        );
+
+        $data = WpUserDao::getInstance("WpUser")->select("*",$conditions,$params,true);
+        if(empty($data)){
+            return array();
+        }
+        $returnArray = array();
+        foreach($data as $key => $val){
+            $returnArray[] = array(
+                'id' => $val['id'],
+                'name' => $val['name'],
+                'createTime' => $val['create_time'],
+                'roleId' => $val['role_id'],
+                'desc' => $val['desc'],
+            );
+        }
+        return true;
+    }
+
     public function isUserManageArea($userId,$streetId){
         $conditions = array(
             "and",
