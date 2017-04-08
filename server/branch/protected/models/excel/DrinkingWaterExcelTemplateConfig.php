@@ -7,6 +7,7 @@
  * Time: 22:40
  */
 class DrinkingWaterExcelTemplateConfig extends ExcelTemplateConfig{
+    public static $id = 17;
     protected $itemList = array(
         'station_name'=>'供水站名称',
         'location' =>'所在村庄',
@@ -57,5 +58,13 @@ class DrinkingWaterExcelTemplateConfig extends ExcelTemplateConfig{
     public function getSearchTextTableColName()
     {
         return "station_name";
+    }
+
+    public function getServiceTypeId(){
+        return self::$id;
+    }
+
+    protected function getTemplateName(){
+        return "农民饮用水";
     }
 }

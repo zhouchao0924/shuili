@@ -6,7 +6,7 @@
  * @date 2017-04-06
  */
 class HillPondExcelTemplateConfig extends ExcelTemplateConfig{
-
+    public static $id = 2;
     protected $itemList = array(
         'hill_pond_name'=>'山塘名称',
         'catchment_area'=>'集雨面积',
@@ -70,5 +70,12 @@ class HillPondExcelTemplateConfig extends ExcelTemplateConfig{
     public function getSearchTextTableColName()
     {
         return "hill_pond_name";
+    }
+
+    public function getServiceTypeId(){
+        return self::$id;
+    }
+    protected function getTemplateName(){
+        return "山塘";
     }
 }

@@ -7,6 +7,7 @@
  * Time: 22:40
  */
 class TransferPeopExcelTemplateConfig extends ExcelTemplateConfig{
+    public static $id = 16;
     protected $itemList = array(
         'village'=>'乡村名称',
         'danger_area'=> '危险区名称',
@@ -52,5 +53,11 @@ class TransferPeopExcelTemplateConfig extends ExcelTemplateConfig{
     public function getSearchTextTableColName()
     {
         return "village";
+    }
+    public function getServiceTypeId(){
+        return self::$id;
+    }
+    protected function getTemplateName(){
+        return "转移人员清单";
     }
 }

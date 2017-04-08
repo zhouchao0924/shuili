@@ -6,7 +6,7 @@
  * @date 2017-04-04
  */
 class ReservoirTemplateConfig extends ExcelTemplateConfig{
-
+    public static $id = 1;
     protected $itemList = array(
         'name'=>'水库名称',
         'project_scale'=>'工程规模',
@@ -76,5 +76,12 @@ class ReservoirTemplateConfig extends ExcelTemplateConfig{
     public function getSearchTextTableColName()
     {
         return "name";
+    }
+
+    public function getServiceTypeId(){
+        return self::$id;
+    }
+    protected function getTemplateName(){
+        return "水库";
     }
 }

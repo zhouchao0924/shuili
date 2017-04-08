@@ -210,6 +210,32 @@ MetronicApp.config([
 					}
 				]
 			}
+		}).state('BasicDetail', {
+			url: "/BasicDetail",
+			templateUrl: "views/BasicDetail.html?v=" + MetronicApp.version,
+			data: {
+				pageTitle: '信息详情'
+			},
+			controller: "BasicDetailController",
+			resolve: {
+				deps: [
+					'$ocLazyLoad',
+					function($ocLazyLoad) {
+						return $ocLazyLoad.load({
+							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
+							files: [
+								'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/all.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=' + MetronicApp.version,
+								// 'js/scripts/Reservoir-table-advanced.js?v=' + MetronicApp.version,
+								'js/controllers/BasicDetailController.js?v=' + MetronicApp.version
+							]
+						});
+					}
+				]
+			}
 		}).state('GEOInfo', {
 			url: "/GEOInfo",
 			templateUrl: "views/GEOInfo.html?v=" + MetronicApp.version,

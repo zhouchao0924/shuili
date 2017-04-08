@@ -1,0 +1,62 @@
+################################serviceType定义########################################################
+serviceType      报表名称                     更新全景图     更新图片          更新布置图
+1                 水库                        是             是
+2                 山塘                        是             是
+3                 小水电                      是             是
+4                 河道                        是             是
+5                 水闸                        是             是
+6                 泵站                        是             是
+12                村社区防汛台基本情况      
+13                乡镇街道防汛台负责人  
+14                乡镇街道防汛台责任人         
+15                网络负责人      
+16                转移人员清单
+17                农民饮用水                   是             是 
+18                农田水利                                   是                是
+########################################################################################################
+
+1.更新全景图
+    url:/attachment/updateFullImage
+    method:post 
+    request:{
+        "id":int //对应的获取数据的id
+        "url":string //url地址
+        "serviceType":int //应用头上的serviceType
+    }
+    response:{
+    }
+
+2.更新普通图片
+    url:/attachment/updateImage
+    method:post 
+    request:{
+        "id":int //对应的获取数据的id
+        "url":[//url地址数组
+            ...,
+            ...
+        ] 
+        "serviceType":int //应用头上的serviceType
+    }
+    response:{
+    }
+
+3.更新布置图
+    url:/attachment/updateProjectImage
+    method:post 
+    request:{
+        "id":int //对应的获取数据的id
+        "url":string //url地址
+        "serviceType":int //应用头上的serviceType
+    }
+    response:{
+    }
+
+4.删除记录
+    url:/table/deleteItem
+    method:post 
+    request:{
+        "id":int //对应的获取数据的id
+        "serviceType":int //应用头上的serviceType
+    }
+    response:{
+    }

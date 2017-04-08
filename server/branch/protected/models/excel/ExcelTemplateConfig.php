@@ -13,6 +13,12 @@ abstract class ExcelTemplateConfig{
     protected $newLine = false;
 
     /**
+     * 获取类型id
+     * @return mixed
+     */
+    public abstract function getServiceTypeId();
+
+    /**
      * 获取csv导出模板样例
      * 只要给出对应的文件名即可,路径统一放在models/csv/example/目录下
      * @return string
@@ -223,4 +229,87 @@ abstract class ExcelTemplateConfig{
 
         return $k;
     }
+
+    protected function getFullImageColName(){
+        return "full_image";
+    }
+
+    protected function getImageColName(){
+        return "image";
+    }
+
+    public function updateFullImage($imageUrl,$id,$userId,$userName){
+        $cols = array(
+            $this->getFullImageColName()=>$imageUrl,
+        );
+        $conditions = array(
+            "and",
+            "id = :id",
+            "del_flag = 0",
+        );
+        $params = array(
+            ":id"=>$id
+        );
+        $this->getDao()->update($cols,$conditions,$params);
+
+        OperatorLogModel::addLog($userId,$userName,"更新".$this->getTemplateName()."记录全景图片,数据id:".$id);
+    }
+
+    public function updateImage($imageArray,$id,$userId,$userName){
+        $cols = array(
+            $this->getImageColName()=>json_encode($imageArray),
+        );
+        $conditions = array(
+            "and",
+            "id = :id",
+            "del_flag = 0",
+        );
+        $params = array(
+            ":id"=>$id
+        );
+        $this->getDao()->update($cols,$conditions,$params);
+        OperatorLogModel::addLog($userId,$userName,"更新".$this->getTemplateName()."记录图片,数据id:".$id);
+    }
+
+    public function delete($id,$userId,$userName){
+        $cols = array(
+            "del_flag"=>1,
+        );
+        $conditions = array(
+            "and",
+            "id = :id",
+            "del_flag = 0",
+        );
+        $params = array(
+            ":id"=>$id
+        );
+        $this->getDao()->update($cols,$conditions,$params);
+        OperatorLogModel::addLog($userId,$userName,"删除".$this->getTemplateName()."记录,数据id:".$id);
+    }
+
+    protected function getProjectImageColName(){
+        return "";
+    }
+
+    public function updateProjectImage($imageUrl,$id,$userId,$userName){
+        $colName = $this->getProjectImageColName();
+        if(empty($colName)){
+            throw new Exception("无效操作");
+        }
+        $cols = array(
+            $colName=>$imageUrl,
+        );
+        $conditions = array(
+            "and",
+            "id = :id",
+            "del_flag = 0",
+        );
+        $params = array(
+            ":id"=>$id
+        );
+        $this->getDao()->update($cols,$conditions,$params);
+        OperatorLogModel::addLog($userId,$userName,"更新".$this->getTemplateName()."记录布置图图片,数据id:".$id);
+    }
+
+    protected abstract function getTemplateName();
 }

@@ -70,4 +70,83 @@ class AttachmentController extends Controller{
         fclose($file);
         return;
     }
+
+    /**
+     * 统一更新全景图片
+     * @return string
+     */
+    public function actionUpdateFullImage(){
+        $params = $this->getAjaxRequestParam();
+        $id = (isset($params['id']))?intval($params['id']):0;
+        $url = (isset($params['url']) && !empty($params['url']))?trim($params['url']):"";
+        $serviceType = isset($params['serviceType'])?intval($params['serviceType']):-1;
+        if($id <= 0 || empty($url) || !isset(ExcelTemplateModel::$excelTypeMAP[$serviceType]) || empty(ExcelTemplateModel::$excelTypeMAP[$serviceType])){
+            return $this->renderBadParamsAjaxResponse();
+        }
+        $client = new ClientComponent();
+        $userInfo = $client->getUserInfo();
+        if(empty($userInfo)){
+            return $this->renderUserNotLoginAjaxResponse();
+        }
+
+        $templateConfigString = ExcelTemplateModel::$excelTypeMAP[$serviceType];
+        $templateConfig = new $templateConfigString();
+        $templateConfig->updateFullImage($url,$id,$userInfo['userId'],$userInfo['userName']);
+
+        return $this->renderSuccessAjaxResponse();
+    }
+
+    /**
+     * 统一更新图片
+     * @return string
+     */
+    public function actionUpdateImage(){
+        $params = $this->getAjaxRequestParam();
+        $id = (isset($params['id']))?intval($params['id']):0;
+        $url = (isset($params['url']) && is_array($params['url']) && !empty($params['url']))?$params['url']:array();
+        $serviceType = isset($params['serviceType'])?intval($params['serviceType']):-1;
+        if($id <= 0 || empty($url) || !isset(ExcelTemplateModel::$excelTypeMAP[$serviceType]) || empty(ExcelTemplateModel::$excelTypeMAP[$serviceType])){
+            return $this->renderBadParamsAjaxResponse();
+        }
+        if(count($url) > 3){
+            return $this->renderBadParamsAjaxResponse();
+        }
+        $client = new ClientComponent();
+        $userInfo = $client->getUserInfo();
+        if(empty($userInfo)){
+            return $this->renderUserNotLoginAjaxResponse();
+        }
+
+        $templateConfigString = ExcelTemplateModel::$excelTypeMAP[$serviceType];
+        $templateConfig = new $templateConfigString();
+        $templateConfig->updateImage($url,$id,$userInfo['userId'],$userInfo['userName']);
+
+        return $this->renderSuccessAjaxResponse();
+    }
+
+    /**
+     * 统一更新布置图图片
+     * @return string
+     */
+    public function actionUpdateProjectImage(){
+        $params = $this->getAjaxRequestParam();
+        $id = (isset($params['id']))?intval($params['id']):0;
+        $url = (isset($params['url']) && !empty($params['url']))?trim($params['url']):"";
+        $serviceType = isset($params['serviceType'])?intval($params['serviceType']):-1;
+        if($id <= 0 || empty($url) || !isset(ExcelTemplateModel::$excelTypeMAP[$serviceType]) || empty(ExcelTemplateModel::$excelTypeMAP[$serviceType])){
+            return $this->renderBadParamsAjaxResponse();
+        }
+
+        $client = new ClientComponent();
+        $userInfo = $client->getUserInfo();
+        if(empty($userInfo)){
+            return $this->renderUserNotLoginAjaxResponse();
+        }
+
+        $templateConfigString = ExcelTemplateModel::$excelTypeMAP[$serviceType];
+        $templateConfig = new $templateConfigString();
+        $templateConfig->updateProjectImage($url,$id,$userInfo['userId'],$userInfo['userName']);
+
+        return $this->renderSuccessAjaxResponse();
+    }
 }
