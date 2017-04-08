@@ -73,7 +73,7 @@ var Login = function() {
 							if (datas.success) {
 								obj.UserdataMenuList = datas.data;
 								window.localStorage.Userdata = JSON.stringify(obj);
-								window.location.href = "index.html#/dashboard.html";
+								window.location.href = "index.html#/YYTown";
 							}
 						},
 						error: function(xhr, data, status) {
@@ -130,7 +130,7 @@ var Login = function() {
 									if (datas.success) {
 										obj.UserdataMenuList = datas.data;
 										window.localStorage.Userdata = JSON.stringify(obj);
-										window.location.href = "index.html#/dashboard.html";
+										window.location.href = "index.html#/YYTown";
 									}
 								},
 								error: function(xhr, data, status) {

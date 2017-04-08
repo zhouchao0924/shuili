@@ -55,16 +55,8 @@ var InformationManagementAdvanced = function() {
 					success: function(datas) {
 						if (datas.success) {
 							var arr = [];
-							$.each(datas.data.list || [], function(i, n) {
-								var temp = [
-									n.id,
-									n.nickName,
-									n.displayArtType,
-									n.brief,
-									n.artProductCount,
-									"",
-									n.artType
-								];
+							$.each(datas.data || [], function(i, n) {
+								var temp = [n.id, n.title, n.addTime, n.originalUrl, ""];
 								arr.push(temp);
 							});
 							var d = {
