@@ -37,13 +37,12 @@ var InformationManagementAdvanced = function() {
 			"stateSave": true,
 			"serverSide": true,
 			"ajax": function(data, callback, settings) {
-				var a = JSON.parse(window.localStorage.Userdata);
 				var params = {
 					articleType: 1
 				};
 				Metronic.blockUI({message: '<div style="background:rgba(0,0,0,0.3);padding:10px;font-size:16px;font-weight:bold;color:#fff;">正在加载...</div>', textOnly: true});
 				$.ajax({
-					url: Metronic.host + '/article/getArticleListAjax',
+					url: Metronic.host + 'article/getArticleListAjax',
 					type: 'GET',
 					dataType: 'json',
 					xhrFields: {
@@ -51,7 +50,7 @@ var InformationManagementAdvanced = function() {
 					},
 					crossDomain: true,
 					data: {
-						data: JSON.stringify({params})
+						data: JSON.stringify(params)
 					},
 					success: function(datas) {
 						if (datas.success) {
@@ -70,8 +69,8 @@ var InformationManagementAdvanced = function() {
 							});
 							var d = {
 								data: arr,
-								recordsTotal: datas.obj.totalRecords,
-								recordsFiltered: datas.obj.totalRecords
+								recordsTotal: datas.totalRecords,
+								recordsFiltered: datas.totalRecords
 							};
 							callback(d);
 							table.find('tbody tr td:last-child').each(function(i, n) {

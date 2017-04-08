@@ -8,18 +8,18 @@
 </style>
 <!-- BEGIN PAGE HEADER-->
 <h3 class="page-title">
-    添加新闻文档
+    {{$state.current.data.pageTitle}}
     <small></small>
 </h3>
 <div class="page-bar">
     <ul class="page-breadcrumb">
         <li>
             <i class="fa fa-home"></i>
-            <a href="javascript:void(0)">司法局后台</a>
+            <a href="javascript:void(0)">内容管理</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <a href="#/addhelp">添加新闻文档</a>
+            <a href="#/addhelp">{{$state.current.data.pageTitle}}</a>
         </li>
     </ul>
 </div>
@@ -30,7 +30,7 @@
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    添加新闻文档
+                    {{$state.current.data.pageTitle}}
                 </div>
             </div>
             <div class="portlet-body form">
@@ -38,9 +38,9 @@
                 <form id="articleForm" action="#" class="form-horizontal" enctype="multipart/form-data">
                     <div class="form-body">
                         <div class="form-group">
-                            <label class="control-label col-md-2">标题</label>
+                            <label class="control-label col-md-2">标题：</label>
                             <div class="col-md-4">
-                                <input type="text" class="form-control maxlength-handler" maxlength="35" id="adTitle" name="adTitle" ng-model="newsDetail.title" placeholder="输入帮助文档标题">
+                                <input type="text" class="form-control maxlength-handler" maxlength="30" id="adTitle" name="adTitle" ng-model="newsDetail.title" placeholder="输入帮助文档标题">
                             </div>
                         </div>
                         <div class="form-group">
@@ -49,7 +49,7 @@
                                 <input type="checkbox" ng-model="newsDetail.isBold" ng-true-value="1" ng-false-value="0">标题加粗</label>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-2">图片</label>
+                            <label class="control-label col-md-2">图片：</label>
                             <div class="col-md-9" style="margin-bottom:10px;">
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                     <div class="fileinput-new thumbnail" style="width: 150px; height: 120px;margin-right:5px;">
@@ -74,52 +74,10 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-2">添加类型</label>
-                            <div class="col-md-2">
-                                <select class="form-control" name="category" id="category" ng-model="newsDetail.category" ng-options="m.id as m.name for m in newsType">
-                                    <option value="">请选择</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-2">推送城市</label>
-                            <div class="col-md-2">
-                                <select class="form-control" name="province" ng-model="newsDetail.province" ng-options="m.id as m.name for m in provinces" ng-change="querycity()" ng-disabled="sureaddress">
-                                    <option value="">请选择</option>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <select class="form-control" name="city" id="city" ng-model="newsDetail.city" ng-options="m.id as m.name for m in citys" ng-change="querydistrict()" ng-disabled="sureaddress && surecity">
-                                    <option value="">请选择</option>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <select class="form-control" name="district" id="district" ng-model="newsDetail.district" ng-options="m.id as m.name for m in districts" ng-change="querystreet()" ng-disabled="sureaddress && suredistrict">
-                                    <option value="">请选择</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3">
-                                <select class="form-control" name="street" ng-model="newsDetail.street" ng-options="m.id as m.name for m in streets" ng-disabled="sureaddress && surestreet">
-                                    <option value="">请选择</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-2"></label>
-                            <div class="col-md-4">
-                                <span style="line-height:34px;color:orange">选择所有可以推送到该项最大区域</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-2">详情</label>
+                            <label class="control-label col-md-2">详情：</label>
                             <div class="col-md-9">
-                                <script type="text/plain" id="new-editor" style="width:802px;height:400px;"></script>
+                                <script type="text/plain" id="new-editor" style="width:700px;height:400px;"></script>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-2"></label>
-                            <label class="checkbox-inline" style="float:left;">
-                                <input type="checkbox" ng-model="newsDetail.isPublic" ng-true-value="0" ng-false-value="1">不在终端界面推送</label>
                         </div>
                     </div>
                     <div class="form-actions">
