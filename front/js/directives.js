@@ -545,7 +545,7 @@ MetronicApp.directive('employees', [
 					var options = attr.ngOptions.match(RegOpt)[1]
 					$parse(options).assign(scope, employees)
 					if (attr.employees === 'self') {
-						var a = JSON.parse(window.localStorage.aijiaUserdata);
+						var a = JSON.parse(window.localStorage.Userdata);
 						ctrl.$setViewValue(a.userId)
 						ctrl.$render();
 					}
@@ -1676,7 +1676,7 @@ MetronicApp.directive('tableTab', [
 							"filter": false,
 							"serverSide": true,
 							"ajax": function(data, callback, settings) {
-								var a = JSON.parse(window.localStorage.aijiaUserdata);
+								var a = JSON.parse(window.localStorage.Userdata);
 								var params = {
 									"pageNo": data.start / data.length + 1,
 									"pageSize": data.length
@@ -3335,7 +3335,7 @@ MetronicApp.directive('tableTab', [
 							type: $scope.urlId,
 							content: newlabel.valueDesc
 						};
-						var a = JSON.parse(window.localStorage.aijiaUserdata);
+						var a = JSON.parse(window.localStorage.Userdata);
 						$.ajax({
 							url: Metronic.host + '/art/addCondition/' + $scope.urlId + '/' + a.userId + '/' + a.sessionId,
 							type: 'POST',

@@ -40,9 +40,9 @@ MetronicApp.controller('AppController', [
 		$scope.$on('$viewContentLoaded', function() {
 			Metronic.initComponents(); // init core components
 			//Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive
-			if (window.localStorage.aijiaUserdata) {
-				var a = JSON.parse(window.localStorage.aijiaUserdata);
-				$('.username').text(a.username);
+			if (window.localStorage.Userdata) {
+				var a = JSON.parse(window.localStorage.Userdata);
+				$('.username').text(a.userName);
 			}
 			$scope.quit = function() {
 				$.ajax({

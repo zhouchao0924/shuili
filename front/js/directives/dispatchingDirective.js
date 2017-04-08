@@ -13,7 +13,7 @@ MetronicApp.directive('tableTab2', ['dataTable', '$timeout', 'queryFilter', '$co
                 var tableParams = scope.tableParams;
                 var table0, table1, table2, table3;
                 var company = queryFilter('/company/queryAllCompany/');
-                var a = JSON.parse(window.localStorage.aijiaUserdata);
+                var a = JSON.parse(window.localStorage.Userdata);
                 tableParams.buttonFunc = function(self) {
                     return function(i, n) {
                         var rowData = self.table.api().row(i).data();
