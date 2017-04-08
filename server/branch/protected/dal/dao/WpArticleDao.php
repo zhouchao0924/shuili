@@ -4,7 +4,7 @@
  * @author yulongfei
  * @date 2017-04-03
  */
-class WpArticleDao extends BaseDao{
+class WpArticleDao extends Dao{
     /**
      * @return string
      */

@@ -5,6 +5,7 @@
  *
  */
 class AreaController extends Controller{
+
     /**
      * 获取省列表
      */

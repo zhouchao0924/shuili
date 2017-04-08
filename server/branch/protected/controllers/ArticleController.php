@@ -11,9 +11,20 @@ class ArticleController extends Controller{
     /**
      * 增加一篇文章
      */
-    public function actionAddArticleAjax($title,$isBoldTitle=0,$titleImgUrl="",$articleType=1,$originalUrl="",$content=""){
-        $client = new ClientComponent();
+    public function actionAddArticleAjax(){
+        $params = $this->getAjaxRequestParam();
+        $title = trim($params['title']);
+        $isBoldTitle= isset($params['isBoldTitle']) && !empty($params['isBoldTitle']) ? trim($params['isBoldTitle']) : "";
+        $titleImgUrl=isset($params['titleImgUrl']) && !empty($params['titleImgUrl']) ? trim($params['titleImgUrl']) : "";
+        $articleType=isset($params['articleType']) && !empty($params['articleType']) ? intval($params['articleType']) : 1;
+        $originalUrl=isset($params['originalUrl']) && !empty($params['originalUrl']) ? trim($params['originalUrl']) : "";
+        $content=isset($params['content']) && !empty($params['content']) ? trim($params['content']) : "";
 
+        if(empty($title) || empty($content)){
+            return $this->renderAjaxResponse($this->getAjaxResponse(false,"参数错误",ErrorCode::ERROR_PARAMS,array()));
+        }
+
+        $client = new ClientComponent();
         $userId = $client->getUserId();
         if($userId <= 0){
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户未登录",ErrorCode::ERROR_USER_NOT_LOGIN,array()));
@@ -30,8 +41,10 @@ class ArticleController extends Controller{
     /**
      * 获取文章列表（根据type）
      */
-    public function actionGetArticleListAjax($articleType){
+    public function actionGetArticleListAjax(){
 
+        $params = $this->getAjaxRequestParam();
+        $articleType = intval($params['articleType']);
         $client = new ClientComponent();
 
         $userId = $client->getUserId();
@@ -52,7 +65,9 @@ class ArticleController extends Controller{
     /**
      * 获取单条文章的内容
      */
-    public function actionGetArticleInfoAjax($articleId){
+    public function actionGetArticleInfoAjax(){
+        $params = $this->getAjaxRequestParam();
+        $articleId = intval($params['articleId']);
 
         $client = new ClientComponent();
 
@@ -68,7 +83,17 @@ class ArticleController extends Controller{
     /**
      * 修改单条文章的内容
      */
-    public function actionEditArticleInfoAjax($id,$title,$isBoldTitle=0,$titleImgUrl="",$articleType=1,$originalUrl="",$content=""){
+    public function actionEditArticleInfoAjax(){
+
+        $params = $this->getAjaxRequestParam();
+        $id = intval($params['id']);
+        $title = trim($params['title']);
+        $isBoldTitle= isset($params['isBoldTitle']) && !empty($params['isBoldTitle']) ? trim($params['isBoldTitle']) : "";
+        $titleImgUrl=isset($params['titleImgUrl']) && !empty($params['titleImgUrl']) ? trim($params['titleImgUrl']) : "";
+        $articleType=isset($params['articleType']) && !empty($params['articleType']) ? intval($params['articleType']) : 1;
+        $originalUrl=isset($params['originalUrl']) && !empty($params['originalUrl']) ? trim($params['originalUrl']) : "";
+        $content=isset($params['content']) && !empty($params['content']) ? trim($params['content']) : "";
+
 
         $client = new ClientComponent();
 

@@ -22,7 +22,7 @@ class ArticleModel extends BaseModel{
             ":articleType"=>$articleType,
             ":streetId"=>$streetId,
         );
-        $list = $this->_getWpArticleDao()->select("*",$conditions,$params,false);
+        $list = $this->_getWpArticleDao()->select("*",$conditions,$params,true);
         $returnList = array();
         foreach($list as $key => $value){
             $returnList[] = $this->_formatWpArticleInfo($value);
@@ -117,6 +117,6 @@ class ArticleModel extends BaseModel{
      * @return WpProvinceDao
      */
     private function _getWpArticleDao(){
-        return WpProvinceDao::getInstance("wp_article");
+        return WpArticleDao::getInstance("wp_article");
     }
 }
