@@ -6,7 +6,7 @@
 	<ul class="page-breadcrumb">
 		<li>
 			<i class="fa fa-home"></i>
-			<a href="javascript:;">司法局后台</a>
+			<a href="javascript:;">管理员列表</a>
 			<i class="fa fa-angle-right"></i>
 		</li>
 		<li>
@@ -40,7 +40,7 @@
 								<button class="btn blue" type="button" id="search">搜索</button>
 							</div>
 							<div class="col-md-1">
-								<a href="javascript:void(0);" data-toggle="modal" data-target=".bs-change-modal-lg" class="btn blue pull-right">
+								<a href="" data-toggle="modal" data-target=".bs-change-modal-lg" class="btn blue pull-right">
 									<i class="fa fa-plus"></i>
 									增加管理员</a>
 							</div>
@@ -54,22 +54,19 @@
 								序号
 							</th>
 							<th>
-								登录名
-							</th>
-							<th>
-								姓名
+								登录名称
 							</th>
 							<th>
 								登录密码
 							</th>
 							<th>
-								创建者
-							</th>
-							<th>
 								创建时间
 							</th>
-							<th width="180">
+							<th >
 								操作
+							</th>
+							<th >
+								备注
 							</th>
 						</tr>
 					</thead>
@@ -80,6 +77,7 @@
 		<!-- END EXAMPLE TABLE PORTLET-->
 	</div>
 </div>
+<!-- 添加账号 -->
 <div class="modal fade bs-change-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exchangeModalLabel">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -96,7 +94,7 @@
 							<div class="form-group col-md-12">
 								<label class="control-label col-md-3">登录名:</label>
 								<div class="col-md-5 cates">
-									<input type="text" class="form-control" name="logInName" ng-model="logInName"/>
+									<input type="text" class="form-control" name="userName" ng-model="userName"/>
 								</div>
 							</div>
 							<div class="form-group col-md-12">
@@ -114,15 +112,18 @@
 							<div class="form-group col-md-12">
 								<label class="control-label col-md-3">选择角色:</label>
 								<div class="col-md-5 cates">
-									<select class="form-control" name="roleId" ng-model="roleId" ng-options="role.roleId as role.roleName for role in roles">
+									<select class="form-control" name="roleId" ng-model="roleId">
 										<option value="">请选择</option>
+										<option value="0">普通用户</option>
+										<option value="1">管理员</option>
+										<option value="2">超级管理员</option>
 									</select>
 								</div>
 							</div>
 							<div class="form-group col-md-12">
 								<label class="control-label col-md-3">备注信息:</label>
 								<div class="col-md-5 cates">
-									<input type="text" class="form-control" name="logInName" ng-model="logInName"/>
+									<textarea type="text" class="form-control" name="desc" ng-model="desc"></textarea>
 								</div>
 							</div>
 						</form>
@@ -135,117 +136,37 @@
 		</div>
 	</div>
 </div>
-<div class="modal fade bs-manage-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exchangeModalLabel">
+<!-- 重置密码  -->
+<div class="modal fade bs-modify-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exchangeModalLabel">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title" id="gridSystemModalLabel">管理机构</h4>
+				<h4 class="modal-title" id="gridSystemModalLabel">重置密码</h4>
 			</div>
 			<div class="modal-body">
 				<div class="container-fluid">
 					<div class="row">
-						<div class="form-group col-md-10" ng-repeat="n in orgs">
-							<div class="col-md-10 ">
-								<input type="checkbox" id="{{n.orgId}}" name="{{n.orgName}}" ng-checked="n.manager === 1" ng-click="updateSelection($event,n)" bn-uniform>
-								<span>{{n.orgName}}</span>
+						<div class="form-group col-md-12">
+							<label class="control-label col-md-3">新密码:</label>
+							<div class="col-md-5 cates">
+								<input type="text" class="form-control" id="newpassword"/>
+							</div>
+						</div>
+						<div class="form-group col-md-12">
+							<label class="control-label col-md-3">确认新密码:</label>
+							<div class="col-md-5 cates">
+								<input type="text" class="form-control"/>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" id="bindOrg" class="btn btn-primary">确定保存</button>
+				<button type="button" id="makesure3" class="btn btn-primary">确定保存</button>
 			</div>
 		</div>
 	</div>
 </div>
-<div class="modal fade bs-edit-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exchangeModalLabel">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title" id="gridSystemModalLabel">编辑管理员</h4>
-			</div>
-			<div class="modal-body">
-				<div class="container-fluid">
-					<div class="row">
-						<form id="articleForm1" action="#" class="form-horizontal" enctype="multipart/form-data">
-							<div class="form-group col-md-12">
-								<label class="control-label col-md-3">登录名:</label>
-								<div class="col-md-5 cates">
-									<input type="text" class="form-control" name="logInName" ng-model="logInName"/>
-								</div>
-							</div>
-							<div class="form-group col-md-12">
-								<label class="control-label col-md-3">密码:</label>
-								<div class="col-md-5 cates">
-									<input type="password" class="form-control" name="password" id="password" ng-model="password"/>
-								</div>
-							</div>
-							<div class="form-group col-md-12">
-								<label class="control-label col-md-3">确认密码:</label>
-								<div class="col-md-5 cates">
-									<input type="password" class="form-control" name="resetpassword"/>
-								</div>
-							</div>
-							<div class="form-group col-md-12">
-								<label class="control-label col-md-3">选择角色:</label>
-								<div class="col-md-5 cates">
-									<select class="form-control" name="roleId" ng-model="roleId" ng-options="role.roleId as role.roleName for role in roles">
-										<option value="">请选择</option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group col-md-12">
-								<label class="control-label col-md-3">备注信息:</label>
-								<div class="col-md-5 cates">
-									<input type="text" class="form-control" name="logInName" ng-model="logInName"/>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" id="makesure2" class="btn btn-primary">确定保存</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade bs-modify-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exchangeModalLabel">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="gridSystemModalLabel">重置密码</h4>
-				</div>
-				<div class="modal-body">
-					<div class="container-fluid">
-						<div class="row">
-							<div class="form-group col-md-12">
-								<label class="control-label col-md-3">新密码:</label>
-								<div class="col-md-5 cates">
-									<input type="text" class="form-control" id="newpassword"/>
-								</div>
-							</div>
-							<div class="form-group col-md-12">
-								<label class="control-label col-md-3">确认新密码:</label>
-								<div class="col-md-5 cates">
-									<input type="text" class="form-control"/>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" id="makesure3" class="btn btn-primary">确定保存</button>
-				</div>
-			</div>
-		</div>
-	</div>
