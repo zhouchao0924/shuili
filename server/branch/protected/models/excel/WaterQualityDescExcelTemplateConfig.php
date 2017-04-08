@@ -6,6 +6,7 @@
  * @date 2017-04-06
  */
 class WaterQualityDescExcelTemplateConfig extends ExcelTemplateConfig{
+    public static $id = 10;
 
     protected $itemList = array(
         'time'=>'时间',
@@ -29,16 +30,28 @@ class WaterQualityDescExcelTemplateConfig extends ExcelTemplateConfig{
     );
 
     public function getDao(){
-        return WaterQualityDescDao::getInstance("WaterQualityDesc");
+        return WpWaterQualityDescDao::getInstance("WaterQualityDesc");
     }
 
     public function getExampleExcelFileName()
     {
-        return "水质监测基本情况模板.xlsx";
+        return "水质监测成果模板.xlsx";
     }
 
     public function getSearchTextTableColName()
     {
         return "detecion_position";
+    }
+
+    /**
+     * 获取类型id
+     * @return mixed
+     */
+    public function getServiceTypeId() {
+        return self::$id;
+    }
+
+    protected function getTemplateName() {
+        return "水质监测成果";
     }
 }

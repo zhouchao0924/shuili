@@ -6,6 +6,7 @@
  * @date 2017-04-06
  */
 class WaterQualityBaseExcelTemplateConfig extends ExcelTemplateConfig{
+    public static $id = 9;
 
     protected $itemList = array(
         'name'=>'河道名称',
@@ -33,5 +34,17 @@ class WaterQualityBaseExcelTemplateConfig extends ExcelTemplateConfig{
     public function getSearchTextTableColName()
     {
         return "name";
+    }
+
+    /**
+     * 获取类型id
+     * @return mixed
+     */
+    public function getServiceTypeId() {
+        return self::$id;
+    }
+
+    protected function getTemplateName() {
+        return "水质监测基本情况";
     }
 }

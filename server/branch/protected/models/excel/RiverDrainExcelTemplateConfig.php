@@ -6,6 +6,7 @@
  * @date 2017-04-06
  */
 class RiverDrainExcelTemplateConfig extends ExcelTemplateConfig{
+    public static $id = 8;
 
     protected $itemList = array(
         'river_id'=>'编号',
@@ -44,10 +45,10 @@ class RiverDrainExcelTemplateConfig extends ExcelTemplateConfig{
      * @return mixed
      */
     public function getServiceTypeId() {
-        // TODO: Implement getServiceTypeId() method.
+        return self::$id;
     }
 
     protected function getTemplateName() {
-        // TODO: Implement getTemplateName() method.
+        return "河道排水统计";
     }
 }
