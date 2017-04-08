@@ -50,13 +50,13 @@ class UserModel {
     public function doLogin($name,$password){
         $user = $this->getUserByName($name);
         if(empty($user) || $user['password'] != $this->genPassword($password)){
-            return ErrorCode::ERROR_LOGIN_FAILED;
+            return array();
         }
 
         $clientComponent = new ClientComponent();
         $clientComponent->setUserInfo($user);
 
-        return ErrorCode::SUCCESS;
+        return $user;
     }
 
     public function resetPassword($userId, $password){

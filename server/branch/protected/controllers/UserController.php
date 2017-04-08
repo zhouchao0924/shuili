@@ -22,12 +22,17 @@ class UserController extends Controller{
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"参数错误",ErrorCode::ERROR_PARAMS,array()));
         }
         $userModel = new UserModel();
-        $result = $userModel->doLogin($name,$password);
+        $userInfo = $userModel->doLogin($name,$password);
 
-        if($result != ErrorCode::SUCCESS){
-            return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户名或密码错误",$result,array()));
+        if(empty($userInfo)){
+            return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户名或密码错误",ErrorCode::ERROR_COMMON_ERROR,array()));
         }
-        return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,array()));
+        $userData = array(
+            "userName"=>$userInfo['name'],
+            "userId"=>$userInfo['id'],
+            "roleId"=>$userInfo['role_id']
+        );
+        return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,$userData));
     }
 
     public function actionIsLogin(){
@@ -144,8 +149,9 @@ class UserController extends Controller{
         if(!$userModel->isUserManageArea($userId,$streetId)){
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"无对应权限",ErrorCode::ERROR_USER_DENY,array()));
         }
-
-        $client->setCurrentArea($streetId);
+        $areaModel = new AreaModel();
+        $areaInfo = $areaModel->getStreetById($streetId);
+        $client->setCurrentArea($streetId,$areaInfo['name']);
 
         return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,array()));
     }

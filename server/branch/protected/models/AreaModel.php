@@ -212,4 +212,19 @@ class AreaModel{
         }
         return $sInfoList;
     }
+
+    public function getStreetById($streetId){
+        $streetDao = WpStreetDao::getInstance("WpStreet");
+        $condition = array(
+            "and",
+            "id=:id",
+            "del_flag=0"
+        );
+        $params = array(
+            ":id"=>$streetId
+        );
+        $streetInfo = $streetDao->select("id,name",$condition,$params,false);
+
+        return $streetInfo;
+    }
 }

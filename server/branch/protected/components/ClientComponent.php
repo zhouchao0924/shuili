@@ -35,6 +35,7 @@ class ClientComponent{
             'roleId'=>$userInfo['role_id'],
             'super'=>$userInfo['super'],
             'currentArea'=>0,
+            'currentAreaName'=>'',
 		);
 
 
@@ -45,10 +46,11 @@ class ClientComponent{
         CookieComponent::setCookie("tmp", $userInfo['name'].time());
 	}
 
-	public function setCurrentArea($streetId){
+	public function setCurrentArea($streetId,$name){
         $userKey = CookieComponent::getCookie(CookieComponent::$sessionId);
         $cacheInfo = MemCacheComponent::getCacheByKey($userKey);
         $cacheInfo['currentArea'] = $streetId;
+        $cacheInfo['currentAreaName'] = $name;
 
         MemCacheComponent::setCache($userKey, $cacheInfo, self::EXPIRE_TIME_DEFAULT);
     }

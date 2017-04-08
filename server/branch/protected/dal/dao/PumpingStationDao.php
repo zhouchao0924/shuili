@@ -1,12 +1,12 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: lzm
+ * User: yulongfei
  * Date: 17/4/3
  * Time: 10:06
  */
-class WpDrinkingWaterDao extends WpCsvBaseDao{
+class WpWaterGateDao extends WpCsvBaseDao{
     public function getTableName(){
-        return "wp_drinking_water";
+        return "wp_water_gate";
     }
 }
