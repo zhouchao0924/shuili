@@ -395,7 +395,7 @@ MetronicApp.directive('productSelectExtendModal', [
                 "stateSave": false,
                 "serverSide": true,
                 "ajax": function(data, callback, settings) {
-                    var a = JSON.parse(window.localStorage.aijiaUserdata);
+                    var a = JSON.parse(window.localStorage.Userdata);
                     var params = {
                         page: data.start / data.length + 1,
                         size: data.length,

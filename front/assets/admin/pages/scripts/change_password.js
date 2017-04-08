@@ -2,7 +2,7 @@ var ChangePassword = function() {
 
     var handleChangePassword = function() {
 
-        var a = JSON.parse(window.localStorage.aijiaUserdata);
+        var a = JSON.parse(window.localStorage.Userdata);
         
         var validate = $('.change-form').validate({
             errorElement: 'span', //default input error message container
@@ -82,7 +82,7 @@ var ChangePassword = function() {
                     success:function(data){
                         if(data.code==1){
                             a.sessionId = data.obj.sessionId;
-                            window.localStorage.aijiaUserdata = JSON.stringify(a);
+                            window.localStorage.Userdata = JSON.stringify(a);
                             window.location.href = 'index.html';
                         }else{
                             alert(data.ext.msg);

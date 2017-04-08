@@ -37,7 +37,7 @@ var ReservoirAdvanced = function() {
 			"stateSave": true,
 			"serverSide": true,
 			"ajax": function(data, callback, settings) {
-				var a = JSON.parse(window.localStorage.aijiaUserdata);
+				var a = JSON.parse(window.localStorage.Userdata);
 				var params = {
 					pageNo: data.start / data.length + 1,
 					pageSize: 5
@@ -133,7 +133,7 @@ var ReservoirAdvanced = function() {
 			"stateSave": true,
 			"serverSide": true,
 			"ajax": function(data, callback, settings) {
-				var a = JSON.parse(window.localStorage.aijiaUserdata);
+				var a = JSON.parse(window.localStorage.Userdata);
 				var params = {
 					pageNo: data.start / data.length + 1,
 					pageSize: 5
@@ -229,7 +229,7 @@ var ReservoirAdvanced = function() {
 			"stateSave": true,
 			"serverSide": true,
 			"ajax": function(data, callback, settings) {
-				var a = JSON.parse(window.localStorage.aijiaUserdata);
+				var a = JSON.parse(window.localStorage.Userdata);
 				var params = {
 					pageNo: data.start / data.length + 1,
 					pageSize: 5

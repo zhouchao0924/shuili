@@ -12,7 +12,7 @@ MetronicApp.directive('tableTab4', ['dataTable4', '$timeout', 'queryFilter', '$c
             link: function(scope, elem, attrs) {
                 var tableParams = scope.tableParams;
                 var table0, table1, table2, table3;
-                var a = JSON.parse(window.localStorage.aijiaUserdata);
+                var a = JSON.parse(window.localStorage.Userdata);
                 $timeout(function() {
                     switch ('1') {
                         case '1':

@@ -37,14 +37,35 @@ var Login = function() {
 				error.insertAfter(element.closest('.input-icon'));
 			}
 		});
-		// $('.login-form input').keypress(function(e) {
-		//     if (e.which == 13) {
-		//         if ($('.login-form').validate().form()) {
-		//             $('.login-form').submit(); //form validation success, call ajax form submit
-		//         }
-		//         return false;
-		//     }
-		// });
+		// 检查是否登录
+		$.ajax({
+			url: Metronic.host + '/user/isLogin',
+			type: 'GET',
+			dataType: 'json',
+			xhrFields: {
+				withCredentials: true
+			},
+			crossDomain: true,
+			data: {
+				data: JSON.stringify({})
+			},
+			success: function(datas) {
+				if (datas.success) {
+					var obj = {
+						userId: datas.data.userId,
+						roleId: datas.data.roleId,
+						userName: datas.data.userName,
+						currentArea: datas.data.currentArea,
+						currentAreaName: datas.data.currentAreaName
+					};
+					window.localStorage.Userdata = JSON.stringify(obj);
+					window.location.href = "index.html#/dashboard.html";
+				}
+			},
+			error: function(xhr, data, status) {
+				alert('请检查网络');
+			}
+		})
 		$('body').bind('keydown', function(e) {
 			if (e.which == 13) { //回车键的键值为13
 				$('#loginBtn').click(); //调用登录按钮的登录事件
@@ -67,11 +88,17 @@ var Login = function() {
 					data: {
 						data: JSON.stringify(params)
 					},
-					success: function(data) {
-						if (data.success) {
+					success: function(datas) {
+						if (datas.success) {
+							var obj = {
+								userId: datas.data.userId,
+								roleId: datas.data.roleId,
+								userName: datas.data.userName
+							};
+							window.localStorage.Userdata = JSON.stringify(obj);
 							window.location.href = "index.html#/dashboard.html";
 						} else {
-							alert(data.message);
+							alert(datas.message);
 						}
 					},
 					error: function(xhr, data, status) {

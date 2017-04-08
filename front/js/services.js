@@ -282,7 +282,7 @@ MetronicApp.factory('ajax', function() {
 			params = {};
 		}
 		if (window.localStorage) {
-			var a = JSON.parse(window.localStorage.aijiaUserdata);
+			var a = JSON.parse(window.localStorage.Userdata);
 		} else {
 			window.location.href = 'login.html';
 		}
@@ -310,18 +310,18 @@ MetronicApp.factory('ajax', function() {
 MetronicApp.factory('userNow', [
 	'$window',
 	function($window) {
-		if (!$window.localStorage || !$window.localStorage.aijiaUserdata) {
+		if (!$window.localStorage || !$window.localStorage.Userdata) {
 			// $window.location.href = 'login.html';
 			return
 		}
 		return {
 			get userId() {
-				return JSON.parse($window.localStorage.aijiaUserdata).userId
+				return JSON.parse($window.localStorage.Userdata).userId
 			},
 			get sessionId() {
-				return JSON.parse($window.localStorage.aijiaUserdata).sessionId
+				return JSON.parse($window.localStorage.Userdata).sessionId
 			},
-			companyCode: JSON.parse($window.localStorage.aijiaUserdata).companyCode,
+			companyCode: JSON.parse($window.localStorage.Userdata).companyCode,
 			timeout: function() {
 				$window.localStorage.sessionOut = true
 			},
