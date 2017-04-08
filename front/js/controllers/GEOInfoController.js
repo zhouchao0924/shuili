@@ -101,7 +101,7 @@ MetronicApp.controller('GEOInfoController', [
 			// 编辑事件
 			$('#edit').click(function(e){
 				$('#modaledit').modal('show');
-				// $('#modalview').modal('hide');
+				$('#modalview').modal('hide');
 
 			});
 
