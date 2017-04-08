@@ -58,10 +58,10 @@ return array(
 		),
 		// uncomment the following to use a MySQL database
 		'db'=>array(
-            'connectionString' => 'mysql:host=localhost;port=3306;dbname=sl',
+            'connectionString' => 'mysql:host=139.199.27.165;port=3306;dbname=sl',
             'emulatePrepare' => true,
             'username' => 'mysql',
-            'password' => 'mysql',
+            'password' => 'shuili@1999',
             'charset' => 'utf8',
 //            'enableProfiling'=>true, //分析sql语句
             'enableParamLogging'=>true, //日志中显示每次传参的参数

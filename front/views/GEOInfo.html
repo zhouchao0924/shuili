@@ -1,3 +1,48 @@
+<style media="screen">
+	.box{
+		position: relative;
+	}
+	#mapcontainer{
+		width:100%;
+		height: 500px;
+	}
+	.toplabel{
+		position: absolute;
+		top:0;
+		left:0;
+		height:30px;
+		width:100%;
+		background: rgba(0,0,0,0.7);
+	}
+	.t-left{
+		font-size: 18px;
+		color:#fff;
+		float: left;
+		margin-left: 20px;
+		line-height: 30px;
+	}
+	.t-r{
+		line-height: 30px;
+		float: right;
+		margin-right: 20px;
+	}
+  .detail .title{
+    font-size:24px;
+		color:#333;
+  }
+  .detail .sub-title{
+    margin-top: 15px;
+    font-size:13px;
+		color:#666;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+  .detail .content{
+    font-size:13px;
+    color:#666;
+  }
+</style>
+
 <h3 class="page-title">
 	{{$state.current.data.pageTitle}}
 </h3>
@@ -8,4 +53,136 @@
 			<a href="javascript:;">{{$state.current.data.pageTitle}}</a>
 		</li>
 	</ul>
+</div>
+
+<div class="box">
+	<div id="mapcontainer">
+
+	</div>
+	<div class="toplabel">
+		<div class="t-left">
+			<span>马渚镇地理信息</span>
+		</div>
+		<div class="t-r">
+			<span class="label label-sm label-success">水库山塘</span>
+			<span class="label label-sm label-info">河道</span>
+			<span class="label label-sm label-danger">水闸</span>
+			<span class="label label-sm label-warning">泵站</span>
+		</div>
+	</div>
+</div>
+
+<div id="modaladd" class="modal fade bs-modify-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exchangeModalLabel">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+     <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title" id="gridSystemModalLabel">确认添加后，添加小图标到地图界面。
+点击小图标编辑该你而信息。</h4>
+   </div>
+   <div class="modal-body">
+    <div class="container-fluid">
+     <div class="row">
+      <div class="form-group col-md-12">
+       <label class="control-label col-md-3">名称:</label>
+       <div class="col-md-5 cates">
+        <input type="text" class="form-control" id="newpassword"/>
+       </div>
+      </div>
+      <div class="form-group col-md-12">
+       <label class="control-label col-md-3">类型:</label>
+       <div class="col-md-5 cates">
+				 <select class="layout-option form-control input-sm">
+ 					<option value="fluid" selected="selected">水库山塘</option>
+ 					<option value="boxed">河道</option>
+					<option value="boxed">水闸</option>
+					<option value="boxed">泵站</option>
+ 				</select>
+       </div>
+		 </div>
+    </div>
+   </div>
+  </div>
+  <div class="modal-footer">
+   <button type="button" id="makesure" class="btn btn-primary">确定添加</button>
+	 <button type="button" id="cancel" class="btn btn-default">取消</button>
+  </div>
+ </div>
+</div>
+</div>
+
+
+<div id="modalview" class="modal fade bs-modify-modal-lg" tabindex="1" role="dialog2" aria-labelledby="exchangeModalLabel">
+ <div class="modal-dialog" style="width:80%;">
+  <div class="modal-content">
+   <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+     <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title"></h4>
+   </div>
+   <div class="modal-body">
+    <div class="container-fluid">
+			<div class="detail">
+ 		   <div class="title">
+ 		     <span>马渚镇水利信息云平台正式对外发布</span>
+ 		   </div>
+ 		   <div class="sub-title">
+ 		     <span>1分钟前</span>
+ 		   </div>
+ 		   <div class="content">
+ 		     这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要
+ 		   </div>
+ 		 	</div>
+    </div>
+   </div>
+   <div class="modal-footer">
+   	<button type="button" id="edit" class="btn btn-primary">编辑</button>
+	 	<button type="button" id="cancel2" data-dismiss="modal" class="btn btn-default">关闭</button>
+   </div>
+ </div>
+</div>
+</div>
+
+
+<div id="modaledit" class="modal fade bs-modify-modal-lg" tabindex="2" role="dialog3">
+ <div class="modal-dialog" style="width:80%;">
+  <div class="modal-content">
+   <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+     <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title"></h4>
+   </div>
+   <div class="modal-body">
+		 <div class="container-fluid">
+      <div class="row">
+       <div class="form-group col-md-12">
+        <label class="control-label col-md-1">标题:</label>
+        <div class="col-md-9 cates">
+         <input type="text" class="form-control" id="newpassword"/>
+        </div>
+       </div>
+			 <div class="form-group col-md-12">
+        <label class="control-label col-md-1"></label>
+        <div class="col-md-9 cates">
+					<label>
+ 				 		<input type="checkbox"> 标题加粗 </label>
+        </div>
+       </div>
+       <div class="form-group col-md-12">
+        <label class="control-label col-md-1">详情:</label>
+        <div class="col-md-9 cates">
+					<script type="text/plain" id="new-editor" style="width:700px;height:400px;"></script>
+        </div>
+			 </div>
+ 		 </div>
+   </div>
+   <div class="modal-footer">
+	   <button type="button" id="save" class="btn btn-primary">保存</button>
+		 <button type="button" id="cancel3" data-dismiss="modal" class="btn btn-default">关闭</button>
+   </div>
+ </div>
 </div>

@@ -2,14 +2,10 @@
 /**
  * @copyright (C) 2006-2017 Tuniu All rights reserved
  * @author yulongfei
- * @date 2017-04-03
+ * @date 2017-04-08
  */
-class WpArticleDao extends Dao{
-    /**
-     * @return string
-     */
+class WpWaterQualityBaseDao extends WpCsvBaseDao{
     public function getTableName(){
-        return "wp_article";
+        return "water_quality_base";
     }
-
 }
