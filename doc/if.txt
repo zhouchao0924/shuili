@@ -156,6 +156,7 @@
     method:get
     request:{
         articleType,//文章类型：1，基本情况，2，文档信息
+	searchKey://搜索关键词 title
     }
     response:[
             {
@@ -210,4 +211,14 @@
                 'createTime’:String,
                 'roleId’:String,
                 'desc' => $val['desc'],
+    }
+15.文章操作接口（置顶，取消置顶，删除）
+    url:/article/doAction
+    method:get
+    request:{
+	id，//文章id
+	actionType：//操作：1，置顶，2取消置顶，3删除
+    }
+    response:{
+
     }
