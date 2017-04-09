@@ -1,0 +1,102 @@
+<style type="text/css">
+	.cates .col-md-2 {
+		padding: 0 4px 0 0;
+	}
+	.cates .col-md-2:last-of-type {
+		padding: 0;
+	}
+</style>
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+	{{$state.current.data.pageTitle}}
+	<small></small>
+</h3>
+<div class="page-bar">
+	<ul class="page-breadcrumb">
+		<li>
+			<i class="fa fa-home"></i>
+			<a href="javascript:void(0)">内容管理</a>
+			<i class="fa fa-angle-right"></i>
+		</li>
+		<li>
+			<a href="#/addhelp">{{$state.current.data.pageTitle}}</a>
+		</li>
+	</ul>
+</div>
+<!-- END PAGE HEADER-->
+<div class="row">
+	<div class="col-md-12">
+		<!-- BEGIN PORTLET-->
+		<div class="portlet box blue">
+			<div class="portlet-title">
+				<div class="caption">
+					{{$state.current.data.pageTitle}}
+				</div>
+			</div>
+			<div class="portlet-body form">
+				<!-- BEGIN FORM-->
+				<form id="articleForm" action="#" class="form-horizontal" enctype="multipart/form-data">
+					<div class="form-body">
+						<div class="form-group">
+							<label class="control-label col-md-2">标题：</label>
+							<div class="col-md-4">
+								<input type="text" class="form-control maxlength-handler" maxlength="30" id="adTitle" name="adTitle" ng-model="newsDetail.title" placeholder="输入文档标题">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-2"></label>
+							<label class="checkbox-inline" style="float:left;">
+								<input type="checkbox" ng-model="newsDetail.isBoldTitle" ng-true-value="1" ng-false-value="0">标题加粗</label>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-2">图片：</label>
+							<div class="col-md-9" style="margin-bottom:10px;">
+								<div class="fileinput fileinput-new" data-provides="fileinput">
+									<div class="fileinput-new thumbnail" style="width: 150px; height: 120px;margin-right:5px;">
+										<img class="showImg" ng-src="{{titleImgUrl}}" alt=""/>
+									</div>
+									<div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 150px; max-height: 120px;"></div>
+									<div>
+										<span class="btn btn-xs default btn-file">
+											<span class="fileinput-new">
+												选择图片
+											</span>
+											<span class="fileinput-exists">
+												更改图片
+											</span>
+											<input type="file" class="fileupload" name="...">
+										</span>
+										<a href="javascript:void(0);" class="btn btn-xs red fileinput-exists" data-dismiss="fileinput">
+											删除图片
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-2">详情：</label>
+							<div class="col-md-9">
+								<script type="text/plain" id="new-editor" style="width:700px;height:400px;"></script>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-2">原文链接：</label>
+							<div class="col-md-4">
+								<input type="text" class="form-control" ng-model="newsDetail.originalUrl" placeholder="">
+							</div>
+						</div>
+					</div>
+					<div class="form-actions">
+						<div class="col-md-offset-2 col-md-9">
+							<a href="javascript:void(0);" ng-click="addnews()" class="btn blue">
+								<i class="fa fa-check"></i>
+								发布</a>
+							<a href="#/helps" class="btn default">预览</a>
+						</div>
+					</div>
+				</form>
+				<!-- END FORM-->
+			</div>
+		</div>
+	</div>
+</div>

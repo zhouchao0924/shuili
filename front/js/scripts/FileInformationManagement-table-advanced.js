@@ -82,15 +82,15 @@ var FileInformationManagementAdvanced = function() {
 								var up = $('<a href="javascript:;" class="btn btn-xs green"><i class="fa fa-upload"></i> 置顶 </a>');
 								var quitup = $('<a href="javascript:;" class="btn btn-xs grey"><i class="fa fa-download"></i> 取消置顶 </a>');
 								edit.click(function(event) {
-									window.location.href = '#/EditInformationManagement/' + rowData[0];
+									window.location.href = '#/EditFileInformationManagement/' + rowData[0];
 								});
 								up.click(function() {
 									var params = {
 										id: rowData[0],
-										actionType: 1
+										actionType: 2
 									};
 									$.ajax({
-										url: Metronic.host + 'article/doAction',
+										url: Metronic.host + 'article/doActionAjax',
 										type: 'GET',
 										dataType: 'json',
 										xhrFields: {
@@ -110,10 +110,10 @@ var FileInformationManagementAdvanced = function() {
 								quitup.click(function() {
 									var params = {
 										id: rowData[0],
-										actionType: 2
+										actionType: 3
 									};
 									$.ajax({
-										url: Metronic.host + 'article/doAction',
+										url: Metronic.host + 'article/doActionAjax',
 										type: 'GET',
 										dataType: 'json',
 										xhrFields: {
@@ -133,11 +133,11 @@ var FileInformationManagementAdvanced = function() {
 								deletex.click(function() {
 									var params = {
 										id: rowData[0],
-										actionType: 3
+										actionType: 1
 									};
 									if (confirm('确定删除?')) {
 										$.ajax({
-											url: Metronic.host + 'article/doAction',
+											url: Metronic.host + 'article/doActionAjax',
 											type: 'GET',
 											dataType: 'json',
 											xhrFields: {

@@ -1,5 +1,5 @@
 /* Setup general page controller */
-MetronicApp.controller('AddInformationManagementController', [
+MetronicApp.controller('AddFileInformationManagementController', [
 	'$rootScope',
 	'$scope',
 	'settings',

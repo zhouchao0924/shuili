@@ -802,7 +802,7 @@ MetronicApp.config([
 			url: "/EditFileInformationManagement/:id",
 			templateUrl: "views/EditFileInformationManagement.html?v=" + MetronicApp.version,
 			data: {
-				pageTitle: '编辑基本情况'
+				pageTitle: '编辑档案信息'
 			},
 			controller: "EditFileInformationManagementController",
 			resolve: {

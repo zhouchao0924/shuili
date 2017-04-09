@@ -87,10 +87,10 @@ var InformationManagementAdvanced = function() {
 								up.click(function() {
 									var params = {
 										id: rowData[0],
-										actionType: 1
+										actionType: 2
 									};
 									$.ajax({
-										url: Metronic.host + 'article/doAction',
+										url: Metronic.host + 'article/doActionAjax',
 										type: 'GET',
 										dataType: 'json',
 										xhrFields: {
@@ -110,10 +110,10 @@ var InformationManagementAdvanced = function() {
 								quitup.click(function() {
 									var params = {
 										id: rowData[0],
-										actionType: 2
+										actionType: 3
 									};
 									$.ajax({
-										url: Metronic.host + 'article/doAction',
+										url: Metronic.host + 'article/doActionAjax',
 										type: 'GET',
 										dataType: 'json',
 										xhrFields: {
@@ -133,11 +133,11 @@ var InformationManagementAdvanced = function() {
 								deletex.click(function() {
 									var params = {
 										id: rowData[0],
-										actionType: 3
+										actionType: 1
 									};
 									if (confirm('确定删除?')) {
 										$.ajax({
-											url: Metronic.host + 'article/doAction',
+											url: Metronic.host + 'article/doActionAjax',
 											type: 'GET',
 											dataType: 'json',
 											xhrFields: {

@@ -81,7 +81,7 @@ MetronicApp.controller('EditInformationManagementController', [
 						},
 						crossDomain: true,
 						data: {
-							data: JSON.stringify({id: root.currentScope.$state.params.id})
+							data: JSON.stringify({articleId: root.currentScope.$state.params.id})
 						},
 						success: function(data) {
 							if (data.success) {
