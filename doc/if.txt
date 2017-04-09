@@ -105,20 +105,6 @@
         "domain":string
     }
 
-9.获取附件上传token
-    url:/article/addArticleAjax
-    method:get
-    request:{
-        title,//文章标题
-        isBoldTitle=0,//是否加粗文章标题1，加粗，0不加粗
-        titleImgUrl="",//题图的图片url
-        articleType=1,//文章类型：1，基本情况，2，文档信息
-        originalUrl="",//原文链接
-        content=""，//文章类容html
-    }
-    response:{
-    }
-
 
 9.增加基本情况和文档信息的接口
     url:/article/addArticleAjax
@@ -157,8 +143,13 @@
     request:{
         articleType,//文章类型：1，基本情况，2，文档信息
 	searchKey://搜索关键词 title
+	page://页码
+	pageSize：//每页数量
     }
-    response:[
+    response:
+
+	“articleCount”://文章总数
+	"articleList”：[
             {
             id，//文章id
             title,//文章标题
@@ -175,7 +166,7 @@
     url:/article/getArticleInfoAjax
     method:get
     request:{
-        id,//文章id
+        articleId,//文章id
     }
     response:{
                  id，//文章id
