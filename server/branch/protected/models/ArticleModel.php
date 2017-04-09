@@ -56,7 +56,7 @@ class ArticleModel extends BaseModel{
             $conditions[] = 'title like "%'.$searchKey.'%"';
         }
 
-        $data = $this->_getWpArticleDao()->select("count(1) as count",$conditions,$params,true);
+        $data = $this->_getWpArticleDao()->select("count(1) as count",$conditions,$params,false);
         return $data['count'];
     }
 
