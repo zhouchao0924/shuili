@@ -93,7 +93,6 @@ class ArticleModel extends BaseModel{
             ":id"=>$articleId
         );
         $info = $this->_getWpArticleDao()->select("*",$conditions,$params,false);
-        var_dump($info);die;
         return $this->_formatWpArticleInfo($info);
     }
     /**
