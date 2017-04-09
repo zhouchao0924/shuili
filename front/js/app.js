@@ -256,7 +256,6 @@ MetronicApp.config([
 								'assets/global/plugins/umeditor/umeditor.min.js?v=' + MetronicApp.version,
 								'assets/global/plugins/umeditor/plupload/plupload.full.min.js?v=' + MetronicApp.version,
 								'assets/global/plugins/umeditor/qiniu.min.js?v=' + MetronicApp.version,
-								
 								'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css?v=' + MetronicApp.version,
 								'assets/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css?v=' + MetronicApp.version,
 								'assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css?v=' + MetronicApp.version,
@@ -697,6 +696,44 @@ MetronicApp.config([
 					}
 				]
 			}
+		}).state('EditInformationManagement', {
+			url: "/EditInformationManagement/:id",
+			templateUrl: "views/EditInformationManagement.html?v=" + MetronicApp.version,
+			data: {
+				pageTitle: '编辑基本情况'
+			},
+			controller: "EditInformationManagementController",
+			resolve: {
+				deps: [
+					'$ocLazyLoad',
+					function($ocLazyLoad) {
+						return $ocLazyLoad.load({
+							name: 'MetronicApp', insertBefore: '#nins_before', // load the above css files before '#ng_load_plugins_before'
+							files: [
+								// 'assets/global/plugins/select2/select2.css',
+								'assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css?v=' + MetronicApp.version,
+								'assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/umeditor/themes/default/css/umeditor.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/umeditor/umeditor.config.js?v=' + MetronicApp.version,
+								'assets/global/plugins/umeditor/umeditor.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/umeditor/plupload/plupload.full.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/umeditor/qiniu.min.js?v=' + MetronicApp.version,
+								// 'assets/global/plugins/select2/select2.min.js',
+								'assets/global/plugins/datatables/all.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/bootbox/bootbox.min.js?v=' + MetronicApp.version,
+								'js/controllers/EditInformationManagementController.js?v=' + MetronicApp.version
+							]
+						});
+					}
+				]
+			}
 		}).state('FileInformationManagement', {
 			url: "/FileInformationManagement",
 			templateUrl: "views/FileInformationManagement.html?v=" + MetronicApp.version,
@@ -756,6 +793,44 @@ MetronicApp.config([
 								'assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=' + MetronicApp.version,
 								'assets/global/plugins/bootbox/bootbox.min.js?v=' + MetronicApp.version,
 								'js/controllers/AddFileInformationManagementController.js?v=' + MetronicApp.version
+							]
+						});
+					}
+				]
+			}
+		}).state('EditFileInformationManagement', {
+			url: "/EditFileInformationManagement/:id",
+			templateUrl: "views/EditFileInformationManagement.html?v=" + MetronicApp.version,
+			data: {
+				pageTitle: '编辑基本情况'
+			},
+			controller: "EditFileInformationManagementController",
+			resolve: {
+				deps: [
+					'$ocLazyLoad',
+					function($ocLazyLoad) {
+						return $ocLazyLoad.load({
+							name: 'MetronicApp', insertBefore: '#nins_before', // load the above css files before '#ng_load_plugins_before'
+							files: [
+								// 'assets/global/plugins/select2/select2.css',
+								'assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css?v=' + MetronicApp.version,
+								'assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/umeditor/themes/default/css/umeditor.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/umeditor/umeditor.config.js?v=' + MetronicApp.version,
+								'assets/global/plugins/umeditor/umeditor.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/umeditor/plupload/plupload.full.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/umeditor/qiniu.min.js?v=' + MetronicApp.version,
+								// 'assets/global/plugins/select2/select2.min.js',
+								'assets/global/plugins/datatables/all.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/bootbox/bootbox.min.js?v=' + MetronicApp.version,
+								'js/controllers/EditFileInformationManagementController.js?v=' + MetronicApp.version
 							]
 						});
 					}

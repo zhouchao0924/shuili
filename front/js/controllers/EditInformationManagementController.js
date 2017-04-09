@@ -1,5 +1,5 @@
 /* Setup general page controller */
-MetronicApp.controller('AddInformationManagementController', [
+MetronicApp.controller('EditInformationManagementController', [
 	'$rootScope',
 	'$scope',
 	'settings',
@@ -71,19 +71,40 @@ MetronicApp.controller('AddInformationManagementController', [
 						alert(datas.message);
 						Metronic.unblockUI();
 					}
+					// 获取新闻文档详情
+					$.ajax({
+						url: Metronic.host + 'article/getArticleInfoAjax',
+						type: 'GET',
+						dataType: 'json',
+						xhrFields: {
+							withCredentials: true
+						},
+						crossDomain: true,
+						data: {
+							data: JSON.stringify({id: root.currentScope.$state.params.id})
+						},
+						success: function(data) {
+							if (data.success) {
+								articleUm.setContent(data.data.content);
+								$scope.$apply(function() {
+									$scope.newsDetail = {
+										'title': '',
+										'isBoldTitle': '',
+										'titleImgUrl': '',
+										'articleType': 1,
+										'originalUrl': '',
+										'content': ''
+									};
+									$scope.titleImgUrl = $scope.newsDetail.titleImgUrl;
+								});
+							}
+						}
+					});
 				},
 				error: function(xhr, data, status) {
 					alert('请检查网络');
 				}
 			});
-			$scope.newsDetail = {
-				'title': '',
-				'isBoldTitle': '',
-				'titleImgUrl': '',
-				'articleType': 2,
-				'originalUrl': '',
-				'content': ''
-			};
 			$scope.addnews = function() {
 				var validate = $("#articleForm").validate(validate_filed);
 				if (!validate.form()) {
@@ -140,7 +161,7 @@ MetronicApp.controller('AddInformationManagementController', [
 												},
 												success: function(data) {
 													if (data.success) {
-														window.location.href = '#/FileInformationManagement';
+														window.location.href = '#/InformationManagement';
 													} else {
 														alert(data.message);
 													}
