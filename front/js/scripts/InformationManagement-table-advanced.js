@@ -39,7 +39,7 @@ var InformationManagementAdvanced = function() {
 			"ajax": function(data, callback, settings) {
 				var params = {
 					articleType: 1,
-					searchKey: '',
+					searchKey: $scope.searchKey,
 					page: data.start / data.length + 1,
 					pageSize: 30
 				};
@@ -179,9 +179,11 @@ var InformationManagementAdvanced = function() {
 				});
 			}
 		});
-		var tableWrapper = $('#sample_3_wrapper');
 		$('#searchBtn').click(function(e) {
 			table.DataTable().ajax.reload();
+		});
+		$('#emptyData').click(function(e) {
+			$scope.searchKey = '';
 		});
 		//添加enter搜索的事件
 		$('body').bind('keydown', function(e) {

@@ -39,7 +39,7 @@ var FileInformationManagementAdvanced = function() {
 			"ajax": function(data, callback, settings) {
 				var params = {
 					articleType: 2,
-					searchKey: '',
+					searchKey: $scope.searchKey,
 					page: data.start / data.length + 1,
 					pageSize: 30
 				};
@@ -179,7 +179,6 @@ var FileInformationManagementAdvanced = function() {
 				});
 			}
 		});
-		var tableWrapper = $('#sample_3_wrapper');
 		$('#searchBtn').click(function(e) {
 			table.DataTable().ajax.reload();
 		});
