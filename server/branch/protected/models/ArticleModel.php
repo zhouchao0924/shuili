@@ -86,6 +86,7 @@ class ArticleModel extends BaseModel{
     public function getArticleInfo($articleId){
 
         $conditions = array(
+            "and",
             "id = :id",
         );
         $params = array(
