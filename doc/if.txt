@@ -172,7 +172,7 @@
     ]
 
 12，获取单个文档信息的接口
-    url:/article/addArticleAjax
+    url:/article/getArticleInfoAjax
     method:get
     request:{
         id,//文章id
@@ -213,7 +213,7 @@
                 'desc' => $val['desc'],
     }
 15.文章操作接口（置顶，取消置顶，删除）
-    url:/article/doAction
+    url:/article/doActionAjax
     method:get
     request:{
 	id，//文章id

@@ -70,7 +70,7 @@ class ArticleModel extends BaseModel{
         $params = array(
             ":id"=>$articleId
         );
-        $info = $this->_getWpArticleDao()->select("*",$conditions,$params,true);
+        $info = $this->_getWpArticleDao()->select("*",$conditions,$params,false);
         return $this->_formatWpArticleInfo($info);
     }
     /**
