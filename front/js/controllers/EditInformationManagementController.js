@@ -88,15 +88,17 @@ MetronicApp.controller('EditInformationManagementController', [
 								articleUm.setContent(data.data.content);
 								$scope.$apply(function() {
 									$scope.newsDetail = {
-										'title': '',
-										'isBoldTitle': '',
-										'titleImgUrl': '',
+										'id': data.data.id,
+										'title': data.data.title,
+										'isBoldTitle': data.data.isBoldTitle,
+										'titleImgUrl': data.data.titleImgUrl,
 										'articleType': 1,
-										'originalUrl': '',
-										'content': ''
+										'originalUrl': data.data.originalUrl,
+										'content': data.data.title
 									};
 									$scope.titleImgUrl = $scope.newsDetail.titleImgUrl;
 								});
+								$.uniform.update($('input[type = checkbox]'));
 							}
 						}
 					});
@@ -149,7 +151,7 @@ MetronicApp.controller('EditInformationManagementController', [
 											var params = $scope.newsDetail;
 											params.content = articleUm.getContent();
 											$.ajax({
-												url: Metronic.host + 'article/addArticleAjax',
+												url: Metronic.host + 'article/EditArticleInfoAjax',
 												type: 'GET',
 												dataType: 'json',
 												xhrFields: {
@@ -186,7 +188,7 @@ MetronicApp.controller('EditInformationManagementController', [
 					var params = $scope.newsDetail;
 					params.description = articleUm.getContent();
 					$.ajax({
-						url: Metronic.host + 'article/addArticleAjax',
+						url: Metronic.host + 'article/EditArticleInfoAjax',
 						type: 'GET',
 						dataType: 'json',
 						xhrFields: {

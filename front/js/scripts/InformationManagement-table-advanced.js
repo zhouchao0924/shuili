@@ -38,7 +38,10 @@ var InformationManagementAdvanced = function() {
 			"serverSide": true,
 			"ajax": function(data, callback, settings) {
 				var params = {
-					articleType: 1
+					articleType: 1,
+					searchKey: '',
+					page: data.start / data.length + 1,
+					pageSize: 30
 				};
 				Metronic.blockUI({message: '<div style="background:rgba(0,0,0,0.3);padding:10px;font-size:16px;font-weight:bold;color:#fff;">正在加载...</div>', textOnly: true});
 				$.ajax({
@@ -55,7 +58,7 @@ var InformationManagementAdvanced = function() {
 					success: function(datas) {
 						if (datas.success) {
 							var arr = [];
-							$.each(datas.data || [], function(i, n) {
+							$.each(datas.data.articleList || [], function(i, n) {
 								var temp = [
 									n.id,
 									n.title,
@@ -68,8 +71,12 @@ var InformationManagementAdvanced = function() {
 							});
 							var d = {
 								data: arr,
-								recordsTotal: datas.totalRecords,
-								recordsFiltered: datas.totalRecords
+								recordsTotal: datas.data.articleCount
+									? datas.data.articleCount
+									: 0,
+								recordsFiltered: datas.data.articleCount
+									? datas.data.articleCount
+									: 0
 							};
 							callback(d);
 							table.find('tbody tr td:last-child').each(function(i, n) {
