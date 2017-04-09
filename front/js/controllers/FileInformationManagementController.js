@@ -14,6 +14,9 @@ MetronicApp.controller('FileInformationManagementController', [
 			$rootScope.settings.layout.pageBodySolid = false;
 			$rootScope.settings.layout.pageSidebarClosed = false;
 			FileInformationManagementAdvanced.init($scope, $compile);
+			$scope.emptyData = function() {
+				$scope.searchKey = '';
+			}
 		});
 	}
 ]);

@@ -29,11 +29,11 @@
 						<div class="form-group">
 							<label class="control-label col-md-1"></label>
 							<div class="col-md-3">
-								<input type="text" class="form-control" ng-model="searchDetail.name" placeholder="请输入名称检索"/>
+								<input type="text" class="form-control" ng-model="searchKey" placeholder="请输入标题检索"/>
 							</div>
 							<div class="col-md-2">
 								<button class="btn blue" type="button" id="searchBtn">搜索</button>
-								<button class="btn default" type="button" id="emptyData">重置</button>
+								<button class="btn default" type="button" ng-click="emptyData()">重置</button>
 							</div>
 							<div class="col-md-4">
 								<a href="#/AddFileInformationManagement" class="btn blue pull-right">添加档案</a>
