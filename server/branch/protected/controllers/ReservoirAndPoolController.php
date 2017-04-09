@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+
 /**
  * @copyright (C) 2006-2017 Tuniu All rights reserved
  * @author yulongfei
@@ -22,10 +24,12 @@ class ReservoirAndPoolController extends Controller{
         $userInfo = $client->getUserInfo();
         try {
             $data = ExcelModel::parseExcel(2, $uploadInfo['fileFullPath']);
+
             if (empty($data)) {
                 return $this->renderAjaxResponse($this->getAjaxResponse(false,"empty file",ErrorCode::ERROR_COMMON_ERROR,array()));
             }
-            $csv = new ExcelTemplateModel(new ReservoirTemplateConfig());
+            $csv = new ExcelTemplateModel(new ReservoirExcelTemplateConfig());
+
             $extra = array(
                 'street_id' => $client->getCurrentArea(),
                 'district_id' => OpenCity::DISTRICT_ID,
@@ -51,7 +55,7 @@ class ReservoirAndPoolController extends Controller{
         $searchText = isset($params['text'])?trim($params['text']):"";
         $page = isset($params['page'])?intval($params['page']):1;
 
-        $excelModel = new ExcelTemplateModel(new RiverwayExcelTemplateConfig());
+        $excelModel = new ExcelTemplateModel(new ReservoirExcelTemplateConfig());
         $client = new ClientComponent();
         $streetId = $client->getCurrentArea();
         $data = $excelModel->queryRecords($page,$streetId,$searchText,1);

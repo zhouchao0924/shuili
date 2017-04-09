@@ -1,0 +1,48 @@
+1.导入excel
+    url:/riverway/import
+    method:post 提交文件 文件字段名“efile”
+    request:{
+    }
+    response:{
+    }
+
+2.获取列表
+    url:/riverway/getList
+    method:get
+    request:{
+        "text":string //搜索的文本 没有搜索文本传""空字符串
+        "page":int //当前页号 从1开始
+    }
+    response:{
+        totalPage: int,
+        totalCount: int,
+        page: int,
+        list: [
+            {
+                id: int //id 用在编辑图片 删除等操作是做id键
+                name: string //河流名称,
+                level: string //河流级别,
+                start: string //起点,
+                end: string //终点,
+                length: string//长度,
+                currentSituation: {//现状
+                    width: string //宽度,
+                    bottomHeigh: string //河底高程,
+                    damHeight: string //堤坝高程,
+                    waterArea: string //水域面积
+                },
+                planSituation: {
+                    width: string //宽度,
+                    bottomHeigh: string //河底高程,
+                    damHeight: string //堤坝高程,
+                    waterArea: string //水域面积
+                },
+                manageRank: string //管理范围,
+                fullImage: [ ],//全景图片url
+                image: [ ],//图片url
+                desc: string //描述信息,
+                createTime: datestring //创建时间
+            },
+            ...
+        ]
+}

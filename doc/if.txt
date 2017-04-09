@@ -208,7 +208,7 @@
     method:get
     request:{
 	id，//文章id
-	actionType：//操作：1，置顶，2取消置顶，3删除
+	actionType：//操作：1删除，2置顶，3取消置顶
     }
     response:{
 
