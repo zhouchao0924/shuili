@@ -56,7 +56,14 @@ var InformationManagementAdvanced = function() {
 						if (datas.success) {
 							var arr = [];
 							$.each(datas.data || [], function(i, n) {
-								var temp = [n.id, n.title, n.addTime, n.originalUrl, ""];
+								var temp = [
+									n.id,
+									n.title,
+									n.addTime,
+									n.originalUrl,
+									"",
+									n.isStick
+								];
 								arr.push(temp);
 							});
 							var d = {
@@ -71,13 +78,89 @@ var InformationManagementAdvanced = function() {
 									return false;
 								}
 								var edit = $('<a href="javascript:;" class="btn btn-xs blue"><i class="fa fa-edit"></i> 编辑 </a>');
+								var deletex = $('<a href="javascript:;" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
+								var up = $('<a href="javascript:;" class="btn btn-xs green"><i class="fa fa-upload"></i> 置顶 </a>');
+								var quitup = $('<a href="javascript:;" class="btn btn-xs grey"><i class="fa fa-download"></i> 取消置顶 </a>');
 								edit.click(function(event) {
-									window.location.href = '#/edit-artist/' + rowData[0] + '/' + rowData[6];
+									window.location.href = '#/EditInformationManagement/' + rowData[0];
 								});
-								$(this).append(edit);
+								up.click(function() {
+									var params = {
+										id: rowData[0],
+										actionType: 1
+									};
+									$.ajax({
+										url: Metronic.host + 'article/doAction',
+										type: 'GET',
+										dataType: 'json',
+										xhrFields: {
+											withCredentials: true
+										},
+										crossDomain: true,
+										data: {
+											data: JSON.stringify(params)
+										},
+										success: function(datas) {
+											if (datas.success) {
+												oTable.fnDraw();
+											}
+										}
+									});
+								});
+								quitup.click(function() {
+									var params = {
+										id: rowData[0],
+										actionType: 2
+									};
+									$.ajax({
+										url: Metronic.host + 'article/doAction',
+										type: 'GET',
+										dataType: 'json',
+										xhrFields: {
+											withCredentials: true
+										},
+										crossDomain: true,
+										data: {
+											data: JSON.stringify(params)
+										},
+										success: function(datas) {
+											if (datas.success) {
+												oTable.fnDraw();
+											}
+										}
+									});
+								});
+								deletex.click(function() {
+									var params = {
+										id: rowData[0],
+										actionType: 3
+									};
+									if (confirm('确定删除?')) {
+										$.ajax({
+											url: Metronic.host + 'article/doAction',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													oTable.fnDraw();
+												}
+											}
+										});
+									}
+								});
+								if (rowData[5] == 0) {
+									$(this).append(edit).append(deletex).append(up);
+								} else {
+									$(this).append(edit).append(deletex).append(quitup);
+								}
 							});
-						} else if (datas.code == 3) {
-							window.location.href = 'login.html';
 						} else {
 							alert(datas.message);
 							Metronic.unblockUI();

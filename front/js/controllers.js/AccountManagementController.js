@@ -70,7 +70,7 @@ MetronicApp.controller('AccountManagementController', [
 					label.remove();
 				}
 			};
-			// AccountManagementAdvanced.init($scope, $compile, validate_filed);
+			AccountManagementAdvanced.init($scope, $compile, validate_filed);
 			//添加管理员
 			$scope.addmanagers = function() {
 				var validate = $("#articleForm").validate(validate_filed);

@@ -1,7 +1,6 @@
 var FileInformationManagementAdvanced = function() {
 	var initTable3 = function($scope, $compile) {
 		var table = $('#sample_3');
-		var conditions = [];
 		var oTable = table.dataTable({
 			"language": {
 				"aria": {
@@ -38,38 +37,39 @@ var FileInformationManagementAdvanced = function() {
 			"stateSave": true,
 			"serverSide": true,
 			"ajax": function(data, callback, settings) {
-				var a = JSON.parse(window.localStorage.Userdata);
 				var params = {
-					pageNo: data.start / data.length + 1,
-					pageSize: data.length,
-					conditions: conditions
+					articleType: 2
 				};
 				Metronic.blockUI({message: '<div style="background:rgba(0,0,0,0.3);padding:10px;font-size:16px;font-weight:bold;color:#fff;">正在加载...</div>', textOnly: true});
 				$.ajax({
-					url: Metronic.host + '/arter/queryArterList/' + a.userId + '/' + a.sessionId,
-					type: 'POST',
+					url: Metronic.host + 'article/getArticleListAjax',
+					type: 'GET',
 					dataType: 'json',
-					data: JSON.stringify(params),
+					xhrFields: {
+						withCredentials: true
+					},
+					crossDomain: true,
+					data: {
+						data: JSON.stringify(params)
+					},
 					success: function(datas) {
-						console.debug(datas, '艺术家列表');
-						if (datas.code == 1) {
+						if (datas.success) {
 							var arr = [];
-							$.each(datas.obj.list || [], function(i, n) {
+							$.each(datas.data || [], function(i, n) {
 								var temp = [
 									n.id,
-									n.nickName,
-									n.displayArtType,
-									n.brief,
-									n.artProductCount,
+									n.title,
+									n.addTime,
+									n.originalUrl,
 									"",
-									n.artType
+									n.isStick
 								];
 								arr.push(temp);
 							});
 							var d = {
 								data: arr,
-								recordsTotal: datas.obj.totalRecords,
-								recordsFiltered: datas.obj.totalRecords
+								recordsTotal: datas.totalRecords,
+								recordsFiltered: datas.totalRecords
 							};
 							callback(d);
 							table.find('tbody tr td:last-child').each(function(i, n) {
@@ -78,15 +78,91 @@ var FileInformationManagementAdvanced = function() {
 									return false;
 								}
 								var edit = $('<a href="javascript:;" class="btn btn-xs blue"><i class="fa fa-edit"></i> 编辑 </a>');
+								var deletex = $('<a href="javascript:;" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
+								var up = $('<a href="javascript:;" class="btn btn-xs green"><i class="fa fa-upload"></i> 置顶 </a>');
+								var quitup = $('<a href="javascript:;" class="btn btn-xs grey"><i class="fa fa-download"></i> 取消置顶 </a>');
 								edit.click(function(event) {
-									window.location.href = '#/edit-artist/' + rowData[0] + '/' + rowData[6];
+									window.location.href = '#/EditInformationManagement/' + rowData[0];
 								});
-								$(this).append(edit);
+								up.click(function() {
+									var params = {
+										id: rowData[0],
+										actionType: 1
+									};
+									$.ajax({
+										url: Metronic.host + 'article/doAction',
+										type: 'GET',
+										dataType: 'json',
+										xhrFields: {
+											withCredentials: true
+										},
+										crossDomain: true,
+										data: {
+											data: JSON.stringify(params)
+										},
+										success: function(datas) {
+											if (datas.success) {
+												oTable.fnDraw();
+											}
+										}
+									});
+								});
+								quitup.click(function() {
+									var params = {
+										id: rowData[0],
+										actionType: 2
+									};
+									$.ajax({
+										url: Metronic.host + 'article/doAction',
+										type: 'GET',
+										dataType: 'json',
+										xhrFields: {
+											withCredentials: true
+										},
+										crossDomain: true,
+										data: {
+											data: JSON.stringify(params)
+										},
+										success: function(datas) {
+											if (datas.success) {
+												oTable.fnDraw();
+											}
+										}
+									});
+								});
+								deletex.click(function() {
+									var params = {
+										id: rowData[0],
+										actionType: 3
+									};
+									if (confirm('确定删除?')) {
+										$.ajax({
+											url: Metronic.host + 'article/doAction',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													oTable.fnDraw();
+												}
+											}
+										});
+									}
+								});
+								if (rowData[5] == 0) {
+									$(this).append(edit).append(deletex).append(up);
+								} else {
+									$(this).append(edit).append(deletex).append(quitup);
+								}
 							});
-						} else if (datas.code == 3) {
-							window.location.href = 'login.html';
 						} else {
-							alert(datas.ext.msg);
+							alert(datas.message);
 							Metronic.unblockUI();
 						}
 					},
@@ -98,20 +174,7 @@ var FileInformationManagementAdvanced = function() {
 		});
 		var tableWrapper = $('#sample_3_wrapper');
 		$('#searchBtn').click(function(e) {
-			var nickName = $('#nickName').val(),
-				mobile = $('#mobile').val();
-			if (nickName) {
-				conditions.push({'type': 1, 'condition': nickName})
-			}
-			if (mobile) {
-				conditions.push({'type': 2, 'condition': mobile})
-			}
 			table.DataTable().ajax.reload();
-		});
-		$("#clear").click(function(e) {
-			$('#nickName').val('');
-			$('#mobile').val('');
-			conditions = [];
 		});
 		//添加enter搜索的事件
 		$('body').bind('keydown', function(e) {
@@ -126,9 +189,7 @@ var FileInformationManagementAdvanced = function() {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			console.log('me 1');
 			initTable3($scope, $compile);
-			console.log('me 2');
 		}
 	};
 }();

@@ -1,7 +1,6 @@
 var AccountManagementAdvanced = function() {
 	var initTable3 = function($scope, $compile, validate_filed) {
 		var table = $('#sample_3');
-		var conditions = [];
 		var oTable = table.dataTable({
 			// Internationalisation. For more info refer to http://datatables.net/manual/i18n
 			"language": {
@@ -39,15 +38,11 @@ var AccountManagementAdvanced = function() {
 			"stateSave": true,
 			"serverSide": true,
 			"ajax": function(data, callback, settings) {
-				var params = {
-					userName: ($('#loginName').val() === ""
-						? null
-						: $('#loginName').val())
-				};
+				var params = {};
 				Metronic.blockUI({message: '<div style="background:rgba(0,0,0,0.3);padding:10px;font-size:16px;font-weight:bold;color:#fff;">正在加载...</div>', textOnly: true, zIndex: 10051});
 				$.ajax({
-					url: Metronic.host + 'boss/search/user',
-					type: 'POST',
+					url: Metronic.host + 'user/getUserList',
+					type: 'get',
 					dataType: 'json',
 					xhrFields: {
 						withCredentials: true
