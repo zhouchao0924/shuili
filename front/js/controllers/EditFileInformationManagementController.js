@@ -1,5 +1,5 @@
 /* Setup general page controller */
-MetronicApp.controller('EditInformationManagementController', [
+MetronicApp.controller('EditFileInformationManagementController', [
 	'$rootScope',
 	'$scope',
 	'settings',
@@ -91,7 +91,7 @@ MetronicApp.controller('EditInformationManagementController', [
 										'title': '',
 										'isBoldTitle': '',
 										'titleImgUrl': '',
-										'articleType': 1,
+										'articleType': 2,
 										'originalUrl': '',
 										'content': ''
 									};
