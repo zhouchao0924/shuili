@@ -71,9 +71,9 @@ MetronicApp.controller('EditFileInformationManagementController', [
 						alert(datas.message);
 						Metronic.unblockUI();
 					}
-					// 获取新闻文档详情
+					// 获取档案信息
 					$.ajax({
-						url: Metronic.host + 'article/addArticleAjax',
+						url: Metronic.host + 'article/getArticleInfoAjax',
 						type: 'POST',
 						dataType: 'json',
 						xhrFields: {
@@ -161,7 +161,7 @@ MetronicApp.controller('EditFileInformationManagementController', [
 												},
 												success: function(data) {
 													if (data.success) {
-														window.location.href = '#/InformationManagement';
+														window.location.href = '#/FileInformationManagement';
 													} else {
 														alert(data.message);
 													}
@@ -198,7 +198,7 @@ MetronicApp.controller('EditFileInformationManagementController', [
 						},
 						success: function(data) {
 							if (data.success) {
-								window.location.href = '#/InformationManagement';
+								window.location.href = '#/FileInformationManagement';
 							} else {
 								alert(data.message);
 							}
