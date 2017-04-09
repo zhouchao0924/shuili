@@ -6,11 +6,15 @@
  */
 class ArticleModel extends BaseModel{
 
+    const ACTION_TYPE_DEL = 1;
+    const ACTION_TYPE_STICK = 2;
+    const ACTION_TYPE_NOT_STICK = 3;
+
     /**
      * 获取文章列表
      * @param articleType $
      */
-    public function getArticleList($streetId,$articleType){
+    public function getArticleList($streetId,$articleType,$searchKey = ""){
 
         $conditions = array(
             "and",
@@ -22,7 +26,12 @@ class ArticleModel extends BaseModel{
             ":articleType"=>$articleType,
             ":streetId"=>$streetId,
         );
-        $list = $this->_getWpArticleDao()->select("*",$conditions,$params,true);
+        if(!empty($searchKey)){
+            $conditions[] = 'title like "%'.$searchKey.'%"';
+        }
+
+        $orderBy = " is_stick desc";
+        $list = $this->_getWpArticleDao()->select("*",$conditions,$params,true,$orderBy);
         $returnList = array();
         foreach($list as $key => $value){
             $returnList[] = $this->_formatWpArticleInfo($value);
@@ -36,6 +45,7 @@ class ArticleModel extends BaseModel{
      */
     private function _formatWpArticleInfo($info){
         return array(
+            "id" => $info["id"],
             "title" => $info["title"],
             "isBoldTitle" =>$info["is_bold_title"],
             "titleImgUrl" =>$info["title_img_url"],
@@ -43,6 +53,7 @@ class ArticleModel extends BaseModel{
             "originalUrl" =>$info["original_url"],
             "articleType" =>$info["article_type"],
             "addTime" =>$info["add_time"],
+            "isStick" =>$info["is_stick"],
         );
     }
 
@@ -71,7 +82,7 @@ class ArticleModel extends BaseModel{
      * @param $originalUrl
      * @param $content
      */
-    public function addArticle($title,$isBoldTitle,$titleImgUrl,$articleType,$userId,$originalUrl,$content,$streetId){
+    public function addArticle($title,$isBoldTitle,$titleImgUrl,$articleType,$userId,$originalUrl,$content,$streetId,$isStick){
         $cols = array(
             "title"=>$title,
             "is_bold_title"=>($isBoldTitle == 0) ? 0 : 1 ,
@@ -81,6 +92,7 @@ class ArticleModel extends BaseModel{
             "original_url"=>$originalUrl,
             "content"=>$content,
             "street_id"=>$streetId,
+            "is_stick" =>$isStick,
         );
         $this->_getWpArticleDao()->baseInsert($cols);
     }
@@ -109,6 +121,39 @@ class ArticleModel extends BaseModel{
         );
         $params = array(
             ":id"=>$id
+        );
+        $this->_getWpArticleDao()->update($cols,$conditions,$params);
+    }
+
+    /**
+     * 操作类型
+     * @param $articleId
+     * @param $actionType
+     */
+    public function doAction($articleId,$actionType){
+        $cols = array(
+
+        );
+        $conditions = array(
+            "and",
+            "id=:id",
+        );
+        switch($actionType){
+            case self::ACTION_TYPE_DEL:
+                $cols['del_flag'] = 1;
+                break;
+            case self::ACTION_TYPE_STICK:
+                $cols['is_stick'] = 1;
+                break;
+            case self::ACTION_TYPE_NOT_STICK:
+                $cols['is_stick'] = 0;
+                break;
+            default:
+                return;
+        }
+
+        $params = array(
+            ":id"=>$articleId
         );
         $this->_getWpArticleDao()->update($cols,$conditions,$params);
     }

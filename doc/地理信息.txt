@@ -1,0 +1,35 @@
+1.添加标记点
+    url:/geographyInfo/addPoint
+    method:get
+    request:{
+        'cat' int //0 山塘水库，1 河道，2 水闸 3 泵站,
+        'name' string //名称,
+        'longitude' double //经度,
+        'latitude' double //纬度
+    }
+    response:{
+    }
+
+2.获取标记点列表
+    url:/geographyInfo/getPointAll
+    method:get
+    request:{
+    }
+    response:[
+        {
+        'id' int  //id 删除 点击获取详细信息等
+        'cat' int //0 山塘水库，1 河道，2 水闸 3 泵站,
+        'name' string //名称,
+        'longitude' double //经度,
+        'latitude' double //纬度
+        }
+        ...
+    ]
+
+3.删除标记点
+    url:/geographyInfo/deletePoint
+    method:get
+    request:{
+        'id' int //上面接口id
+    }
+    response:{}

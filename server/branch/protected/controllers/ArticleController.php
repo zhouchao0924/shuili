@@ -19,6 +19,7 @@ class ArticleController extends Controller{
         $articleType=isset($params['articleType']) && !empty($params['articleType']) ? intval($params['articleType']) : 1;
         $originalUrl=isset($params['originalUrl']) && !empty($params['originalUrl']) ? trim($params['originalUrl']) : "";
         $content=isset($params['content']) && !empty($params['content']) ? trim($params['content']) : "";
+        $isStick=isset($params['isStick']) && !empty($params['isStick']) ? intval($params['isStick']) : 0;
 
         if(empty($title) || empty($content)){
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"参数错误",ErrorCode::ERROR_PARAMS,array()));
@@ -34,7 +35,7 @@ class ArticleController extends Controller{
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"管理的城市id不存在",ErrorCode::ERROR_USER_DENY,array()));
         }
 
-        ArticleModel::getInstance()->addArticle($title,$isBoldTitle,$titleImgUrl,$articleType,$userId,$originalUrl,$content,$streetId);
+        ArticleModel::getInstance()->addArticle($title,$isBoldTitle,$titleImgUrl,$articleType,$userId,$originalUrl,$content,$streetId,$isStick);
         $this->renderAjaxResponse($this->getAjaxResponse(true, "success", ErrorCode::SUCCESS, ""));
     }
 
@@ -45,6 +46,7 @@ class ArticleController extends Controller{
 
         $params = $this->getAjaxRequestParam();
         $articleType = intval($params['articleType']);
+        $searchKey = isset($params['searchKey']) && !empty($params['searchKey']) ? trim($params['searchKey']) : '';
         $client = new ClientComponent();
 
         $userId = $client->getUserId();
@@ -56,12 +58,24 @@ class ArticleController extends Controller{
         if($streetId <= 0){
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"管理的城市id不存在",ErrorCode::ERROR_USER_DENY,array()));
         }
-        $returnList = ArticleModel::getInstance()->getArticleList($streetId,$articleType);
+        $returnList = ArticleModel::getInstance()->getArticleList($streetId,$articleType,$searchKey);
         $this->renderAjaxResponse($this->getAjaxResponse(true, "success", ErrorCode::SUCCESS, $returnList));
 
     }
 
 
+    /**
+     * 文章操作，删除和置顶
+     */
+    public function actionDoActionAjax(){
+
+        $params = $this->getAjaxRequestParam();
+        $articleId = intval($params['id']);
+        $actionType = intval($params['actionType']);
+        ArticleModel::getInstance()->doAction($articleId,$actionType);
+        $this->renderAjaxResponse($this->getAjaxResponse(true, "success", ErrorCode::SUCCESS, ""));
+
+    }
     /**
      * 获取单条文章的内容
      */
