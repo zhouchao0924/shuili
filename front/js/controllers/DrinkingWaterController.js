@@ -16,8 +16,10 @@ MetronicApp.controller('DrinkingWaterController', [
 			$scope.emptyData = function() {
 				$scope.text = '';
 			};
-			var UpLoadUrl = Metronic.host + 'drinkingWater/import'
-			$('#uploadform').attr("action", UpLoadUrl);
+			//导出样表
+			$scope.DownLoad1 = function() {
+				window.open(Metronic.host + 'attachment/exportExample/17', '_blank');
+			};
 		});
 	}
 ]);

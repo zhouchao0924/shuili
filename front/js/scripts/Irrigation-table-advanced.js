@@ -120,7 +120,6 @@ var IrrigationAdvanced = function() {
 				});
 			}
 		});
-		var tableWrapper = $('#sample_3_wrapper');
 		$('#searchBtn').click(function(e) {
 			table.DataTable().ajax.reload();
 		});

@@ -221,14 +221,13 @@ var ReservoirAdvanced2 = function() {
 									n.conveyanceFcailities.chicun,
 									n.conveyanceFcailities.jinkougaocheng,
 									n.conveyanceFcailities.chukougaocheng,
-									n.discharge.shejibiaozhun,
-									n.discharge.hexiaobiaozhun,
+									n.image,
 									n.extend,
 									n.manager.username,
 									n.manager.phone,
 									n.inspector.username,
 									n.inspector.phone,
-									n.image
+									""
 								];
 								arr.push(temp);
 							});

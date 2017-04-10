@@ -17,6 +17,10 @@ MetronicApp.controller('PumpStationController', [
 			$scope.emptyData = function() {
 				$scope.text = '';
 			};
+			//导出样表
+			$scope.DownLoad1 = function() {
+				window.open(Metronic.host + 'attachment/exportExample/6', '_blank');
+			};
 		});
 	}
 ]);;

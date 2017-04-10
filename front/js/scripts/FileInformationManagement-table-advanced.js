@@ -45,7 +45,7 @@ var FileInformationManagementAdvanced = function() {
 				};
 				Metronic.blockUI({message: '<div style="background:rgba(0,0,0,0.3);padding:10px;font-size:16px;font-weight:bold;color:#fff;">正在加载...</div>', textOnly: true});
 				$.ajax({
-					url: Metronic.host + 'article/getArticleListAjax',
+					url: Metronic.host + 'article/getAllArticleListAjax',
 					type: 'GET',
 					dataType: 'json',
 					xhrFields: {
