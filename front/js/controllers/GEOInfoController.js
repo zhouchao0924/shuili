@@ -103,14 +103,13 @@ MetronicApp.controller('GEOInfoController', [
 
 				getAllPoint();
 
-				function listPoints(points){
-					for(var i=0;i<points.length;i++){
-						// var point = new window.BMap.Point(116.404, 40.915);
-						var point = points[i];
-						// mp.centerAndZoom(point, 15);
+				function listPoints(data){
+					for(var i=0;i<data.length;i++){
+						var point = new window.BMap.Point(data[i].longitude, data[i].latitude);
+						console.log(parseInt(data[i].cat),888888);
 						var myIcon = new window.BMap.Icon("http://onrnzg8zq.bkt.clouddn.com/markers2.png", new BMap.Size(23, 25), {
 							 offset: new window.BMap.Size(10, 25),
-							 imageOffset: new window.BMap.Size(0, 0 - i * 25)   // 设置图片偏移
+							 imageOffset: new window.BMap.Size(0, 0 - parseInt(data[i].cat) * 25)   // 设置图片偏移
 						 });
 						var marker = new window.BMap.Marker(point,{icon:myIcon});        // 创建标注
 						// marker.addEventListener("click", function(e){
@@ -140,11 +139,7 @@ MetronicApp.controller('GEOInfoController', [
 						success: function(data) {
 						 if (data.success && data.data.length>0) {
 								//
-								var ps = [];
-								for(var i=0;i<data.data.length;i++){
-									ps.push(new window.BMap.Point(data.data[i].longitude, data.data[i].latitude));
-								}
-								listPoints(ps);
+								listPoints(data.data);
 						 }
 						},
 						error: function(xhr, data, status) {
@@ -161,7 +156,7 @@ MetronicApp.controller('GEOInfoController', [
 				// 添加事件
 				$('#makesure').click(function(e){
 					var params = {
-						cat:0,
+						cat:$('#cat').val(),
 						name:$('#name').val(),
 						longitude:curlon,
 						latitude:curlat,
