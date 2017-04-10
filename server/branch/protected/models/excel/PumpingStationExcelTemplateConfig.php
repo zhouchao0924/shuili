@@ -14,6 +14,7 @@ class PumpingStationExcelTemplateConfig extends ExcelTemplateConfig{
         'rivers'=>'内河',
         'outside_rivers'=>'外江',
         'catchment_area'=>'汇水面积',
+        'flow'=>'流量',
         'installed_power'=>'装机功率',
         'pumping_station'=>'水泵型号',
         'pumping_station_num'=>'台数',
