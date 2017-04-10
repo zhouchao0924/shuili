@@ -13,6 +13,9 @@ MetronicApp.controller('DrinkingWaterController', [
 			$rootScope.settings.layout.pageBodySolid = false;
 			$rootScope.settings.layout.pageSidebarClosed = false;
 			DrinkingWaterAdvanced.init($scope, $compile);
+			$scope.emptyData = function() {
+				$scope.text = '';
+			};
 		});
 	}
 ]);

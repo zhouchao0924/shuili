@@ -17,7 +17,20 @@ MetronicApp.controller('ReservoirController', [
 			// set default layout mode
 			$rootScope.settings.layout.pageBodySolid = false;
 			$rootScope.settings.layout.pageSidebarClosed = false;
-			ReservoirAdvanced.init($scope, $compile);
+			//初始化所有表格
+			ReservoirAdvanced1.init($scope, $compile);
+			ReservoirAdvanced2.init($scope, $compile);
+			ReservoirAdvanced3.init($scope, $compile);
+			//清空搜索数据
+			$scope.emptyData1 = function() {
+				$scope.text1 = '';
+			};
+			$scope.emptyData2 = function() {
+				$scope.text2 = '';
+			};
+			$scope.emptyData3 = function() {
+				$scope.text3 = '';
+			};
 		});
 	}
 ]);
