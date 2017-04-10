@@ -1,5 +1,5 @@
 1.导入excel
-    url:/riverway/import
+    url:/waterConservancy/import
     method:post 提交文件 文件字段名“efile”
     request:{
     }
@@ -7,7 +7,7 @@
     }
 
 2.获取列表
-    url:/riverway/getList
+    url:/WaterConservancy/getList
     method:get
     request:{
         "text":string //搜索的文本 没有搜索文本传""空字符串
@@ -19,29 +19,25 @@
         page: int,
         list: [
             {
-                id: int //id 用在编辑图片 删除等操作是做id键
-                name: string //河流名称,
-                level: string //河流级别,
-                start: string //起点,
-                end: string //终点,
-                length: string//长度,
-                currentSituation: {//现状
-                    width: string //宽度,
-                    bottomHeigh: string //河底高程,
-                    damHeight: string //堤坝高程,
-                    waterArea: string //水域面积
-                },
-                planSituation: {
-                    width: string //宽度,
-                    bottomHeigh: string //河底高程,
-                    damHeight: string //堤坝高程,
-                    waterArea: string //水域面积
-                },
-                manageRank: string //管理范围,
-                fullImage: [ ],//全景图片url
-                image: [ ],//图片url
-                desc: string //描述信息,
-                createTime: datestring //创建时间
+      	  'name'=>'电站名称',
+	  'township'=>'所在乡镇',
+	  'basin'=>'流域',
+          'catchment_area'=>'集雨面积',
+	  'diversion'=>'发电引水',
+	  'head'=>'设计水头',
+	  'design_capacity'=>'设计流量',
+	  'installed_capacity'=>'装机容量',
+	  'plant_location'=>array(
+	  'jindu'=>'经度',
+	  'weidu'=>'纬度',
+  		),
+	  'commissionning_date'=>'投产年月',
+	  'reform'=>'改造情况',
+	  'ownership'=>'所有制',
+        'extend'=>'备注',
+        'manager'=>array(
+            'username'=>'姓名',
+            'phone'=>'手机号',
             },
             ...
         ]

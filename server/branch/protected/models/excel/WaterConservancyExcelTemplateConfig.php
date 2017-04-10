@@ -24,7 +24,6 @@ class WaterConservancyExcelTemplateConfig extends ExcelTemplateConfig{
 	  'reform'=>'改造情况',
 	  'ownership'=>'所有制',
         'extend'=>'备注',
-        'image'=>'全景图片',
         'manager'=>array(
             'username'=>'姓名',
             'phone'=>'手机号',
@@ -33,7 +32,6 @@ class WaterConservancyExcelTemplateConfig extends ExcelTemplateConfig{
 
     protected $printExtraItem = array(
         'full_image'=>array(),
-        'image'=>array(),
         'create_time'=>'',
         'id'=>''
     );
