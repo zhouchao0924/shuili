@@ -156,14 +156,15 @@
 							<h4 style="color:orange;">我确认已经填写好样表数据信息</h4>
 						</div>
 						<div class="form-group">
-							<div class="col-md-10">
-								<input-files ng-model="efile"></input-files>
-							</div>
+							<form id="uploadform" action="" method="post" enctype="multipart/form-data">
+								<input type="file" name="efile"/>
+								<input type="submit" value="Submit"/>
+							</form>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="modal-footer">
+			<div class=" modal-footer">
 				<button type="button" class="btn btn-primary" ng-click="UpLoad()">确定导入</button>
 				<button type="button" class="btn default" data-dismiss="modal" aria-hidden="true">不导入</button>
 			</div>

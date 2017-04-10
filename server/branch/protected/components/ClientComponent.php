@@ -33,7 +33,7 @@ class ClientComponent{
 			'createTime'=>time(),
 			'expirTime'=>time() + self::EXPIRE_TIME_DEFAULT,
             'roleId'=>$userInfo['role_id'],
-            'super'=>$userInfo['super'],
+            'super'=>($userInfo['role_id'] == AuthDefine::AUTH_SUPER)?1:0,
             'currentArea'=>0,
             'currentAreaName'=>'',
 		);

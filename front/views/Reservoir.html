@@ -55,7 +55,8 @@
 											<button class="btn default" type="button" ng-click="emptyData1()">重置</button>
 										</div>
 										<div class="col-md-4">
-											<button class="btn blue" type="button">导出样表</button>
+											<a href="" class="btn blue" ng-click="DownLoad1()">
+												导出样表</a>
 											<a href="" data-toggle="modal" data-target=".bs-shuiku-modal-lg" class="btn blue">
 												数据导入</a>
 										</div>
@@ -101,10 +102,10 @@
 										<th rowspan="2" style="vertical-align:middle;">
 											照片
 										</th>
-										<th rowspan="2" style="vertical-align:middle;">
+										<th colspan="2" style="vertical-align:middle;">
 											管理责任人
 										</th>
-										<th rowspan="2" style="vertical-align:middle;">
+										<th colspan="2" style="vertical-align:middle;">
 											巡查人员
 										</th>
 										<th rowspan="2" style="vertical-align:middle;">
@@ -175,6 +176,18 @@
 										<th style="text-align:center;">
 											台汛期
 										</th>
+										<th style="text-align:center;">
+											姓名
+										</th>
+										<th style="text-align:center;">
+											手机
+										</th>
+										<th style="text-align:center;">
+											姓名
+										</th>
+										<th style="text-align:center;">
+											手机
+										</th>
 									</tr>
 								</thead>
 								<tbody></tbody>
@@ -195,7 +208,8 @@
 											<button class="btn default" type="button" ng-click="emptyData2()">重置</button>
 										</div>
 										<div class="col-md-4">
-											<button class="btn blue" type="button">导出样表</button>
+											<a href="" class="btn blue" ng-click="DownLoad2()">
+												导出样表</a>
 											<a href="" data-toggle="modal" data-target=".bs-shantang-modal-lg" class="btn blue">
 												数据导入</a>
 										</div>
@@ -323,7 +337,8 @@
 											<button class="btn default" type="button" ng-click="emptyData3()">重置</button>
 										</div>
 										<div class="col-md-4">
-											<button class="btn blue" type="button">导出样表</button>
+											<a href="" class="btn blue" ng-click="DownLoad3()">
+												导出样表</a>
 											<a href="" data-toggle="modal" data-target=".bs-xiaoshuidian-modal-lg" class="btn blue">
 												数据导入</a>
 										</div>
@@ -450,9 +465,10 @@
 							<h4 style="color:orange;">我确认已经填写好样表数据信息</h4>
 						</div>
 						<div class="form-group">
-							<div class="col-md-10">
-								<input-files ng-model="efile"></input-files>
-							</div>
+							<form action="http://139.199.27.165:8081/reservoirAndPool/import" method="post" enctype=" multipart/form-data">
+								<input type="file" name="efile"/>
+								<input type="submit" value="Submit"/>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -480,9 +496,10 @@
 							<h4 style="color:orange;">我确认已经填写好样表数据信息</h4>
 						</div>
 						<div class="form-group">
-							<div class="col-md-10">
-								<input-files ng-model="efile"></input-files>
-							</div>
+							<form action="http://139.199.27.165:8081/hillPond/import" method="post" enctype="multipart/form-data">
+								<input type="file" name="efile"/>
+								<input type="submit" value="Submit"/>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -510,9 +527,10 @@
 							<h4 style="color:orange;">我确认已经填写好样表数据信息</h4>
 						</div>
 						<div class="form-group">
-							<div class="col-md-10">
-								<input-files ng-model="efile"></input-files>
-							</div>
+							<form action="http://139.199.27.165:8081/waterConservancy/import" method="post" enctype="multipart/form-data">
+								<input type="file" name="efile"/>
+								<input type="submit" value="Submit"/>
+							</form>
 						</div>
 					</div>
 				</div>

@@ -39,11 +39,11 @@ var PumpStationAdvanced = function() {
 			"ajax": function(data, callback, settings) {
 				var params = {
 					page: data.start / data.length + 1,
-					text: ""
+					text: $scope.text
 				};
 				Metronic.blockUI({message: '<div style="background:rgba(0,0,0,0.3);padding:10px;font-size:16px;font-weight:bold;color:#fff;">正在加载...</div>', textOnly: true});
 				$.ajax({
-					url: Metronic.host + 'reservoirAndPool/getList',
+					url: Metronic.host + 'PumpingStation/getList',
 					type: 'GET',
 					dataType: 'json',
 					xhrFields: {
@@ -59,12 +59,24 @@ var PumpStationAdvanced = function() {
 							$.each(datas.data.list || [], function(i, n) {
 								var temp = [
 									n.id,
-									n.nickName,
-									n.displayArtType,
-									n.brief,
-									n.artProductCount,
-									"",
-									n.artType
+									n.name,
+									n.address,
+									n.rivers,
+									n.outside_rivers,
+									n.catchment_area,
+									n.installed_power,
+									n.pumping_station,
+									n.pumping_station_num,
+									n.manufacturer,
+									n.gate_form,
+									n.sluices_num,
+									n.brake_hole_size,
+									n.managerment,
+									n.manager,
+									n.manager_phone,
+									n.completion_date,
+									n.extend,
+									n.image
 								];
 								arr.push(temp);
 							});
@@ -128,9 +140,7 @@ var PumpStationAdvanced = function() {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			console.log('me 1');
 			initTable3($scope, $compile);
-			console.log('me 2');
 		}
 	};
 }();
