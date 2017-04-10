@@ -47,6 +47,38 @@ class ArticleModel extends BaseModel{
      * 获取文章列表
      * @param articleType $
      */
+    public function getAllArticleList($streetId,$articleType,$searchKey = "",$page=1,$pageSize=10){
+
+        $limit = ($page-1) * $pageSize;
+        $limit = $limit > 0 ? $limit : 0;
+        $conditions = array(
+            "and",
+            "article_type = :articleType",
+            "street_id = :streetId",
+            "del_flag = 0",
+        );
+        $params = array(
+            ":articleType"=>$articleType,
+            ":streetId"=>$streetId,
+        );
+        if(!empty($searchKey)){
+            $conditions[] = 'title like "%'.$searchKey.'%"';
+        }
+
+        $orderBy = " is_stick desc";
+        $list = $this->_getWpArticleDao()->select("*",$conditions,$params,true,$orderBy,"",$limit,$pageSize);
+        $returnList = array();
+        foreach($list as $key => $value){
+            $returnList[] = $this->_formatWpArticleInfo($value);
+        }
+        return $returnList;
+    }
+
+
+    /**
+     * 获取文章列表
+     * @param articleType $
+     */
     public function getTopArticleList($streetId,$articleType,$searchKey = "",$page=1,$pageSize=10){
 
         $limit = ($page-1) * $pageSize;

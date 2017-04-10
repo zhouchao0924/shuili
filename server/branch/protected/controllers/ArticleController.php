@@ -70,6 +70,38 @@ class ArticleController extends Controller{
 
     }
 
+    /**
+     * 获取文章列表（根据type）
+     */
+    public function actionGetAllArticleListAjax(){
+
+        $params = $this->getAjaxRequestParam();
+        $articleType = intval($params['articleType']);
+        $page = intval($params['page']);
+        $page = $page > 0 ? $page : 1;
+
+        $pageSize = intval($params['pageSize']);
+        $pageSize = $pageSize > 0 ?$pageSize : 10;
+        $searchKey = isset($params['searchKey']) && !empty($params['searchKey']) ? trim($params['searchKey']) : '';
+        $client = new ClientComponent();
+
+        $userId = $client->getUserId();
+        if($userId <= 0){
+            return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户未登录",ErrorCode::ERROR_USER_NOT_LOGIN,array()));
+        }
+
+        $streetId = $client->getCurrentArea();
+        $streetId = 6;
+        if($streetId <= 0){
+            return $this->renderAjaxResponse($this->getAjaxResponse(false,"管理的城市id不存在",ErrorCode::ERROR_USER_DENY,array()));
+        }
+        $articleCount = ArticleModel::getInstance()->getArticleCount($streetId,$articleType,$searchKey);
+        $returnList = ArticleModel::getInstance()->getAllArticleList($streetId,$articleType,$searchKey,$page,$pageSize);
+
+        $this->renderAjaxResponse($this->getAjaxResponse(true, "success", ErrorCode::SUCCESS, array("articleCount" => $articleCount,"articleList"=>$returnList)));
+
+    }
+
 
     /**
      * 文章操作，删除和置顶
