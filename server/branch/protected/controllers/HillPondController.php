@@ -1,11 +1,11 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: lzm
- * Date: 17/4/4
- * Time: 13:06
+ * @copyright (C) 2006-2017 Tuniu All rights reserved
+ * @author yulongfei
+ * @date 2017-04-07
  */
-class RiverManagerBaseController extends Controller{
+
+class HillPondController extends Controller{
     /**
      * 导入
      * @return string
@@ -22,11 +22,11 @@ class RiverManagerBaseController extends Controller{
         }
         $userInfo = $client->getUserInfo();
         try {
-            $data = ExcelModel::parseExcel(2, $uploadInfo['fileFullPath']);
+            $data = ExcelModel::parseExcel(3, $uploadInfo['fileFullPath']);
             if (empty($data)) {
                 return $this->renderAjaxResponse($this->getAjaxResponse(false,"empty file",ErrorCode::ERROR_COMMON_ERROR,array()));
             }
-            $excel = new ExcelTemplateModel(new RiverManagerBaseExcelTemplateConfig());
+            $excel = new ExcelTemplateModel(new HillPondExcelTemplateConfig());
             $extra = array(
                 'street_id' => $client->getCurrentArea(),
                 'district_id' => OpenCity::DISTRICT_ID,
@@ -52,7 +52,7 @@ class RiverManagerBaseController extends Controller{
         $searchText = isset($params['text'])?trim($params['text']):"";
         $page = isset($params['page'])?intval($params['page']):1;
 
-        $excelModel = new ExcelTemplateModel(new RiverManagerBaseExcelTemplateConfig());
+        $excelModel = new ExcelTemplateModel(new HillPondExcelTemplateConfig());
         $client = new ClientComponent();
         $streetId = $client->getCurrentArea();
         $data = $excelModel->queryRecords($page,$streetId,$searchText,1);

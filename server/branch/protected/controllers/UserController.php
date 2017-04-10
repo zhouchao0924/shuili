@@ -92,17 +92,23 @@ class UserController extends Controller{
 
     public function actionResetPassword(){
         $params = $this->getAjaxRequestParam();
+        $tUserId = isset($params['userId'])?intval($params['userId']):0;
         $password = isset($params['password'])&&!empty($params['password'])?trim($params['password']):"";
         if(!CommonComponent::checkUserPasswordFormat($password)){
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"参数错误",ErrorCode::ERROR_PARAMS,array()));
         }
+
         $clientComponent = new ClientComponent();
         $userId = $clientComponent->getUserId();
         if($userId == 0){
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户未登录",ErrorCode::ERROR_USER_NOT_LOGIN,array()));
         }
+
+        if($tUserId <= 0 || $userId == $tUserId){
+            return $this->renderUserNotLoginAjaxResponse();
+        }
         $userModel = new UserModel();
-        $userModel->resetPassword($userId,$password);
+        $userModel->resetPassword($tUserId,$password);
         return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,array()));
     }
 
@@ -168,16 +174,122 @@ class UserController extends Controller{
      * 获取用户列表
      * @return string
      */
-    public function actionUserList(){
+    public function actionGetUserList(){
         $clientComponent = new ClientComponent();
         $userId = $clientComponent->getUserId();
         if($userId <= 0){
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户未登录",ErrorCode::ERROR_USER_NOT_LOGIN,array()));
         }
-
+        $page = isset($params['page'])?intval($params['page']):1;
+        $pageSize = isset($params['pageSize'])?intval($params['pageSize']):10;
 
         $userModel = new UserModel();
-        $userList = $userModel->getUserList();
-        return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,$userList));
+        $userTotal = $userModel->getUserTotal();
+        $userList = $userModel->getUserList($page,$pageSize);
+        return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,
+            array(
+                'page' => $page,
+                'total' => $userTotal,
+                'userList' => $userList,
+            )));
+    }
+
+    public function actionGetCurrentAreaLocation(){
+        $clientComponent = new ClientComponent();
+        $userId = $clientComponent->getUserId();
+        if($userId <= 0){
+            return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户未登录",ErrorCode::ERROR_USER_NOT_LOGIN,array()));
+        }
+        $area = $clientComponent->getCurrentArea();
+        if($area <= 0){
+            return $this->renderAjaxResponse($this->getAjaxResponse(false,"bad area id",ErrorCode::ERROR_COMMON_ERROR,array()));
+        }
+
+        $areaModel = new AreaModel();
+        $areaInfo = $areaModel->getStreetById($area);
+        if(empty($areaInfo)){
+            return $this->renderAjaxResponse($this->getAjaxResponse(false,"bad area info",ErrorCode::ERROR_COMMON_ERROR,array()));
+        }
+        $location = array(
+            "long"=>$areaInfo['long'],
+            "lat"=>$areaInfo['lat'],
+        );
+        return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,$location));
+    }
+
+    public function actionGetAreaList(){
+        $params = $this->getAjaxRequestParam();
+        $userId = isset($params['userId'])?intval($params['userId']):0;
+
+        if($userId <= 0){
+            return $this->renderBadParamsAjaxResponse();
+        }
+
+        $client = new ClientComponent();
+        $superInfo = $client->getUserInfo();
+        if(empty($superInfo)){
+            return $this->renderUserNotLoginAjaxResponse();
+        }
+
+        $areaModel = new AreaModel();
+        $areaList = $areaModel->getStreetListInfoByDistrictId(OpenCity::DISTRICT_ID);
+
+        $userModel = new UserModel();
+        $manageAreaList = $userModel->getManageArea($userId);
+
+        $streetInfo = array();
+        if(!empty($manageAreaList)){
+            $sf = $manageAreaList[OpenCity::DISTRICT_ID]['list'];
+            foreach ($sf as $value){
+                $streetInfo[$value['id']] = $value['name'];
+            }
+        }
+
+        $data = array();
+        foreach ($areaList as $key=>$value){
+            $data[] = array(
+                "id"=>$value['id'],
+                "name"=>$value['name'],
+                "isManage"=>isset($streetInfo[$value['id']])?true:false,
+            );
+        }
+
+        return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,$data));
+    }
+
+    public function actionUpdateManageArea(){
+        $params = $this->getAjaxRequestParam();
+        $userId = isset($params['userId'])?intval($params['userId']):0;
+        $pareaList = isset($params['areaList']) && is_array($params['areaList'])?$params['areaList']:array();
+        if($userId <= 0 || empty($pareaList)){
+            return $this->renderBadParamsAjaxResponse();
+        }
+
+        $client = new ClientComponent();
+        $superInfo = $client->getUserInfo();
+        if(empty($superInfo)){
+            return $this->renderUserNotLoginAjaxResponse();
+        }
+
+        $areaModel = new AreaModel();
+        $areaList = $areaModel->getStreetListInfoByDistrictId(OpenCity::DISTRICT_ID);
+        $list = array();
+        foreach ($pareaList as $value){
+            $tid = intval($value);
+            if(!isset($areaList[$tid])){
+                return $this->renderBadParamsAjaxResponse();
+            }
+            $list[] = $tid;
+        }
+
+        $userModel = new UserModel();
+        $userInfo = $userModel->getUserById($userId);
+        if(empty($userInfo)){
+            return $this->renderBadParamsAjaxResponse();
+        }
+        $userModel->updateUserManageArea($list,$userId,$areaList,$superInfo['userId'],$superInfo['userName']);
+
+        OperatorLogModel::addLog($superInfo['userId'],$superInfo['userName'],"编辑管理员".$userInfo['name']."管理地区信息");
+        return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,array()));
     }
 }

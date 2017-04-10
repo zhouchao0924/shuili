@@ -111,7 +111,7 @@ class UserModel {
         return $this->formatManageArea($list);
     }
 
-    private function getUserById($userId){
+    public function getUserById($userId){
         $conditions = array(
             "and",
             "id = :id",
@@ -132,8 +132,7 @@ class UserModel {
         return true;
     }
 
-    public function getUserList(){
-
+    public function getUserTotal(){
         $conditions = array(
             "and",
             "del_flag = 0",
@@ -141,7 +140,22 @@ class UserModel {
         $params = array(
         );
 
-        $data = WpUserDao::getInstance("WpUser")->select("*",$conditions,$params,true);
+        $data = WpUserDao::getInstance("WpUser")->select("count(1) as c",$conditions,$params,false);
+        return $data['c'];
+    }
+
+    public function getUserList($page,$pageSize){
+
+        $limit = ($page-1) * $pageSize;
+        $limit = $limit > 0 ? $limit : 0;
+        $conditions = array(
+            "and",
+            "del_flag = 0",
+        );
+        $params = array(
+        );
+
+        $data = WpUserDao::getInstance("WpUser")->select("*",$conditions,$params,true,'',$limit,$pageSize);
         if(empty($data)){
             return array();
         }
@@ -155,7 +169,7 @@ class UserModel {
                 'desc' => $val['desc'],
             );
         }
-        return true;
+        return $returnArray;
     }
 
     public function isUserManageArea($userId,$streetId){
@@ -175,5 +189,38 @@ class UserModel {
             return false;
         }
         return true;
+    }
+
+    public function updateUserManageArea($areaList,$userId,$streetList,$opUid,$opUname){
+        $conditions = array(
+            "and",
+            "user_id=:userId",
+        );
+        $params = array(
+            ":userId"=>$userId,
+        );
+        $cols = array(
+            "del_flag"=>1
+        );
+        $dao = WpUserManageAreaDao::getInstance("WpUserManageArea");
+        $dao->update($cols,$conditions,$params);
+
+        foreach ($areaList as $id){
+            $cols = array(
+                'province_name'=>'浙江省',
+                'province_id'=>OpenCity::PROVINCE_ID,
+                'city_name'=>'宁波市',
+                'city_id'=>OpenCity::CITY_ID,
+                'district_name' =>'余姚市',
+                'district_id' =>OpenCity::DISTRICT_ID,
+                'street_name' =>$streetList[$id]['name'],
+                'street_id' =>$id,
+                'user_id' =>$userId,
+                'operator_user_id'=>$opUid,
+                'operator_user_name'=>$opUname,
+                'create_time' =>date("Y-m-d H:i:s"),
+            );
+            $dao->baseInsert($cols);
+        }
     }
 }

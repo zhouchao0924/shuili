@@ -223,7 +223,7 @@ class AreaModel{
         $params = array(
             ":id"=>$streetId
         );
-        $streetInfo = $streetDao->select("id,name",$condition,$params,false);
+        $streetInfo = $streetDao->select("id,name,long,lat",$condition,$params,false);
 
         return $streetInfo;
     }

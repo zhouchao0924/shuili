@@ -35,12 +35,7 @@ class HillPondExcelTemplateConfig extends ExcelTemplateConfig{
             'jinkougaocheng'=>'进口高程（m）',
             'chukougaocheng'=>'出口高程（m）',
         ),
-        'discharge'=>array(
-            'shejibiaozhun'=>'设计标准最大下泄量（m3/s）',
-            'hexiaobiaozhun'=>'核校标准最大下泄量（m3/s）',
-        ),
         'extend'=>'备注',
-        'image'=>'照片',
         'manager'=>array(
             'username'=>'姓名',
             'phone'=>'手机号',
@@ -52,14 +47,13 @@ class HillPondExcelTemplateConfig extends ExcelTemplateConfig{
     );
 
     protected $printExtraItem = array(
-        'full_image'=>array(),
         'image'=>array(),
         'create_time'=>'',
         'id'=>''
     );
 
     public function getDao(){
-        return WpHillPondDao::getInstance("WpHillPondDao");
+        return WpHillPondDao::getInstance("WpHillPond");
     }
 
     public function getExampleExcelFileName()

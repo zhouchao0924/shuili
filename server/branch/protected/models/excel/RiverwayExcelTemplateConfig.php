@@ -33,7 +33,7 @@ class RiverwayExcelTemplateConfig extends ExcelTemplateConfig{
     );
 
     protected $printExtraItem = array(
-        'full_image'=>array(),
+        'full_image'=>"",
         'image'=>array(),
         'create_time'=>'',
         'id'=>''

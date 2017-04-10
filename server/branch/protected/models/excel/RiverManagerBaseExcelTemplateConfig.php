@@ -22,8 +22,6 @@ class RiverManagerBaseExcelTemplateConfig extends ExcelTemplateConfig{
     );
 
     protected $printExtraItem = array(
-        'full_image'=>array(),
-        'image'=>array(),
         'create_time'=>'',
         'id'=>''
     );

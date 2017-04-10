@@ -10,7 +10,7 @@ class ExcelTemplateModel{
 
     //这个地方时k->类 k为excel类型 用来做统一的图片上传等
     public static $excelTypeMAP = array(
-        1=>"ReservoirTemplateConfig",
+        1=>"ReservoirExcelTemplateConfig",
         2=>"HillPondExcelTemplateConfig",
         3=>"WaterConservancyExcelTemplateConfig",
         4=>"RiverwayExcelTemplateConfig",
@@ -56,7 +56,6 @@ class ExcelTemplateModel{
         if(!$result){
             throw new ExcelDataImport2DBFailedException();
         }
-
         return ;
     }
 

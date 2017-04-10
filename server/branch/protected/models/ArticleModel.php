@@ -23,6 +23,39 @@ class ArticleModel extends BaseModel{
             "article_type = :articleType",
             "street_id = :streetId",
             "del_flag = 0",
+            "is_stick = 0",
+        );
+        $params = array(
+            ":articleType"=>$articleType,
+            ":streetId"=>$streetId,
+        );
+        if(!empty($searchKey)){
+            $conditions[] = 'title like "%'.$searchKey.'%"';
+        }
+
+        $orderBy = " is_stick desc";
+        $list = $this->_getWpArticleDao()->select("*",$conditions,$params,true,$orderBy,"",$limit,$pageSize);
+        $returnList = array();
+
+        foreach($list as $key => $value){
+            $returnList[] = $this->_formatWpArticleInfo($value);
+        }
+        return $returnList;
+    }
+
+    /**
+     * 获取文章列表
+     * @param articleType $
+     */
+    public function getAllArticleList($streetId,$articleType,$searchKey = "",$page=1,$pageSize=10){
+
+        $limit = ($page-1) * $pageSize;
+        $limit = $limit > 0 ? $limit : 0;
+        $conditions = array(
+            "and",
+            "article_type = :articleType",
+            "street_id = :streetId",
+            "del_flag = 0",
         );
         $params = array(
             ":articleType"=>$articleType,
@@ -41,12 +74,47 @@ class ArticleModel extends BaseModel{
         return $returnList;
     }
 
+
+    /**
+     * 获取文章列表
+     * @param articleType $
+     */
+    public function getTopArticleList($streetId,$articleType,$searchKey = "",$page=1,$pageSize=10){
+
+        $limit = ($page-1) * $pageSize;
+        $limit = $limit > 0 ? $limit : 0;
+        $conditions = array(
+            "and",
+            "article_type = :articleType",
+            "street_id = :streetId",
+            "del_flag = 0",
+            "is_stick = 1",
+        );
+        $params = array(
+            ":articleType"=>$articleType,
+            ":streetId"=>$streetId,
+        );
+        if(!empty($searchKey)){
+            $conditions[] = 'title like "%'.$searchKey.'%"';
+        }
+
+        $orderBy = " is_stick desc";
+        $list = $this->_getWpArticleDao()->select("*",$conditions,$params,true,$orderBy,"",$limit,$pageSize);
+        $returnList = array();
+        foreach($list as $key => $value){
+            $returnList[] = $this->_formatWpArticleInfo($value);
+        }
+        return $returnList;
+    }
+
+
     public function getArticleCount($streetId,$articleType,$searchKey){
         $conditions = array(
             "and",
             "article_type = :articleType",
             "street_id = :streetId",
             "del_flag = 0",
+            "is_stick = 0",
         );
         $params = array(
             ":articleType"=>$articleType,
@@ -74,6 +142,7 @@ class ArticleModel extends BaseModel{
             "originalUrl" =>$info["original_url"],
             "articleType" =>$info["article_type"],
             "addTime" =>$info["add_time"],
+            "updateTime" =>empty($info["update_time"]) ? $info["add_time"] : $info["update_time"],
             "isStick" =>$info["is_stick"],
         );
     }
@@ -115,6 +184,7 @@ class ArticleModel extends BaseModel{
             "content"=>$content,
             "street_id"=>$streetId,
             "is_stick" =>$isStick,
+            "update_time" =>date("Y-m-d H:i:s"),
         );
         $this->_getWpArticleDao()->baseInsert($cols);
     }
