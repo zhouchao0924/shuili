@@ -216,4 +216,80 @@ class UserController extends Controller{
         );
         return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,$location));
     }
+
+    public function actionGetAreaList(){
+        $params = $this->getAjaxRequestParam();
+        $userId = isset($params['userId'])?intval($params['userId']):0;
+
+        if($userId <= 0){
+            return $this->renderBadParamsAjaxResponse();
+        }
+
+        $client = new ClientComponent();
+        $superInfo = $client->getUserInfo();
+        if(empty($superInfo)){
+            return $this->renderUserNotLoginAjaxResponse();
+        }
+
+        $areaModel = new AreaModel();
+        $areaList = $areaModel->getStreetListInfoByDistrictId(OpenCity::DISTRICT_ID);
+
+        $userModel = new UserModel();
+        $manageAreaList = $userModel->getManageArea($userId);
+
+        $streetInfo = array();
+        if(!empty($manageAreaList)){
+            $sf = $manageAreaList[OpenCity::DISTRICT_ID]['list'];
+            foreach ($sf as $value){
+                $streetInfo[$value['id']] = $value['name'];
+            }
+        }
+
+        $data = array();
+        foreach ($areaList as $key=>$value){
+            $data[] = array(
+                "id"=>$value['id'],
+                "name"=>$value['name'],
+                "isManage"=>isset($streetInfo[$value['id']])?true:false,
+            );
+        }
+
+        return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,$data));
+    }
+
+    public function actionUpdateManageArea(){
+        $params = $this->getAjaxRequestParam();
+        $userId = isset($params['userId'])?intval($params['userId']):0;
+        $pareaList = isset($params['areaList']) && is_array($params['areaList'])?$params['areaList']:array();
+        if($userId <= 0 || empty($pareaList)){
+            return $this->renderBadParamsAjaxResponse();
+        }
+
+        $client = new ClientComponent();
+        $superInfo = $client->getUserInfo();
+        if(empty($superInfo)){
+            return $this->renderUserNotLoginAjaxResponse();
+        }
+
+        $areaModel = new AreaModel();
+        $areaList = $areaModel->getStreetListInfoByDistrictId(OpenCity::DISTRICT_ID);
+        $list = array();
+        foreach ($pareaList as $value){
+            $tid = intval($value);
+            if(!isset($areaList[$tid])){
+                return $this->renderBadParamsAjaxResponse();
+            }
+            $list[] = $tid;
+        }
+
+        $userModel = new UserModel();
+        $userInfo = $userModel->getUserById($userId);
+        if(empty($userInfo)){
+            return $this->renderBadParamsAjaxResponse();
+        }
+        $userModel->updateUserManageArea($list,$userId,$areaList,$superInfo['userId'],$superInfo['userName']);
+
+        OperatorLogModel::addLog($superInfo['userId'],$superInfo['userName'],"编辑管理员".$userInfo['name']."管理地区信息");
+        return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,array()));
+    }
 }
