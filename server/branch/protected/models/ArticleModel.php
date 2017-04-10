@@ -152,6 +152,7 @@ class ArticleModel extends BaseModel{
             "content"=>$content,
             "street_id"=>$streetId,
             "is_stick" =>$isStick,
+            "update_time" =>date("Y-m-d H:i:s"),
         );
         $this->_getWpArticleDao()->baseInsert($cols);
     }
