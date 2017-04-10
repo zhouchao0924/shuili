@@ -93,6 +93,8 @@ MetronicApp.controller('GEOInfoController', [
 					console.log(e,8888);
 					if(e.overlay){
 						$('#modalview').modal('show');
+						// 比对经纬度获得id
+						
 					}else{
 						$('#modaladd').modal('show');
 					}
