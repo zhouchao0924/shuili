@@ -132,7 +132,7 @@ class UserController extends Controller{
             foreach ($areaList as $value){
                 $list['list'][] = array(
                     "id"=>$value['id'],
-                    "nam"=>$value['name']
+                    "name"=>$value['name']
                 );
             }
             return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,array($list)));
