@@ -14,6 +14,9 @@ MetronicApp.controller('PumpStationController', [
 			$rootScope.settings.layout.pageBodySolid = false;
 			$rootScope.settings.layout.pageSidebarClosed = false;
 			PumpStationAdvanced.init($scope, $compile);
+			$scope.emptyData = function() {
+				$scope.text = '';
+			};
 		});
 	}
-]);
+]);;

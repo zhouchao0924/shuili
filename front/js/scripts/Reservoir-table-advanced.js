@@ -59,34 +59,37 @@ var ReservoirAdvanced1 = function() {
 							$.each(datas.data.list || [], function(i, n) {
 								var temp = [
 									n.name,
-									n.project_scale,
-									n.storage_capacity.xiaoheshuiwei,
-									n.storage_capacity.zongkurong,
-									n.storage_capacity.shejishuiwei,
-									n.storage_capacity.xiangyinkurong,
-									n.storage_capacity.zhengchangshuiwei,
-									n.storage_capacity.zhengchangkurong,
+									n.projectScale,
+									n.catchmentArea,
+									n.storageCapacity.xiaoheshuiwei,
+									n.storageCapacity.zongkurong,
+									n.storageCapacity.shejishuiwei,
+									n.storageCapacity.xiangyinkurong,
+									n.storageCapacity.zhengchangshuiwei,
+									n.storageCapacity.zhengchangkurong,
 									n.dam.baxing,
 									n.dam.dibagaocheng,
 									n.dam.bagao,
 									n.dam.bachang,
-									n.flood_discharge_fcailities.xingshi,
-									n.flood_discharge_fcailities.dibagaocheng,
-									n.flood_discharge_fcailities.kuandu,
-									n.conveyance_fcailities.xingshi,
-									n.conveyance_fcailities.chicun,
-									n.conveyance_fcailities.jinkougaocheng,
-									n.conveyance_fcailities.chukougaocheng,
+									n.floodDischargeFcailities.xingshi,
+									n.floodDischargeFcailities.dibagaocheng,
+									n.floodDischargeFcailities.kuandu,
+									n.conveyanceFcailities.xingshi,
+									n.conveyanceFcailities.chicun,
+									n.conveyanceFcailities.jinkougaocheng,
+									n.conveyanceFcailities.chukougaocheng,
 									n.discharge.shejibiaozhun,
 									n.discharge.hexiaobiaozhun,
-									n.control_level.meixunqi,
-									n.control_level.taixunqi,
+									n.controlLevel.meixunqi,
+									n.controlLevel.taixunqi,
 									n.extend,
-									n.full_image,
+									n.fullImage,
+									n.image,
 									n.manager.username,
 									n.manager.phone,
 									n.inspector.username,
-									n.inspector.phone
+									n.inspector.phone,
+									""
 								];
 								arr.push(temp);
 							});
@@ -107,8 +110,6 @@ var ReservoirAdvanced1 = function() {
 								});
 								$(this).append(edit);
 							});
-						} else if (datas.code == 3) {
-							window.location.href = 'login.html';
 						} else {
 							alert(datas.ext.msg);
 							Metronic.unblockUI();
@@ -185,7 +186,7 @@ var ReservoirAdvanced2 = function() {
 				};
 				Metronic.blockUI({message: '<div style="background:rgba(0,0,0,0.3);padding:10px;font-size:16px;font-weight:bold;color:#fff;">正在加载...</div>', textOnly: true});
 				$.ajax({
-					url: Metronic.host + 'flood/getFloodLeaderInfoList',
+					url: Metronic.host + 'hillPond/getList',
 					type: 'GET',
 					dataType: 'json',
 					xhrFields: {
@@ -201,12 +202,33 @@ var ReservoirAdvanced2 = function() {
 							$.each(datas.data.list || [], function(i, n) {
 								var temp = [
 									n.id,
-									n.post,
-									n.leader,
-									n.job,
-									n.cell,
-									n.uptime,
-									n.desc
+									n.hillPondName,
+									n.catchmentArea,
+									n.storageCapacity.xiaoheshuiwei,
+									n.storageCapacity.zongkurong,
+									n.storageCapacity.shejishuiwei,
+									n.storageCapacity.xiangyinkurong,
+									n.storageCapacity.zhengchangshuiwei,
+									n.storageCapacity.zhengchangkurong,
+									n.dam.baxing,
+									n.dam.dibagaocheng,
+									n.dam.bagao,
+									n.dam.bachang,
+									n.floodDischargeFcailities.xingshi,
+									n.floodDischargeFcailities.dibagaocheng,
+									n.floodDischargeFcailities.kuandu,
+									n.conveyanceFcailities.xingshi,
+									n.conveyanceFcailities.chicun,
+									n.conveyanceFcailities.jinkougaocheng,
+									n.conveyanceFcailities.chukougaocheng,
+									n.discharge.shejibiaozhun,
+									n.discharge.hexiaobiaozhun,
+									n.extend,
+									n.manager.username,
+									n.manager.phone,
+									n.inspector.username,
+									n.inspector.phone,
+									n.image
 								];
 								arr.push(temp);
 							});
@@ -292,7 +314,7 @@ var ReservoirAdvanced3 = function() {
 				};
 				Metronic.blockUI({message: '<div style="background:rgba(0,0,0,0.3);padding:10px;font-size:16px;font-weight:bold;color:#fff;">正在加载...</div>', textOnly: true});
 				$.ajax({
-					url: Metronic.host + 'flood/getFloodOwnerInfoList',
+					url: Metronic.host + 'WaterConservancy/getList',
 					type: 'GET',
 					dataType: 'json',
 					xhrFields: {
@@ -307,13 +329,25 @@ var ReservoirAdvanced3 = function() {
 							var arr = [];
 							$.each(datas.data.list || [], function(i, n) {
 								var temp = [
-									n.id,
-									n.job,
-									n.village,
-									n.owner.name,
-									n.owner.post,
-									n.owner.cell,
-									n.desc
+									n.name,
+									n.township,
+									n.basin,
+									n.catchmentArea,
+									n.diversion,
+									n.head,
+									n.designCapacity,
+									n.installedCapacity,
+									n.plantLocation.jindu,
+									n.plantLocation.weidu,
+									n.commissionningDate,
+									n.reform,
+									n.ownership,
+									n.extend,
+									n.floodDischargeFcailities.dibagaocheng,
+									"",
+									"",
+									n.manager.username,
+									n.manager.phone
 								];
 								arr.push(temp);
 							});
