@@ -39,6 +39,22 @@ MetronicApp.controller('LongRiverSystemController', [
 			$scope.emptyData5 = function() {
 				$scope.text5 = '';
 			};
+			//导出表格
+			$scope.DownLoad1 = function() {
+				window.open(Metronic.host + 'attachment/exportExample/7', '_blank');
+			};
+			$scope.DownLoad2 = function() {
+				window.open(Metronic.host + 'attachment/exportExample/8', '_blank');
+			};
+			$scope.DownLoad3 = function() {
+				window.open(Metronic.host + 'attachment/exportExample/9', '_blank');
+			};
+			$scope.DownLoad4 = function() {
+				window.open(Metronic.host + 'attachment/exportExample/10', '_blank');
+			};
+			$scope.DownLoad5 = function() {
+				window.open(Metronic.host + 'attachment/exportExample/11', '_blank');
+			};
 		});
 	}
 ]);
