@@ -1,0 +1,13 @@
+1. 账户权限可查看乡镇
+    url: /user/getAreaList
+    method: get
+    request: {
+        "userId" int //被查看的用户id
+    }
+    response:[
+        {
+            "id" int //地区id
+            "name" string 名字
+            "isManage": bool 是否可以查看 false不能 true能
+        }
+    ]
