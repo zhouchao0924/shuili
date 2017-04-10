@@ -11,3 +11,16 @@
             "isManage": bool 是否可以查看 false不能 true能
         }
     ]
+
+2. 账户权限可查看乡镇
+    url: /user/updateManageArea
+    method: get
+    request: {
+        "userId" int //被查看的用户id
+        "areaList: [//管理地区id list
+            id1,
+            id2,
+            ...
+        ]
+    }
+    response:{}
