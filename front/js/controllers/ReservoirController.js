@@ -31,6 +31,85 @@ MetronicApp.controller('ReservoirController', [
 			$scope.emptyData3 = function() {
 				$scope.text3 = '';
 			};
+			//导入表格
+			$scope.UpLoad1 = function() {
+				var params = {
+					efile: $scope.efile
+				}
+				$.ajax({
+					url: Metronic.host + 'drinkingWater/import',
+					type: 'POST',
+					dataType: 'json',
+					xhrFields: {
+						withCredentials: true
+					},
+					crossDomain: true,
+					data: {
+						data: JSON.stringify(params)
+					},
+					success: function(datas) {
+						if (datas.success) {
+							alert('重置密码成功');
+							location.reload();
+						} else {
+							alert(datas.message);
+							Metronic.unblockUI();
+						}
+					}
+				});
+			};
+			$scope.UpLoad2 = function() {
+				var params = {
+					efile: $scope.efile
+				}
+				$.ajax({
+					url: Metronic.host + 'drinkingWater/import',
+					type: 'POST',
+					dataType: 'json',
+					xhrFields: {
+						withCredentials: true
+					},
+					crossDomain: true,
+					data: {
+						data: JSON.stringify(params)
+					},
+					success: function(datas) {
+						if (datas.success) {
+							alert('重置密码成功');
+							location.reload();
+						} else {
+							alert(datas.message);
+							Metronic.unblockUI();
+						}
+					}
+				});
+			};
+			$scope.UpLoad3 = function() {
+				var params = {
+					efile: $scope.efile
+				}
+				$.ajax({
+					url: Metronic.host + 'drinkingWater/import',
+					type: 'POST',
+					dataType: 'json',
+					xhrFields: {
+						withCredentials: true
+					},
+					crossDomain: true,
+					data: {
+						data: JSON.stringify(params)
+					},
+					success: function(datas) {
+						if (datas.success) {
+							alert('重置密码成功');
+							location.reload();
+						} else {
+							alert(datas.message);
+							Metronic.unblockUI();
+						}
+					}
+				});
+			}
 		});
 	}
 ]);

@@ -16,6 +16,33 @@ MetronicApp.controller('DrinkingWaterController', [
 			$scope.emptyData = function() {
 				$scope.text = '';
 			};
+			//导入表格
+			$scope.UpLoad = function() {
+				var params = {
+					efile: $scope.efile
+				}
+				$.ajax({
+					url: Metronic.host + 'drinkingWater/import',
+					type: 'POST',
+					dataType: 'json',
+					xhrFields: {
+						withCredentials: true
+					},
+					crossDomain: true,
+					data: {
+						data: JSON.stringify(params)
+					},
+					success: function(datas) {
+						if (datas.success) {
+							alert('重置密码成功');
+							location.reload();
+						} else {
+							alert(datas.message);
+							Metronic.unblockUI();
+						}
+					}
+				});
+			}
 		});
 	}
 ]);

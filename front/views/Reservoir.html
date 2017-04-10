@@ -56,7 +56,8 @@
 										</div>
 										<div class="col-md-4">
 											<button class="btn blue" type="button">导出样表</button>
-											<button class="btn blue" type="button">数据导入</button>
+											<a href="" data-toggle="modal" data-target=".bs-shuiku-modal-lg" class="btn blue">
+												数据导入</a>
 										</div>
 									</div>
 								</form>
@@ -195,7 +196,8 @@
 										</div>
 										<div class="col-md-4">
 											<button class="btn blue" type="button">导出样表</button>
-											<button class="btn blue" type="button">数据导入</button>
+											<a href="" data-toggle="modal" data-target=".bs-shantang-modal-lg" class="btn blue">
+												数据导入</a>
 										</div>
 									</div>
 								</form>
@@ -322,7 +324,8 @@
 										</div>
 										<div class="col-md-4">
 											<button class="btn blue" type="button">导出样表</button>
-											<button class="btn blue" type="button">数据导入</button>
+											<a href="" data-toggle="modal" data-target=".bs-xiaoshuidian-modal-lg" class="btn blue">
+												数据导入</a>
 										</div>
 									</div>
 								</form>
@@ -429,5 +432,95 @@
 			</div>
 		</div>
 		<!-- END EXAMPLE TABLE PORTLET-->
+	</div>
+</div>
+<div class="modal fade bs-shuiku-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exchangeModalLabel">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="gridSystemModalLabel">数据导入</h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="form-group">
+							<h4 style="color:orange;">我确认已经填写好样表数据信息</h4>
+						</div>
+						<div class="form-group">
+							<div class="col-md-10">
+								<input-files ng-model="efile"></input-files>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" ng-click="UpLoad1()">确定导入</button>
+				<button type="button" class="btn default" data-dismiss="modal" aria-hidden="true">不导入</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade bs-shantang-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exchangeModalLabel">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="gridSystemModalLabel">数据导入</h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="form-group">
+							<h4 style="color:orange;">我确认已经填写好样表数据信息</h4>
+						</div>
+						<div class="form-group">
+							<div class="col-md-10">
+								<input-files ng-model="efile"></input-files>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" ng-click="UpLoad2()">确定导入</button>
+				<button type="button" class="btn default" data-dismiss="modal" aria-hidden="true">不导入</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade bs-xiaoshuidian-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exchangeModalLabel">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="gridSystemModalLabel">数据导入</h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="form-group">
+							<h4 style="color:orange;">我确认已经填写好样表数据信息</h4>
+						</div>
+						<div class="form-group">
+							<div class="col-md-10">
+								<input-files ng-model="efile"></input-files>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" ng-click="UpLoad3()">确定导入</button>
+				<button type="button" class="btn default" data-dismiss="modal" aria-hidden="true">不导入</button>
+			</div>
+		</div>
 	</div>
 </div>
