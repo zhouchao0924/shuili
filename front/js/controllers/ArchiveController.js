@@ -10,6 +10,10 @@ MetronicApp.controller('ArchiveController', [
 			// initialize core components
 			Metronic.initAjax();
 			// set default layout mode
+			$('#Tabs a').click(function(e) {
+				e.preventDefault();
+				var index = $(this).parent().index();
+			});
 			$rootScope.settings.layout.pageBodySolid = false;
 			$rootScope.settings.layout.pageSidebarClosed = false;
 			ArchiveAdvanced.init($scope, $compile);

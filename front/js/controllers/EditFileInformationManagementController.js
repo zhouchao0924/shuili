@@ -1,5 +1,5 @@
 /* Setup general page controller */
-MetronicApp.controller('AddFileInformationManagementController', [
+MetronicApp.controller('EditFileInformationManagementController', [
 	'$rootScope',
 	'$scope',
 	'settings',
@@ -71,19 +71,42 @@ MetronicApp.controller('AddFileInformationManagementController', [
 						alert(datas.message);
 						Metronic.unblockUI();
 					}
+					// 获取档案信息
+					$.ajax({
+						url: Metronic.host + 'article/getArticleInfoAjax',
+						type: 'POST',
+						dataType: 'json',
+						xhrFields: {
+							withCredentials: true
+						},
+						crossDomain: true,
+						data: {
+							data: JSON.stringify({articleId: root.currentScope.$state.params.id})
+						},
+						success: function(data) {
+							if (data.success) {
+								articleUm.setContent(data.data.content);
+								$scope.$apply(function() {
+									$scope.newsDetail = {
+										'id': data.data.id,
+										'title': data.data.title,
+										'isBoldTitle': data.data.isBoldTitle,
+										'titleImgUrl': data.data.titleImgUrl,
+										'articleType': 2,
+										'originalUrl': data.data.originalUrl,
+										'content': data.data.title
+									};
+									$scope.titleImgUrl = $scope.newsDetail.titleImgUrl;
+								});
+								$.uniform.update($('input[type = checkbox]'));
+							}
+						}
+					});
 				},
 				error: function(xhr, data, status) {
 					alert('请检查网络');
 				}
 			});
-			$scope.newsDetail = {
-				'title': '',
-				'isBoldTitle': '',
-				'titleImgUrl': '',
-				'articleType': 2,
-				'originalUrl': '',
-				'content': ''
-			};
 			$scope.addnews = function() {
 				var validate = $("#articleForm").validate(validate_filed);
 				if (!validate.form()) {
@@ -128,7 +151,7 @@ MetronicApp.controller('AddFileInformationManagementController', [
 											var params = $scope.newsDetail;
 											params.content = articleUm.getContent();
 											$.ajax({
-												url: Metronic.host + 'article/addArticleAjax',
+												url: Metronic.host + 'article/EditArticleInfoAjax',
 												type: 'GET',
 												dataType: 'json',
 												xhrFields: {
@@ -165,7 +188,7 @@ MetronicApp.controller('AddFileInformationManagementController', [
 					var params = $scope.newsDetail;
 					params.description = articleUm.getContent();
 					$.ajax({
-						url: Metronic.host + 'article/addArticleAjax',
+						url: Metronic.host + 'article/EditArticleInfoAjax',
 						type: 'GET',
 						dataType: 'json',
 						xhrFields: {
@@ -177,7 +200,7 @@ MetronicApp.controller('AddFileInformationManagementController', [
 						},
 						success: function(data) {
 							if (data.success) {
-								window.location.href = '#/InformationManagement';
+								window.location.href = '#/FileInformationManagement';
 							} else {
 								alert(data.message);
 							}

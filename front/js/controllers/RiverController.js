@@ -13,6 +13,9 @@ MetronicApp.controller('RiverController', [
 			$rootScope.settings.layout.pageBodySolid = false;
 			$rootScope.settings.layout.pageSidebarClosed = false;
 			RiverAdvanced.init($scope, $compile);
+			$scope.emptyData = function() {
+				$scope.text = '';
+			};
 		});
 	}
 ]);

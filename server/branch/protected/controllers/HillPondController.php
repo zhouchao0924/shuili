@@ -1,12 +1,11 @@
 <?php
-error_reporting(E_ALL);
-
 /**
  * @copyright (C) 2006-2017 Tuniu All rights reserved
  * @author yulongfei
- * @date 2017-04-04
+ * @date 2017-04-07
  */
-class ReservoirAndPoolController extends Controller{
+
+class HillPondController extends Controller{
     /**
      * 导入
      * @return string
@@ -24,12 +23,10 @@ class ReservoirAndPoolController extends Controller{
         $userInfo = $client->getUserInfo();
         try {
             $data = ExcelModel::parseExcel(2, $uploadInfo['fileFullPath']);
-
             if (empty($data)) {
                 return $this->renderAjaxResponse($this->getAjaxResponse(false,"empty file",ErrorCode::ERROR_COMMON_ERROR,array()));
             }
-            $csv = new ExcelTemplateModel(new ReservoirExcelTemplateConfig());
-
+            $excel = new ExcelTemplateModel(new HillPondExcelTemplateConfig());
             $extra = array(
                 'street_id' => $client->getCurrentArea(),
                 'district_id' => OpenCity::DISTRICT_ID,
@@ -39,7 +36,7 @@ class ReservoirAndPoolController extends Controller{
                 'add_user_id' => $userId,
                 'add_user_name' => $userInfo['userName'],
             );
-            $csv->data2Db($data, $extra);
+            $excel->data2Db($data, $extra);
             return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,array()));
         }catch (Exception $e){
             return $this->renderAjaxResponse($this->getAjaxResponse(false,$e->getMessage(),ErrorCode::ERROR_COMMON_ERROR,array()));
@@ -55,7 +52,7 @@ class ReservoirAndPoolController extends Controller{
         $searchText = isset($params['text'])?trim($params['text']):"";
         $page = isset($params['page'])?intval($params['page']):1;
 
-        $excelModel = new ExcelTemplateModel(new ReservoirExcelTemplateConfig());
+        $excelModel = new ExcelTemplateModel(new HillPondExcelTemplateConfig());
         $client = new ClientComponent();
         $streetId = $client->getCurrentArea();
         $data = $excelModel->queryRecords($page,$streetId,$searchText,1);

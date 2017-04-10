@@ -12,7 +12,12 @@ MetronicApp.controller('IrrigationController', [
 			// set default layout mode
 			$rootScope.settings.layout.pageBodySolid = false;
 			$rootScope.settings.layout.pageSidebarClosed = false;
+			//初始化表格
 			IrrigationAdvanced.init($scope, $compile);
+			// 清空搜索数据
+			$scope.emptyData = function() {
+				$scope.text = '';
+			};
 		});
 	}
 ]);

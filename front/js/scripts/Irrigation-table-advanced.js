@@ -39,7 +39,7 @@ var IrrigationAdvanced = function() {
 			"ajax": function(data, callback, settings) {
 				var params = {
 					page: data.start / data.length + 1,
-					text: ''
+					text: $scope.text
 				};
 				Metronic.blockUI({message: '<div style="background:rgba(0,0,0,0.3);padding:10px;font-size:16px;font-weight:bold;color:#fff;">正在加载...</div>', textOnly: true});
 				$.ajax({
@@ -68,6 +68,7 @@ var IrrigationAdvanced = function() {
 									n.projectImage,
 									n.image,
 									n.desc,
+									"",
 									n.id
 								];
 								arr.push(temp);
@@ -83,14 +84,31 @@ var IrrigationAdvanced = function() {
 								if (!rowData) {
 									return false;
 								}
-								var edit = $('<a href="javascript:;" class="btn btn-xs blue"><i class="fa fa-edit"></i> 编辑 </a>');
-								edit.click(function(event) {
-									window.location.href = '#/edit-artist/' + rowData[0] + '/' + rowData[6];
+								var deletex = $('<a href="javascript:;" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
+								deletex.click(function() {
+									var params = {};
+									if (confirm('确定删除?')) {
+										$.ajax({
+											url: Metronic.host + '',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													oTable.fnDraw();
+												}
+											}
+										});
+									}
 								});
-								$(this).append(edit);
+								$(this).append(deletex);
 							});
-						} else if (datas.code == 3) {
-							window.location.href = 'login.html';
 						} else {
 							alert(datas.ext.msg);
 							Metronic.unblockUI();

@@ -14,8 +14,10 @@ class ArticleModel extends BaseModel{
      * 获取文章列表
      * @param articleType $
      */
-    public function getArticleList($streetId,$articleType,$searchKey = ""){
+    public function getArticleList($streetId,$articleType,$searchKey = "",$page=1,$pageSize=10){
 
+        $limit = ($page-1) * $pageSize;
+        $limit = $limit > 0 ? $limit : 0;
         $conditions = array(
             "and",
             "article_type = :articleType",
@@ -31,12 +33,31 @@ class ArticleModel extends BaseModel{
         }
 
         $orderBy = " is_stick desc";
-        $list = $this->_getWpArticleDao()->select("*",$conditions,$params,true,$orderBy);
+        $list = $this->_getWpArticleDao()->select("*",$conditions,$params,true,$orderBy,"",$limit,$pageSize);
         $returnList = array();
         foreach($list as $key => $value){
             $returnList[] = $this->_formatWpArticleInfo($value);
         }
         return $returnList;
+    }
+
+    public function getArticleCount($streetId,$articleType,$searchKey){
+        $conditions = array(
+            "and",
+            "article_type = :articleType",
+            "street_id = :streetId",
+            "del_flag = 0",
+        );
+        $params = array(
+            ":articleType"=>$articleType,
+            ":streetId"=>$streetId,
+        );
+        if(!empty($searchKey)){
+            $conditions[] = 'title like "%'.$searchKey.'%"';
+        }
+
+        $data = $this->_getWpArticleDao()->select("count(1) as count",$conditions,$params,false);
+        return $data['count'];
     }
 
     /**
@@ -65,12 +86,13 @@ class ArticleModel extends BaseModel{
     public function getArticleInfo($articleId){
 
         $conditions = array(
+            "and",
             "id = :id",
         );
         $params = array(
             ":id"=>$articleId
         );
-        $info = $this->_getWpArticleDao()->select("*",$conditions,$params,true);
+        $info = $this->_getWpArticleDao()->select("*",$conditions,$params,false);
         return $this->_formatWpArticleInfo($info);
     }
     /**

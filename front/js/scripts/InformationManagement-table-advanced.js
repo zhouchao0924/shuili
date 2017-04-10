@@ -38,7 +38,10 @@ var InformationManagementAdvanced = function() {
 			"serverSide": true,
 			"ajax": function(data, callback, settings) {
 				var params = {
-					articleType: 1
+					articleType: 1,
+					searchKey: $scope.searchKey,
+					page: data.start / data.length + 1,
+					pageSize: 30
 				};
 				Metronic.blockUI({message: '<div style="background:rgba(0,0,0,0.3);padding:10px;font-size:16px;font-weight:bold;color:#fff;">正在加载...</div>', textOnly: true});
 				$.ajax({
@@ -55,14 +58,25 @@ var InformationManagementAdvanced = function() {
 					success: function(datas) {
 						if (datas.success) {
 							var arr = [];
-							$.each(datas.data || [], function(i, n) {
-								var temp = [n.id, n.title, n.addTime, n.originalUrl, ""];
+							$.each(datas.data.articleList || [], function(i, n) {
+								var temp = [
+									n.id,
+									n.title,
+									n.addTime,
+									n.originalUrl,
+									"",
+									n.isStick
+								];
 								arr.push(temp);
 							});
 							var d = {
 								data: arr,
-								recordsTotal: datas.totalRecords,
-								recordsFiltered: datas.totalRecords
+								recordsTotal: datas.data.articleCount
+									? datas.data.articleCount
+									: 0,
+								recordsFiltered: datas.data.articleCount
+									? datas.data.articleCount
+									: 0
 							};
 							callback(d);
 							table.find('tbody tr td:last-child').each(function(i, n) {
@@ -71,13 +85,89 @@ var InformationManagementAdvanced = function() {
 									return false;
 								}
 								var edit = $('<a href="javascript:;" class="btn btn-xs blue"><i class="fa fa-edit"></i> 编辑 </a>');
+								var deletex = $('<a href="javascript:;" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
+								var up = $('<a href="javascript:;" class="btn btn-xs green"><i class="fa fa-upload"></i> 置顶 </a>');
+								var quitup = $('<a href="javascript:;" class="btn btn-xs grey"><i class="fa fa-download"></i> 取消置顶 </a>');
 								edit.click(function(event) {
-									window.location.href = '#/edit-artist/' + rowData[0] + '/' + rowData[6];
+									window.location.href = '#/EditInformationManagement/' + rowData[0];
 								});
-								$(this).append(edit);
+								up.click(function() {
+									var params = {
+										id: rowData[0],
+										actionType: 2
+									};
+									$.ajax({
+										url: Metronic.host + 'article/doActionAjax',
+										type: 'GET',
+										dataType: 'json',
+										xhrFields: {
+											withCredentials: true
+										},
+										crossDomain: true,
+										data: {
+											data: JSON.stringify(params)
+										},
+										success: function(datas) {
+											if (datas.success) {
+												oTable.fnDraw();
+											}
+										}
+									});
+								});
+								quitup.click(function() {
+									var params = {
+										id: rowData[0],
+										actionType: 3
+									};
+									$.ajax({
+										url: Metronic.host + 'article/doActionAjax',
+										type: 'GET',
+										dataType: 'json',
+										xhrFields: {
+											withCredentials: true
+										},
+										crossDomain: true,
+										data: {
+											data: JSON.stringify(params)
+										},
+										success: function(datas) {
+											if (datas.success) {
+												oTable.fnDraw();
+											}
+										}
+									});
+								});
+								deletex.click(function() {
+									var params = {
+										id: rowData[0],
+										actionType: 1
+									};
+									if (confirm('确定删除?')) {
+										$.ajax({
+											url: Metronic.host + 'article/doActionAjax',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													oTable.fnDraw();
+												}
+											}
+										});
+									}
+								});
+								if (rowData[5] == 0) {
+									$(this).append(edit).append(deletex).append(up);
+								} else {
+									$(this).append(edit).append(deletex).append(quitup);
+								}
 							});
-						} else if (datas.code == 3) {
-							window.location.href = 'login.html';
 						} else {
 							alert(datas.message);
 							Metronic.unblockUI();
@@ -89,9 +179,11 @@ var InformationManagementAdvanced = function() {
 				});
 			}
 		});
-		var tableWrapper = $('#sample_3_wrapper');
 		$('#searchBtn').click(function(e) {
 			table.DataTable().ajax.reload();
+		});
+		$('#emptyData').click(function(e) {
+			$scope.searchKey = '';
 		});
 		//添加enter搜索的事件
 		$('body').bind('keydown', function(e) {

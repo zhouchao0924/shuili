@@ -1,7 +1,6 @@
 var PumpStationAdvanced = function() {
 	var initTable3 = function($scope, $compile) {
 		var table = $('#sample_3');
-		var conditions = [];
 		var oTable = table.dataTable({
 			"language": {
 				"aria": {
@@ -38,23 +37,26 @@ var PumpStationAdvanced = function() {
 			"stateSave": true,
 			"serverSide": true,
 			"ajax": function(data, callback, settings) {
-				var a = JSON.parse(window.localStorage.Userdata);
 				var params = {
-					pageNo: data.start / data.length + 1,
-					pageSize: data.length,
-					conditions: conditions
+					page: data.start / data.length + 1,
+					text: ""
 				};
 				Metronic.blockUI({message: '<div style="background:rgba(0,0,0,0.3);padding:10px;font-size:16px;font-weight:bold;color:#fff;">正在加载...</div>', textOnly: true});
 				$.ajax({
-					url: Metronic.host + '/arter/queryArterList/' + a.userId + '/' + a.sessionId,
-					type: 'POST',
+					url: Metronic.host + 'reservoirAndPool/getList',
+					type: 'GET',
 					dataType: 'json',
-					data: JSON.stringify(params),
+					xhrFields: {
+						withCredentials: true
+					},
+					crossDomain: true,
+					data: {
+						data: JSON.stringify(params)
+					},
 					success: function(datas) {
-						console.debug(datas, '艺术家列表');
-						if (datas.code == 1) {
+						if (datas.success) {
 							var arr = [];
-							$.each(datas.obj.list || [], function(i, n) {
+							$.each(datas.data.list || [], function(i, n) {
 								var temp = [
 									n.id,
 									n.nickName,
@@ -68,8 +70,8 @@ var PumpStationAdvanced = function() {
 							});
 							var d = {
 								data: arr,
-								recordsTotal: datas.obj.totalRecords,
-								recordsFiltered: datas.obj.totalRecords
+								recordsTotal: datas.data.totalCount,
+								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
 							table.find('tbody tr td:last-child').each(function(i, n) {
@@ -86,7 +88,7 @@ var PumpStationAdvanced = function() {
 						} else if (datas.code == 3) {
 							window.location.href = 'login.html';
 						} else {
-							alert(datas.ext.msg);
+							alert(datas.message);
 							Metronic.unblockUI();
 						}
 					},

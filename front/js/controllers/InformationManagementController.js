@@ -14,6 +14,9 @@ MetronicApp.controller('InformationManagementController', [
 			$rootScope.settings.layout.pageBodySolid = false;
 			$rootScope.settings.layout.pageSidebarClosed = false;
 			InformationManagementAdvanced.init($scope, $compile);
+			$scope.emptyData = function() {
+				$scope.searchKey = '';
+			}
 		});
 	}
 ]);

@@ -39,7 +39,7 @@ var RiverAdvanced = function() {
 			"ajax": function(data, callback, settings) {
 				var params = {
 					page: data.start / data.length + 1,
-					text: ''
+					text: $scope.text
 				};
 				Metronic.blockUI({message: '<div style="background:rgba(0,0,0,0.3);padding:10px;font-size:16px;font-weight:bold;color:#fff;">正在加载...</div>', textOnly: true});
 				$.ajax({
@@ -65,11 +65,11 @@ var RiverAdvanced = function() {
 									n.end,
 									n.length,
 									n.currentSituation.width,
-									n.currentSituation.bottomHeigh,
+									n.currentSituation.bottomHeight,
 									n.currentSituation.damHeight,
 									n.currentSituation.waterArea,
 									n.planSituation.width,
-									n.planSituation.bottomHeigh,
+									n.planSituation.bottomHeight,
 									n.planSituation.damHeight,
 									n.planSituation.waterArea,
 									n.manageRank,
@@ -96,8 +96,6 @@ var RiverAdvanced = function() {
 								});
 								$(this).append(edit);
 							});
-						} else if (datas.code == 3) {
-							window.location.href = 'login.html';
 						} else {
 							alert(datas.ext.msg);
 							Metronic.unblockUI();

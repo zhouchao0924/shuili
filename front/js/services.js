@@ -306,6 +306,140 @@ MetronicApp.factory('ajax', function() {
 		})
 	};
 });
+//ajax服务，使用$http,$q，成功和失败方法中不需要使用$scope.$apply()
+MetronicApp.factory('ajax1', [
+	'$http',
+	'$q',
+	'blockUI',
+	'userNow',
+	function($http, $q, blockUI, userNow) {
+		return function(url_key, params, isNoStringify, isFullUrl) {
+			blockUI.block()
+			var deferred = $q.defer();
+			if (!url_key) {
+				return;
+			}
+			if (!params) {
+				params = {};
+			}
+			var url = isFullUrl
+				? Metronic.host + url_key
+				: Metronic.host + url_key + userNow.userId + '/' + userNow.sessionId
+			var config = {
+				responseType: 'json',
+				headers: {
+					// 'Cache-Control': 'no-cache',
+					'Content-Type': 'text/plain'
+				}
+			}
+			params = JSON.stringify(params)
+			if (isNoStringify) {
+				params = JSON.parse(params)
+				config.transformRequest = function(data) {
+					return $.param(data);
+				}
+				config.headers = {
+					'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+				}
+			}
+			$http.post(url, params, config).then(function(data) {
+				if (data.data.code == 1) {
+					//前台过滤'艾佳总部'
+					if (url_key === '/company/queryAllCompany/') {
+						data.data.obj = data.data.obj.filter(function(e) {
+							return e.companyName !== '艾佳总部'
+						})
+					}
+					deferred.resolve(data.data);
+				} else if (data.data.code == 3) {
+					userNow.timeout()
+					window.location.href = 'login.html';
+				} else {
+					deferred.reject(data.data);
+					alert(data.data.ext.msg);
+				}
+			}, function(data, status) {
+				deferred.reject(data.data);
+				// alert('请检查网络');
+				console.error('method: ' + data.config.method + '\nstatus: ' + data.status + '\nstatusText: ' + data.statusText + '\nurl: ' + data.config.url);
+			}). finally(function() {
+				blockUI.unblock()
+			})
+			return deferred.promise;
+		};
+	}
+]);
+//ajax服务，使用$http,$q，成功和失败方法中不需要使用$scope.$apply()
+MetronicApp.factory('ajax2', [
+	'$http',
+	'$q',
+	'blockUI',
+	'userNow',
+	function($http, $q, blockUI, userNow) {
+		return function(options) {
+			blockUI.block()
+			var deferred = $q.defer();
+			if (!options.url)
+				return
+			if (!options.data)
+				options.data = {}
+			if (!options.host)
+				options.host = 'host'
+			var url = options.isFullUrl
+				? Metronic[options.host] + options.url
+				: Metronic[options.host] + options.url + userNow.userId + '/' + userNow.sessionId
+			var config = {
+				responseType: 'json',
+				headers: {
+					// 'Cache-Control': 'no-cache',
+					'Content-Type': 'text/plain'
+				}
+			}
+			options.data = JSON.stringify(options.data)
+			if (options.isNoStringify) {
+				options.data = JSON.parse(options.data)
+				config.transformRequest = function(data) {
+					return $.param(data);
+				}
+				config.headers = {
+					'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+				}
+			}
+			$http({
+				method: options.method || 'POST',
+				url: url,
+				data: options.data,
+				responseType: 'json',
+				headers: {
+					// 'Cache-Control': 'no-cache',
+					'Content-Type': 'text/plain'
+				}
+			}).then(function(data) {
+				if (data.data.code == 1) {
+					//前台过滤'艾佳总部'
+					if (options.url === '/company/queryAllCompany/') {
+						data.data.obj = data.data.obj.filter(function(e) {
+							return e.companyName !== '艾佳总部'
+						})
+					}
+					deferred.resolve(data.data);
+				} else if (data.data.code == 3) {
+					userNow.timeout()
+					window.location.href = 'login.html';
+				} else {
+					alert(data.data.ext.msg);
+				}
+			}, function(data, status) {
+				deferred.reject(data.data);
+				// alert('请检查网络');
+				console.error('method: ' + data.config.method + '\nstatus: ' + data.status + '\nstatusText: ' + data.statusText + '\nurl: ' + data.config.url);
+			}). finally(function() {
+				blockUI.unblock()
+			})
+			return deferred.promise;
+		};
+	}
+]);
 //获得当前user的相关信息，如a.userId和a.sessionId
 MetronicApp.factory('userNow', [
 	'$window',
@@ -572,19 +706,22 @@ MetronicApp.factory('qiniu', [
 			blockUI.block()
 			var deferred = $q.defer();
 			$.ajax({
-				url: Metronic.apihost + '/media/qiniutoken?bucketName=aijia-product-test',
-				// url: Metronic.host + '/media/qiniutoken?bucketName=aijia-game',
-				// url: 'http://10.0.0.24:8080/cms-web' + '/media/qiniutokenAttachment?bucketName=aijia-product-test',
-				type: 'GET',
+				url: Metronic.apihost + 'attachment/getUploadTokenAjax',
+				type: 'POST',
 				dataType: 'json',
-				data: {},
+				xhrFields: {
+					withCredentials: true
+				},
+				crossDomain: true,
+				data: {
+					data: JSON.stringify({})
+				},
 				success: function(data) {
-					if (data.code == 1) {
+					if (data.success) {
 						blockUI.block()
-						var token = data.obj.token;
-						// var key = data.obj.key;
-						var key = data.obj.key;
-						var domain = data.obj.downloadUrl
+						var token = data.data.token;
+						var key = data.data.key;
+						var domain = data.data.domain
 						var formData = new FormData();
 						formData.append("token", token);
 						formData.append("file", file.files[0]);
@@ -597,7 +734,7 @@ MetronicApp.factory('qiniu', [
 							processData: false,
 							contentType: false,
 							success: function(data) {
-								deferred.resolve('http://' + domain + '/' + data.key);
+								deferred.resolve(domain + '/' + data.key);
 							},
 							error: function() {
 								console.debug('请检查网络');
@@ -606,11 +743,8 @@ MetronicApp.factory('qiniu', [
 								blockUI.unblock()
 							}
 						});
-					} else if (data.code == 3) {
-						alert(data.ext.msg);
-						window.location.href = 'login.html';
 					} else {
-						alert(data.ext.msg);
+						alert(data.message);
 					}
 				},
 				error: function(xhr, data, status) {

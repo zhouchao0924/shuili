@@ -5,7 +5,7 @@
  * @author yulongfei
  * @date 2017-04-04
  */
-class ReservoirTemplateConfig extends ExcelTemplateConfig{
+class ReservoirExcelTemplateConfig extends ExcelTemplateConfig{
     public static $id = 1;
     protected $itemList = array(
         'name'=>'水库名称',
@@ -45,8 +45,6 @@ class ReservoirTemplateConfig extends ExcelTemplateConfig{
             'taixunqi'=>'台汛期',
         ),
         'extend'=>'备注',
-        'full_image'=>'全景图',
-        'image'=>'照片',
         'manager'=>array(
             'username'=>'姓名',
             'phone'=>'手机号',

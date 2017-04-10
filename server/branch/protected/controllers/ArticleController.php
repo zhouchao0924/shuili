@@ -46,6 +46,8 @@ class ArticleController extends Controller{
 
         $params = $this->getAjaxRequestParam();
         $articleType = intval($params['articleType']);
+        $page = intval($params['page']);
+        $pageSize = intval($params['pageSize']);
         $searchKey = isset($params['searchKey']) && !empty($params['searchKey']) ? trim($params['searchKey']) : '';
         $client = new ClientComponent();
 
@@ -58,8 +60,9 @@ class ArticleController extends Controller{
         if($streetId <= 0){
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"管理的城市id不存在",ErrorCode::ERROR_USER_DENY,array()));
         }
-        $returnList = ArticleModel::getInstance()->getArticleList($streetId,$articleType,$searchKey);
-        $this->renderAjaxResponse($this->getAjaxResponse(true, "success", ErrorCode::SUCCESS, $returnList));
+        $articleCount = ArticleModel::getInstance()->getArticleCount($streetId,$articleType,$searchKey);
+        $returnList = ArticleModel::getInstance()->getArticleList($streetId,$articleType,$searchKey,$page,$pageSize);
+        $this->renderAjaxResponse($this->getAjaxResponse(true, "success", ErrorCode::SUCCESS, array("articleCount" => $articleCount,"articleList"=>$returnList)));
 
     }
 
