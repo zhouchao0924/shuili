@@ -121,24 +121,21 @@ class UserController extends Controller{
         if($userId <= 0){
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户未登录",ErrorCode::ERROR_USER_NOT_LOGIN,array()));
         }
-
         if($this->isSuper){
             $areaModel = new AreaModel();
-            $data = array(
-                OpenCity::DISTRICT_ID=>array(
-                    'id'=>OpenCity::DISTRICT_ID,
-                    'name'=>"余姚市",
-                    'list'=>array(),
-                )
+            $list = array(
+                'id'=>OpenCity::DISTRICT_ID,
+                'name'=>"余姚市",
+                'list'=>array(),
             );
             $areaList = $areaModel->getStreetListInfoByDistrictId(OpenCity::DISTRICT_ID);
             foreach ($areaList as $value){
-                $data[OpenCity::DISTRICT_ID]['list'][] = array(
+                $list['list'][] = array(
                     "id"=>$value['id'],
                     "nam"=>$value['name']
                 );
             }
-            return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,$data));
+            return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,array($list)));
         }
 
         $userModel = new UserModel();
