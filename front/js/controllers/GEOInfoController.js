@@ -67,8 +67,8 @@ MetronicApp.controller('GEOInfoController', [
 					crossDomain: true,
 					data: {},
 					success: function(data) {
-						if(data.long && data.lat){
-							mp.centerAndZoom(new window.BMap.Point(data.long, data.lat), 15);
+						if(data.success){
+							mp.centerAndZoom(new window.BMap.Point(data.data.long, data.data.lat), 15);
 						}
 					},
 					error: function(xhr, data, status) {
@@ -99,14 +99,18 @@ MetronicApp.controller('GEOInfoController', [
 				});
 
 
+
+
+				getAllPoint();
+
 				function listPoints(points){
 					for(var i=0;i<points.length;i++){
 						// var point = new window.BMap.Point(116.404, 40.915);
 						var point = points[i];
-					  mp.centerAndZoom(point, 15);
+						// mp.centerAndZoom(point, 15);
 						var myIcon = new window.BMap.Icon("http://onrnzg8zq.bkt.clouddn.com/markers2.png", new BMap.Size(23, 25), {
-						   offset: new window.BMap.Size(10, 25),
-						   imageOffset: new window.BMap.Size(0, 0 - i * 25)   // 设置图片偏移
+							 offset: new window.BMap.Size(10, 25),
+							 imageOffset: new window.BMap.Size(0, 0 - i * 25)   // 设置图片偏移
 						 });
 						var marker = new window.BMap.Marker(point,{icon:myIcon});        // 创建标注
 						// marker.addEventListener("click", function(e){
@@ -122,35 +126,82 @@ MetronicApp.controller('GEOInfoController', [
 					}
 				}
 
-				window.getAllPoint();
+				// 获取地理列表
+				function getAllPoint(){
+					$.ajax({
+						url: Metronic.host + 'geographyInfo/getPointAll',
+						type: 'GET',
+						dataType: 'json',
+						xhrFields: {
+						 withCredentials: true
+						},
+						crossDomain: true,
+						data: {},
+						success: function(data) {
+						 if (data.success && data.data.length>0) {
+								//
+								var ps = [];
+								for(var i=0;i<data.data.length;i++){
+									ps.push(new window.BMap.Point(data.data[i].longitude, data.data[i].latitude));
+								}
+								listPoints(ps);
+						 }
+						},
+						error: function(xhr, data, status) {
+							//  alert('请检查网络');
+						}
+					});
+				}
+
+				// 对话框事件
+				$('#cancel,#cancel2').click(function(e){
+					$('#modaladd').modal('hide');
+				});
+
+				// 添加事件
+				$('#makesure').click(function(e){
+					var params = {
+						cat:0,
+						name:$('#name').val(),
+						longitude:curlon,
+						latitude:curlat,
+					};
+					$.ajax({
+			      url: Metronic.host + '/geographyInfo/addPoint',
+			      type: 'GET',
+			      dataType: 'json',
+			      xhrFields: {
+			       withCredentials: true
+			      },
+			      crossDomain: true,
+			      data: {
+			       data: JSON.stringify(params)
+			      },
+			      success: function(datas) {
+			       if (datas.success) {
+			        	// 刷新points
+								getAllPoint();
+								$('#modaladd').modal('hide');
+			       }
+			      },
+			      error: function(xhr, data, status) {
+			      	//  alert('请检查网络');
+			      }
+					});
+				});
+
+				// 编辑事件
+				$('#edit').click(function(e){
+					$('#modaledit').modal('show');
+					$('#modalview').modal('hide');
+				});
+
+
+
+
 			}
 
-			// 获取地理列表
-			window.getAllPoint = function(){
-				$.ajax({
-					url: Metronic.host + 'geographyInfo/getPointAll',
-					type: 'GET',
-					dataType: 'json',
-					xhrFields: {
-					 withCredentials: true
-					},
-					crossDomain: true,
-					data: {},
-					success: function(datas) {
-					 if (datas.length>0) {
-							//
-							var ps = [];
-							for(var i=0;i<datas.length;i++){
-								ps.push(new window.BMap.Point(datas[i].longitude, datas[i].latitude));
-							}
-							listPoints(ps);
-					 }
-					},
-					error: function(xhr, data, status) {
-						//  alert('请检查网络');
-					}
-				});
-			}
+
 
 			function loadScript() {
 			  var script = document.createElement("script");
@@ -161,48 +212,7 @@ MetronicApp.controller('GEOInfoController', [
 
 			loadScript();
 
-			// 对话框事件
-			$('#cancel,#cancel2').click(function(e){
-				$('#modaladd').modal('hide');
-			});
 
-			// 添加事件
-			$('#makesure').click(function(e){
-				var params = {
-					cat:0,
-					name:$('#name').val(),
-					longitude:curlon,
-					latitude:curlat,
-				};
-				$.ajax({
-		      url: Metronic.host + '/geographyInfo/addPoint',
-		      type: 'GET',
-		      dataType: 'json',
-		      xhrFields: {
-		       withCredentials: true
-		      },
-		      crossDomain: true,
-		      data: {
-		       data: JSON.stringify(params)
-		      },
-		      success: function(datas) {
-		       if (datas.success) {
-		        	// 刷新points
-							window.getAllPoint();
-							$('#modaladd').modal('hide');
-		       }
-		      },
-		      error: function(xhr, data, status) {
-		      	//  alert('请检查网络');
-		      }
-				});
-			});
-
-			// 编辑事件
-			$('#edit').click(function(e){
-				$('#modaledit').modal('show');
-				$('#modalview').modal('hide');
-			});
 
 
 		});
