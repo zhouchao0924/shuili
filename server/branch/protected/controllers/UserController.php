@@ -174,17 +174,24 @@ class UserController extends Controller{
      * 获取用户列表
      * @return string
      */
-    public function actionUserList(){
+    public function actionGetUserList(){
         $clientComponent = new ClientComponent();
         $userId = $clientComponent->getUserId();
         if($userId <= 0){
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户未登录",ErrorCode::ERROR_USER_NOT_LOGIN,array()));
         }
-
+        $page = isset($params['page'])?intval($params['page']):1;
+        $pageSize = isset($params['pageSize'])?intval($params['pageSize']):10;
 
         $userModel = new UserModel();
-        $userList = $userModel->getUserList();
-        return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,$userList));
+        $userTotal = $userModel->getUserTotal();
+        $userList = $userModel->getUserList($page,$pageSize);
+        return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,
+            array(
+                'page' => $page,
+                'total' => $userTotal,
+                'userList' => $userList,
+            )));
     }
 
     public function actionGetCurrentAreaLocation(){

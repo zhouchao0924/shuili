@@ -23,12 +23,10 @@ class WaterGateExcelTemplateConfig extends ExcelTemplateConfig{
 	  'managerment'=>'管理单位',
         'manager'=>'管理者负责人',
         'manager_phone'=>'管理者负责人电话',
-        'image'=>'图片',
 	    'extend'=>'备注',
     );
 
     protected $printExtraItem = array(
-        'full_image'=>array(),
         'image'=>array(),
         'create_time'=>'',
         'id'=>''

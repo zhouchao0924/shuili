@@ -1,6 +1,6 @@
 <?php
 /**
- * 河道排水口
+ *  水质监测基础信息
  * Created by PhpStorm.
  * User: yulongfei
  * Date: 17/4/4

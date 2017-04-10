@@ -25,12 +25,10 @@ class PumpingStationExcelTemplateConfig extends ExcelTemplateConfig{
         'manager'=>'管理者负责人',
         'manager_phone'=>'管理者负责人电话',
         'completion_date'=>'建造年份',
-        'image'=>'图片',
 	    'extend'=>'备注',
     );
 
     protected $printExtraItem = array(
-        'full_image'=>array(),
         'image'=>array(),
         'create_time'=>'',
         'id'=>''

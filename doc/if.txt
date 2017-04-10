@@ -150,7 +150,19 @@
     response:
 
 	“articleCount”://文章总数
-	"articleList”：[
+	“topArticleList”:[
+	{
+            id，//文章id
+            title,//文章标题
+            isBoldTitle=0,//是否加粗文章标题1，加粗，0不加粗
+            titleImgUrl="",//题图的图片url
+            articleType=1,//文章类型：1，基本情况，2，文档信息
+            originalUrl="",//原文链接
+            content=""，//文章类容html
+            addTime,//创建时间
+	    updateTime，//更新时间
+	]
+	"articleList”:[
             {
             id，//文章id
             title,//文章标题
@@ -160,6 +172,7 @@
             originalUrl="",//原文链接
             content=""，//文章类容html
             addTime,//创建时间
+	    updateTime，//更新时间
             },...
     ]
 
@@ -195,14 +208,20 @@
     url:/user/getUserList
     method:get
     request:{
-
+	page:页数
+	pageSize：每页数量
     }
     response:{
-                'id’:int,
+	page:页数
+	total:总条数
+	userList:{
+	        'id’:int,
                 'name’:string,
                 'createTime’:String,
                 'roleId’:String,
-                'desc' => $val['desc'],
+                'desc’:string,	
+	}
+
     }
 15.文章操作接口（置顶，取消置顶，删除）
     url:/article/doActionAjax
@@ -214,3 +233,29 @@
     response:{
 
     }
+
+16，获取所有文档列表的接口，后台使用
+    url:/article/getAllArticleListAjax
+    method:get
+    request:{
+        articleType,//文章类型：1，基本情况，2，文档信息
+	searchKey://搜索关键词 title
+	page://页码
+	pageSize：//每页数量
+    }
+    response:
+
+	“articleCount”://文章总数
+	"articleList”:[
+            {
+            id，//文章id
+            title,//文章标题
+            isBoldTitle=0,//是否加粗文章标题1，加粗，0不加粗
+            titleImgUrl="",//题图的图片url
+            articleType=1,//文章类型：1，基本情况，2，文档信息
+            originalUrl="",//原文链接
+            content=""，//文章类容html
+            addTime,//创建时间
+	    updateTime，//更新时间
+            },...
+    ]

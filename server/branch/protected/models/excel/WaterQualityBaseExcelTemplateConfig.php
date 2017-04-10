@@ -12,18 +12,16 @@ class WaterQualityBaseExcelTemplateConfig extends ExcelTemplateConfig{
         'name'=>'河道名称',
         'detecion_position'=>'监测点位置',
         'latitude_longitude'=>'经纬度',
-        'image'=>'照片',
     );
 
     protected $printExtraItem = array(
-        'full_image'=>array(),
         'image'=>array(),
         'create_time'=>'',
         'id'=>''
     );
 
     public function getDao(){
-        return WaterQualityBaseDao::getInstance("WaterQualityBase");
+        return WpWaterQualityBaseDao::getInstance("WaterQualityBase");
     }
 
     public function getExampleExcelFileName()

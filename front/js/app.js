@@ -211,7 +211,7 @@ MetronicApp.config([
 				]
 			}
 		}).state('BasicDetail', {
-			url: "/BasicDetail",
+			url: "/BasicDetail/:id",
 			templateUrl: "views/BasicDetail.html?v=" + MetronicApp.version,
 			data: {
 				pageTitle: '信息详情'
