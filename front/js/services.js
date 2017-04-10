@@ -706,19 +706,22 @@ MetronicApp.factory('qiniu', [
 			blockUI.block()
 			var deferred = $q.defer();
 			$.ajax({
-				url: Metronic.apihost + '/media/qiniutoken?bucketName=aijia-product-test',
-				// url: Metronic.host + '/media/qiniutoken?bucketName=aijia-game',
-				// url: 'http://10.0.0.24:8080/cms-web' + '/media/qiniutokenAttachment?bucketName=aijia-product-test',
-				type: 'GET',
+				url: Metronic.apihost + 'attachment/getUploadTokenAjax',
+				type: 'POST',
 				dataType: 'json',
-				data: {},
+				xhrFields: {
+					withCredentials: true
+				},
+				crossDomain: true,
+				data: {
+					data: JSON.stringify({})
+				},
 				success: function(data) {
-					if (data.code == 1) {
+					if (data.success) {
 						blockUI.block()
-						var token = data.obj.token;
-						// var key = data.obj.key;
-						var key = data.obj.key;
-						var domain = data.obj.downloadUrl
+						var token = data.data.token;
+						var key = data.data.key;
+						var domain = data.data.domain
 						var formData = new FormData();
 						formData.append("token", token);
 						formData.append("file", file.files[0]);
@@ -731,7 +734,7 @@ MetronicApp.factory('qiniu', [
 							processData: false,
 							contentType: false,
 							success: function(data) {
-								deferred.resolve('http://' + domain + '/' + data.key);
+								deferred.resolve(domain + '/' + data.key);
 							},
 							error: function() {
 								console.debug('请检查网络');
@@ -740,11 +743,8 @@ MetronicApp.factory('qiniu', [
 								blockUI.unblock()
 							}
 						});
-					} else if (data.code == 3) {
-						alert(data.ext.msg);
-						window.location.href = 'login.html';
 					} else {
-						alert(data.ext.msg);
+						alert(data.message);
 					}
 				},
 				error: function(xhr, data, status) {
