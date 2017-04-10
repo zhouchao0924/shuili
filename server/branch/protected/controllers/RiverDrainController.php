@@ -23,7 +23,7 @@ class RiverDrainController extends Controller{
         }
         $userInfo = $client->getUserInfo();
         try {
-            $data = ExcelModel::parseExcel(3, $uploadInfo['fileFullPath']);
+            $data = ExcelModel::parseExcel(2, $uploadInfo['fileFullPath']);
             if (empty($data)) {
                 return $this->renderAjaxResponse($this->getAjaxResponse(false,"empty file",ErrorCode::ERROR_COMMON_ERROR,array()));
             }
@@ -53,7 +53,7 @@ class RiverDrainController extends Controller{
         $searchText = isset($params['text'])?trim($params['text']):"";
         $page = isset($params['page'])?intval($params['page']):1;
 
-        $excelModel = new ExcelTemplateModel(new RiverManagerBaseExcelTemplateConfig());
+        $excelModel = new ExcelTemplateModel(new RiverDrainExcelTemplateConfig());
         $client = new ClientComponent();
         $streetId = $client->getCurrentArea();
         $data = $excelModel->queryRecords($page,$streetId,$searchText,1);

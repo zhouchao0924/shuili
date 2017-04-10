@@ -56,7 +56,6 @@ class ExcelTemplateModel{
         if(!$result){
             throw new ExcelDataImport2DBFailedException();
         }
-
         return ;
     }
 

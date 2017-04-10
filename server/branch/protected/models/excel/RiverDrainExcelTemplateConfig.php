@@ -16,12 +16,10 @@ class RiverDrainExcelTemplateConfig extends ExcelTemplateConfig{
         'sewage_outlet'=>'污水口',
         'rainwater_sewage_outlet'=>'雨污混排口',
         'outlet_num'=>'排水口总数',
-        'image'=>'污水口平面图',
     );
 
     protected $printExtraItem = array(
-        'full_image'=>array(),
-        'image'=>array(),
+        'image'=>array(),//污水口平面图
         'create_time'=>'',
         'id'=>''
     );
