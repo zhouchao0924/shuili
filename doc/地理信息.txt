@@ -42,3 +42,14 @@
         "long": double 经度
         "lat": double 纬度
     }
+
+5.获取地理位置详情
+    url:/geographyInfo/getDesc
+    method:get
+    request:{
+        'id' int //上面接口id
+    }
+    response:{
+	id：//传入的id,
+	tit://
+	}
