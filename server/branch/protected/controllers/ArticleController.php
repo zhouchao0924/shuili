@@ -47,7 +47,10 @@ class ArticleController extends Controller{
         $params = $this->getAjaxRequestParam();
         $articleType = intval($params['articleType']);
         $page = intval($params['page']);
+        $page = $page > 0 ? $page : 1;
+
         $pageSize = intval($params['pageSize']);
+        $pageSize = $pageSize > 0 ?$pageSize : 10;
         $searchKey = isset($params['searchKey']) && !empty($params['searchKey']) ? trim($params['searchKey']) : '';
         $client = new ClientComponent();
 
@@ -62,7 +65,8 @@ class ArticleController extends Controller{
         }
         $articleCount = ArticleModel::getInstance()->getArticleCount($streetId,$articleType,$searchKey);
         $returnList = ArticleModel::getInstance()->getArticleList($streetId,$articleType,$searchKey,$page,$pageSize);
-        $this->renderAjaxResponse($this->getAjaxResponse(true, "success", ErrorCode::SUCCESS, array("articleCount" => $articleCount,"articleList"=>$returnList)));
+        $returnTopList = ArticleModel::getInstance()->getTopArticleList($streetId,$articleType,$searchKey,1,100);
+        $this->renderAjaxResponse($this->getAjaxResponse(true, "success", ErrorCode::SUCCESS, array("articleCount" => $articleCount,"topArticleList"=>$returnTopList,"articleList"=>$returnList)));
 
     }
 

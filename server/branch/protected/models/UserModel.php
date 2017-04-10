@@ -132,8 +132,7 @@ class UserModel {
         return true;
     }
 
-    public function getUserList(){
-
+    public function getUserTotal(){
         $conditions = array(
             "and",
             "del_flag = 0",
@@ -141,7 +140,22 @@ class UserModel {
         $params = array(
         );
 
-        $data = WpUserDao::getInstance("WpUser")->select("*",$conditions,$params,true);
+        $data = WpUserDao::getInstance("WpUser")->select("count(1) as c",$conditions,$params,false);
+        return $data['c'];
+    }
+
+    public function getUserList($page,$pageSize){
+
+        $limit = ($page-1) * $pageSize;
+        $limit = $limit > 0 ? $limit : 0;
+        $conditions = array(
+            "and",
+            "del_flag = 0",
+        );
+        $params = array(
+        );
+
+        $data = WpUserDao::getInstance("WpUser")->select("*",$conditions,$params,true,'',$limit,$pageSize);
         if(empty($data)){
             return array();
         }
@@ -155,7 +169,7 @@ class UserModel {
                 'desc' => $val['desc'],
             );
         }
-        return true;
+        return $returnArray;
     }
 
     public function isUserManageArea($userId,$streetId){
