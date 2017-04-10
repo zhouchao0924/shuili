@@ -34,8 +34,13 @@ MetronicApp.controller('BasicInformationController', [
 				data: {data:JSON.stringify(params)},
 				success: function(data) {
 					if(data.success){
-						$scope.tops = data.topArticleList;
-						$scope.lists = data.articleList;
+						$scope.tops = data.data.topArticleList;
+						var list = [];
+						for(var i=0;i<data.data.articleList.length;i++){
+							data.data.articleList[i].desc = $(data.data.articleList[i].content).text();
+							list.push(data.data.articleList[i]);
+						}
+						$scope.lists = list;
 						$scope.$apply();
 					}
 				},

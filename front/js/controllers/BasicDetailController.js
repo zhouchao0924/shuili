@@ -7,7 +7,7 @@ MetronicApp.controller('BasicDetailController', [
 	'$compile',
 	'ajax1',
 	function($rootScope, $scope, settings, $timeout, $compile, ajax) {
-		$scope.$on('$viewContentLoaded', function() {
+		$scope.$on('$viewContentLoaded', function(root) {
 			// initialize core components
 			Metronic.initAjax();
 			// set default layout mode
@@ -18,7 +18,7 @@ MetronicApp.controller('BasicDetailController', [
 			//article/getArticleInfoAjax
 			// 获取基本信息列表
 			var params = {
-				articleId:14
+				articleId:root.currentScope.$state.params.id
 			}
 			$.ajax({
 				url: Metronic.host + 'article/getArticleInfoAjax',
