@@ -45,8 +45,8 @@ class AttachmentController extends Controller{
      * @return string|void
      */
     public function actionExportExample($excelType){
-        if($excelType >= count(ExcelTemplateModel::$excelTypeMAP)){
-            return $this->renderAjaxResponse($this->getAjaxResponse(false, "参数错误", ErrorCode::ERROR_CLIENT_PARAMS_ERROR, array()));
+        if($excelType > count(ExcelTemplateModel::$excelTypeMAP)){
+            return $this->renderAjaxResponse($this->getAjaxResponse(false, "参数错误", ErrorCode::ERROR_PARAMS, array()));
         }
         $clientComponent = new ClientComponent();
         $userId = $clientComponent->getUserId();
