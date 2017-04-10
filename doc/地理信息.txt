@@ -44,13 +44,13 @@
     }
 
 5.获取地理位置详情
-    url:/geographyInfo/getDesc
+    url:/geographyInfo/getInfoDesc
     method:get
     request:{
-        'id' int //上面接口id
+        'pointId' int //上面接口id
     }
     response:{
-	id：//传入的id,
+	pointId：//和传入的id相同,
 	title://标题
 	updateTime：//更新时间
 	isBold：//是否加粗，0，不加粗，1不加粗
@@ -58,11 +58,10 @@
 	add_time：//增加时间
 	}
 6.修改地理位置详情的接口
-5.获取地理位置详情
-    url:/geographyInfo/updateDesc
+    url:/geographyInfo/updateInfoDesc
     method:get
     request:{
-	id：//传入的id,
+	pointId：//传入的id,
 	title://标题
 	isBold：//是否加粗，0，不加粗，1不加粗
 	content：//详情内容

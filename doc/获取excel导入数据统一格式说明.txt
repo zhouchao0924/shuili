@@ -1,0 +1,10 @@
+获取excel导入数据统一格式说明：
+response {
+    "totalPage": int 总页数
+    "totalCount": int 总条数
+    "pageRowCount": 每页显示的行数
+    "page": 当前页号
+    "list": [ 数据list
+        ... 
+    ]
+}

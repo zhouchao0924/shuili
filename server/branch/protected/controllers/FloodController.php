@@ -56,7 +56,7 @@ class FloodController extends Controller{
         $excelModel = new ExcelTemplateModel(new FloodBaseInfoExcelTemplateConfig());
         $client = new ClientComponent();
         $streetId = $client->getCurrentArea();
-        $data = $excelModel->queryRecords($page,$streetId,$searchText,1);
+        $data = $excelModel->queryRecords($page,$streetId,$searchText);
 
         return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,$data));
     }
@@ -111,7 +111,7 @@ class FloodController extends Controller{
         $excelModel = new ExcelTemplateModel(new FloodLeaderInfoExcelTemplateConfig());
         $client = new ClientComponent();
         $streetId = $client->getCurrentArea();
-        $data = $excelModel->queryRecords($page,$streetId,$searchText,1);
+        $data = $excelModel->queryRecords($page,$streetId,$searchText);
 
         return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,$data));
     }
@@ -166,7 +166,7 @@ class FloodController extends Controller{
         $excelModel = new ExcelTemplateModel(new FloodOwnerInfoExcelTemplateConfig());
         $client = new ClientComponent();
         $streetId = $client->getCurrentArea();
-        $data = $excelModel->queryRecords($page,$streetId,$searchText,1);
+        $data = $excelModel->queryRecords($page,$streetId,$searchText);
 
         return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,$data));
     }
@@ -221,7 +221,7 @@ class FloodController extends Controller{
         $excelModel = new ExcelTemplateModel(new FloodNetworkOwnerExcelTemplateConfig());
         $client = new ClientComponent();
         $streetId = $client->getCurrentArea();
-        $data = $excelModel->queryRecords($page,$streetId,$searchText,1);
+        $data = $excelModel->queryRecords($page,$streetId,$searchText);
 
         return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,$data));
     }
@@ -276,7 +276,7 @@ class FloodController extends Controller{
         $excelModel = new ExcelTemplateModel(new TransferPeopExcelTemplateConfig());
         $client = new ClientComponent();
         $streetId = $client->getCurrentArea();
-        $data = $excelModel->queryRecords($page,$streetId,$searchText,1);
+        $data = $excelModel->queryRecords($page,$streetId,$searchText);
 
         return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,$data));
     }
