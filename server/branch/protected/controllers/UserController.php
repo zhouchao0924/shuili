@@ -92,17 +92,23 @@ class UserController extends Controller{
 
     public function actionResetPassword(){
         $params = $this->getAjaxRequestParam();
+        $tUserId = isset($params['userId'])?intval($params['userId']):0;
         $password = isset($params['password'])&&!empty($params['password'])?trim($params['password']):"";
         if(!CommonComponent::checkUserPasswordFormat($password)){
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"参数错误",ErrorCode::ERROR_PARAMS,array()));
         }
+
         $clientComponent = new ClientComponent();
         $userId = $clientComponent->getUserId();
         if($userId == 0){
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户未登录",ErrorCode::ERROR_USER_NOT_LOGIN,array()));
         }
+
+        if($tUserId <= 0 || $userId == $tUserId){
+            return $this->renderUserNotLoginAjaxResponse();
+        }
         $userModel = new UserModel();
-        $userModel->resetPassword($userId,$password);
+        $userModel->resetPassword($tUserId,$password);
         return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,array()));
     }
 
@@ -179,5 +185,28 @@ class UserController extends Controller{
         $userModel = new UserModel();
         $userList = $userModel->getUserList();
         return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,$userList));
+    }
+
+    public function actionGetCurrentAreaLocation(){
+        $clientComponent = new ClientComponent();
+        $userId = $clientComponent->getUserId();
+        if($userId <= 0){
+            return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户未登录",ErrorCode::ERROR_USER_NOT_LOGIN,array()));
+        }
+        $area = $clientComponent->getCurrentArea();
+        if($area <= 0){
+            return $this->renderAjaxResponse($this->getAjaxResponse(false,"bad area id",ErrorCode::ERROR_COMMON_ERROR,array()));
+        }
+
+        $areaModel = new AreaModel();
+        $areaInfo = $areaModel->getStreetById($area);
+        if(empty($areaInfo)){
+            return $this->renderAjaxResponse($this->getAjaxResponse(false,"bad area info",ErrorCode::ERROR_COMMON_ERROR,array()));
+        }
+        $location = array(
+            "long"=>$areaInfo['long'],
+            "lat"=>$areaInfo['lat'],
+        );
+        return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,$location));
     }
 }
