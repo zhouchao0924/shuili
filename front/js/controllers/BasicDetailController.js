@@ -17,6 +17,9 @@ MetronicApp.controller('BasicDetailController', [
 
 			//article/getArticleInfoAjax
 			// 获取基本信息列表
+			var params = {
+				articleId:14
+			}
 			$.ajax({
 				url: Metronic.host + 'article/getArticleInfoAjax',
 				type: 'GET',
@@ -25,10 +28,11 @@ MetronicApp.controller('BasicDetailController', [
 				 withCredentials: true
 				},
 				crossDomain: true,
-				data: {articleId:1},
+				data: {data:JSON.stringify(params)},
 				success: function(data) {
 					if(data.success){
 						$scope.detail = data.data;
+						$scope.$apply();
 					}
 				},
 				error: function(xhr, data, status) {

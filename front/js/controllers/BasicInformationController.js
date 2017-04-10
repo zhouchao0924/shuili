@@ -17,18 +17,26 @@ MetronicApp.controller('BasicInformationController', [
 
 
 			// 获取基本信息
+			var params = {
+				articleType:1,//文章类型：1，基本情况，2，文档信息
+				searchKey:'',//搜索关键词 title
+				page:1,//页码
+				pageSize:10,//每页数量
+			}
 			$.ajax({
-				url: Metronic.host + 'user/GetCurrentAreaLocation',
+				url: Metronic.host + 'article/getArticleListAjax',
 				type: 'GET',
 				dataType: 'json',
 				xhrFields: {
 				 withCredentials: true
 				},
 				crossDomain: true,
-				data: {},
+				data: {data:JSON.stringify(params)},
 				success: function(data) {
-					if(data.long && data.lat){
-						mp.centerAndZoom(new window.BMap.Point(data.long, data.lat), 15);
+					if(data.success){
+						$scope.tops = data.topArticleList;
+						$scope.lists = data.articleList;
+						$scope.$apply();
 					}
 				},
 				error: function(xhr, data, status) {

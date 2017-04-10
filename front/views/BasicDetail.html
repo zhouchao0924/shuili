@@ -38,10 +38,10 @@
     <span ng-class="{true:'bold',false:''}[detail.isBoldTitle]">{{detail.title}}</span>
   </div>
   <div class="sub-title">
-    <span>{{detail.addTime}}</span>
+    <span>{{detail.updateTime}}</span>
   </div>
   <div class="content">
     <div class="imgx"><img src="{{detail.titleImgUrl}}" alt="" /></div>
-    <div class="contentx">{{detail.content}}</div>
+    <div class="contentx" ng-bind-html="detail.content"></div>
   </div>
 </div>
