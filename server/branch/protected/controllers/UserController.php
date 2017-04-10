@@ -171,7 +171,7 @@ class UserController extends Controller{
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户未登录",ErrorCode::ERROR_USER_NOT_LOGIN,array()));
         }
         $userModel = new UserModel();
-        if(!$userModel->isUserManageArea($userId,$streetId)){
+        if(!$this->isSuper && !$userModel->isUserManageArea($userId,$streetId)){
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"无对应权限",ErrorCode::ERROR_USER_DENY,array()));
         }
         $areaModel = new AreaModel();
