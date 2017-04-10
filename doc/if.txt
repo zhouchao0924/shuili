@@ -60,6 +60,7 @@
     url:/user/resetPassword
     method:get
     request:{
+        "userId": int 被修改的用户id
         "password":string
     }
     response:{

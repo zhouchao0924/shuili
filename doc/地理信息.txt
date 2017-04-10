@@ -33,3 +33,12 @@
         'id' int //上面接口id
     }
     response:{}
+
+4.获取当前选择地区经纬度信息
+    url:/user/GetCurrentAreaLocation
+    method:get
+    request: {}
+    response: {
+        "long": double 经度
+        "lat": double 纬度
+    }
