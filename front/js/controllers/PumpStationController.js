@@ -5,15 +5,16 @@ MetronicApp.controller('PumpStationController', [
 	'settings',
 	'$timeout',
 	'$compile',
-	'ajax1',
-	function($rootScope, $scope, settings, $timeout, $compile, ajax) {
+	'ajax',
+	'Shuffling',
+	function($rootScope, $scope, settings, $timeout, $compile, ajax, Shuffling) {
 		$scope.$on('$viewContentLoaded', function() {
 			// initialize core components
 			Metronic.initAjax();
 			// set default layout mode
 			$rootScope.settings.layout.pageBodySolid = false;
 			$rootScope.settings.layout.pageSidebarClosed = false;
-			PumpStationAdvanced.init($scope, $compile);
+			PumpStationAdvanced.init($scope, $compile, Shuffling);
 			$scope.emptyData = function() {
 				$scope.text = '';
 			};
@@ -23,4 +24,4 @@ MetronicApp.controller('PumpStationController', [
 			};
 		});
 	}
-]);;
+]);

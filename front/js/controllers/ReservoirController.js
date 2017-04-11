@@ -41,9 +41,22 @@ MetronicApp.controller('ReservoirController', [
 			$scope.DownLoad3 = function() {
 				window.open(Metronic.host + 'attachment/exportExample/3', '_blank');
 			};
-			$('#test1').on('click', function() {
-				layer.msg('Hello layer');
-			});
+			var layerImageJson = {
+				"title": "", //相册标题
+				"id": "", //相册id
+				"start": 0, //初始显示的图片序号，默认0
+				"data": [
+					{ //相册包含的图片，数组格式
+						"alt": "",
+						"pid": "", //图片id
+						"src": "", //原图地址
+						"thumb": "" //缩略图地址
+					}
+				]
+			}
+			$('#test').click(function() {
+				layer.photos({photos: layerImageJson, anim: 5});
+			})
 		});
 	}
 ]);

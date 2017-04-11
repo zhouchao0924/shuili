@@ -1,5 +1,5 @@
 var PumpStationAdvanced = function() {
-	var initTable3 = function($scope, $compile) {
+	var initTable3 = function($scope, $compile, Shuffling) {
 		var table = $('#sample_3');
 		var oTable = table.dataTable({
 			"language": {
@@ -76,8 +76,10 @@ var PumpStationAdvanced = function() {
 									n.manager,
 									n.managerPhone,
 									n.completionDate,
-									n.image,
-									n.extend
+									"",
+									n.extend,
+									// n.image
+									['http://onrnzg8zq.bkt.clouddn.com/0bd6d930f68a58b63f7b28a44e23e189.jpg', 'http://onrnzg8zq.bkt.clouddn.com/9a41242062db3c5715763e056f3114f7.jpg', 'http://onrnzg8zq.bkt.clouddn.com/a58e92bf10e0a4755c71875a3cf67282.jpg']
 								];
 								arr.push(temp);
 							});
@@ -87,16 +89,16 @@ var PumpStationAdvanced = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
-							table.find('tbody tr td:last-child').each(function(i, n) {
+							table.find('tbody tr td:nth-child(19)').each(function(i, n) {
 								var rowData = table.api().row(i).data();
 								if (!rowData) {
 									return false;
 								}
-								var edit = $('<a href="javascript:;" class="btn btn-xs blue"><i class="fa fa-edit"></i> 编辑 </a>');
-								edit.click(function(event) {
-									window.location.href = '#/edit-artist/' + rowData[0] + '/' + rowData[6];
-								});
-								$(this).append(edit);
+								var img = $('<a href=""> 查看 </a>');
+								img.unbind('click').bind('click', function(e) {
+									Shuffling(rowData[20]);
+								})
+								$(this).append($compile(img)($scope));
 							});
 						} else if (datas.code == 3) {
 							window.location.href = 'login.html';
@@ -137,11 +139,11 @@ var PumpStationAdvanced = function() {
 	}
 	return {
 		//main function to initiate the module
-		init: function($scope, $compile) {
+		init: function($scope, $compile, Shuffling) {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			initTable3($scope, $compile);
+			initTable3($scope, $compile, Shuffling);
 		}
 	};
 }();
