@@ -14,7 +14,7 @@ class ReservoirAndPoolController extends Controller{
     public function actionImport(){
         $uploadInfo = $this->getUploadFileInfo();
         if(empty($uploadInfo)){
-            return $this->renderBadParamsAjaxResponse();
+            return $this->renderAjaxResponse($this->getAjaxResponse(false,"no file upload",ErrorCode::ERROR_COMMON_ERROR,array()));
         }
         $client = new ClientComponent();
         $userId = $client->getUserId();
