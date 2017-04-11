@@ -1720,7 +1720,6 @@ MetronicApp.directive('tableTab', [
 			};
 		}
 	]);
-
 	//硬装中心工艺模板
 	MetronicApp.directive('craftTemplate', [
 		'$timeout',
@@ -1773,7 +1772,7 @@ MetronicApp.directive('tableTab', [
 					//删除行
 					scope.delRow = function() {
 						var craftTemplateVoList = scope.template.craftTemplateVoList;
-						console.log('delRow',scope.template.id, craftTemplateVoList[craftTemplateVoList.length - 1].id,scope.templateData.groupId)
+						console.log('delRow', scope.template.id, craftTemplateVoList[craftTemplateVoList.length - 1].id, scope.templateData.groupId)
 						ajax1('/hbms/project/deleteCraft/', {
 							"nodeId": scope.template.id,
 							"id": craftTemplateVoList[craftTemplateVoList.length - 1].id,
@@ -1813,13 +1812,11 @@ MetronicApp.directive('tableTab', [
 								scope.$parent.init();
 							})
 						}
-						
 					}
 				}
 			}
 		}
 	]);
-	
 	//单元格点选
 	MetronicApp.directive('tableCellDrag', [
 		'$timeout',
@@ -1894,8 +1891,7 @@ MetronicApp.directive('tableTab', [
 								if (mousedown) {
 									if (isColored) {
 										getTarget(startPoint, $(e.target)).removeClass('background_color')
-									}
-									else {
+									} else {
 										getTarget(startPoint, $(e.target)).addClass('background_color')
 									}
 								}
@@ -1952,7 +1948,6 @@ MetronicApp.directive('tableTab', [
 			};
 		}
 	]);
-
 	//单元格点选
 	// MetronicApp.directive('tableCellDrag', [
 	// 	'$timeout',
@@ -2683,17 +2678,15 @@ MetronicApp.directive('tableTab', [
 					scope.allchecked = (enent, datas) => {
 						if (event.target.checked) {
 							datas.forEach((m) => {
-								
-								if(m.unDeliveryPackage){
+								if (m.unDeliveryPackage) {
 									m.isSelected = true;
 									m.unDeliveryPackage.forEach((c) => {
-									c.isSelected = true;
-									c.uidList.forEach((d) => {
-										d.isSelected = true;
+										c.isSelected = true;
+										c.uidList.forEach((d) => {
+											d.isSelected = true;
+										})
 									})
-								})
 								}
-								
 							})
 						} else {
 							datas.forEach((m) => {
@@ -3026,16 +3019,21 @@ MetronicApp.directive('tableTab', [
 				restrict: 'E',
 				require: 'ngModel',
 				scope: {
-					ngModel: '='
+					ngModel: '=',
+					ngUrl: "@",
+					makeSure: "="
 				},
 				templateUrl: 'tpl/inputFiles.html',
 				link: function(scope, elem, attrs, ctrl) {
-					elem.on('change.bs.fileinput', function(e) {
-						var file = elem.find('.fileupload')[0]
-						if (file.files.length) {
-							qiniu(file).then(function(data) {
-								ctrl.$setViewValue(data)
-							})
+					scope.$watch('makeSure', function() {
+						if (scope.makeSure) {
+							var file = elem.find('.fileupload')[0]
+							if (file.files.length) {
+								qiniu(file, Metronic.host + scope.ngUrl).then(function(data) {
+									ctrl.$setViewValue(data);
+									location.reload();
+								})
+							}
 						}
 					})
 					elem.on('clear.bs.fileinput', function(e) {
@@ -3901,8 +3899,7 @@ MetronicApp.directive('tableTab', [
 		// 		};
 		// 	}
 		// ]);
-		
-/*
+		/*
 dialog(created by sunhan on 2017/02/14)
 	example:
 		<vi-dialog title="test" width="600" ng-if="dialogVisible">
@@ -3910,41 +3907,40 @@ dialog(created by sunhan on 2017/02/14)
 			<div class="dialog-footer">...</div>  //dialog底部
 		</vi-dialog>
  */
-MetronicApp.directive('viDialog', [
-	'$compile',
-	function($compile) {
-		return {
-			restrict: 'E',
-			transclude: true,
-			scope: {
-				title: '@',
-				width: '@'
-			},
-			templateUrl: 'tpl/common/viDialog.html',
-			link: function(scope, elem, attrs, ctrl, transclude) {
-				var dialogWidth = scope.width || 650;
-				elem.find('.vi-dialog').css({
-					'width': dialogWidth,
-					'left': ($('body').width() - dialogWidth) / 2
-				})
-				transclude(scope, function(clone, scope) {
-					elem.find('.vi-dialog-content div').append(clone[1])
-					elem.find('.vi-dialog-footer').append(clone[3])
-				});
-				scope.hide = function() {
-					scope.$parent.$parent.dialogVisible = false;
-				}
+		MetronicApp.directive('viDialog', [
+			'$compile',
+			function($compile) {
+				return {
+					restrict: 'E',
+					transclude: true,
+					scope: {
+						title: '@',
+						width: '@'
+					},
+					templateUrl: 'tpl/common/viDialog.html',
+					link: function(scope, elem, attrs, ctrl, transclude) {
+						var dialogWidth = scope.width || 650;
+						elem.find('.vi-dialog').css({
+							'width': dialogWidth,
+							'left': ($('body').width() - dialogWidth) / 2
+						})
+						transclude(scope, function(clone, scope) {
+							elem.find('.vi-dialog-content div').append(clone[1])
+							elem.find('.vi-dialog-footer').append(clone[3])
+						});
+						scope.hide = function() {
+							scope.$parent.$parent.dialogVisible = false;
+						}
+					}
+				};
 			}
-		};
-	}
-]);
-
-/*
+		]);
+		/*
 new dataTable (created by sunhan on 2017/02/18)
 	example:
 		<table-tab2
-	        table-params="tableParams" 
-	        table="table" 
+	        table-params="tableParams"
+	        table="table"
 	        tabs="[{
                 'index': 1,
                 'name': 'tab1'
@@ -3955,43 +3951,43 @@ new dataTable (created by sunhan on 2017/02/18)
 	        active="1">
 	    </table-tab2>
  */
-MetronicApp.directive('tableTab2', [
-	'dataTable',
-	'$timeout',
-	'queryFilter',
-	'$compile',
-	'userNow',
-	function(dataTable, $timeout, queryFilter, $compile, userNow) {
-		return {
-			restrict: 'E', 
-			templateUrl: 'tpl/tableTab2.html',
-			scope: {
-				tableParams: '=',
-				table: '=',
-				hideTab: '@',
-				tabs: '=',
-				active: '@'
-			},
-			link: function(scope, elem, attrs) {
-				var tableParams = scope.tableParams;
-				$timeout(function() {
-					scope.click(parseInt(scope.active));
-				})
-				var tableInstance;
-				scope.click = function(index) {
-					scope.active = index;
-					tableParams.conditionsBig = {
-						tabIndex: index  //传给后台的tab参数
-					}
-					if (!tableInstance) {
-						tableParams.id = '#sample_1'
-						tableParams.conditions = scope.$parent.searchDetail;
-						scope.table = tableInstance = dataTable.new(tableParams, scope);
-					} else {
-						tableInstance.tableSearch(scope.$parent.searchDetail, tableParams.conditionsBig)
+		MetronicApp.directive('tableTab2', [
+			'dataTable',
+			'$timeout',
+			'queryFilter',
+			'$compile',
+			'userNow',
+			function(dataTable, $timeout, queryFilter, $compile, userNow) {
+				return {
+					restrict: 'E',
+					templateUrl: 'tpl/tableTab2.html',
+					scope: {
+						tableParams: '=',
+						table: '=',
+						hideTab: '@',
+						tabs: '=',
+						active: '@'
+					},
+					link: function(scope, elem, attrs) {
+						var tableParams = scope.tableParams;
+						$timeout(function() {
+							scope.click(parseInt(scope.active));
+						})
+						var tableInstance;
+						scope.click = function(index) {
+							scope.active = index;
+							tableParams.conditionsBig = {
+								tabIndex: index //传给后台的tab参数
+							}
+							if (!tableInstance) {
+								tableParams.id = '#sample_1'
+								tableParams.conditions = scope.$parent.searchDetail;
+								scope.table = tableInstance = dataTable.new(tableParams, scope);
+							} else {
+								tableInstance.tableSearch(scope.$parent.searchDetail, tableParams.conditionsBig)
+							}
+						};
 					}
 				};
 			}
-		};
-	}
-]);
+		]);

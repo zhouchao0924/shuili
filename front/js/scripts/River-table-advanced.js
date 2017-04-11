@@ -74,8 +74,9 @@ var RiverAdvanced = function() {
 									n.planSituation.waterArea,
 									n.manageRank,
 									n.fullImage,
-									n.image,
-									n.desc
+									"",
+									n.desc,
+									n.image
 								];
 								arr.push(temp);
 							});
@@ -85,16 +86,16 @@ var RiverAdvanced = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
-							table.find('tbody tr td:last-child').each(function(i, n) {
+							table.find('tbody tr td:nth-child(17)').each(function(i, n) {
 								var rowData = table.api().row(i).data();
 								if (!rowData) {
 									return false;
 								}
-								var edit = $('<a href="javascript:;" class="btn btn-xs blue"><i class="fa fa-edit"></i> 编辑 </a>');
-								edit.click(function(event) {
-									window.location.href = '#/edit-artist/' + rowData[0] + '/' + rowData[6];
-								});
-								$(this).append(edit);
+								var img = $('<a href=""> 查看 </a>');
+								img.unbind('click').bind('click', function(e) {
+									Shuffling(rowData[18]);
+								})
+								$(this).append($compile(img)($scope));
 							});
 						} else {
 							alert(datas.ext.msg);

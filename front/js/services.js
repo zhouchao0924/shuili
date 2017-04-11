@@ -702,53 +702,23 @@ MetronicApp.factory('qiniu', [
 	'$q',
 	'blockUI',
 	function($q, blockUI) {
-		return function(file) {
+		return function(file, url) {
 			blockUI.block()
 			var deferred = $q.defer();
+			var formData = new FormData();
+			formData.append("efile", file.files[0]);
 			$.ajax({
-				url: Metronic.apihost + 'attachment/getUploadTokenAjax',
+				url: url,
 				type: 'POST',
-				dataType: 'json',
 				xhrFields: {
 					withCredentials: true
 				},
 				crossDomain: true,
-				data: {
-					data: JSON.stringify({})
-				},
+				processData: false,
+				contentType: false,
+				data: formData,
 				success: function(data) {
-					if (data.success) {
-						blockUI.block()
-						var token = data.data.token;
-						var key = data.data.key;
-						var domain = data.data.domain
-						var formData = new FormData();
-						formData.append("token", token);
-						formData.append("file", file.files[0]);
-						formData.append("accept", "text/plain");
-						$.ajax({
-							url: 'http://upload.qiniu.com',
-							type: 'POST',
-							dataType: 'json',
-							data: formData,
-							processData: false,
-							contentType: false,
-							success: function(data) {
-								deferred.resolve(domain + '/' + data.key);
-							},
-							error: function() {
-								console.debug('请检查网络');
-							},
-							complete: function() {
-								blockUI.unblock()
-							}
-						});
-					} else {
-						alert(data.message);
-					}
-				},
-				error: function(xhr, data, status) {
-					alert('请检查网络');
+					deferred.resolve(data);
 				},
 				complete: function() {
 					blockUI.unblock()
@@ -2338,7 +2308,7 @@ MetronicApp.factory('alertMessage', [
 		return function(type, content) {
 			var msgClass = 'vi-message' +
 			'-' + type;
-			var message = angular.element('<div class="vi-message ' + msgClass + '">' + '<div class="vi-message-content">' + content + '</div>' + '</div>');
+			var messaage = angular.element('<div class="vi-message ' + msgClass + '">' + '<div class="vi-message-content">' + content + '</div>' + '</div>');
 			$('.vi-message').remove();
 			$document.find('body').append(message);
 			$message = $('.vi-message');
@@ -2367,7 +2337,7 @@ MetronicApp.factory('Shuffling', function() {
 				"thumb": "" //缩略图地址
 			}
 			obj.src = n;
-			layerImageJson.data.push(obj);
+			erImageJson.data.push(obj);
 		});
 		layer.photos({photos: layerImageJson, anim: 5});
 	}

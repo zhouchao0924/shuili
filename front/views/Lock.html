@@ -120,16 +120,13 @@
 							<h4 style="color:orange;">我确认已经填写好样表数据信息</h4>
 						</div>
 						<div class="form-group">
-							<form action="http://139.199.27.165:8081/waterGate/import" method="post" enctype="multipart/form-data">
-								<input type="file" name="efile"/>
-								<input type="submit" value="确人导入"/>
-							</form>
+							<input-files ng-model="a" ng-url="waterGate/import" make-sure="MakeSureUpLoad"></input-files>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" ng-click="UpLoad3()">确定导入</button>
+				<button type="button" class="btn btn-primary" ng-click="UpLoad()">确定导入</button>
 				<button type="button" class="btn default" data-dismiss="modal" aria-hidden="true">不导入</button>
 			</div>
 		</div>
