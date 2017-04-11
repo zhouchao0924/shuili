@@ -1,5 +1,5 @@
 var FileInformationManagementAdvanced = function() {
-	var initTable3 = function($scope, $compile) {
+	var initTable3 = function($scope, $compile, Shuffling) {
 		var table = $('#sample_3');
 		var oTable = table.dataTable({
 			"language": {
@@ -191,11 +191,11 @@ var FileInformationManagementAdvanced = function() {
 	}
 	return {
 		//main function to initiate the module
-		init: function($scope, $compile) {
+		init: function($scope, $compile, Shuffling) {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			initTable3($scope, $compile);
+			initTable3($scope, $compile, Shuffling);
 		}
 	};
 }();

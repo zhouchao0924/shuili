@@ -13,7 +13,7 @@ MetronicApp.controller('CityManagementController', [
 			// set default layout mode
 			$rootScope.settings.layout.pageBodySolid = false;
 			$rootScope.settings.layout.pageSidebarClosed = false;
-			CityManagementAdvanced.init($scope, $compile);
+			CityManagementAdvanced.init($scope, $compile, Shuffling);
 		});
 	}
 ]);

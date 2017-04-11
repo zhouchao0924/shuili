@@ -1,5 +1,5 @@
 var LongRiverSystemAdvanced1 = function() {
-	var initTable = function($scope, $compile) {
+	var initTable = function($scope, $compile, Shuffling) {
 		var table = $('#sample_1');
 		var oTable = table.dataTable({
 			"language": {
@@ -113,16 +113,16 @@ var LongRiverSystemAdvanced1 = function() {
 	}
 	return {
 		//main function to initiate the module
-		init: function($scope, $compile) {
+		init: function($scope, $compile, Shuffling) {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			initTable($scope, $compile);
+			initTable($scope, $compile, Shuffling);
 		}
 	};
 }();
 var LongRiverSystemAdvanced2 = function() {
-	var initTable = function($scope, $compile) {
+	var initTable = function($scope, $compile, Shuffling) {
 		var table = $('#sample_2');
 		var oTable = table.dataTable({
 			"language": {
@@ -220,16 +220,16 @@ var LongRiverSystemAdvanced2 = function() {
 	}
 	return {
 		//main function to initiate the module
-		init: function($scope, $compile) {
+		init: function($scope, $compile, Shuffling) {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			initTable($scope, $compile);
+			initTable($scope, $compile, Shuffling);
 		}
 	};
 }();
 var LongRiverSystemAdvanced3 = function() {
-	var initTable = function($scope, $compile) {
+	var initTable = function($scope, $compile, Shuffling) {
 		var table = $('#sample_3');
 		var oTable = table.dataTable({
 			"language": {
@@ -327,16 +327,16 @@ var LongRiverSystemAdvanced3 = function() {
 	}
 	return {
 		//main function to initiate the module
-		init: function($scope, $compile) {
+		init: function($scope, $compile, Shuffling) {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			initTable($scope, $compile);
+			initTable($scope, $compile, Shuffling);
 		}
 	};
 }();
 var LongRiverSystemAdvanced4 = function() {
-	var initTable = function($scope, $compile) {
+	var initTable = function($scope, $compile, Shuffling) {
 		var table = $('#sample_4');
 		var oTable = table.dataTable({
 			"language": {
@@ -435,16 +435,16 @@ var LongRiverSystemAdvanced4 = function() {
 	}
 	return {
 		//main function to initiate the module
-		init: function($scope, $compile) {
+		init: function($scope, $compile, Shuffling) {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			initTable($scope, $compile);
+			initTable($scope, $compile, Shuffling);
 		}
 	};
 }();
 var LongRiverSystemAdvanced5 = function() {
-	var initTable = function($scope, $compile) {
+	var initTable = function($scope, $compile, Shuffling) {
 		var table = $('#sample_5');
 		var oTable = table.dataTable({
 			"language": {
@@ -553,11 +553,11 @@ var LongRiverSystemAdvanced5 = function() {
 	}
 	return {
 		//main function to initiate the module
-		init: function($scope, $compile) {
+		init: function($scope, $compile, Shuffling) {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			initTable($scope, $compile);
+			initTable($scope, $compile, Shuffling);
 		}
 	};
 }();

@@ -5,7 +5,8 @@ MetronicApp.controller('IrrigationController', [
 	'settings',
 	'$timeout',
 	'$compile',
-	function($rootScope, $scope, settings, $timeout, $compile) {
+	'Shuffling',
+	function($rootScope, $scope, settings, $timeout, $compile, Shuffling) {
 		$scope.$on('$viewContentLoaded', function() {
 			// initialize core components
 			Metronic.initAjax();
@@ -13,7 +14,7 @@ MetronicApp.controller('IrrigationController', [
 			$rootScope.settings.layout.pageBodySolid = false;
 			$rootScope.settings.layout.pageSidebarClosed = false;
 			//初始化表格
-			IrrigationAdvanced.init($scope, $compile);
+			IrrigationAdvanced.init($scope, $compile, Shuffling);
 			// 清空搜索数据
 			$scope.emptyData = function() {
 				$scope.text = '';

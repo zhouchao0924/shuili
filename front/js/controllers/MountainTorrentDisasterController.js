@@ -6,7 +6,8 @@ MetronicApp.controller('MountainTorrentDisasterController', [
 	'$timeout',
 	'$compile',
 	'ajax1',
-	function($rootScope, $scope, settings, $timeout, $compile, ajax) {
+	'Shuffling',
+	function($rootScope, $scope, settings, $timeout, $compile, ajax, Shuffling) {
 		$scope.$on('$viewContentLoaded', function() {
 			// initialize core components
 			Metronic.initAjax();
@@ -18,11 +19,11 @@ MetronicApp.controller('MountainTorrentDisasterController', [
 			$rootScope.settings.layout.pageBodySolid = false;
 			$rootScope.settings.layout.pageSidebarClosed = false;
 			//初始所有表格
-			MountainTorrentDisasterAdvanced1.init($scope, $compile);
-			MountainTorrentDisasterAdvanced2.init($scope, $compile);
-			MountainTorrentDisasterAdvanced3.init($scope, $compile);
-			MountainTorrentDisasterAdvanced4.init($scope, $compile);
-			MountainTorrentDisasterAdvanced5.init($scope, $compile);
+			MountainTorrentDisasterAdvanced1.init($scope, $compile, Shuffling);
+			MountainTorrentDisasterAdvanced2.init($scope, $compile, Shuffling);
+			MountainTorrentDisasterAdvanced3.init($scope, $compile, Shuffling);
+			MountainTorrentDisasterAdvanced4.init($scope, $compile, Shuffling);
+			MountainTorrentDisasterAdvanced5.init($scope, $compile, Shuffling);
 			//清空搜索数据
 			$scope.emptyData1 = function() {
 				$scope.text1 = '';

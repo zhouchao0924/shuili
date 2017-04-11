@@ -6,7 +6,8 @@ MetronicApp.controller('ReservoirController', [
 	'$timeout',
 	'$compile',
 	'ajax1',
-	function($rootScope, $scope, settings, $timeout, $compile, ajax) {
+	'Shuffling',
+	function($rootScope, $scope, settings, $timeout, $compile, ajax, Shuffling) {
 		$scope.$on('$viewContentLoaded', function() {
 			// initialize core components
 			Metronic.initAjax();
@@ -18,9 +19,9 @@ MetronicApp.controller('ReservoirController', [
 			$rootScope.settings.layout.pageBodySolid = false;
 			$rootScope.settings.layout.pageSidebarClosed = false;
 			//初始化所有表格
-			ReservoirAdvanced1.init($scope, $compile);
-			ReservoirAdvanced2.init($scope, $compile);
-			ReservoirAdvanced3.init($scope, $compile);
+			ReservoirAdvanced1.init($scope, $compile, Shuffling);
+			ReservoirAdvanced2.init($scope, $compile, Shuffling);
+			ReservoirAdvanced3.init($scope, $compile, Shuffling);
 			//清空搜索数据
 			$scope.emptyData1 = function() {
 				$scope.text1 = '';

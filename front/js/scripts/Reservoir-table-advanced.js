@@ -1,5 +1,5 @@
 var ReservoirAdvanced1 = function() {
-	var initTable = function($scope, $compile) {
+	var initTable = function($scope, $compile, Shuffling) {
 		var table = $('#sample_1');
 		var oTable = table.dataTable({
 			"language": {
@@ -132,16 +132,16 @@ var ReservoirAdvanced1 = function() {
 	}
 	return {
 		//main function to initiate the module
-		init: function($scope, $compile) {
+		init: function($scope, $compile, Shuffling) {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			initTable($scope, $compile);
+			initTable($scope, $compile, Shuffling);
 		}
 	};
 }();
 var ReservoirAdvanced2 = function() {
-	var initTable = function($scope, $compile) {
+	var initTable = function($scope, $compile, Shuffling) {
 		var table = $('#sample_2');
 		var oTable = table.dataTable({
 			"language": {
@@ -259,16 +259,16 @@ var ReservoirAdvanced2 = function() {
 	}
 	return {
 		//main function to initiate the module
-		init: function($scope, $compile) {
+		init: function($scope, $compile, Shuffling) {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			initTable($scope, $compile);
+			initTable($scope, $compile, Shuffling);
 		}
 	};
 }();
 var ReservoirAdvanced3 = function() {
-	var initTable = function($scope, $compile) {
+	var initTable = function($scope, $compile, Shuffling) {
 		var table = $('#sample_3');
 		var oTable = table.dataTable({
 			"language": {
@@ -378,11 +378,11 @@ var ReservoirAdvanced3 = function() {
 	}
 	return {
 		//main function to initiate the module
-		init: function($scope, $compile) {
+		init: function($scope, $compile, Shuffling) {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			initTable($scope, $compile);
+			initTable($scope, $compile, Shuffling);
 		}
 	};
 }();

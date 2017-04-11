@@ -1,5 +1,5 @@
 var VideoMonitoringAdvanced = function() {
-	var initTable3 = function($scope, $compile) {
+	var initTable3 = function($scope, $compile, Shuffling) {
 		var table = $('#sample_3');
 		var conditions = [];
 		var oTable = table.dataTable({
@@ -122,12 +122,12 @@ var VideoMonitoringAdvanced = function() {
 	}
 	return {
 		//main function to initiate the module
-		init: function($scope, $compile) {
+		init: function($scope, $compile, Shuffling) {
 			if (!jQuery().dataTable) {
 				return;
 			}
 			console.log('me 1');
-			initTable3($scope, $compile);
+			initTable3($scope, $compile, Shuffling);
 			console.log('me 2');
 		}
 	};

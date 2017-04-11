@@ -13,7 +13,7 @@ MetronicApp.controller('BasicInformationController', [
 			// set default layout mode
 			$rootScope.settings.layout.pageBodySolid = false;
 			$rootScope.settings.layout.pageSidebarClosed = false;
-			// ArchiveAdvanced.init($scope, $compile);
+			// ArchiveAdvanced.init($scope, $compile, Shuffling);
 
 
 			// 获取基本信息

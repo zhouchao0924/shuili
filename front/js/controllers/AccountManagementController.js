@@ -4,7 +4,8 @@ MetronicApp.controller('AccountManagementController', [
 	'$scope',
 	'settings',
 	'$compile',
-	function($rootScope, $scope, settings, $compile) {
+	'Shuffling',
+	function($rootScope, $scope, settings, $compile, Shuffling) {
 		$scope.$on('$viewContentLoaded', function() {
 			// initialize core components
 			Metronic.initAjax();
@@ -70,7 +71,7 @@ MetronicApp.controller('AccountManagementController', [
 					label.remove();
 				}
 			};
-			AccountManagementAdvanced.init($scope, $compile, validate_filed);
+			AccountManagementAdvanced.init($scope, $compile, Shuffling, validate_filed);
 			//添加管理员
 			$scope.addmanagers = function() {
 				var validate = $("#articleForm").validate(validate_filed);
