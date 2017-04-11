@@ -17,6 +17,8 @@ MetronicApp.controller('GEOInfoController', [
 
 			var curlat = 0;
 			var curlon = 0;
+			var curid = undefined;
+			var points = [];
 
 			//编辑器初始化
 			var articleUm = '';
@@ -88,13 +90,49 @@ MetronicApp.controller('GEOInfoController', [
 
 				mp.addEventListener("click",function(e){
 					// alert(e.point.lng + "," + e.point.lat);
-					curlon = e.point.lng;
-					curlat = e.point.lat;
+					// curlon = e.point.lng;
+					// curlat = e.point.lat;
 					console.log(e,8888);
 					if(e.overlay){
+						curlon = e.overlay.point.lng;
+						curlat = e.overlay.point.lat;
 						$('#modalview').modal('show');
 						// 比对经纬度获得id
-						
+						console.log(points,7777);
+						for(var i=0;i<points.length;i++){
+							console.log(points[i].longitude,curlon,points[i].latitude,curlat);
+							if(points[i].longitude==curlon&&points[i].latitude==curlat){
+								var id = points[i].id;
+								curid = id;
+								// 获取地理位置详情
+								var params = {
+									pointId:parseInt(id)
+								}
+								// function getAllPoint(){
+									$.ajax({
+										url: Metronic.host + 'geographyInfo/getInfoDesc',
+										type: 'GET',
+										dataType: 'json',
+										xhrFields: {
+										 withCredentials: true
+										},
+										crossDomain: true,
+										data: {data:JSON.stringify(params)},
+										success: function(data) {
+										 if (data.success) {
+												//
+												$scope.pointdetail = data.data;
+												$scope.$apply();
+										 }
+										},
+										error: function(xhr, data, status) {
+											//  alert('请检查网络');
+										}
+									});
+								// }
+							}
+						}
+
 					}else{
 						$('#modaladd').modal('show');
 					}
@@ -141,6 +179,7 @@ MetronicApp.controller('GEOInfoController', [
 						success: function(data) {
 						 if (data.success && data.data.length>0) {
 								//
+								points = data.data;
 								listPoints(data.data);
 						 }
 						},
@@ -189,12 +228,45 @@ MetronicApp.controller('GEOInfoController', [
 
 				// 编辑事件
 				$('#edit').click(function(e){
+					// 塞值
+					$('#eTitle').val($scope.pointdetail.title);
+					$('#eBold').val($scope.pointdetail.isBold);
+					articleUm.setContent($scope.pointdetail.content);
 					$('#modaledit').modal('show');
 					$('#modalview').modal('hide');
 				});
 
+				// 保存事件
+				$('#save').click(function(e){
+					var params = {
+						pointId:curid,
+						title:$('#eTitle').val(),
+						isBold:$('#eBold').is(':checked'),
+						content:articleUm.getContent()
+					}
+					$.ajax({
+						url: Metronic.host + 'geographyInfo/updateInfoDesc',
+						type: 'GET',
+						dataType: 'json',
+						xhrFields: {
+						 withCredentials: true
+						},
+						crossDomain: true,
+						data: {data:JSON.stringify(params)},
+						success: function(data) {
+						 if (data.success) {
+								//
+								$('#modaledit').modal('hide');
+						 }else{
 
+						 }
+						},
+						error: function(xhr, data, status) {
+							//  alert('请检查网络');
+						}
+					});
 
+				})
 
 			}
 
