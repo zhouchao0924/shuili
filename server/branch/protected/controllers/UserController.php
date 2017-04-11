@@ -32,6 +32,7 @@ class UserController extends Controller{
             "userId"=>$userInfo['id'],
             "roleId"=>$userInfo['role_id']
         );
+        OperatorLogModel::addLog($userInfo['id'],$userInfo['name'],$userInfo['name']."登录成功");
         return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,$userData));
     }
 
@@ -70,7 +71,8 @@ class UserController extends Controller{
         }
         $userModel = new UserModel();
         $result = $userModel->addUser($name,$password,$roleId,$desc);
-
+        $userInfo = $component->getUserInfo();
+        OperatorLogModel::addLog($userInfo['userId'],$userInfo['userName'],"添加管理员".$name);
         if($result != ErrorCode::SUCCESS){
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"添加用户错误",$result,array()));
         }
@@ -87,6 +89,9 @@ class UserController extends Controller{
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户未登录",ErrorCode::ERROR_USER_NOT_LOGIN,array()));
         }
         $clientComponent->unsetUserClientInfo();
+        $userInfo = $clientComponent->getUserInfo();
+        OperatorLogModel::addLog($userInfo['userId'],$userInfo['userName'],$userInfo['userName']."登出成功");
+
         return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,array()));
     }
 
@@ -108,7 +113,14 @@ class UserController extends Controller{
             return $this->renderUserNotLoginAjaxResponse();
         }
         $userModel = new UserModel();
+        $uinfo = $userModel->getUserById($tUserId);
+        if(empty($uinfo)){
+            return $this->renderAjaxResponse($this->getAjaxResponse(false,"参数错误",ErrorCode::ERROR_PARAMS,array()));
+        }
         $userModel->resetPassword($tUserId,$password);
+        $userInfo = $clientComponent->getUserInfo();
+
+        OperatorLogModel::addLog($userInfo['userId'],$userInfo['userName'],"重置用户".$uinfo['name']."密码");
         return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,array()));
     }
 
