@@ -52,8 +52,7 @@ class ExcelTemplateModel{
 
     public function data2Db($lineArray,$extra = array()){
         $streetIdColName = $this->config->getStreetIdColName();
-        if(isset($extra[$streetIdColName]) || $extra[$streetIdColName] <= 0){
-            print_r($extra);
+        if(isset($extra[$streetIdColName]) && $extra[$streetIdColName] <= 0){
             throw new Exception("没有选择地区");
         }
         $this->parse($lineArray);
