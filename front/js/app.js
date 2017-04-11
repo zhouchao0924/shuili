@@ -177,7 +177,6 @@ MetronicApp.config([
 								'assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css?v=' + MetronicApp.version,
 								'assets/global/plugins/datatables/all.min.js?v=' + MetronicApp.version,
 								'assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=' + MetronicApp.version,
-								// 'js/scripts/Reservoir-table-advanced.js?v=' + MetronicApp.version,
 								'js/controllers/YYTownController.js?v=' + MetronicApp.version
 							]
 						});
@@ -203,7 +202,6 @@ MetronicApp.config([
 								'assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css?v=' + MetronicApp.version,
 								'assets/global/plugins/datatables/all.min.js?v=' + MetronicApp.version,
 								'assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=' + MetronicApp.version,
-								// 'js/scripts/Reservoir-table-advanced.js?v=' + MetronicApp.version,
 								'js/controllers/BasicInformationController.js?v=' + MetronicApp.version
 							]
 						});
@@ -229,7 +227,6 @@ MetronicApp.config([
 								'assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css?v=' + MetronicApp.version,
 								'assets/global/plugins/datatables/all.min.js?v=' + MetronicApp.version,
 								'assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=' + MetronicApp.version,
-								// 'js/scripts/Reservoir-table-advanced.js?v=' + MetronicApp.version,
 								'js/controllers/BasicDetailController.js?v=' + MetronicApp.version
 							]
 						});
@@ -261,7 +258,6 @@ MetronicApp.config([
 								'assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css?v=' + MetronicApp.version,
 								'assets/global/plugins/datatables/all.min.js?v=' + MetronicApp.version,
 								'assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=' + MetronicApp.version,
-								// 'js/scripts/Reservoir-table-advanced.js?v=' + MetronicApp.version,
 								'js/controllers/GEOInfoController.js?v=' + MetronicApp.version
 							]
 						});
@@ -286,6 +282,9 @@ MetronicApp.config([
 								'assets/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css?v=' + MetronicApp.version,
 								'assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css?v=' + MetronicApp.version,
 								'assets/global/plugins/datatables/all.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/carousel-owl-carousel/owl-carousel/owl.carousel.css?v=' + MetronicApp.version,
+								'assets/global/plugins/carousel-owl-carousel/owl-carousel/owl.theme.css?v=' + MetronicApp.version,
+								'assets/global/plugins/carousel-owl-carousel/owl-carousel/owl.carousel.js?v=' + MetronicApp.version,
 								'assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=' + MetronicApp.version,
 								'js/scripts/Reservoir-table-advanced.js?v=' + MetronicApp.version,
 								'js/controllers/ReservoirController.js?v=' + MetronicApp.version

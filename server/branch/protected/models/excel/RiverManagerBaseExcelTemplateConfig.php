@@ -19,6 +19,7 @@ class RiverManagerBaseExcelTemplateConfig extends ExcelTemplateConfig{
         'position'=>'职位',
         'contact_info'=>'联系方式',
         'police'=>'河道警长',
+        'police_contact_info'=>"警长联系方式",
     );
 
     protected $printExtraItem = array(

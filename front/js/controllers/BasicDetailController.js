@@ -6,31 +6,33 @@ MetronicApp.controller('BasicDetailController', [
 	'$timeout',
 	'$compile',
 	'ajax1',
-	function($rootScope, $scope, settings, $timeout, $compile, ajax) {
+	'Shuffling',
+	function($rootScope, $scope, settings, $timeout, $compile, ajax, Shuffling) {
 		$scope.$on('$viewContentLoaded', function(root) {
 			// initialize core components
 			Metronic.initAjax();
 			// set default layout mode
 			$rootScope.settings.layout.pageBodySolid = false;
 			$rootScope.settings.layout.pageSidebarClosed = false;
-			// ArchiveAdvanced.init($scope, $compile);
-
+			// ArchiveAdvanced.init($scope, $compile, Shuffling);
 			//article/getArticleInfoAjax
 			// 获取基本信息列表
 			var params = {
-				articleId:root.currentScope.$state.params.id
+				articleId: root.currentScope.$state.params.id
 			}
 			$.ajax({
 				url: Metronic.host + 'article/getArticleInfoAjax',
 				type: 'GET',
 				dataType: 'json',
 				xhrFields: {
-				 withCredentials: true
+					withCredentials: true
 				},
 				crossDomain: true,
-				data: {data:JSON.stringify(params)},
+				data: {
+					data: JSON.stringify(params)
+				},
 				success: function(data) {
-					if(data.success){
+					if (data.success) {
 						$scope.detail = data.data;
 						$scope.$apply();
 					}

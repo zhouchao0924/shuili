@@ -1,5 +1,5 @@
 var MountainTorrentDisasterAdvanced1 = function() {
-	var initTable = function($scope, $compile) {
+	var initTable = function($scope, $compile, Shuffling) {
 		var table = $('#sample_1');
 		var oTable = table.dataTable({
 			"language": {
@@ -110,16 +110,16 @@ var MountainTorrentDisasterAdvanced1 = function() {
 	}
 	return {
 		//main function to initiate the module
-		init: function($scope, $compile) {
+		init: function($scope, $compile, Shuffling) {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			initTable($scope, $compile);
+			initTable($scope, $compile, Shuffling);
 		}
 	};
 }();
 var MountainTorrentDisasterAdvanced2 = function() {
-	var initTable = function($scope, $compile) {
+	var initTable = function($scope, $compile, Shuffling) {
 		var table = $('#sample_2');
 		var oTable = table.dataTable({
 			"language": {
@@ -217,16 +217,16 @@ var MountainTorrentDisasterAdvanced2 = function() {
 	}
 	return {
 		//main function to initiate the module
-		init: function($scope, $compile) {
+		init: function($scope, $compile, Shuffling) {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			initTable($scope, $compile);
+			initTable($scope, $compile, Shuffling);
 		}
 	};
 }();
 var MountainTorrentDisasterAdvanced3 = function() {
-	var initTable = function($scope, $compile) {
+	var initTable = function($scope, $compile, Shuffling) {
 		var table = $('#sample_3');
 		var oTable = table.dataTable({
 			"language": {
@@ -324,16 +324,16 @@ var MountainTorrentDisasterAdvanced3 = function() {
 	}
 	return {
 		//main function to initiate the module
-		init: function($scope, $compile) {
+		init: function($scope, $compile, Shuffling) {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			initTable($scope, $compile);
+			initTable($scope, $compile, Shuffling);
 		}
 	};
 }();
 var MountainTorrentDisasterAdvanced4 = function() {
-	var initTable = function($scope, $compile) {
+	var initTable = function($scope, $compile, Shuffling) {
 		var table = $('#sample_4');
 		var oTable = table.dataTable({
 			"language": {
@@ -432,16 +432,16 @@ var MountainTorrentDisasterAdvanced4 = function() {
 	}
 	return {
 		//main function to initiate the module
-		init: function($scope, $compile) {
+		init: function($scope, $compile, Shuffling) {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			initTable($scope, $compile);
+			initTable($scope, $compile, Shuffling);
 		}
 	};
 }();
 var MountainTorrentDisasterAdvanced5 = function() {
-	var initTable = function($scope, $compile) {
+	var initTable = function($scope, $compile, Shuffling) {
 		var table = $('#sample_5');
 		var oTable = table.dataTable({
 			"language": {
@@ -550,11 +550,11 @@ var MountainTorrentDisasterAdvanced5 = function() {
 	}
 	return {
 		//main function to initiate the module
-		init: function($scope, $compile) {
+		init: function($scope, $compile, Shuffling) {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			initTable($scope, $compile);
+			initTable($scope, $compile, Shuffling);
 		}
 	};
 }();

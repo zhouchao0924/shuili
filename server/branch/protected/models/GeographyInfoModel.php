@@ -76,4 +76,70 @@ class GeographyInfoModel{
 
         WpGeographyPointsDao::getInstance("WpGeographyPoints")->update($cols,$conditions,$params);
     }
+
+    /**
+     * @param $pointId
+     * @param $userId
+     * @param $title
+     * @param $isBold
+     * @param $content
+     */
+    public function editInfo($pointId,$userId,$title,$isBold,$content){
+        //按照志民要求，先删除所有指定id的内容，再增加
+        $conditions = array(
+            "and",
+            "geography_points_id=:pointId",
+        );
+        $params = array(
+            ":pointId"=>$pointId,
+        );
+        $cols = array(
+            "del_flag"=>1,
+        );
+
+        $this->_getWpGeographyInfoDao()->update($cols,$conditions,$params);
+        //增加一条新的
+        $insertData = array(
+            'title' => $title,
+            'content' => $content,
+            'add_time' => date("Y-m-d H:i:s"),
+            'is_bold' => $isBold,
+            'add_user_id' => $userId,
+            'geography_points_id' => $pointId,
+
+        );
+
+        $this->_getWpGeographyInfoDao()->baseInsert($insertData);
+    }
+
+    public function getInfo($pointId){
+        $conditions = array(
+            "and",
+            "geography_points_id = :pointId",
+            "del_flag = 0",
+        );
+        $params = array(
+            ":pointId"=>$pointId,
+        );
+
+        $orderBy = " id desc";
+        $returnDate = $this->_getWpGeographyInfoDao()->select("*",$conditions,$params,false,$orderBy);
+        return array(
+            'pointId' => $pointId,
+            'title' => $returnDate['title'],
+            'updateTime' => $returnDate['update_time'],
+            'isBold' => $returnDate['is_bold'],
+            'content' => $returnDate['content'],
+            'addTime' => $returnDate['add_time'],
+        );
+    }
+
+    /**
+     * @return WpGeographyInfoDao
+     */
+    private function _getWpGeographyInfoDao(){
+       return WpGeographyInfoDao::getInstance("WpGeographyInfo");
+    }
+
+
 }

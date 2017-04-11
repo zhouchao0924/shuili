@@ -160,6 +160,7 @@ abstract class ExcelTemplateConfig{
         $data = array(
             "totalPage"=>ceil($totalCount/$perPageCount),
             "totalCount"=>$totalCount,
+            "pageRowCount"=>$perPageCount,
             "page"=>$page,
             "list"=>array(),
         );

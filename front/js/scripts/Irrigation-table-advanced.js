@@ -1,5 +1,5 @@
 var IrrigationAdvanced = function() {
-	var initTable3 = function($scope, $compile) {
+	var initTable3 = function($scope, $compile, Shuffling) {
 		var table = $('#sample_3');
 		var oTable = table.dataTable({
 			"language": {
@@ -120,7 +120,6 @@ var IrrigationAdvanced = function() {
 				});
 			}
 		});
-		var tableWrapper = $('#sample_3_wrapper');
 		$('#searchBtn').click(function(e) {
 			table.DataTable().ajax.reload();
 		});
@@ -133,11 +132,11 @@ var IrrigationAdvanced = function() {
 	}
 	return {
 		//main function to initiate the module
-		init: function($scope, $compile) {
+		init: function($scope, $compile, Shuffling) {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			initTable3($scope, $compile);
+			initTable3($scope, $compile, Shuffling);
 		}
 	};
 }();

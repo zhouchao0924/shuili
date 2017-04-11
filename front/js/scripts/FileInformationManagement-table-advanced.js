@@ -1,5 +1,5 @@
 var FileInformationManagementAdvanced = function() {
-	var initTable3 = function($scope, $compile) {
+	var initTable3 = function($scope, $compile, Shuffling) {
 		var table = $('#sample_3');
 		var oTable = table.dataTable({
 			"language": {
@@ -45,7 +45,7 @@ var FileInformationManagementAdvanced = function() {
 				};
 				Metronic.blockUI({message: '<div style="background:rgba(0,0,0,0.3);padding:10px;font-size:16px;font-weight:bold;color:#fff;">正在加载...</div>', textOnly: true});
 				$.ajax({
-					url: Metronic.host + 'article/getArticleListAjax',
+					url: Metronic.host + 'article/getAllArticleListAjax',
 					type: 'GET',
 					dataType: 'json',
 					xhrFields: {
@@ -191,11 +191,11 @@ var FileInformationManagementAdvanced = function() {
 	}
 	return {
 		//main function to initiate the module
-		init: function($scope, $compile) {
+		init: function($scope, $compile, Shuffling) {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			initTable3($scope, $compile);
+			initTable3($scope, $compile, Shuffling);
 		}
 	};
 }();

@@ -1,5 +1,5 @@
 var ReservoirAdvanced1 = function() {
-	var initTable = function($scope, $compile) {
+	var initTable = function($scope, $compile, Shuffling) {
 		var table = $('#sample_1');
 		var oTable = table.dataTable({
 			"language": {
@@ -59,34 +59,38 @@ var ReservoirAdvanced1 = function() {
 							$.each(datas.data.list || [], function(i, n) {
 								var temp = [
 									n.name,
-									n.project_scale,
-									n.storage_capacity.xiaoheshuiwei,
-									n.storage_capacity.zongkurong,
-									n.storage_capacity.shejishuiwei,
-									n.storage_capacity.xiangyinkurong,
-									n.storage_capacity.zhengchangshuiwei,
-									n.storage_capacity.zhengchangkurong,
+									n.projectScale,
+									n.catchmentArea,
+									n.storageCapacity.xiaoheshuiwei,
+									n.storageCapacity.zongkurong,
+									n.storageCapacity.shejishuiwei,
+									n.storageCapacity.xiangyinkurong,
+									n.storageCapacity.zhengchangshuiwei,
+									n.storageCapacity.zhengchangkurong,
 									n.dam.baxing,
 									n.dam.dibagaocheng,
 									n.dam.bagao,
 									n.dam.bachang,
-									n.flood_discharge_fcailities.xingshi,
-									n.flood_discharge_fcailities.dibagaocheng,
-									n.flood_discharge_fcailities.kuandu,
-									n.conveyance_fcailities.xingshi,
-									n.conveyance_fcailities.chicun,
-									n.conveyance_fcailities.jinkougaocheng,
-									n.conveyance_fcailities.chukougaocheng,
+									n.floodDischargeFcailities.xingshi,
+									n.floodDischargeFcailities.dibagaocheng,
+									n.floodDischargeFcailities.kuandu,
+									n.conveyanceFcailities.xingshi,
+									n.conveyanceFcailities.chicun,
+									n.conveyanceFcailities.jinkougaocheng,
+									n.conveyanceFcailities.chukougaocheng,
 									n.discharge.shejibiaozhun,
 									n.discharge.hexiaobiaozhun,
-									n.control_level.meixunqi,
-									n.control_level.taixunqi,
+									n.controlLevel.meixunqi,
+									n.controlLevel.taixunqi,
 									n.extend,
-									n.full_image,
+									n.fullImage,
+									"",
 									n.manager.username,
 									n.manager.phone,
 									n.inspector.username,
-									n.inspector.phone
+									n.inspector.phone,
+									"",
+									n.image
 								];
 								arr.push(temp);
 							});
@@ -96,21 +100,17 @@ var ReservoirAdvanced1 = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
-							table.find('tbody tr td:last-child').each(function(i, n) {
+							table.find('tbody tr td:nth-child(26)').each(function(i, n) {
 								var rowData = table.api().row(i).data();
 								if (!rowData) {
 									return false;
 								}
-								var edit = $('<a href="javascript:;" class="btn btn-xs blue"><i class="fa fa-edit"></i> 编辑 </a>');
-								edit.click(function(event) {
-									window.location.href = '#/edit-artist/' + rowData[0] + '/' + rowData[6];
-								});
-								$(this).append(edit);
+								var img = $('<a href="javascript:;"> 查看 </a>');
+								img.click(function(event) {});
+								$(this).append($compile(img)($scope));
 							});
-						} else if (datas.code == 3) {
-							window.location.href = 'login.html';
 						} else {
-							alert(datas.ext.msg);
+							alert(datas.message);
 							Metronic.unblockUI();
 						}
 					},
@@ -132,16 +132,16 @@ var ReservoirAdvanced1 = function() {
 	}
 	return {
 		//main function to initiate the module
-		init: function($scope, $compile) {
+		init: function($scope, $compile, Shuffling) {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			initTable($scope, $compile);
+			initTable($scope, $compile, Shuffling);
 		}
 	};
 }();
 var ReservoirAdvanced2 = function() {
-	var initTable = function($scope, $compile) {
+	var initTable = function($scope, $compile, Shuffling) {
 		var table = $('#sample_2');
 		var oTable = table.dataTable({
 			"language": {
@@ -185,7 +185,7 @@ var ReservoirAdvanced2 = function() {
 				};
 				Metronic.blockUI({message: '<div style="background:rgba(0,0,0,0.3);padding:10px;font-size:16px;font-weight:bold;color:#fff;">正在加载...</div>', textOnly: true});
 				$.ajax({
-					url: Metronic.host + 'flood/getFloodLeaderInfoList',
+					url: Metronic.host + 'hillPond/getList',
 					type: 'GET',
 					dataType: 'json',
 					xhrFields: {
@@ -201,12 +201,32 @@ var ReservoirAdvanced2 = function() {
 							$.each(datas.data.list || [], function(i, n) {
 								var temp = [
 									n.id,
-									n.post,
-									n.leader,
-									n.job,
-									n.cell,
-									n.uptime,
-									n.desc
+									n.hillPondName,
+									n.catchmentArea,
+									n.storageCapacity.xiaoheshuiwei,
+									n.storageCapacity.zongkurong,
+									n.storageCapacity.shejishuiwei,
+									n.storageCapacity.xiangyinkurong,
+									n.storageCapacity.zhengchangshuiwei,
+									n.storageCapacity.zhengchangkurong,
+									n.dam.baxing,
+									n.dam.dibagaocheng,
+									n.dam.bagao,
+									n.dam.bachang,
+									n.floodDischargeFcailities.xingshi,
+									n.floodDischargeFcailities.dibagaocheng,
+									n.floodDischargeFcailities.kuandu,
+									n.conveyanceFcailities.xingshi,
+									n.conveyanceFcailities.chicun,
+									n.conveyanceFcailities.jinkougaocheng,
+									n.conveyanceFcailities.chukougaocheng,
+									n.image,
+									n.extend,
+									n.manager.username,
+									n.manager.phone,
+									n.inspector.username,
+									n.inspector.phone,
+									""
 								];
 								arr.push(temp);
 							});
@@ -239,16 +259,16 @@ var ReservoirAdvanced2 = function() {
 	}
 	return {
 		//main function to initiate the module
-		init: function($scope, $compile) {
+		init: function($scope, $compile, Shuffling) {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			initTable($scope, $compile);
+			initTable($scope, $compile, Shuffling);
 		}
 	};
 }();
 var ReservoirAdvanced3 = function() {
-	var initTable = function($scope, $compile) {
+	var initTable = function($scope, $compile, Shuffling) {
 		var table = $('#sample_3');
 		var oTable = table.dataTable({
 			"language": {
@@ -292,7 +312,7 @@ var ReservoirAdvanced3 = function() {
 				};
 				Metronic.blockUI({message: '<div style="background:rgba(0,0,0,0.3);padding:10px;font-size:16px;font-weight:bold;color:#fff;">正在加载...</div>', textOnly: true});
 				$.ajax({
-					url: Metronic.host + 'flood/getFloodOwnerInfoList',
+					url: Metronic.host + 'WaterConservancy/getList',
 					type: 'GET',
 					dataType: 'json',
 					xhrFields: {
@@ -307,13 +327,25 @@ var ReservoirAdvanced3 = function() {
 							var arr = [];
 							$.each(datas.data.list || [], function(i, n) {
 								var temp = [
-									n.id,
-									n.job,
-									n.village,
-									n.owner.name,
-									n.owner.post,
-									n.owner.cell,
-									n.desc
+									n.name,
+									n.township,
+									n.basin,
+									n.catchmentArea,
+									n.diversion,
+									n.head,
+									n.designCapacity,
+									n.installedCapacity,
+									n.plantLocation.jindu,
+									n.plantLocation.weidu,
+									n.commissionningDate,
+									n.reform,
+									n.ownership,
+									n.extend,
+									n.floodDischargeFcailities.dibagaocheng,
+									"",
+									"",
+									n.manager.username,
+									n.manager.phone
 								];
 								arr.push(temp);
 							});
@@ -346,11 +378,11 @@ var ReservoirAdvanced3 = function() {
 	}
 	return {
 		//main function to initiate the module
-		init: function($scope, $compile) {
+		init: function($scope, $compile, Shuffling) {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			initTable($scope, $compile);
+			initTable($scope, $compile, Shuffling);
 		}
 	};
 }();

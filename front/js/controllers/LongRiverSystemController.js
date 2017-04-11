@@ -6,7 +6,8 @@ MetronicApp.controller('LongRiverSystemController', [
 	'$timeout',
 	'$compile',
 	'ajax1',
-	function($rootScope, $scope, settings, $timeout, $compile, ajax) {
+	'Shuffling',
+	function($rootScope, $scope, settings, $timeout, $compile, ajax, Shuffling) {
 		$scope.$on('$viewContentLoaded', function() {
 			// initialize core components
 			Metronic.initAjax();
@@ -18,11 +19,11 @@ MetronicApp.controller('LongRiverSystemController', [
 			$rootScope.settings.layout.pageBodySolid = false;
 			$rootScope.settings.layout.pageSidebarClosed = false;
 			//初始所有表格
-			LongRiverSystemAdvanced1.init($scope, $compile);
-			LongRiverSystemAdvanced2.init($scope, $compile);
-			LongRiverSystemAdvanced3.init($scope, $compile);
-			LongRiverSystemAdvanced4.init($scope, $compile);
-			LongRiverSystemAdvanced5.init($scope, $compile);
+			LongRiverSystemAdvanced1.init($scope, $compile, Shuffling);
+			LongRiverSystemAdvanced2.init($scope, $compile, Shuffling);
+			LongRiverSystemAdvanced3.init($scope, $compile, Shuffling);
+			LongRiverSystemAdvanced4.init($scope, $compile, Shuffling);
+			LongRiverSystemAdvanced5.init($scope, $compile, Shuffling);
 			//清空搜索数据
 			$scope.emptyData1 = function() {
 				$scope.text1 = '';
@@ -38,6 +39,22 @@ MetronicApp.controller('LongRiverSystemController', [
 			};
 			$scope.emptyData5 = function() {
 				$scope.text5 = '';
+			};
+			//导出表格
+			$scope.DownLoad1 = function() {
+				window.open(Metronic.host + 'attachment/exportExample/7', '_blank');
+			};
+			$scope.DownLoad2 = function() {
+				window.open(Metronic.host + 'attachment/exportExample/8', '_blank');
+			};
+			$scope.DownLoad3 = function() {
+				window.open(Metronic.host + 'attachment/exportExample/9', '_blank');
+			};
+			$scope.DownLoad4 = function() {
+				window.open(Metronic.host + 'attachment/exportExample/10', '_blank');
+			};
+			$scope.DownLoad5 = function() {
+				window.open(Metronic.host + 'attachment/exportExample/11', '_blank');
 			};
 		});
 	}

@@ -1,5 +1,5 @@
 var AccountManagementAdvanced = function() {
-	var initTable3 = function($scope, $compile, validate_filed) {
+	var initTable3 = function($scope, $compile, Shuffling, validate_filed) {
 		var table = $('#sample_3');
 		var oTable = table.dataTable({
 			// Internationalisation. For more info refer to http://datatables.net/manual/i18n
@@ -288,12 +288,12 @@ var AccountManagementAdvanced = function() {
 	};
 	return {
 		//main function to initiate the module
-		init: function($scope, $compile, validate_filed) {
+		init: function($scope, $compile, Shuffling, validate_filed) {
 			if (!jQuery().dataTable) {
 				return;
 			}
 			//console.log('me 1');
-			initTable3($scope, $compile, validate_filed);
+			initTable3($scope, $compile, Shuffling, validate_filed);
 			//console.log('me 2');
 		}
 	};

@@ -13,7 +13,7 @@ MetronicApp.controller('GEOInfoController', [
 			// set default layout mode
 			$rootScope.settings.layout.pageBodySolid = false;
 			$rootScope.settings.layout.pageSidebarClosed = false;
-			// ArchiveAdvanced.init($scope, $compile);
+			// ArchiveAdvanced.init($scope, $compile, Shuffling);
 
 			var curlat = 0;
 			var curlon = 0;

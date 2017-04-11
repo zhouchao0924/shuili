@@ -1,5 +1,5 @@
 var LongRiverSystemAdvanced1 = function() {
-	var initTable = function($scope, $compile) {
+	var initTable = function($scope, $compile, Shuffling) {
 		var table = $('#sample_1');
 		var oTable = table.dataTable({
 			"language": {
@@ -43,7 +43,7 @@ var LongRiverSystemAdvanced1 = function() {
 				};
 				Metronic.blockUI({message: '<div style="background:rgba(0,0,0,0.3);padding:10px;font-size:16px;font-weight:bold;color:#fff;">正在加载...</div>', textOnly: true});
 				$.ajax({
-					url: Metronic.host + 'flood/getBaseInfoList',
+					url: Metronic.host + 'RiverManagerBase/getList',
 					type: 'GET',
 					dataType: 'json',
 					xhrFields: {
@@ -59,12 +59,15 @@ var LongRiverSystemAdvanced1 = function() {
 							$.each(datas.data.list || [], function(i, n) {
 								var temp = [
 									n.id,
-									n.manager,
-									n.village,
-									"",
-									"",
-									"",
-									""
+									n.name,
+									n.riverId,
+									n.riversSize,
+									n.start,
+									n.end,
+									n.riverManager,
+									n.position,
+									n.contactInfo,
+									n.police
 								];
 								arr.push(temp);
 							});
@@ -110,16 +113,16 @@ var LongRiverSystemAdvanced1 = function() {
 	}
 	return {
 		//main function to initiate the module
-		init: function($scope, $compile) {
+		init: function($scope, $compile, Shuffling) {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			initTable($scope, $compile);
+			initTable($scope, $compile, Shuffling);
 		}
 	};
 }();
 var LongRiverSystemAdvanced2 = function() {
-	var initTable = function($scope, $compile) {
+	var initTable = function($scope, $compile, Shuffling) {
 		var table = $('#sample_2');
 		var oTable = table.dataTable({
 			"language": {
@@ -163,7 +166,7 @@ var LongRiverSystemAdvanced2 = function() {
 				};
 				Metronic.blockUI({message: '<div style="background:rgba(0,0,0,0.3);padding:10px;font-size:16px;font-weight:bold;color:#fff;">正在加载...</div>', textOnly: true});
 				$.ajax({
-					url: Metronic.host + 'flood/getFloodLeaderInfoList',
+					url: Metronic.host + 'RiverDrain/getList',
 					type: 'GET',
 					dataType: 'json',
 					xhrFields: {
@@ -217,16 +220,16 @@ var LongRiverSystemAdvanced2 = function() {
 	}
 	return {
 		//main function to initiate the module
-		init: function($scope, $compile) {
+		init: function($scope, $compile, Shuffling) {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			initTable($scope, $compile);
+			initTable($scope, $compile, Shuffling);
 		}
 	};
 }();
 var LongRiverSystemAdvanced3 = function() {
-	var initTable = function($scope, $compile) {
+	var initTable = function($scope, $compile, Shuffling) {
 		var table = $('#sample_3');
 		var oTable = table.dataTable({
 			"language": {
@@ -270,7 +273,7 @@ var LongRiverSystemAdvanced3 = function() {
 				};
 				Metronic.blockUI({message: '<div style="background:rgba(0,0,0,0.3);padding:10px;font-size:16px;font-weight:bold;color:#fff;">正在加载...</div>', textOnly: true});
 				$.ajax({
-					url: Metronic.host + 'flood/getFloodOwnerInfoList',
+					url: Metronic.host + 'WaterQualityBase/getList',
 					type: 'GET',
 					dataType: 'json',
 					xhrFields: {
@@ -324,16 +327,16 @@ var LongRiverSystemAdvanced3 = function() {
 	}
 	return {
 		//main function to initiate the module
-		init: function($scope, $compile) {
+		init: function($scope, $compile, Shuffling) {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			initTable($scope, $compile);
+			initTable($scope, $compile, Shuffling);
 		}
 	};
 }();
 var LongRiverSystemAdvanced4 = function() {
-	var initTable = function($scope, $compile) {
+	var initTable = function($scope, $compile, Shuffling) {
 		var table = $('#sample_4');
 		var oTable = table.dataTable({
 			"language": {
@@ -377,7 +380,7 @@ var LongRiverSystemAdvanced4 = function() {
 				};
 				Metronic.blockUI({message: '<div style="background:rgba(0,0,0,0.3);padding:10px;font-size:16px;font-weight:bold;color:#fff;">正在加载...</div>', textOnly: true});
 				$.ajax({
-					url: Metronic.host + 'flood/getFloodNetworkOwnerInfoList',
+					url: Metronic.host + 'WaterQualityDesc/getList',
 					type: 'GET',
 					dataType: 'json',
 					xhrFields: {
@@ -432,16 +435,16 @@ var LongRiverSystemAdvanced4 = function() {
 	}
 	return {
 		//main function to initiate the module
-		init: function($scope, $compile) {
+		init: function($scope, $compile, Shuffling) {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			initTable($scope, $compile);
+			initTable($scope, $compile, Shuffling);
 		}
 	};
 }();
 var LongRiverSystemAdvanced5 = function() {
-	var initTable = function($scope, $compile) {
+	var initTable = function($scope, $compile, Shuffling) {
 		var table = $('#sample_5');
 		var oTable = table.dataTable({
 			"language": {
@@ -485,7 +488,7 @@ var LongRiverSystemAdvanced5 = function() {
 				};
 				Metronic.blockUI({message: '<div style="background:rgba(0,0,0,0.3);padding:10px;font-size:16px;font-weight:bold;color:#fff;">正在加载...</div>', textOnly: true});
 				$.ajax({
-					url: Metronic.host + 'flood/getTransferPeopleList',
+					url: Metronic.host + 'RiverDrainExtend/getList',
 					type: 'GET',
 					dataType: 'json',
 					xhrFields: {
@@ -550,11 +553,11 @@ var LongRiverSystemAdvanced5 = function() {
 	}
 	return {
 		//main function to initiate the module
-		init: function($scope, $compile) {
+		init: function($scope, $compile, Shuffling) {
 			if (!jQuery().dataTable) {
 				return;
 			}
-			initTable($scope, $compile);
+			initTable($scope, $compile, Shuffling);
 		}
 	};
 }();

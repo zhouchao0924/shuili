@@ -5,7 +5,8 @@ MetronicApp.controller('ArchiveController', [
 	'settings',
 	'$timeout',
 	'$compile',
-	function($rootScope, $scope, settings, $timeout, $compile) {
+	'Shuffling',
+	function($rootScope, $scope, settings, $timeout, $compile, Shuffling) {
 		$scope.$on('$viewContentLoaded', function() {
 			// initialize core components
 			Metronic.initAjax();
@@ -16,7 +17,7 @@ MetronicApp.controller('ArchiveController', [
 			});
 			$rootScope.settings.layout.pageBodySolid = false;
 			$rootScope.settings.layout.pageSidebarClosed = false;
-			ArchiveAdvanced.init($scope, $compile);
+			ArchiveAdvanced.init($scope, $compile, Shuffling);
 		});
 	}
 ]);

@@ -56,7 +56,7 @@ class WaterQualityDescController extends Controller{
         $excelModel = new ExcelTemplateModel(new WaterQualityDescExcelTemplateConfig());
         $client = new ClientComponent();
         $streetId = $client->getCurrentArea();
-        $data = $excelModel->queryRecords($page,$streetId,$searchText,1);
+        $data = $excelModel->queryRecords($page,$streetId,$searchText);
 
         return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,$data));
     }

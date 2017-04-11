@@ -6,7 +6,8 @@ MetronicApp.controller('ReservoirController', [
 	'$timeout',
 	'$compile',
 	'ajax1',
-	function($rootScope, $scope, settings, $timeout, $compile, ajax) {
+	'Shuffling',
+	function($rootScope, $scope, settings, $timeout, $compile, ajax, Shuffling) {
 		$scope.$on('$viewContentLoaded', function() {
 			// initialize core components
 			Metronic.initAjax();
@@ -18,9 +19,9 @@ MetronicApp.controller('ReservoirController', [
 			$rootScope.settings.layout.pageBodySolid = false;
 			$rootScope.settings.layout.pageSidebarClosed = false;
 			//初始化所有表格
-			ReservoirAdvanced1.init($scope, $compile);
-			ReservoirAdvanced2.init($scope, $compile);
-			ReservoirAdvanced3.init($scope, $compile);
+			ReservoirAdvanced1.init($scope, $compile, Shuffling);
+			ReservoirAdvanced2.init($scope, $compile, Shuffling);
+			ReservoirAdvanced3.init($scope, $compile, Shuffling);
 			//清空搜索数据
 			$scope.emptyData1 = function() {
 				$scope.text1 = '';
@@ -31,85 +32,32 @@ MetronicApp.controller('ReservoirController', [
 			$scope.emptyData3 = function() {
 				$scope.text3 = '';
 			};
-			//导入表格
-			$scope.UpLoad1 = function() {
-				var params = {
-					efile: $scope.efile
-				}
-				$.ajax({
-					url: Metronic.host + 'drinkingWater/import',
-					type: 'POST',
-					dataType: 'json',
-					xhrFields: {
-						withCredentials: true
-					},
-					crossDomain: true,
-					data: {
-						data: JSON.stringify(params)
-					},
-					success: function(datas) {
-						if (datas.success) {
-							alert('重置密码成功');
-							location.reload();
-						} else {
-							alert(datas.message);
-							Metronic.unblockUI();
-						}
-					}
-				});
+			//导出样表
+			$scope.DownLoad1 = function() {
+				window.open(Metronic.host + 'attachment/exportExample/1', '_blank');
 			};
-			$scope.UpLoad2 = function() {
-				var params = {
-					efile: $scope.efile
-				}
-				$.ajax({
-					url: Metronic.host + 'drinkingWater/import',
-					type: 'POST',
-					dataType: 'json',
-					xhrFields: {
-						withCredentials: true
-					},
-					crossDomain: true,
-					data: {
-						data: JSON.stringify(params)
-					},
-					success: function(datas) {
-						if (datas.success) {
-							alert('重置密码成功');
-							location.reload();
-						} else {
-							alert(datas.message);
-							Metronic.unblockUI();
-						}
-					}
-				});
+			$scope.DownLoad2 = function() {
+				window.open(Metronic.host + 'attachment/exportExample/2', '_blank');
 			};
-			$scope.UpLoad3 = function() {
-				var params = {
-					efile: $scope.efile
-				}
-				$.ajax({
-					url: Metronic.host + 'drinkingWater/import',
-					type: 'POST',
-					dataType: 'json',
-					xhrFields: {
-						withCredentials: true
-					},
-					crossDomain: true,
-					data: {
-						data: JSON.stringify(params)
-					},
-					success: function(datas) {
-						if (datas.success) {
-							alert('重置密码成功');
-							location.reload();
-						} else {
-							alert(datas.message);
-							Metronic.unblockUI();
-						}
+			$scope.DownLoad3 = function() {
+				window.open(Metronic.host + 'attachment/exportExample/3', '_blank');
+			};
+			var layerImageJson = {
+				"title": "", //相册标题
+				"id": "", //相册id
+				"start": 0, //初始显示的图片序号，默认0
+				"data": [
+					{ //相册包含的图片，数组格式
+						"alt": "",
+						"pid": "", //图片id
+						"src": "", //原图地址
+						"thumb": "" //缩略图地址
 					}
-				});
+				]
 			}
+			$('#test').click(function() {
+				layer.photos({photos: layerImageJson, anim: 5});
+			})
 		});
 	}
 ]);

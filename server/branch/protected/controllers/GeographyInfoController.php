@@ -79,4 +79,40 @@ class GeographyInfoController extends Controller{
 
         return $this->renderSuccessAjaxResponse();
     }
+
+    public function actionGetInfoDesc(){
+        $params = $this->getAjaxRequestParam();
+        $pointId = isset($params['pointId'])?intval($params['pointId']):0;
+        if($pointId <= 0){
+            return $this->renderBadParamsAjaxResponse();
+        }
+        $geographyModel = new GeographyInfoModel();
+        $data = $geographyModel->getInfo($pointId);
+
+        return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,$data));
+
+    }
+
+    /**
+     * 修改详情接口
+     */
+    public function actionUpdateInfoDesc(){
+        $params = $this->getAjaxRequestParam();
+        $pointId = isset($params['pointId'])?intval($params['pointId']):0;
+
+        $title = isset($params['title'])?trim($params['title']):"";//标题
+        $isBold = isset($params['isBold'])?intval($params['isBold']):0;//是否加粗，0，不加粗，1不加粗
+        $content = isset($params['content'])?trim($params['content']):"";//详情内容
+        if($pointId <= 0 || empty($title) || empty($content)){
+            return $this->renderBadParamsAjaxResponse();
+        }
+        $client = new ClientComponent();
+        $userId = $client->getUserId();
+
+        $geographyModel = new GeographyInfoModel();
+        $geographyModel->editInfo($pointId,$userId,$title,$isBold,$content);
+        return $this->renderSuccessAjaxResponse();
+
+    }
+
 }
