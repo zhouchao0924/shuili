@@ -22,6 +22,9 @@ MetronicApp.controller('PumpStationController', [
 			$scope.DownLoad1 = function() {
 				window.open(Metronic.host + 'attachment/exportExample/6', '_blank');
 			};
+			$scope.UpLoad = function() {
+				$scope.MakeSureUpLoad = true;
+			};
 		});
 	}
 ]);

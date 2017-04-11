@@ -56,6 +56,21 @@ MetronicApp.controller('LongRiverSystemController', [
 			$scope.DownLoad5 = function() {
 				window.open(Metronic.host + 'attachment/exportExample/11', '_blank');
 			};
+			$scope.UpLoad1 = function() {
+				$scope.MakeSureUpLoad1 = true;
+			};
+			$scope.UpLoad2 = function() {
+				$scope.MakeSureUpLoad2 = true;
+			};
+			$scope.UpLoad3 = function() {
+				$scope.MakeSureUpLoad3 = true;
+			};
+			$scope.UpLoad4 = function() {
+				$scope.MakeSureUpLoad4 = true;
+			};
+			$scope.UpLoad5 = function() {
+				$scope.MakeSureUpLoad5 = true;
+			};
 		});
 	}
 ]);
