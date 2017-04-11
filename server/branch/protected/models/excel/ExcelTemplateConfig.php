@@ -182,7 +182,6 @@ abstract class ExcelTemplateConfig{
         }
 
         $dataRows = $this->getDao()->select("*",$conditions,$params,true,"id desc","",$start,$perPageCount);
-
         if(!empty($dataRows)){
             foreach ($dataRows as $key=>$value){
                 $tmp = array();

@@ -23,7 +23,7 @@ class ReservoirAndPoolController extends Controller{
         }
         $userInfo = $client->getUserInfo();
         try {
-            $data = ExcelModel::parseExcel(2, $uploadInfo['fileFullPath']);
+            $data = ExcelModel::parseExcel(3, $uploadInfo['fileFullPath']);
 
             if (empty($data)) {
                 return $this->renderAjaxResponse($this->getAjaxResponse(false,"empty file",ErrorCode::ERROR_COMMON_ERROR,array()));
