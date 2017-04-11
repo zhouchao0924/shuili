@@ -124,6 +124,9 @@ class GeographyInfoModel{
 
         $orderBy = " id desc";
         $returnDate = $this->_getWpGeographyInfoDao()->select("*",$conditions,$params,false,$orderBy);
+        if (empty($returnDate)){
+            return array();
+        }
         return array(
             'pointId' => $pointId,
             'title' => $returnDate['title'],
