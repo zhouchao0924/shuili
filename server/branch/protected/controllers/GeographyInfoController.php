@@ -38,7 +38,7 @@ class GeographyInfoController extends Controller{
         );
         $geographyModel = new GeographyInfoModel();
         $geographyModel->addPoint($params);
-
+        OperatorLogModel::addLog($userInfo['userId'],$userInfo['userName'],"添加".$name."地图坐标");
         return $this->renderSuccessAjaxResponse();
     }
 
