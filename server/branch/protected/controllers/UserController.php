@@ -88,8 +88,9 @@ class UserController extends Controller{
         if($userId == 0){
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户未登录",ErrorCode::ERROR_USER_NOT_LOGIN,array()));
         }
-        $clientComponent->unsetUserClientInfo();
         $userInfo = $clientComponent->getUserInfo();
+
+        $clientComponent->unsetUserClientInfo();
         OperatorLogModel::addLog($userInfo['userId'],$userInfo['userName'],$userInfo['userName']."登出成功");
 
         return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,array()));
