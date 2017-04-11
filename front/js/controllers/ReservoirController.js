@@ -41,6 +41,9 @@ MetronicApp.controller('ReservoirController', [
 			$scope.DownLoad3 = function() {
 				window.open(Metronic.host + 'attachment/exportExample/3', '_blank');
 			};
+			$('#test1').on('click', function() {
+				layer.msg('Hello layer');
+			});
 		});
 	}
 ]);
