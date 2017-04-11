@@ -311,4 +311,8 @@ abstract class ExcelTemplateConfig{
     }
 
     protected abstract function getTemplateName();
+
+    public function getStreetIdColName(){
+        return "street_id";
+    }
 }
