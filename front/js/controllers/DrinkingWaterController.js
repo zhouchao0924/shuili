@@ -24,6 +24,13 @@ MetronicApp.controller('DrinkingWaterController', [
 			$scope.UpLoad = function() {
 				$scope.MakeSureUpLoad = true;
 			};
+			//上传图片
+			$scope.imgUrl = '';
+			$scope.imgUrlList = [];
+			$scope.addimage = function() {
+				obj = angular.copy($scope.imgUrl);
+				$scope.imgUrlList.push(obj);
+			};
 		});
 	}
 ]);
