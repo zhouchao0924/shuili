@@ -100,7 +100,7 @@ final class CommonComponent{
 			return false;
 		}
 		if($userType == self::USER_CMS_ADMIN){//管理员只允许字母+数字
-			if(preg_match("/^[0-9A-Za-z]+$/", $name)){
+			if(preg_match("/^[\x{4e00}-\x{9fa5}A-Za-z0-9_]+$/u", $name)){
 				return true;
 			}
 		}else{//网站注册用户手机号码 or 邮箱

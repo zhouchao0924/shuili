@@ -61,7 +61,7 @@ class UserController extends Controller{
 
         if(!CommonComponent::checkUserNameFormat($name)
             || !CommonComponent::checkUserPasswordFormat($password)
-            || !RoleModel::isRightRole($roleId)){
+            || !AuthDefine::isAuthRoleId($roleId)){
             return $this->renderAjaxResponse($this->getAjaxResponse(false,"参数错误",ErrorCode::ERROR_PARAMS,array()));
         }
         $component = new ClientComponent();

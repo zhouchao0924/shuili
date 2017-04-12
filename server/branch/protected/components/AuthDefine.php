@@ -10,6 +10,13 @@ class AuthDefine {
     CONST AUTH_ADMIN = 1;//管理员
     CONST AUTH_SUPER = 2;//超级管理员
 
+    public static function isAuthRoleId($roleId){
+        if($roleId >= self::AUTH_NORMAL || $roleId <= self::AUTH_SUPER){
+            return true;
+        }
+
+        return false;
+    }
 
     /**
      * 通用导航页
