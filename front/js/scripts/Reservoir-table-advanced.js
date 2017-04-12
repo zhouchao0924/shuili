@@ -107,11 +107,11 @@ var ReservoirAdvanced1 = function() {
 								if (!rowData) {
 									return false;
 								}
-								var img = $('<a href=""> 查看 </a>');
-								img.unbind('click').bind('click', function(e) {
+								var fullimg = $('<a href=""> 查看 </a>');
+								fullimg.unbind('click').bind('click', function(e) {
 									Shuffling(rowData[33]);
 								})
-								$(this).append($compile(img)($scope));
+								$(this).append($compile(fullimg)($scope));
 							});
 							table.find('tbody tr td:nth-child(27)').each(function(i, n) {
 								var rowData = table.api().row(i).data();
@@ -122,7 +122,34 @@ var ReservoirAdvanced1 = function() {
 								img.unbind('click').bind('click', function(e) {
 									Shuffling(rowData[32]);
 								})
-								$(this).append($compile(img)($scope));
+								var UpImage = $('<a href="" data-toggle="modal" data-target=".bs-UpImage-modal-lg">上传图片 </a>');
+								UpImage.unbind('click').bind('click', function(e) {
+									$scope.UpLoadImage = function() {
+										var params = {
+											id: rowData[34],
+											url: $scope.imgUrlList,
+											serviceType: 1
+										};
+										$.ajax({
+											url: Metronic.host + 'attachment/updateImage',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													location.reload();
+												}
+											}
+										});
+									}
+								})
+								$(this).append($compile(img)($scope)).append($compile(UpImage)($scope));
 							});
 							table.find('tbody tr td:last-child').each(function(i, n) {
 								var rowData = table.api().row(i).data();
@@ -284,16 +311,43 @@ var ReservoirAdvanced2 = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
-							table.find('tbody tr td:nth-child(22)').each(function(i, n) {
+							table.find('tbody tr td:nth-child(21)').each(function(i, n) {
 								var rowData = table.api().row(i).data();
 								if (!rowData) {
 									return false;
 								}
 								var img = $('<a href=""> 查看 </a>');
 								img.unbind('click').bind('click', function(e) {
-									Shuffling(rowData[27]);
+									Shuffling(rowData[26]);
 								})
-								$(this).append($compile(img)($scope));
+								var UpImage = $('<a href="" data-toggle="modal" data-target=".bs-UpImage-modal-lg">上传图片 </a>');
+								UpImage.unbind('click').bind('click', function(e) {
+									$scope.UpLoadImage = function() {
+										var params = {
+											id: rowData[0],
+											url: $scope.imgUrlList,
+											serviceType: 2
+										};
+										$.ajax({
+											url: Metronic.host + 'attachment/updateImage',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													location.reload();
+												}
+											}
+										});
+									}
+								})
+								$(this).append($compile(img)($scope)).append($compile(UpImage)($scope));
 							});
 							table.find('tbody tr td:last-child').each(function(i, n) {
 								var rowData = table.api().row(i).data();

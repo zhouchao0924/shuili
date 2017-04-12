@@ -100,7 +100,34 @@ var DrinkingWaterAdvanced = function() {
 								img.unbind('click').bind('click', function(e) {
 									Shuffling(rowData[23]);
 								})
-								$(this).append($compile(img)($scope));
+								var UpImage = $('<a href="" data-toggle="modal" data-target=".bs-UpImage-modal-lg">上传图片 </a>');
+								UpImage.unbind('click').bind('click', function(e) {
+									$scope.UpLoadImage = function() {
+										var params = {
+											id: rowData[0],
+											url: $scope.imgUrlList,
+											serviceType: 17
+										};
+										$.ajax({
+											url: Metronic.host + 'attachment/updateImage',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													location.reload();
+												}
+											}
+										});
+									}
+								})
+								$(this).append($compile(img)($scope)).append($compile(UpImage)($scope));
 							});
 							table.find('tbody tr td:last-child').each(function(i, n) {
 								var rowData = table.api().row(i).data();
