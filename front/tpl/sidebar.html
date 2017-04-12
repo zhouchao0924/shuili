@@ -1,8 +1,15 @@
 <div class="page-sidebar navbar-collapse collapse">
 	<ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" ng-class="{'page-sidebar-menu-closed': settings.layout.pageSidebarClosed}">
-		<!-- <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" ng-class="{'page-sidebar-menu-closed': settings.layout.pageSidebarClosed}" ng-repeat="item in MenuList">
+		<li>
+			<a href="#/YYTown">
+				<i class="icon-bar-chart"></i>
+				<span class="title">余姚乡镇</span>
+			</a>
+		</li>
+	</ul>
+	<ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" ng-class="{'page-sidebar-menu-closed': settings.layout.pageSidebarClosed}" ng-repeat="item in MenuList">
 		<li class="heading">
-			<h3 class="uppercase">{{item.name}}</h3>
+			<h3 class="uppercase" style="color:white;">{{item.name}}</h3>
 		</li>
 		<li ng-repeat="v in item.childrenList">
 			<a href="{{v.url}}">
@@ -15,8 +22,9 @@
 					<a href="{{o.url}}">{{o.name}}</a>
 				</li>
 			</ul>
-		</li> -->
-		<!-- 首页 -->
+		</li>
+	</ul>
+	<!-- <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" ng-class="{'page-sidebar-menu-closed': settings.layout.pageSidebarClosed}">
 		<li>
 			<a href="#/YYTown">
 				<i class="icon-bar-chart"></i>
@@ -92,7 +100,7 @@
 				<span class="title">档案页</span>
 			</a>
 		</li>
-		<!-- <li>
+		<li>
 			<a href="#/VideoMonitoring">
 				<i class="icon-bar-chart"></i>
 				<span class="title">视频监控</span>
@@ -109,7 +117,7 @@
 				<i class="icon-bar-chart"></i>
 				<span class="title">雨情</span>
 			</a>
-		</li> -->
+		</li>
 		<li class="heading">
 			<h3 class="uppercase" style="color:white;">账户信息</h3>
 		</li>
@@ -146,5 +154,5 @@
 				<span class="title">档案信息</span>
 			</a>
 		</li>
-	</ul>
+	</ul> -->
 </div>

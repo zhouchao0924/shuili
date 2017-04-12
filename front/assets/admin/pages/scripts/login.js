@@ -73,6 +73,7 @@ var Login = function() {
 							if (datas.success) {
 								obj.UserdataMenuList = datas.data;
 								window.localStorage.Userdata = JSON.stringify(obj);
+								window.localStorage.UserdataMenuList = null;
 								window.location.href = "index.html#/YYTown";
 							}
 						},
@@ -130,6 +131,7 @@ var Login = function() {
 									if (datas.success) {
 										obj.UserdataMenuList = datas.data;
 										window.localStorage.Userdata = JSON.stringify(obj);
+										window.localStorage.UserdataMenuList = null;
 										window.location.href = "index.html#/YYTown";
 									}
 								},
