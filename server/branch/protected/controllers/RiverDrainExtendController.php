@@ -27,7 +27,7 @@ class RiverDrainExtendController extends Controller{
             if (empty($data)) {
                 return $this->renderAjaxResponse($this->getAjaxResponse(false,"empty file",ErrorCode::ERROR_COMMON_ERROR,array()));
             }
-            $excel = new ExcelTemplateModel(new RiverDrainExcelTemplateConfig());
+            $excel = new ExcelTemplateModel(new RiverDrainExtendExcelTemplateConfig());
             $extra = array(
                 'street_id' => $client->getCurrentArea(),
                 'district_id' => OpenCity::DISTRICT_ID,
@@ -53,7 +53,7 @@ class RiverDrainExtendController extends Controller{
         $searchText = isset($params['text'])?trim($params['text']):"";
         $page = isset($params['page'])?intval($params['page']):1;
 
-        $excelModel = new ExcelTemplateModel(new RiverDrainExcelTemplateConfig());
+        $excelModel = new ExcelTemplateModel(new RiverDrainExtendExcelTemplateConfig());
         $client = new ClientComponent();
         $streetId = $client->getCurrentArea();
         $data = $excelModel->queryRecords($page,$streetId,$searchText);
