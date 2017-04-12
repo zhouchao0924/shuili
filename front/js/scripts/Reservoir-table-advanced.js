@@ -505,6 +505,7 @@ var ReservoirAdvanced3 = function() {
 									n.name,
 									n.township,
 									n.basin,
+									n.develop,
 									n.catchmentArea,
 									n.diversion,
 									n.head,
@@ -516,11 +517,11 @@ var ReservoirAdvanced3 = function() {
 									n.reform,
 									n.ownership,
 									n.extend,
-									n.floodDischargeFcailities.dibagaocheng,
-									"",
 									"",
 									n.manager.username,
-									n.manager.phone
+									n.manager.phone,
+									n.id,
+									n.fullImage
 								];
 								arr.push(temp);
 							});
@@ -530,31 +531,25 @@ var ReservoirAdvanced3 = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
-							table.find('tbody tr td:nth-child(17)').each(function(i, n) {
+							table.find('tbody tr td:nth-child(16)').each(function(i, n) {
 								var rowData = table.api().row(i).data();
 								if (!rowData) {
 									return false;
 								}
-								var img = $('<a href=""> 查看 </a>');
-								img.unbind('click').bind('click', function(e) {
-									Shuffling(rowData[18]);
+								var fullimg = $('<a href="" data-toggle="modal" data-target=".bs-fullimgshow-modal-lg"> 查看 </a>');
+								fullimg.unbind('click').bind('click', function(e) {
+									$('#fullimage').attr('src', rowData[19])
 								})
-								$(this).append($compile(img)($scope));
-							});
-							table.find('tbody tr td:last-child').each(function(i, n) {
-								var rowData = table.api().row(i).data();
-								if (!rowData) {
-									return false;
-								}
-								var deletex = $('<a href="javascript:;" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
-								deletex.click(function() {
-									var params = {
-										id: rowData[34],
-										serviceType: 3
-									};
-									layer.confirm('确定要删除该行数据信息吗？', function(index) {
+								var editfullimg = $('<a href="" data-toggle="modal" data-target=".bs-fullimg-modal-lg">编辑全景图</a>');
+								editfullimg.unbind('click').bind('click', function(e) {
+									$scope.fullImageOK = function() {
+										var params = {
+											id: rowData[18],
+											url: $scope.url,
+											serviceType: 3
+										};
 										$.ajax({
-											url: Metronic.host + 'table/deleteItem',
+											url: Metronic.host + 'attachment/updateFullImage',
 											type: 'GET',
 											dataType: 'json',
 											xhrFields: {
@@ -566,14 +561,13 @@ var ReservoirAdvanced3 = function() {
 											},
 											success: function(datas) {
 												if (datas.success) {
-													oTable.fnDraw();
+													location.reload();
 												}
 											}
 										});
-										layer.close(index)
-									})
-								});
-								$(this).append(deletex);
+									}
+								})
+								$(this).append($compile(fullimg)($scope)).append($compile(editfullimg)($scope));
 							});
 						} else {
 							layer.msg(datas.message);

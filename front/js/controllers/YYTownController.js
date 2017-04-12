@@ -50,6 +50,8 @@ MetronicApp.controller('YYTownController', [
 					},
 					success: function(datas) {
 						if (datas.success) {
+							window.localStorage.UserdataMenuList = window.localStorage.Userdata;
+							location.reload();
 							window.location.href = '#/BasicInformation';
 						}
 					},
