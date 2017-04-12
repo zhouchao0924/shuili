@@ -31,7 +31,7 @@ var DrinkingWaterAdvanced = function() {
 				[5, 15, 20, "All"] // change per page values here
 			],
 			// set the initial value
-			"pageLength": 30,
+			"pageLength": 10,
 			"lengthChange": false,
 			"filter": false,
 			"stateSave": true,
@@ -140,7 +140,7 @@ var DrinkingWaterAdvanced = function() {
 										id: rowData[0],
 										serviceType: 17
 									};
-									if (confirm('确定删除?')) {
+									layer.confirm('确定要删除该行数据信息吗？', function(index) {
 										$.ajax({
 											url: Metronic.host + 'table/deleteItem',
 											type: 'GET',
@@ -158,12 +158,13 @@ var DrinkingWaterAdvanced = function() {
 												}
 											}
 										});
-									}
+										layer.close(index);
+									})
 								});
 								$(this).append(deletex);
 							});
 						} else {
-							alert(datas.message);
+							layer.msg(datas.message);
 							Metronic.unblockUI();
 						}
 					},

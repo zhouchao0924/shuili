@@ -1760,11 +1760,11 @@ MetronicApp.directive('tableTab', [
 						var craftTemplateVoList = scope.template.craftTemplateVoList;
 						var length = craftTemplateVoList.length;
 						if (length > 0 && craftTemplateVoList[length - 1].name.trim() === '') {
-							alert('请输入工艺名称')
+							layer.msg('请输入工艺名称')
 							return
 						}
 						if (length > 0 && craftTemplateVoList[length - 1].dateNumberList.length === 0) {
-							alert('请输入工艺天数')
+							layer.msg('请输入工艺天数')
 							return
 						}
 						craftTemplateVoList.push({name: '', dateNumberList: []})
@@ -2022,7 +2022,7 @@ MetronicApp.directive('tableTab', [
 	// 								$q.all(p).then(function() {
 	// 									isClicked = false
 	// 									init()
-	// 									// alert('保存成功')
+	// 									// layer.msg('保存成功')
 	// 								})
 	// 							} else {
 	// 								init()
@@ -2079,11 +2079,11 @@ MetronicApp.directive('tableTab', [
 	// 				})
 	// 				scope.addRow = function() {
 	// 					if (scope.template.craftTemplateVoList.length > 0 && scope.template.craftTemplateVoList[scope.template.craftTemplateVoList.length - 1].name.trim() === '') {
-	// 						alert('请输入工艺名称')
+	// 						layer.msg('请输入工艺名称')
 	// 						return
 	// 					}
 	// 					if (scope.template.craftTemplateVoList.length > 0 && scope.template.craftTemplateVoList[scope.template.craftTemplateVoList.length - 1].dateNumberList.length === 0) {
-	// 						alert('请输入工艺天数')
+	// 						layer.msg('请输入工艺天数')
 	// 						return
 	// 					}
 	// 					scope.template.craftTemplateVoList.push({name: '', dateNumberList: []})
@@ -2363,7 +2363,7 @@ MetronicApp.directive('tableTab', [
 						scope.conditions = obj;
 					}
 					scope.pushData = function(d) {
-						alert(d);
+						layer.msg(d);
 					}
 					elem.on('hide.bs.modal', function() {
 						scope.$broadcast('clearModel')
@@ -2428,7 +2428,7 @@ MetronicApp.directive('tableTab', [
 							temp.push(n.isSelected);
 						})
 						if (temp.indexOf(true) === -1) {
-							alert('请选择采购单商品')
+							layer.msg('请选择采购单商品')
 						} else {
 							scope.productAmount = 0;
 							scope.packageAmount = 0;
@@ -2663,7 +2663,7 @@ MetronicApp.directive('tableTab', [
 							temp.push(n.isSelected);
 						})
 						if (temp.indexOf(true) === -1) {
-							alert('请选择采购单商品')
+							layer.msg('请选择采购单商品')
 						} else {
 							scope.modalConfirm({data: scope})
 							if (scope.modalTitle === '添加采购单商品') {
@@ -3275,12 +3275,12 @@ MetronicApp.directive('tableTab', [
 						if ($rootScope.$state.$current.data.pageTitle === '艺术品详情') {
 							labels = $scope.checklabels;
 							if ($scope.checklabels.length >= 3) {
-								alert("已添加三个标签,无法继续添加!");
+								layer.msg("已添加三个标签,无法继续添加!");
 								return false;
 							};
 						};
 						if (labels.length >= 3) {
-							alert("已添加三个标签,无法继续添加!");
+							layer.msg("已添加三个标签,无法继续添加!");
 							return false;
 						};
 						if (elem.find("input[type='button']").eq(index).hasClass("end")) {

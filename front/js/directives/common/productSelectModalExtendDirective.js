@@ -4,8 +4,8 @@ MetronicApp.directive('productSelectExtendModal', [
     'ajax1',
     'getRoomTypeFilter',
     'getStyleTextFilter',
-    'alertMessage',
-    function(queryBrand1, ajax1, getRoomTypeFilter, getStyleTextFilter, alertMessage) {
+    'layer.msgMessage',
+    function(queryBrand1, ajax1, getRoomTypeFilter, getStyleTextFilter, layer.msgMessage) {
         var linker = function(scope, elem, attrs, ctrl) {
             var selectGoodsList = [];
             var selectRoomsList = [];
@@ -165,7 +165,7 @@ MetronicApp.directive('productSelectExtendModal', [
             //确认选择颜色
             scope.selectGoodSku = function(){
                 if(!scope.skuId){
-                    alertMessage('error', '请选择颜色！');
+                    layer.msgMessage('error', '请选择颜色！');
                     return;
                 }
                 ajax1("/gateway/sku/querySimpleSkuById/1.0.0/", scope.skuId).then(function(data) {
@@ -222,11 +222,11 @@ MetronicApp.directive('productSelectExtendModal', [
             //选择商品
             scope.goodsDialogOK = function() {
                 if(selectGoodsList.length > 1) {
-                    alertMessage('error', '最多只能选择一件商品');
+                    layer.msgMessage('error', '最多只能选择一件商品');
                     return;
                 }
                 if(selectGoodsList.length == 0) {
-                    alertMessage('error', '请选择一件商品');
+                    layer.msgMessage('error', '请选择一件商品');
                     return;
                 }
                 var spuId = selectGoodsList[0].spuId;
@@ -257,11 +257,11 @@ MetronicApp.directive('productSelectExtendModal', [
                 var val = prdPut.val();
                 var reg = /^[0-9]*$/;
                 if(!reg.test(val)){
-                    alertMessage('error', '请输入数字！');
+                    layer.msgMessage('error', '请输入数字！');
                     return;
                 }
                 if(!val){
-                    alertMessage('error', '请输入商品编号！');
+                    layer.msgMessage('error', '请输入商品编号！');
                     return;
                 }
                 if (val) {
@@ -276,7 +276,7 @@ MetronicApp.directive('productSelectExtendModal', [
                     ajax1('/gateway/search/searchGoodses/1.0.0/', params).then(function(data){
                         if (data.code == 1) {                   
                             if(data.obj.goodses.length == 0){
-                                alertMessage('error', '该商品不存在，请重新输入！');
+                                layer.msgMessage('error', '该商品不存在，请重新输入！');
                                 return;
                             }
                             var spuId = data.obj.goodses[0].spuId;
@@ -303,12 +303,12 @@ MetronicApp.directive('productSelectExtendModal', [
                                 }
                             })
                         } else if (data.code == 5) {
-                            alertMessage('error', '该商品不存在，请重新输入！');
+                            layer.msgMessage('error', '该商品不存在，请重新输入！');
                         } else if (data.code == 3) {
-                            alert(data.ext.msg);
+                            layer.msg(data.message);
                             window.location.href = 'login.html';
                         } else {
-                            alert(data.ext.msg);
+                            layer.msg(data.message);
                         }
                     })
                 }
@@ -475,7 +475,7 @@ MetronicApp.directive('productSelectExtendModal', [
                             } else if (datas.code == 3) {
                                 window.location.href = 'login.html';
                             } else {
-                                alert(datas.ext.msg);
+                                layer.msg(datas.message);
                                 Metronic.unblockUI();
                             }
                         },

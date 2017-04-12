@@ -60,11 +60,11 @@ MetronicApp.controller('AppController', [
 						if (data.success) {
 							window.location.href = "login.html";
 						} else {
-							alert(data.message);
+							layer.msg(data.message);
 						}
 					},
 					error: function(xhr, data, status) {
-						alert('请检查网络');
+						layer.msg('请检查网络');
 					}
 				})
 			};

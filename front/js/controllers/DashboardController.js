@@ -22,11 +22,11 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
 		// 		}else if(data.code == 3){
 		// 			window.location.href = 'login.html';
 		// 		}else{
-		// 			alert(data.ext.msg);
+		// 			layer.msg(data.message);
 		// 		}
 		// 	},
 		// 	error:function(xhr, data, status){
-		// 	    alert('请检查网络');
+		// 	    layer.msg('请检查网络');
 		// 	}
 		// })
 	});

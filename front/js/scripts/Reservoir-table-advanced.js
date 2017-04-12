@@ -31,7 +31,7 @@ var ReservoirAdvanced1 = function() {
 				[5, 15, 20, "All"] // change per page values here
 			],
 			// set the initial value
-			"pageLength": 30,
+			"pageLength": 10,
 			"lengthChange": false,
 			"filter": false,
 			"stateSave": true,
@@ -107,9 +107,9 @@ var ReservoirAdvanced1 = function() {
 								if (!rowData) {
 									return false;
 								}
-								var fullimg = $('<a href=""> 查看 </a>');
+								var fullimg = $('<a href="" data-toggle="modal" data-target=".bs-fullimgshow-modal-lg"> 查看 </a>');
 								fullimg.unbind('click').bind('click', function(e) {
-									Shuffling(rowData[33]);
+									$('#fullimage').attr('src', rowData[33])
 								})
 								var editfullimg = $('<a href="" data-toggle="modal" data-target=".bs-fullimg-modal-lg">编辑全景图</a>');
 								editfullimg.unbind('click').bind('click', function(e) {
@@ -189,7 +189,7 @@ var ReservoirAdvanced1 = function() {
 										id: rowData[34],
 										serviceType: 1
 									};
-									if (confirm('确定删除?')) {
+									layer.confirm('确定要删除该行数据信息吗？', function(index) {
 										$.ajax({
 											url: Metronic.host + 'table/deleteItem',
 											type: 'GET',
@@ -207,12 +207,13 @@ var ReservoirAdvanced1 = function() {
 												}
 											}
 										});
-									}
+										layer.close(index);
+									})
 								});
 								$(this).append(deletex);
 							});
 						} else {
-							alert(datas.message);
+							layer.msg(datas.message);
 							Metronic.unblockUI();
 						}
 					},
@@ -275,7 +276,7 @@ var ReservoirAdvanced2 = function() {
 				[5, 15, 20, "All"] // change per page values here
 			],
 			// set the initial value
-			"pageLength": 30,
+			"pageLength": 10,
 			"lengthChange": false,
 			"filter": false,
 			"stateSave": true,
@@ -387,7 +388,7 @@ var ReservoirAdvanced2 = function() {
 										id: rowData[0],
 										serviceType: 2
 									};
-									if (confirm('确定删除?')) {
+									layer.confirm('确定要删除该行数据信息吗？', function(index) {
 										$.ajax({
 											url: Metronic.host + 'table/deleteItem',
 											type: 'GET',
@@ -405,12 +406,13 @@ var ReservoirAdvanced2 = function() {
 												}
 											}
 										});
-									}
+										layer.close(index)
+									})
 								});
 								$(this).append(deletex);
 							});
 						} else {
-							alert(datas.message);
+							layer.msg(datas.message);
 							Metronic.unblockUI();
 						}
 					},
@@ -473,7 +475,7 @@ var ReservoirAdvanced3 = function() {
 				[5, 15, 20, "All"] // change per page values here
 			],
 			// set the initial value
-			"pageLength": 30,
+			"pageLength": 10,
 			"lengthChange": false,
 			"filter": false,
 			"stateSave": true,
@@ -550,7 +552,7 @@ var ReservoirAdvanced3 = function() {
 										id: rowData[34],
 										serviceType: 3
 									};
-									if (confirm('确定删除?')) {
+									layer.confirm('确定要删除该行数据信息吗？', function(index) {
 										$.ajax({
 											url: Metronic.host + 'table/deleteItem',
 											type: 'GET',
@@ -568,12 +570,13 @@ var ReservoirAdvanced3 = function() {
 												}
 											}
 										});
-									}
+										layer.close(index)
+									})
 								});
 								$(this).append(deletex);
 							});
 						} else {
-							alert(datas.message);
+							layer.msg(datas.message);
 							Metronic.unblockUI();
 						}
 					},

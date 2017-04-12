@@ -68,12 +68,12 @@ MetronicApp.controller('AddFileInformationManagementController', [
 						UM.clearCache('new-editor');
 						articleUm = UM.getEditor('new-editor', {UMEDITOR_HOME_URL: 'assets/global/plugins/umeditor/'});
 					} else {
-						alert(datas.message);
+						layer.msg(datas.message);
 						Metronic.unblockUI();
 					}
 				},
 				error: function(xhr, data, status) {
-					alert('请检查网络');
+					layer.msg('请检查网络');
 				}
 			});
 			$scope.newsDetail = {
@@ -142,11 +142,11 @@ MetronicApp.controller('AddFileInformationManagementController', [
 													if (data.success) {
 														window.location.href = '#/FileInformationManagement';
 													} else {
-														alert(data.message);
+														layer.msg(data.message);
 													}
 												},
 												error: function(xhr, data, status) {
-													alert('请检查网络');
+													layer.msg('请检查网络');
 												},
 												complete: function() {
 													Metronic.unblockUI();
@@ -156,7 +156,7 @@ MetronicApp.controller('AddFileInformationManagementController', [
 									});
 								},
 								error: function(xhr, data, status) {
-									alert('请检查网络');
+									layer.msg('请检查网络');
 								}
 							});
 						})();
@@ -179,11 +179,11 @@ MetronicApp.controller('AddFileInformationManagementController', [
 							if (data.success) {
 								window.location.href = '#/InformationManagement';
 							} else {
-								alert(data.message);
+								layer.msg(data.message);
 							}
 						},
 						error: function(xhr, data, status) {
-							alert('请检查网络');
+							layer.msg('请检查网络');
 						},
 						complete: function() {
 							Metronic.unblockUI();

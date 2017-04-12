@@ -144,7 +144,7 @@ MetronicApp.directive('productSelectNoRecord', ['queryBrand1', 'ajax1', 'getRoom
                             } else if (datas.code == 3) {
                                 window.location.href = 'login.html';
                             } else {
-                                alert(datas.ext.msg);
+                                layer.msg(datas.message);
                                 Metronic.unblockUI();
                             }
                         },
@@ -185,7 +185,7 @@ MetronicApp.directive('productSelectNoRecord', ['queryBrand1', 'ajax1', 'getRoom
                         $.each(oldGoodsList,function(i,n){
                             
                             if(parseInt(n.productId) == parseInt(e.target.value)){
-                                alert('此货物已经选择');
+                                layer.msg('此货物已经选择');
                                 e.target.checked=false;
                                 $.uniform.update();
                                 flag=false

@@ -31,7 +31,7 @@ var ArchiveAdvanced = function() {
 				[5, 15, 20, "All"] // change per page values here
 			],
 			// set the initial value
-			"pageLength": 30,
+			"pageLength": 10,
 			"lengthChange": false,
 			"filter": false,
 			"stateSave": true,
@@ -97,7 +97,7 @@ var ArchiveAdvanced = function() {
 								$(this).append(edit);
 							});
 						} else {
-							alert(datas.ext.msg);
+							layer.msg(datas.message);
 							Metronic.unblockUI();
 						}
 					},

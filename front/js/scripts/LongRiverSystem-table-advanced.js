@@ -31,7 +31,7 @@ var LongRiverSystemAdvanced1 = function() {
 				[5, 15, 20, "All"] // change per page values here
 			],
 			// set the initial value
-			"pageLength": 30,
+			"pageLength": 10,
 			"lengthChange": false,
 			"filter": false,
 			"stateSave": true,
@@ -79,7 +79,7 @@ var LongRiverSystemAdvanced1 = function() {
 							};
 							callback(d);
 						} else {
-							alert(datas.message);
+							layer.msg(datas.message);
 							Metronic.unblockUI();
 						}
 					},
@@ -142,7 +142,7 @@ var LongRiverSystemAdvanced2 = function() {
 				[5, 15, 20, "All"] // change per page values here
 			],
 			// set the initial value
-			"pageLength": 30,
+			"pageLength": 10,
 			"lengthChange": false,
 			"filter": false,
 			"stateSave": true,
@@ -189,7 +189,7 @@ var LongRiverSystemAdvanced2 = function() {
 							};
 							callback(d);
 						} else {
-							alert(datas.message);
+							layer.msg(datas.message);
 							Metronic.unblockUI();
 						}
 					},
@@ -252,7 +252,7 @@ var LongRiverSystemAdvanced3 = function() {
 				[5, 15, 20, "All"] // change per page values here
 			],
 			// set the initial value
-			"pageLength": 30,
+			"pageLength": 10,
 			"lengthChange": false,
 			"filter": false,
 			"stateSave": true,
@@ -296,7 +296,7 @@ var LongRiverSystemAdvanced3 = function() {
 							};
 							callback(d);
 						} else {
-							alert(datas.message);
+							layer.msg(datas.message);
 							Metronic.unblockUI();
 						}
 					},
@@ -359,7 +359,7 @@ var LongRiverSystemAdvanced4 = function() {
 				[5, 15, 20, "All"] // change per page values here
 			],
 			// set the initial value
-			"pageLength": 30,
+			"pageLength": 10,
 			"lengthChange": false,
 			"filter": false,
 			"stateSave": true,
@@ -404,7 +404,7 @@ var LongRiverSystemAdvanced4 = function() {
 							};
 							callback(d);
 						} else {
-							alert(datas.message);
+							layer.msg(datas.message);
 							Metronic.unblockUI();
 						}
 					},
@@ -467,7 +467,7 @@ var LongRiverSystemAdvanced5 = function() {
 				[5, 15, 20, "All"] // change per page values here
 			],
 			// set the initial value
-			"pageLength": 30,
+			"pageLength": 10,
 			"lengthChange": false,
 			"filter": false,
 			"stateSave": true,
@@ -515,7 +515,7 @@ var LongRiverSystemAdvanced5 = function() {
 							};
 							callback(d);
 						} else {
-							alert(datas.message);
+							layer.msg(datas.message);
 							Metronic.unblockUI();
 						}
 					},

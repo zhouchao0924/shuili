@@ -32,7 +32,7 @@ var WaterLevelAdvanced = function() {
 				[5, 15, 20, "All"] // change per page values here
 			],
 			// set the initial value
-			"pageLength": 30,
+			"pageLength": 10,
 			"lengthChange": false,
 			"filter": false,
 			"stateSave": true,
@@ -86,7 +86,7 @@ var WaterLevelAdvanced = function() {
 						} else if (datas.code == 3) {
 							window.location.href = 'login.html';
 						} else {
-							alert(datas.ext.msg);
+							layer.msg(datas.message);
 							Metronic.unblockUI();
 						}
 					},
