@@ -32,6 +32,11 @@ class AuthDefine {
                     "childrenList"=>array(),
                 ),
                 array(
+                    "name"=>"地理信息",
+                    "url"=>"#/GEOInfo",
+                    "childrenList"=>array(),
+                ),
+                array(
                     "name"=>"水库山塘",
                     "url"=>"#/Reservoir",
                     "childrenList"=>array(),
