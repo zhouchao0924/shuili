@@ -31,7 +31,7 @@ class WaterConservancyExcelTemplateConfig extends ExcelTemplateConfig{
     );
 
     protected $printExtraItem = array(
-        'full_image'=>array(),
+        'full_image'=>"",
         'create_time'=>'',
         'id'=>''
     );
