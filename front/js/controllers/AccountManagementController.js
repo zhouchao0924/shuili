@@ -81,7 +81,7 @@ MetronicApp.controller('AccountManagementController', [
 				var params = {
 					userName: $scope.userName,
 					password: $scope.password,
-					roleId: $scope.roleId,
+					roleId: 2,
 					desc: $scope.desc
 				};
 				$.ajax({
