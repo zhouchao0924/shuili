@@ -174,3 +174,29 @@
 		</div>
 	</div>
 </div>
+<div class="modal fade bs-fullimg-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exchangeModalLabel">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">编辑全景图</h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="form-group">
+						<h4>全景体链接地址</h4>
+						<div class="col-md-10">
+							<input type="text" class="form-control" ng-model="url" placeholder=" http://"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" ng-click="fullImageOK()">确定</button>
+				<button type="button" class="btn default" data-dismiss="modal" aria-hidden="true">取消</button>
+			</div>
+		</div>
+	</div>
+</div>
