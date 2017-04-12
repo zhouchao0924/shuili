@@ -96,7 +96,7 @@ final class CommonComponent{
 	 */
 	public static function checkUserNameFormat($name,$userType=self::USER_CMS_ADMIN){
 		$len = strlen($name);
-		if($len <6 || $len > 22){
+		if($len <1 || $len > 32){
 			return false;
 		}
 		if($userType == self::USER_CMS_ADMIN){//管理员只允许字母+数字
