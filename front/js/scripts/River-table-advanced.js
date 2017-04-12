@@ -73,10 +73,11 @@ var RiverAdvanced = function() {
 									n.planSituation.damHeight,
 									n.planSituation.waterArea,
 									n.manageRank,
-									n.fullImage,
+									"",
 									"",
 									n.desc,
-									n.image
+									n.image,
+									n.fullImage
 								];
 								arr.push(temp);
 							});
@@ -97,8 +98,19 @@ var RiverAdvanced = function() {
 								})
 								$(this).append($compile(img)($scope));
 							});
+							table.find('tbody tr td:nth-child(16)').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var img = $('<a href=""> 查看 </a>');
+								// img.unbind('click').bind('click', function(e) {
+								// 	Shuffling(rowData[19]);
+								// })
+								// $(this).append($compile(img)($scope));
+							});
 						} else {
-							alert(datas.ext.msg);
+							alert(datas.message);
 							Metronic.unblockUI();
 						}
 					},

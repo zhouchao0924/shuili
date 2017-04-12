@@ -83,14 +83,16 @@ var ReservoirAdvanced1 = function() {
 									n.controlLevel.meixunqi,
 									n.controlLevel.taixunqi,
 									n.extend,
-									n.fullImage,
+									"",
 									"",
 									n.manager.username,
 									n.manager.phone,
 									n.inspector.username,
 									n.inspector.phone,
 									"",
-									n.image
+									n.image,
+									n.fullImage,
+									n.id
 								];
 								arr.push(temp);
 							});
@@ -105,9 +107,55 @@ var ReservoirAdvanced1 = function() {
 								if (!rowData) {
 									return false;
 								}
-								var img = $('<a href="javascript:;"> 查看 </a>');
-								img.click(function(event) {});
+								var img = $('<a href=""> 查看 </a>');
+								img.unbind('click').bind('click', function(e) {
+									Shuffling(rowData[33]);
+								})
 								$(this).append($compile(img)($scope));
+							});
+							table.find('tbody tr td:nth-child(27)').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var img = $('<a href=""> 查看 </a>');
+								img.unbind('click').bind('click', function(e) {
+									Shuffling(rowData[32]);
+								})
+								$(this).append($compile(img)($scope));
+							});
+							table.find('tbody tr td:last-child').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var deletex = $('<a href="javascript:;" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
+								deletex.click(function() {
+									var params = {
+										id: rowData[34],
+										serviceType: 1
+									};
+									if (confirm('确定删除?')) {
+										$.ajax({
+											url: Metronic.host + 'table/deleteItem',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													oTable.fnDraw();
+												}
+											}
+										});
+									}
+								});
+								$(this).append(deletex);
 							});
 						} else {
 							alert(datas.message);
@@ -206,7 +254,6 @@ var ReservoirAdvanced2 = function() {
 									n.storageCapacity.xiaoheshuiwei,
 									n.storageCapacity.zongkurong,
 									n.storageCapacity.shejishuiwei,
-									n.storageCapacity.xiangyinkurong,
 									n.storageCapacity.zhengchangshuiwei,
 									n.storageCapacity.zhengchangkurong,
 									n.dam.baxing,
@@ -220,13 +267,14 @@ var ReservoirAdvanced2 = function() {
 									n.conveyanceFcailities.chicun,
 									n.conveyanceFcailities.jinkougaocheng,
 									n.conveyanceFcailities.chukougaocheng,
-									n.image,
 									n.extend,
+									"",
 									n.manager.username,
 									n.manager.phone,
 									n.inspector.username,
 									n.inspector.phone,
-									""
+									"",
+									n.image
 								];
 								arr.push(temp);
 							});
@@ -236,6 +284,50 @@ var ReservoirAdvanced2 = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
+							table.find('tbody tr td:nth-child(22)').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var img = $('<a href=""> 查看 </a>');
+								img.unbind('click').bind('click', function(e) {
+									Shuffling(rowData[27]);
+								})
+								$(this).append($compile(img)($scope));
+							});
+							table.find('tbody tr td:last-child').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var deletex = $('<a href="javascript:;" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
+								deletex.click(function() {
+									var params = {
+										id: rowData[0],
+										serviceType: 2
+									};
+									if (confirm('确定删除?')) {
+										$.ajax({
+											url: Metronic.host + 'table/deleteItem',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													oTable.fnDraw();
+												}
+											}
+										});
+									}
+								});
+								$(this).append(deletex);
+							});
 						} else {
 							alert(datas.message);
 							Metronic.unblockUI();
@@ -355,6 +447,50 @@ var ReservoirAdvanced3 = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
+							table.find('tbody tr td:nth-child(17)').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var img = $('<a href=""> 查看 </a>');
+								img.unbind('click').bind('click', function(e) {
+									Shuffling(rowData[18]);
+								})
+								$(this).append($compile(img)($scope));
+							});
+							table.find('tbody tr td:last-child').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var deletex = $('<a href="javascript:;" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
+								deletex.click(function() {
+									var params = {
+										id: rowData[34],
+										serviceType: 3
+									};
+									if (confirm('确定删除?')) {
+										$.ajax({
+											url: Metronic.host + 'table/deleteItem',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													oTable.fnDraw();
+												}
+											}
+										});
+									}
+								});
+								$(this).append(deletex);
+							});
 						} else {
 							alert(datas.message);
 							Metronic.unblockUI();
