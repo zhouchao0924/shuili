@@ -31,7 +31,7 @@ var RiverAdvanced = function() {
 				[5, 15, 20, "All"] // change per page values here
 			],
 			// set the initial value
-			"pageLength": 30,
+			"pageLength": 10,
 			"lengthChange": false,
 			"filter": false,
 			"stateSave": true,
@@ -130,10 +130,10 @@ var RiverAdvanced = function() {
 								if (!rowData) {
 									return false;
 								}
-								var fullimg = $('<a href="' + rowData[19] + '"> 查看 </a>');
-								// fullimg.unbind('click').bind('click', function(e) {
-								// 	Shuffling(rowData[33]);
-								// })
+								var fullimg = $('<a href="" data-toggle="modal" data-target=".bs-fullimgshow-modal-lg"> 查看 </a>');
+								fullimg.unbind('click').bind('click', function(e) {
+									$('#fullimage').attr('src', rowData[19])
+								})
 								var editfullimg = $('<a href="" data-toggle="modal" data-target=".bs-fullimg-modal-lg">编辑全景图</a>');
 								editfullimg.unbind('click').bind('click', function(e) {
 									$scope.fullImageOK = function() {
@@ -164,7 +164,7 @@ var RiverAdvanced = function() {
 								$(this).append($compile(fullimg)($scope)).append($compile(editfullimg)($scope));
 							});
 						} else {
-							alert(datas.message);
+							layer.msg(datas.message);
 							Metronic.unblockUI();
 						}
 					},

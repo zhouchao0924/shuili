@@ -31,7 +31,7 @@ var LockAdvanced = function() {
 				[5, 15, 20, "All"] // change per page values here
 			],
 			// set the initial value
-			"pageLength": 30,
+			"pageLength": 10,
 			"lengthChange": false,
 			"filter": false,
 			"stateSave": true,
@@ -124,7 +124,7 @@ var LockAdvanced = function() {
 								$(this).append($compile(img)($scope)).append($compile(UpImage)($scope));
 							});
 						} else {
-							alert(datas.message);
+							layer.msg(datas.message);
 							Metronic.unblockUI();
 						}
 					},

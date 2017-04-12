@@ -257,7 +257,7 @@ MetronicApp.directive('validateTab', [
 							e.preventDefault();
 							e.stopPropagation();
 							$('#suit_tabs a[data-toggle="tab"]')[scope.tab.tagIndex].focus()
-							alert('请完善必填信息，或清空空间类型！')
+							layer.msg('请完善必填信息，或清空空间类型！')
 							return
 						}
 						if (dirty && scope.isEditSuit) {
@@ -530,7 +530,7 @@ MetronicApp.directive('roomSelectModal', [
 							} else if (datas.code == 3) {
 								window.location.href = 'login.html';
 							} else {
-								alert(datas.ext.msg);
+								layer.msg(datas.message);
 								Metronic.unblockUI();
 							}
 						},

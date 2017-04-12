@@ -99,7 +99,7 @@ MetronicApp.controller('AccountManagementController', [
 						if (datas.success) {
 							location.reload();
 						} else {
-							alert(datas.message);
+							layer.msg(datas.message);
 						}
 					}
 				});

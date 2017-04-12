@@ -38,7 +38,7 @@ MetronicApp.controller('BasicDetailController', [
 					}
 				},
 				error: function(xhr, data, status) {
-					//  alert('请检查网络');
+					//  layer.msg('请检查网络');
 				}
 			});
 		});

@@ -32,7 +32,7 @@ MetronicApp.controller('YYTownController', [
 					}
 				},
 				error: function(xhr, data, status) {
-					alert('请检查网络');
+					layer.msg('请检查网络');
 				}
 			});
 			//设置管理区域
@@ -54,7 +54,7 @@ MetronicApp.controller('YYTownController', [
 						}
 					},
 					error: function(xhr, data, status) {
-						alert('请检查网络');
+						layer.msg('请检查网络');
 					}
 				});
 			}

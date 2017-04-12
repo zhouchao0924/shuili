@@ -97,10 +97,10 @@ var AccountManagementAdvanced = function() {
 											},
 											success: function(datas) {
 												if (datas.success) {
-													alert('重置密码成功');
+													layer.msg('重置密码成功');
 													location.reload();
 												} else {
-													alert(datas.message);
+													layer.msg(datas.message);
 													Metronic.unblockUI();
 												}
 											}
@@ -137,7 +137,7 @@ var AccountManagementAdvanced = function() {
 													$scope.editrole = datas.data.roleId;
 												});
 											} else {
-												alert(datas.message);
+												layer.msg(datas.message);
 											}
 										}
 									});
@@ -166,10 +166,10 @@ var AccountManagementAdvanced = function() {
 											},
 											success: function(datas) {
 												if (datas.success) {
-													alert('编辑成功');
+													layer.msg('编辑成功');
 													location.reload();
 												} else {
-													alert(datas.message);
+													layer.msg(datas.message);
 													Metronic.unblockUI();
 												}
 											}
@@ -200,7 +200,7 @@ var AccountManagementAdvanced = function() {
 													});
 												});
 											} else {
-												alert(datas.message);
+												layer.msg(datas.message);
 											}
 										}
 									});
@@ -222,11 +222,11 @@ var AccountManagementAdvanced = function() {
 											},
 											success: function(datas) {
 												if (datas.success) {
-													alert('添加管理机构成功');
+													layer.msg('添加管理机构成功');
 													//console.log(datas, '管理员绑定管理机构');
 													location.reload();
 												} else {
-													alert(datas.message);
+													layer.msg(datas.message);
 													Metronic.unblockUI();
 												}
 											}
@@ -264,7 +264,7 @@ var AccountManagementAdvanced = function() {
 						} else if (datas.code == 50001) {
 							window.location.href = 'login.html';
 						} else {
-							alert(datas.message);
+							layer.msg(datas.message);
 							Metronic.unblockUI();
 						}
 					},

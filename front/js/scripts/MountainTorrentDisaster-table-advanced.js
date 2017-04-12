@@ -31,7 +31,7 @@ var MountainTorrentDisasterAdvanced1 = function() {
 				[5, 15, 20, "All"] // change per page values here
 			],
 			// set the initial value
-			"pageLength": 30,
+			"pageLength": 10,
 			"lengthChange": false,
 			"filter": false,
 			"stateSave": true,
@@ -112,7 +112,7 @@ var MountainTorrentDisasterAdvanced1 = function() {
 								$(this).append(see);
 							});
 						} else {
-							alert(datas.message);
+							layer.msg(datas.message);
 							Metronic.unblockUI();
 						}
 					},
@@ -175,7 +175,7 @@ var MountainTorrentDisasterAdvanced2 = function() {
 				[5, 15, 20, "All"] // change per page values here
 			],
 			// set the initial value
-			"pageLength": 30,
+			"pageLength": 10,
 			"lengthChange": false,
 			"filter": false,
 			"stateSave": true,
@@ -219,7 +219,7 @@ var MountainTorrentDisasterAdvanced2 = function() {
 							};
 							callback(d);
 						} else {
-							alert(datas.message);
+							layer.msg(datas.message);
 							Metronic.unblockUI();
 						}
 					},
@@ -282,7 +282,7 @@ var MountainTorrentDisasterAdvanced3 = function() {
 				[5, 15, 20, "All"] // change per page values here
 			],
 			// set the initial value
-			"pageLength": 30,
+			"pageLength": 10,
 			"lengthChange": false,
 			"filter": false,
 			"stateSave": true,
@@ -326,7 +326,7 @@ var MountainTorrentDisasterAdvanced3 = function() {
 							};
 							callback(d);
 						} else {
-							alert(datas.message);
+							layer.msg(datas.message);
 							Metronic.unblockUI();
 						}
 					},
@@ -389,7 +389,7 @@ var MountainTorrentDisasterAdvanced4 = function() {
 				[5, 15, 20, "All"] // change per page values here
 			],
 			// set the initial value
-			"pageLength": 30,
+			"pageLength": 10,
 			"lengthChange": false,
 			"filter": false,
 			"stateSave": true,
@@ -434,7 +434,7 @@ var MountainTorrentDisasterAdvanced4 = function() {
 							};
 							callback(d);
 						} else {
-							alert(datas.message);
+							layer.msg(datas.message);
 							Metronic.unblockUI();
 						}
 					},
@@ -497,7 +497,7 @@ var MountainTorrentDisasterAdvanced5 = function() {
 				[5, 15, 20, "All"] // change per page values here
 			],
 			// set the initial value
-			"pageLength": 30,
+			"pageLength": 10,
 			"lengthChange": false,
 			"filter": false,
 			"stateSave": true,
@@ -552,7 +552,7 @@ var MountainTorrentDisasterAdvanced5 = function() {
 							};
 							callback(d);
 						} else {
-							alert(datas.message);
+							layer.msg(datas.message);
 							Metronic.unblockUI();
 						}
 					},

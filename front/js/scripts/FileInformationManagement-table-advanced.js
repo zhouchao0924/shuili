@@ -31,7 +31,7 @@ var FileInformationManagementAdvanced = function() {
 				[5, 15, 20, "All"] // change per page values here
 			],
 			// set the initial value
-			"pageLength": 30,
+			"pageLength": 10,
 			"lengthChange": false,
 			"filter": false,
 			"stateSave": true,
@@ -142,7 +142,7 @@ var FileInformationManagementAdvanced = function() {
 										id: rowData[0],
 										actionType: 1
 									};
-									if (confirm('确定删除?')) {
+									layer.confirm('确定要删除该行数据信息吗？', function(index) {
 										$.ajax({
 											url: Metronic.host + 'article/doActionAjax',
 											type: 'GET',
@@ -160,7 +160,8 @@ var FileInformationManagementAdvanced = function() {
 												}
 											}
 										});
-									}
+										layer.close(index);
+									})
 								});
 								if (rowData[5] == 0) {
 									$(this).append(edit).append(deletex).append(up);
@@ -169,7 +170,7 @@ var FileInformationManagementAdvanced = function() {
 								}
 							});
 						} else {
-							alert(datas.message);
+							layer.msg(datas.message);
 							Metronic.unblockUI();
 						}
 					},

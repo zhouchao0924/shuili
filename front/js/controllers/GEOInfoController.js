@@ -46,16 +46,16 @@ MetronicApp.controller('GEOInfoController', [
 					} else if (datas.code == 50001) {
 						window.location.href = 'login.html';
 					} else {
-						alert(datas.message);
+						layer.msg(datas.message);
 						Metronic.unblockUI();
 					}
 				},
 				error: function(xhr, data, status) {
-					alert('请检查网络');
+					layer.msg('请检查网络');
 				}
 			});
 
-			// alert(1);
+			// layer.msg(1);
 			window.initialize = function(){
 			  var mp = new window.BMap.Map('mapcontainer');
 				// 获取当前经纬度
@@ -74,7 +74,7 @@ MetronicApp.controller('GEOInfoController', [
 						}
 					},
 					error: function(xhr, data, status) {
-						//  alert('请检查网络');
+						//  layer.msg('请检查网络');
 					}
 				});
 				// console.log(mp,9999999);
@@ -89,7 +89,7 @@ MetronicApp.controller('GEOInfoController', [
 				// mp.openInfoWindow(infoWindow, mp.getCenter());      // 打开信息窗口
 
 				mp.addEventListener("click",function(e){
-					// alert(e.point.lng + "," + e.point.lat);
+					// layer.msg(e.point.lng + "," + e.point.lat);
 					// curlon = e.point.lng;
 					// curlat = e.point.lat;
 					console.log(e,8888);
@@ -126,7 +126,7 @@ MetronicApp.controller('GEOInfoController', [
 										 }
 										},
 										error: function(xhr, data, status) {
-											//  alert('请检查网络');
+											//  layer.msg('请检查网络');
 										}
 									});
 								// }
@@ -153,7 +153,7 @@ MetronicApp.controller('GEOInfoController', [
 						 });
 						var marker = new window.BMap.Marker(point,{icon:myIcon});        // 创建标注
 						// marker.addEventListener("click", function(e){
-						// //  alert("您点击了标注");
+						// //  layer.msg("您点击了标注");
 						// 	console.log(e,9999);
 						// 	if(e.overlay){
 						// 		$('#modalview').modal('show');
@@ -184,7 +184,7 @@ MetronicApp.controller('GEOInfoController', [
 						 }
 						},
 						error: function(xhr, data, status) {
-							//  alert('请检查网络');
+							//  layer.msg('请检查网络');
 						}
 					});
 				}
@@ -221,7 +221,7 @@ MetronicApp.controller('GEOInfoController', [
 			       }
 			      },
 			      error: function(xhr, data, status) {
-			      	//  alert('请检查网络');
+			      	//  layer.msg('请检查网络');
 			      }
 					});
 				});
@@ -262,7 +262,7 @@ MetronicApp.controller('GEOInfoController', [
 						 }
 						},
 						error: function(xhr, data, status) {
-							//  alert('请检查网络');
+							//  layer.msg('请检查网络');
 						}
 					});
 

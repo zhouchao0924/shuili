@@ -170,7 +170,7 @@ MetronicApp.directive('productSelectIsRecord', ['queryBrand1', 'ajax1', 'getRoom
                             } else if (datas.code == 3) {
                                 window.location.href = 'login.html';
                             } else {
-                                alert(datas.ext.msg);
+                                layer.msg(datas.message);
                                 Metronic.unblockUI();
                             }
                         },
@@ -212,7 +212,7 @@ MetronicApp.directive('productSelectIsRecord', ['queryBrand1', 'ajax1', 'getRoom
                         $.each(oldGoodsList,function(i,n){
                             
                             if(parseInt(n.pid) == parseInt(e.target.value)){
-                                alert('此货物已经选择');
+                                layer.msg('此货物已经选择');
                                 e.target.checked=false;
                                 $.uniform.update();
                                 flag=false
@@ -258,12 +258,12 @@ MetronicApp.directive('productSelectIsRecord', ['queryBrand1', 'ajax1', 'getRoom
                         selectGoodsList.push(tempCargoList);
                      }else if(datas.obj.code==1){
 
-                        alert('此货物追踪码主码在该仓库不存在！');
+                        layer.msg('此货物追踪码主码在该仓库不存在！');
                         e.target.checked=false;
                         $.uniform.update();
                         return false;
                      }else {
-                        alert("此货物追踪码主码关联状态未完结的订单时，在订单结束之前不允许调整!");
+                        layer.msg("此货物追踪码主码关联状态未完结的订单时，在订单结束之前不允许调整!");
                         e.target.checked=false;
                         $.uniform.update();
                         return false;

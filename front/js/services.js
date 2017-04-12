@@ -297,11 +297,11 @@ MetronicApp.factory('ajax', function() {
 				} else if (data.code == 3) {
 					window.location.href = 'login.html';
 				} else {
-					alert(data.ext.msg);
+					layer.msg(data.message);
 				}
 			},
 			error: function(xhr, data, status) {
-				alert('请检查网络');
+				layer.msg('请检查网络');
 			}
 		})
 	};
@@ -356,11 +356,11 @@ MetronicApp.factory('ajax1', [
 					window.location.href = 'login.html';
 				} else {
 					deferred.reject(data.data);
-					alert(data.data.ext.msg);
+					layer.msg(data.data.message);
 				}
 			}, function(data, status) {
 				deferred.reject(data.data);
-				// alert('请检查网络');
+				// layer.msg('请检查网络');
 				console.error('method: ' + data.config.method + '\nstatus: ' + data.status + '\nstatusText: ' + data.statusText + '\nurl: ' + data.config.url);
 			}). finally(function() {
 				blockUI.unblock()
@@ -427,11 +427,11 @@ MetronicApp.factory('ajax2', [
 					userNow.timeout()
 					window.location.href = 'login.html';
 				} else {
-					alert(data.data.ext.msg);
+					layer.msg(data.data.message);
 				}
 			}, function(data, status) {
 				deferred.reject(data.data);
-				// alert('请检查网络');
+				// layer.msg('请检查网络');
 				console.error('method: ' + data.config.method + '\nstatus: ' + data.status + '\nstatusText: ' + data.statusText + '\nurl: ' + data.config.url);
 			}). finally(function() {
 				blockUI.unblock()
@@ -513,7 +513,7 @@ MetronicApp.factory('ajax', [
 					window.location.href = 'login.html';
 				} else {
 					deferred.reject(data.data);
-					alert(data.data.ext.msg);
+					layer.msg(data.data.message);
 				}
 			}, function(data, status) {
 				deferred.reject(data.data);
@@ -573,11 +573,11 @@ MetronicApp.factory('ajaxforjson', [
 					window.location.href = 'login.html';
 				} else {
 					deferred.reject(data.data);
-					//alert(data.data.ext.msg);
+					//layer.msg(data.data.message);
 				}
 			}, function(data, status) {
 				deferred.reject(data.data);
-				// alert('请检查网络');
+				// layer.msg('请检查网络');
 				console.error('method: ' + data.config.method + '\nstatus: ' + data.status + '\nstatusText: ' + data.statusText + '\nurl: ' + data.config.url);
 			}). finally(function() {
 				blockUI.unblock()
@@ -774,11 +774,11 @@ MetronicApp.factory('qiniuimage', [
 							}
 						});
 					} else {
-						alert(data.message);
+						layer.msg(data.message);
 					}
 				},
 				error: function(xhr, data, status) {
-					alert('请检查网络');
+					layer.msg('请检查网络');
 				},
 				complete: function() {
 					blockUI.unblock()
@@ -2358,11 +2358,11 @@ MetronicApp.factory('confirmMessage', [
 	}
 ]);
 /*
-alert提示(created by sunhan on 2017/02/13)
+layer.msg提示(created by sunhan on 2017/02/13)
 example:
 	message(type, content) //type:['success', 'info', 'warn', 'error']
  */
-MetronicApp.factory('alertMessage', [
+MetronicApp.factory('layer.msgMessage', [
 	"$document",
 	function($document) {
 		return function(type, content) {

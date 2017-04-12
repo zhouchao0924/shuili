@@ -228,7 +228,7 @@ MetronicApp.directive('productSelectModal', ['queryBrand1', 'ajax1', function(qu
                         } else if (datas.code == 3) {
                             window.location.href = 'login.html';
                         } else {
-                            alert(datas.ext.msg);
+                            layer.msg(datas.message);
                             Metronic.unblockUI();
                         }
                     },
