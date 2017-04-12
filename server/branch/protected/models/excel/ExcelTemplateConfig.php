@@ -132,6 +132,7 @@ abstract class ExcelTemplateConfig{
         $conditions = array(
             "and",
             "street_id=:streetId",
+            "del_flag=0"
         );
         $params = array(
             ":streetId"=>$streetId,
@@ -171,6 +172,7 @@ abstract class ExcelTemplateConfig{
         $conditions = array(
             "and",
             "street_id=:streetId",
+            "del_flag=0"
         );
         $params = array(
             ":streetId"=>$streetId,
