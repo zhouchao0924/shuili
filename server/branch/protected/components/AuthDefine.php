@@ -119,7 +119,7 @@ class AuthDefine {
             "childrenList"=>array(
                 array(
                     "name"=>"账户管理",
-                    "url"=>"#/AccountManagement",
+                    "url"=>"#/InformationManagement",
                     "childrenList"=>array(),
                 ),
             )
@@ -132,7 +132,7 @@ class AuthDefine {
             "childrenList"=>array(
                 array(
                     "name"=>"账户管理",
-                    "url"=>"#/AccountManagement",
+                    "url"=>"#/FileInformationManagement",
                     "childrenList"=>array(),
                 ),
             )
