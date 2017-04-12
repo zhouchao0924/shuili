@@ -22,6 +22,7 @@
       	  'name'=>'电站名称',
 	  'township'=>'所在乡镇',
 	  'basin'=>'流域',
+      'develop'=>'开发方式'
           'catchment_area'=>'集雨面积',
 	  'diversion'=>'发电引水',
 	  'head'=>'设计水头',
