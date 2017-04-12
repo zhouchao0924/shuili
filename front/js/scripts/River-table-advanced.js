@@ -96,18 +96,72 @@ var RiverAdvanced = function() {
 								img.unbind('click').bind('click', function(e) {
 									Shuffling(rowData[18]);
 								})
-								$(this).append($compile(img)($scope));
+								var UpImage = $('<a href="" data-toggle="modal" data-target=".bs-UpImage-modal-lg">上传图片 </a>');
+								UpImage.unbind('click').bind('click', function(e) {
+									$scope.UpLoadImage = function() {
+										var params = {
+											id: rowData[0],
+											url: $scope.imgUrlList,
+											serviceType: 4
+										};
+										$.ajax({
+											url: Metronic.host + 'attachment/updateImage',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													location.reload();
+												}
+											}
+										});
+									}
+								})
+								$(this).append($compile(img)($scope)).append($compile(UpImage)($scope));
 							});
 							table.find('tbody tr td:nth-child(16)').each(function(i, n) {
 								var rowData = table.api().row(i).data();
 								if (!rowData) {
 									return false;
 								}
-								var img = $('<a href=""> 查看 </a>');
-								// img.unbind('click').bind('click', function(e) {
-								// 	Shuffling(rowData[19]);
+								var fullimg = $('<a href="' + rowData[19] + '"> 查看 </a>');
+								// fullimg.unbind('click').bind('click', function(e) {
+								// 	Shuffling(rowData[33]);
 								// })
-								// $(this).append($compile(img)($scope));
+								var editfullimg = $('<a href="" data-toggle="modal" data-target=".bs-fullimg-modal-lg">编辑全景图</a>');
+								editfullimg.unbind('click').bind('click', function(e) {
+									$scope.fullImageOK = function() {
+										var params = {
+											id: rowData[0],
+											url: $scope.url,
+											serviceType: 4
+										};
+										$.ajax({
+											url: Metronic.host + 'attachment/updateFullImage',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													location.reload();
+												}
+											}
+										});
+									}
+								})
+								$(this).append($compile(fullimg)($scope)).append($compile(editfullimg)($scope));
 							});
 						} else {
 							alert(datas.message);

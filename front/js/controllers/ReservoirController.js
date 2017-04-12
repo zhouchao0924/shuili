@@ -51,6 +51,13 @@ MetronicApp.controller('ReservoirController', [
 			$scope.UpLoad3 = function() {
 				$scope.MakeSureUpLoad3 = true;
 			};
+			//上传图片
+			$scope.imgUrl = '';
+			$scope.imgUrlList = [];
+			$scope.addimage = function() {
+				obj = angular.copy($scope.imgUrl);
+				$scope.imgUrlList.push(obj);
+			};
 		});
 	}
 ]);

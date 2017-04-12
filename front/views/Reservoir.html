@@ -533,3 +533,57 @@
 		</div>
 	</div>
 </div>
+<div class="modal fade bs-UpImage-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exchangeModalLabel">
+	<div class="modal-dialog" style="width:800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">上传图片</h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="form-group">
+						<div class="col-md-3" ng-repeat="n in imgUrlList track by $index">
+							<input-image ng-model="imgUrlList[$index]"></input-image>
+						</div>
+						<div class="col-md-3">
+							<a href="" class="btn blue" ng-click="addimage()">添加图片</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" ng-click="UpLoadImage()">确定导入</button>
+				<button type="button" class="btn default" data-dismiss="modal" aria-hidden="true">不导入</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade bs-fullimg-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exchangeModalLabel">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">编辑全景图</h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="form-group">
+						<h4>全景体链接地址</h4>
+						<div class="col-md-10">
+							<input type="text" class="form-control" ng-model="url" placeholder=" http://"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" ng-click="fullImageOK()">确定</button>
+				<button type="button" class="btn default" data-dismiss="modal" aria-hidden="true">取消</button>
+			</div>
+		</div>
+	</div>
+</div>
