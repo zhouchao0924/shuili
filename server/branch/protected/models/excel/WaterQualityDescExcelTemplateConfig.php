@@ -28,7 +28,7 @@ class WaterQualityDescExcelTemplateConfig extends ExcelTemplateConfig{
     );
 
     public function getDao(){
-        return WpWaterQualityDescDao::getInstance("WaterQualityDesc");
+        return WpWaterQualityDescDao::getInstance("WpWaterQualityDesc");
     }
 
     public function getExampleExcelFileName()

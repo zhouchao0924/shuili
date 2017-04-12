@@ -21,7 +21,7 @@ class WaterQualityBaseExcelTemplateConfig extends ExcelTemplateConfig{
     );
 
     public function getDao(){
-        return WpWaterQualityBaseDao::getInstance("WaterQualityBase");
+        return WpWaterQualityBaseDao::getInstance("WpWaterQualityBase");
     }
 
     public function getExampleExcelFileName()
