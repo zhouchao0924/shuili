@@ -2962,8 +2962,8 @@ MetronicApp.directive('tableTab', [
 		'$compile',
 		'$ocLazyLoad',
 		'dateFilter',
-		'qiniu',
-		function($compile, $ocLazyLoad, dateFilter, qiniu) {
+		'qiniuimage',
+		function($compile, $ocLazyLoad, dateFilter, qiniuimage) {
 			var isloaded = $ocLazyLoad.load({
 				insertBefore: '#ng_load_plugins_before',
 				files: [
@@ -2982,7 +2982,7 @@ MetronicApp.directive('tableTab', [
 					elem.on('change.bs.fileinput', function(e) {
 						var file = elem.find('.fileupload')[0]
 						if (file.files.length) {
-							qiniu(file).then(function(data) {
+							qiniuimage(file).then(function(data) {
 								ctrl.$setViewValue(data)
 							})
 						}
