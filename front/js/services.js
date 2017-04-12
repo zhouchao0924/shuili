@@ -702,11 +702,41 @@ MetronicApp.factory('qiniu', [
 	'$q',
 	'blockUI',
 	function($q, blockUI) {
+		return function(file, url) {
+			blockUI.block()
+			var deferred = $q.defer();
+			var formData = new FormData();
+			formData.append("efile", file.files[0]);
+			$.ajax({
+				url: url,
+				type: 'POST',
+				xhrFields: {
+					withCredentials: true
+				},
+				crossDomain: true,
+				processData: false,
+				contentType: false,
+				data: formData,
+				success: function(data) {
+					deferred.resolve(data);
+				},
+				complete: function() {
+					blockUI.unblock()
+				}
+			});
+			return deferred.promise;
+		};
+	}
+]);
+MetronicApp.factory('qiniuimage', [
+	'$q',
+	'blockUI',
+	function($q, blockUI) {
 		return function(file) {
 			blockUI.block()
 			var deferred = $q.defer();
 			$.ajax({
-				url: Metronic.apihost + 'attachment/getUploadTokenAjax',
+				url: Metronic.host + 'attachment/getUploadTokenAjax',
 				type: 'POST',
 				dataType: 'json',
 				xhrFields: {
@@ -2338,7 +2368,7 @@ MetronicApp.factory('alertMessage', [
 		return function(type, content) {
 			var msgClass = 'vi-message' +
 			'-' + type;
-			var message = angular.element('<div class="vi-message ' + msgClass + '">' + '<div class="vi-message-content">' + content + '</div>' + '</div>');
+			var messaage = angular.element('<div class="vi-message ' + msgClass + '">' + '<div class="vi-message-content">' + content + '</div>' + '</div>');
 			$('.vi-message').remove();
 			$document.find('body').append(message);
 			$message = $('.vi-message');

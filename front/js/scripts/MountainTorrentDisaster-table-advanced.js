@@ -74,21 +74,45 @@ var MountainTorrentDisasterAdvanced1 = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
+							table.find('tbody tr td:nth-child(4)').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var see = $('<a href="javascript:;"> 查看 </a>');
+								var edit = $('<a href="">  编辑</a>');
+								see.click(function(event) {});
+								$(this).append(see).append(edit);
+							});
+							table.find('tbody tr td:nth-child(5)').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var see = $('<a href="javascript:;"> 查看 </a>');
+								see.click(function(event) {});
+								$(this).append(see);
+							});
+							table.find('tbody tr td:nth-child(6)').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var see = $('<a href="javascript:;"> 查看 </a>');
+								see.click(function(event) {});
+								$(this).append(see);
+							});
 							table.find('tbody tr td:last-child').each(function(i, n) {
 								var rowData = table.api().row(i).data();
 								if (!rowData) {
 									return false;
 								}
-								var edit = $('<a href="javascript:;" class="btn btn-xs blue"><i class="fa fa-edit"></i> 编辑 </a>');
-								edit.click(function(event) {
-									window.location.href = '#/edit-artist/' + rowData[0] + '/' + rowData[6];
-								});
-								$(this).append(edit);
+								var see = $('<a href="javascript:;"> 查看 </a>');
+								see.click(function(event) {});
+								$(this).append(see);
 							});
-						} else if (datas.code == 3) {
-							window.location.href = 'login.html';
 						} else {
-							alert(datas.ext.msg);
+							alert(datas.message);
 							Metronic.unblockUI();
 						}
 					},

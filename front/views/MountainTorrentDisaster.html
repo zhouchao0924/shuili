@@ -65,8 +65,10 @@
 											<button class="btn default" type="button" ng-click="emptyData1()">重置</button>
 										</div>
 										<div class="col-md-4">
-											<button class="btn blue" type="button">导出样表</button>
-											<button class="btn blue" type="button">数据导入</button>
+											<a href="" class="btn blue" ng-click="DownLoad1()">
+												导出样表</a>
+											<a href="" data-toggle="modal" data-target=".bs-jibenxinxi-modal-lg" class="btn blue">
+												数据导入</a>
 										</div>
 									</div>
 								</form>
@@ -115,8 +117,10 @@
 											<button class="btn default" type="button" ng-click="emptyData2()">重置</button>
 										</div>
 										<div class="col-md-4">
-											<button class="btn blue" type="button">导出样表</button>
-											<button class="btn blue" type="button">数据导入</button>
+											<a href="" class="btn blue" ng-click="DownLoad2()">
+												导出样表</a>
+											<a href="" data-toggle="modal" data-target=".bs-paishuikou-modal-lg" class="btn blue">
+												数据导入</a>
 										</div>
 									</div>
 								</form>
@@ -165,8 +169,10 @@
 											<button class="btn default" type="button" ng-click="emptyData3()">重置</button>
 										</div>
 										<div class="col-md-4">
-											<button class="btn blue" type="button">导出样表</button>
-											<button class="btn blue" type="button">数据导入</button>
+											<a href="" class="btn blue" ng-click="DownLoad3()">
+												导出样表</a>
+											<a href="" data-toggle="modal" data-target=".bs-shuizhijiance-modal-lg" class="btn blue">
+												数据导入</a>
 										</div>
 									</div>
 								</form>
@@ -215,8 +221,10 @@
 											<button class="btn default" type="button" ng-click="emptyData4()">重置</button>
 										</div>
 										<div class="col-md-4">
-											<button class="btn blue" type="button">导出样表</button>
-											<button class="btn blue" type="button">数据导入</button>
+											<a href="" class="btn blue" ng-click="DownLoad4()">
+												导出样表</a>
+											<a href="" data-toggle="modal" data-target=".bs-shuizhichengguo-modal-lg" class="btn blue">
+												数据导入</a>
 										</div>
 									</div>
 								</form>
@@ -268,8 +276,10 @@
 											<button class="btn default" type="button" ng-click="emptyData5()">重置</button>
 										</div>
 										<div class="col-md-4">
-											<button class="btn blue" type="button">导出样表</button>
-											<button class="btn blue" type="button">数据导入</button>
+											<a href="" class="btn blue" ng-click="DownLoad5()">
+												导出样表</a>
+											<a href="" data-toggle="modal" data-target=".bs-ruhepaiwu-modal-lg" class="btn blue">
+												数据导入</a>
 										</div>
 									</div>
 								</form>
@@ -317,5 +327,145 @@
 			</div>
 		</div>
 		<!-- END EXAMPLE TABLE PORTLET-->
+	</div>
+</div>
+<div class="modal fade bs-jibenxinxi-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exchangeModalLabel">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="gridSystemModalLabel">数据导入</h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="form-group">
+							<h4 style="color:orange;">我确认已经填写好样表数据信息</h4>
+						</div>
+						<div class="form-group">
+							<input-files ng-model="a" ng-url="flood/importBaseInfo" make-sure="MakeSureUpLoad1"></input-files>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" ng-click="UpLoad1()">确定导入</button>
+				<button type="button" class="btn default" data-dismiss="modal" aria-hidden="true">不导入</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade bs-paishuikou-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exchangeModalLabel">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="gridSystemModalLabel">数据导入</h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="form-group">
+							<h4 style="color:orange;">我确认已经填写好样表数据信息</h4>
+						</div>
+						<div class="form-group">
+							<input-files ng-model="b" ng-url="flood/importFloodLeaderInfo" make-sure="MakeSureUpLoad2"></input-files>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" ng-click="UpLoad2()">确定导入</button>
+				<button type="button" class="btn default" data-dismiss="modal" aria-hidden="true">不导入</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade bs-shuizhijiance-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exchangeModalLabel">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="gridSystemModalLabel">数据导入</h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="form-group">
+							<h4 style="color:orange;">我确认已经填写好样表数据信息</h4>
+						</div>
+						<div class="form-group">
+							<input-files ng-model="c" ng-url="flood/importFloodOwnerInfo" make-sure="MakeSureUpLoad3"></input-files>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" ng-click="UpLoad3()">确定导入</button>
+				<button type="button" class="btn default" data-dismiss="modal" aria-hidden="true">不导入</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade bs-shuizhichengguo-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exchangeModalLabel">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="gridSystemModalLabel">数据导入</h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="form-group">
+							<h4 style="color:orange;">我确认已经填写好样表数据信息</h4>
+						</div>
+						<div class="form-group">
+							<input-files ng-model="d" ng-url="flood/importFloodNetworkOwnerInfo" make-sure="MakeSureUpLoad4"></input-files>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" ng-click="UpLoad4()">确定导入</button>
+				<button type="button" class="btn default" data-dismiss="modal" aria-hidden="true">不导入</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade bs-ruhepaiwu-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exchangeModalLabel">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="gridSystemModalLabel">数据导入</h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="form-group">
+							<h4 style="color:orange;">我确认已经填写好样表数据信息</h4>
+						</div>
+						<div class="form-group">
+							<input-files ng-model="e" ng-url="flood/importTransferPeopleInfo" make-sure="MakeSureUpLoad5"></input-files>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" ng-click="UpLoad5()">确定导入</button>
+				<button type="button" class="btn default" data-dismiss="modal" aria-hidden="true">不导入</button>
+			</div>
+		</div>
 	</div>
 </div>

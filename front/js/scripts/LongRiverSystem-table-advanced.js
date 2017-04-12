@@ -67,7 +67,8 @@ var LongRiverSystemAdvanced1 = function() {
 									n.riverManager,
 									n.position,
 									n.contactInfo,
-									n.police
+									n.police,
+									n.policeContactInfo
 								];
 								arr.push(temp);
 							});
@@ -77,21 +78,8 @@ var LongRiverSystemAdvanced1 = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
-							table.find('tbody tr td:last-child').each(function(i, n) {
-								var rowData = table.api().row(i).data();
-								if (!rowData) {
-									return false;
-								}
-								var edit = $('<a href="javascript:;" class="btn btn-xs blue"><i class="fa fa-edit"></i> 编辑 </a>');
-								edit.click(function(event) {
-									window.location.href = '#/edit-artist/' + rowData[0] + '/' + rowData[6];
-								});
-								$(this).append(edit);
-							});
-						} else if (datas.code == 3) {
-							window.location.href = 'login.html';
 						} else {
-							alert(datas.ext.msg);
+							alert(datas.message);
 							Metronic.unblockUI();
 						}
 					},
@@ -182,12 +170,15 @@ var LongRiverSystemAdvanced2 = function() {
 							$.each(datas.data.list || [], function(i, n) {
 								var temp = [
 									n.id,
-									n.post,
-									n.leader,
-									n.job,
-									n.cell,
-									n.uptime,
-									n.desc
+									n.riverId,
+									n.riversLevel,
+									n.name,
+									n.rainwaterOutlet,
+									n.sewageOutlet,
+									n.rainwaterSewageOutlet,
+									n.outletNum,
+									n.image,
+									""
 								];
 								arr.push(temp);
 							});
@@ -504,23 +495,16 @@ var LongRiverSystemAdvanced5 = function() {
 							$.each(datas.data.list || [], function(i, n) {
 								var temp = [
 									n.id,
+									n.name,
+									n.position,
+									n.riverName,
+									n.pollutionSource,
 									n.village,
-									n.dangerArea,
-									n.cat,
-									n.location.pos,
-									n.location.longitude,
-									n.location.latitude,
-									n.people.householder,
-									n.people.peopleCount,
-									n.people.cell,
-									n.transferOwner.name,
-									n.transferOwner.post,
-									n.transferOwner.cell,
-									n.transferLocation.posName,
-									n.transferLocation.secureVerify,
-									n.transferLocation.manager,
-									n.transferLocation.cell,
-									n.desc
+									n.dischargeMode,
+									n.treatmentMethod,
+									n.remarks,
+									n.image,
+									""
 								];
 								arr.push(temp);
 							});

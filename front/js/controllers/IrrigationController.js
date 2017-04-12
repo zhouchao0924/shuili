@@ -23,6 +23,16 @@ MetronicApp.controller('IrrigationController', [
 			$scope.DownLoad1 = function() {
 				window.open(Metronic.host + 'attachment/exportExample/18', '_blank');
 			};
+			$scope.UpLoad = function() {
+				$scope.MakeSureUpLoad = true;
+			};
+			//上传图片
+			$scope.imgUrl = '';
+			$scope.imgUrlList = [];
+			$scope.addimage = function() {
+				obj = angular.copy($scope.imgUrl);
+				$scope.imgUrlList.push(obj);
+			};
 		});
 	}
 ]);

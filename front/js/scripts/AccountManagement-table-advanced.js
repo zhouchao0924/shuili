@@ -55,23 +55,24 @@ var AccountManagementAdvanced = function() {
 						console.debug(datas, '列表数据');
 						if (datas.success) {
 							var arr = [];
-							$.each(datas.data, function(i, n) {
+							$.each(datas.data.userList, function(i, n) {
 								var temp = [
-									n.userId,
-									n.loginName,
-									n.realName,
+									n.id,
+									n.name,
 									"******",
-									n.createUserName,
 									n.createTime,
-									""
+									"",
+									n.desc
 								];
 								arr.push(temp);
 							});
 							var d = {
-								data: arr
+								data: arr,
+								recordsTotal: datas.data.total,
+								recordsFiltered: datas.data.total
 							};
 							callback(d);
-							table.find('tbody tr td:nth-child(4)').each(function(i, n) {
+							table.find('tbody tr td:nth-child(3)').each(function(i, n) {
 								var rowData = table.api().row(i).data();
 								if (!rowData) {
 									return false;
@@ -108,14 +109,14 @@ var AccountManagementAdvanced = function() {
 								});
 								$(n).append(reset);
 							});
-							table.find('tbody tr td:last-child').each(function(i, n) {
+							table.find('tbody tr td:nth-child(5)').each(function(i, n) {
 								var rowData = table.api().row(i).data();
 								if (!rowData) {
 									return false;
 								}
 								var edit = $('<a href="javascript:;" data-toggle="modal" data-target=".bs-edit-modal-lg" class="btn btn-xs green"><i class="fa fa-edit"></i> 编辑 </a>');
 								var deletex = $('<a href="javascript:;" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
-								var manage = $('<a href="javascript:;"  data-toggle="modal"  ng-click="seeorg(' + rowData[0] + ')"  data-target=".bs-manage-modal-lg"  class="btn btn-xs grey-cascade"><i class="fa fa-settings"></i> 管理机构 </a>');
+								var manage = $('<a href="javascript:;"  data-toggle="modal"  ng-click="seeorg(' + rowData[0] + ')"  data-target=".bs-manage-modal-lg"  class="btn btn-xs grey-cascade"><i class="fa fa-settings"></i> 可查看乡镇 </a>');
 								edit.unbind('click').bind('click', function(e) {
 									$.ajax({
 										url: Metronic.host + 'boss/admin/info',
@@ -130,7 +131,6 @@ var AccountManagementAdvanced = function() {
 										},
 										success: function(datas) {
 											if (datas.success) {
-												//console.log(datas, '编辑前获取管理员信息');
 												$scope.$apply(function() {
 													$scope.mlogInName = datas.data.loginName;
 													$scope.mrealName = datas.data.realName;

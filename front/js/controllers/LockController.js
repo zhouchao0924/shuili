@@ -22,6 +22,9 @@ MetronicApp.controller('LockController', [
 			$scope.DownLoad1 = function() {
 				window.open(Metronic.host + 'attachment/exportExample/5', '_blank');
 			};
+			$scope.UpLoad = function() {
+				$scope.MakeSureUpLoad = true;
+			};
 		});
 	}
 ]);

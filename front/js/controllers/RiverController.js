@@ -21,6 +21,9 @@ MetronicApp.controller('RiverController', [
 			$scope.DownLoad1 = function() {
 				window.open(Metronic.host + 'attachment/exportExample/4', '_blank');
 			};
+			$scope.UpLoad = function() {
+				$scope.MakeSureUpLoad = true;
+			};
 		});
 	}
 ]);
