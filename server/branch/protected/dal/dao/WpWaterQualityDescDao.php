@@ -6,6 +6,6 @@
  */
 class WpWaterQualityDescDao extends WpCsvBaseDao{
     public function getTableName(){
-        return "water_quality_desc";
+        return "wp_water_quality_desc";
     }
 }
