@@ -111,7 +111,34 @@ var ReservoirAdvanced1 = function() {
 								fullimg.unbind('click').bind('click', function(e) {
 									Shuffling(rowData[33]);
 								})
-								$(this).append($compile(fullimg)($scope));
+								var editfullimg = $('<a href="" data-toggle="modal" data-target=".bs-fullimg-modal-lg">编辑全景图</a>');
+								editfullimg.unbind('click').bind('click', function(e) {
+									$scope.fullImageOK = function() {
+										var params = {
+											id: rowData[34],
+											url: $scope.url,
+											serviceType: 1
+										};
+										$.ajax({
+											url: Metronic.host + 'attachment/updateFullImage',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													location.reload();
+												}
+											}
+										});
+									}
+								})
+								$(this).append($compile(fullimg)($scope)).append($compile(editfullimg)($scope));
 							});
 							table.find('tbody tr td:nth-child(27)').each(function(i, n) {
 								var rowData = table.api().row(i).data();
