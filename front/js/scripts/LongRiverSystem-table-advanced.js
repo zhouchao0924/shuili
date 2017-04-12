@@ -78,21 +78,8 @@ var LongRiverSystemAdvanced1 = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
-							table.find('tbody tr td:last-child').each(function(i, n) {
-								var rowData = table.api().row(i).data();
-								if (!rowData) {
-									return false;
-								}
-								var edit = $('<a href="javascript:;" class="btn btn-xs blue"><i class="fa fa-edit"></i> 编辑 </a>');
-								edit.click(function(event) {
-									window.location.href = '#/edit-artist/' + rowData[0] + '/' + rowData[6];
-								});
-								$(this).append(edit);
-							});
-						} else if (datas.code == 3) {
-							window.location.href = 'login.html';
 						} else {
-							alert(datas.ext.msg);
+							alert(datas.message);
 							Metronic.unblockUI();
 						}
 					},

@@ -64,7 +64,7 @@ var PumpStationAdvanced = function() {
 									n.rivers,
 									n.outsideRivers,
 									n.catchmentArea,
-									"",
+									n.flow,
 									n.installedPower,
 									n.pumpingStation,
 									n.pumpingStationNum,
@@ -78,8 +78,7 @@ var PumpStationAdvanced = function() {
 									n.completionDate,
 									"",
 									n.extend,
-									// n.image
-									['http://onrnzg8zq.bkt.clouddn.com/0bd6d930f68a58b63f7b28a44e23e189.jpg', 'http://onrnzg8zq.bkt.clouddn.com/9a41242062db3c5715763e056f3114f7.jpg', 'http://onrnzg8zq.bkt.clouddn.com/a58e92bf10e0a4755c71875a3cf67282.jpg']
+									n.image
 								];
 								arr.push(temp);
 							});
@@ -100,8 +99,39 @@ var PumpStationAdvanced = function() {
 								})
 								$(this).append($compile(img)($scope));
 							});
-						} else if (datas.code == 3) {
-							window.location.href = 'login.html';
+							table.find('tbody tr td:last-child').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var deletex = $('<a href="javascript:;" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
+								deletex.click(function() {
+									var params = {
+										id: rowData[0],
+										serviceType: 6
+									};
+									if (confirm('确定删除?')) {
+										$.ajax({
+											url: Metronic.host + 'table/deleteItem',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													oTable.fnDraw();
+												}
+											}
+										});
+									}
+								});
+								$(this).append(deletex);
+							});
 						} else {
 							alert(datas.message);
 							Metronic.unblockUI();

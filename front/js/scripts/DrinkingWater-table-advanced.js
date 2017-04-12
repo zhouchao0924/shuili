@@ -78,9 +78,10 @@ var DrinkingWaterAdvanced = function() {
 									n.managerUser,
 									n.managerUserCell,
 									n.buildTime,
-									n.image,
+									"",
 									n.desc,
-									""
+									"",
+									n.image
 								];
 								arr.push(temp);
 							});
@@ -90,6 +91,17 @@ var DrinkingWaterAdvanced = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
+							table.find('tbody tr td:nth-child(21)').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var img = $('<a href=""> 查看 </a>');
+								img.unbind('click').bind('click', function(e) {
+									Shuffling(rowData[23]);
+								})
+								$(this).append($compile(img)($scope));
+							});
 							table.find('tbody tr td:last-child').each(function(i, n) {
 								var rowData = table.api().row(i).data();
 								if (!rowData) {
@@ -97,10 +109,13 @@ var DrinkingWaterAdvanced = function() {
 								}
 								var deletex = $('<a href="javascript:;" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
 								deletex.click(function() {
-									var params = {};
+									var params = {
+										id: rowData[0],
+										serviceType: 17
+									};
 									if (confirm('确定删除?')) {
 										$.ajax({
-											url: Metronic.host + '',
+											url: Metronic.host + 'table/deleteItem',
 											type: 'GET',
 											dataType: 'json',
 											xhrFields: {
