@@ -98,6 +98,7 @@ MetronicApp.controller('SidebarController', [
 			// 首先渲染侧边栏
 			if (window.localStorage.UserdataMenuList) {
 				var b = JSON.parse(window.localStorage.UserdataMenuList);
+				$rootScope.adminID = b.roleId;
 				$scope.MenuList = b.UserdataMenuList;
 			}
 			Layout.initSidebar(); // init sidebar
