@@ -164,9 +164,9 @@ class AuthDefine {
             foreach (AuthDefine::$commonLink as $value){
                 $tree[] = $value;
             }
-            foreach (AuthDefine::$userAuthLink as $value){
-                $tree[] = $value;
-            }
+//            foreach (AuthDefine::$userAuthLink as $value){
+//                $tree[] = $value;
+//            }
             foreach (AuthDefine::$baseInfoLink as $value){
                 $tree[] = $value;
             }
