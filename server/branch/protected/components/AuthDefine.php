@@ -62,7 +62,7 @@ class AuthDefine {
                     "childrenList"=>array(),
                 ),
                 array(
-                    "name"=>"山洪灾害",
+                    "name"=>"防汛防台",
                     "url"=>"#/MountainTorrentDisaster",
                     "childrenList"=>array(),
                 ),
@@ -118,7 +118,7 @@ class AuthDefine {
             "name"=>"基本情况",
             "childrenList"=>array(
                 array(
-                    "name"=>"账户管理",
+                    "name"=>"基本信息",
                     "url"=>"#/InformationManagement",
                     "childrenList"=>array(),
                 ),
@@ -131,7 +131,7 @@ class AuthDefine {
             "name"=>"档案信息",
             "childrenList"=>array(
                 array(
-                    "name"=>"账户管理",
+                    "name"=>"档案信息",
                     "url"=>"#/FileInformationManagement",
                     "childrenList"=>array(),
                 ),
@@ -145,15 +145,28 @@ class AuthDefine {
         }
         if($role == AuthDefine::AUTH_NORMAL){
             return AuthDefine::$commonLink;
+        }elseif ($role ==AuthDefine::AUTH_ADMIN){
+            $tree = array();
+
+            foreach (AuthDefine::$commonLink as $value){
+                $tree[] = $value;
+            }
+            foreach (AuthDefine::$baseInfoLink as $value){
+                $tree[] = $value;
+            }
+            foreach (AuthDefine::$articleInfoLink as $value){
+                $tree[] = $value;
+            }
+            return $tree;
         }else{
             $tree = array();
 
             foreach (AuthDefine::$commonLink as $value){
                 $tree[] = $value;
             }
-            foreach (AuthDefine::$userAuthLink as $value){
-                $tree[] = $value;
-            }
+//            foreach (AuthDefine::$userAuthLink as $value){
+//                $tree[] = $value;
+//            }
             foreach (AuthDefine::$baseInfoLink as $value){
                 $tree[] = $value;
             }

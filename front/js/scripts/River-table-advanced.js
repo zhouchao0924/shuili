@@ -96,7 +96,7 @@ var RiverAdvanced = function() {
 								img.unbind('click').bind('click', function(e) {
 									Shuffling(rowData[18]);
 								})
-								var UpImage = $('<a href="" data-toggle="modal" data-target=".bs-UpImage-modal-lg">上传图片 </a>');
+								var UpImage = $('<a href="" data-toggle="modal" data-target=".bs-UpImage-modal-lg" button-show>上传图片 </a>');
 								UpImage.unbind('click').bind('click', function(e) {
 									$scope.imgUrlList = rowData[18];
 									$scope.$apply();
@@ -136,7 +136,7 @@ var RiverAdvanced = function() {
 								fullimg.unbind('click').bind('click', function(e) {
 									$('#fullimage').attr('src', rowData[19])
 								})
-								var editfullimg = $('<a href="" data-toggle="modal" data-target=".bs-fullimg-modal-lg">编辑全景图</a>');
+								var editfullimg = $('<a href="" data-toggle="modal" data-target=".bs-fullimg-modal-lg" button-show>编辑全景图</a>');
 								editfullimg.unbind('click').bind('click', function(e) {
 									$scope.url = rowData[19];
 									$scope.$apply();
