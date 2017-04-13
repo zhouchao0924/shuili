@@ -16,6 +16,7 @@ class RiverDrainExtendExcelTemplateConfig extends ExcelTemplateConfig{
         'pollution_source'=>'污染源',
         'village'=>'所在村',
         'discharge_mode'=>'排放方式',
+        'in_river_mode'=>'入河方式',
         'treatment_method'=>'排水口处理方式',
         'remarks'=>'备注',
     );

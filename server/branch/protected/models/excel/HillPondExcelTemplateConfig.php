@@ -14,7 +14,6 @@ class HillPondExcelTemplateConfig extends ExcelTemplateConfig{
             'xiaoheshuiwei'=>'校核水位（m）',
             'zongkurong'=>'总库容(万m3)',
             'shejishuiwei'=>'设计水位(m)',
-            'xiangyinkurong'=>'相应库容(万m3)',
             'zhengchangshuiwei'=>'正常水位（m)',
             'zhengchangkurong'=>'正常库容(万m3)',
         ),
