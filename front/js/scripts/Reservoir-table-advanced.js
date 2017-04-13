@@ -111,7 +111,7 @@ var ReservoirAdvanced1 = function() {
 								fullimg.unbind('click').bind('click', function(e) {
 									$('#fullimage').attr('src', rowData[33])
 								})
-								var editfullimg = $('<a href="" data-toggle="modal" data-target=".bs-fullimg-modal-lg">编辑全景图</a>');
+								var editfullimg = $('<a href="" data-toggle="modal" data-target=".bs-fullimg-modal-lg" button-show>编辑全景图</a>');
 								editfullimg.unbind('click').bind('click', function(e) {
 									$scope.url = rowData[33];
 									$scope.$apply();
@@ -151,7 +151,7 @@ var ReservoirAdvanced1 = function() {
 								img.unbind('click').bind('click', function(e) {
 									Shuffling(rowData[32]);
 								})
-								var UpImage = $('<a href="" data-toggle="modal" data-target=".bs-UpImage-modal-lg">上传图片 </a>');
+								var UpImage = $('<a href="" data-toggle="modal" data-target=".bs-UpImage-modal-lg" button-show>上传图片 </a>');
 								UpImage.unbind('click').bind('click', function(e) {
 									$scope.imgUrlList = rowData[32];
 									$scope.$apply();
@@ -352,7 +352,7 @@ var ReservoirAdvanced2 = function() {
 								img.unbind('click').bind('click', function(e) {
 									Shuffling(rowData[26]);
 								})
-								var UpImage = $('<a href="" data-toggle="modal" data-target=".bs-UpImage-modal-lg">上传图片 </a>');
+								var UpImage = $('<a href="" data-toggle="modal" data-target=".bs-UpImage-modal-lg" button-show>上传图片 </a>');
 								UpImage.unbind('click').bind('click', function(e) {
 									$scope.imgUrlList = rowData[26];
 									$scope.$apply();
@@ -546,7 +546,7 @@ var ReservoirAdvanced3 = function() {
 								fullimg.unbind('click').bind('click', function(e) {
 									$('#fullimage').attr('src', rowData[19])
 								})
-								var editfullimg = $('<a href="" data-toggle="modal" data-target=".bs-fullimg-modal-lg">编辑全景图</a>');
+								var editfullimg = $('<a href="" data-toggle="modal" data-target=".bs-fullimg-modal-lg" button-show>编辑全景图</a>');
 								editfullimg.unbind('click').bind('click', function(e) {
 									$scope.url = rowData[19];
 									$scope.$apply();
