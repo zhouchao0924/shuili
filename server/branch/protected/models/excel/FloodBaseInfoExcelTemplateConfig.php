@@ -11,7 +11,6 @@ class FloodBaseInfoExcelTemplateConfig extends ExcelTemplateConfig{
     protected $itemList = array(
         'manager'=>'防汛太负责任',
         'village'=>'村(社区)',
-        'dangerous_area_people_transfer_list'=>'危险区域人员转义名单',
     );
 
     protected $printExtraItem = array(

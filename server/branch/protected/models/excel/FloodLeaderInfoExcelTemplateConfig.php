@@ -9,6 +9,7 @@
 class FloodLeaderInfoExcelTemplateConfig extends ExcelTemplateConfig{
     public static $id = 13;
     protected $itemList = array(
+        'village'=>'村社区',
         'post'=> '岗位',
         'leader'=> '负责人',
         'job'=> '职位',
@@ -33,7 +34,7 @@ class FloodLeaderInfoExcelTemplateConfig extends ExcelTemplateConfig{
 
     public function getSearchTextTableColName()
     {
-        return "leader";
+        return "village";
     }
     public function getServiceTypeId(){
         return self::$id;
