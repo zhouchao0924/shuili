@@ -1960,3 +1960,18 @@ MetronicApp.directive('tableTab', [
 			};
 		}
 	]);
+	//权限控制按钮隐藏显示
+	MetronicApp.directive('sidebarShow', [
+		'$rootScope',
+		function($rootScope) {
+			return {
+				restrict: 'A',
+				link: function(scope, elem, attrs, ctrl) {
+					var b = JSON.parse(window.localStorage.Userdata);
+					if (b.roleId == 0 || b.roleId == 1) {
+						elem.css('display', 'none');
+					}
+				}
+			};
+		}
+	]);
