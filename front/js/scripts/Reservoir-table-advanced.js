@@ -113,6 +113,8 @@ var ReservoirAdvanced1 = function() {
 								})
 								var editfullimg = $('<a href="" data-toggle="modal" data-target=".bs-fullimg-modal-lg">编辑全景图</a>');
 								editfullimg.unbind('click').bind('click', function(e) {
+									$scope.url = rowData[33];
+									$scope.$apply();
 									$scope.fullImageOK = function() {
 										var params = {
 											id: rowData[34],
@@ -546,6 +548,8 @@ var ReservoirAdvanced3 = function() {
 								})
 								var editfullimg = $('<a href="" data-toggle="modal" data-target=".bs-fullimg-modal-lg">编辑全景图</a>');
 								editfullimg.unbind('click').bind('click', function(e) {
+									$scope.url = rowData[19];
+									$scope.$apply();
 									$scope.fullImageOK = function() {
 										var params = {
 											id: rowData[18],
