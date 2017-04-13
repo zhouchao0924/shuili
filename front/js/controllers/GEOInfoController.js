@@ -57,7 +57,7 @@ MetronicApp.controller('GEOInfoController', [
 
 			// layer.msg(1);
 			window.initialize = function(){
-			  var mp = new window.BMap.Map('mapcontainer');
+			  var mp = new window.BMap.Map('mapcontainer',{mapType:BMAP_SATELLITE_MAP});
 				// 获取当前经纬度
 				$.ajax({
 					url: Metronic.host + 'user/GetCurrentAreaLocation',
@@ -144,10 +144,11 @@ MetronicApp.controller('GEOInfoController', [
 				getAllPoint();
 
 				function listPoints(data){
+					mp.clearOverlays();
 					for(var i=0;i<data.length;i++){
 						var point = new window.BMap.Point(data[i].longitude, data[i].latitude);
 						console.log(parseInt(data[i].cat),888888);
-						var myIcon = new window.BMap.Icon("http://onrnzg8zq.bkt.clouddn.com/markers2.png", new BMap.Size(23, 25), {
+						var myIcon = new window.BMap.Icon("http://onrnzg8zq.bkt.clouddn.com/markers3.png", new BMap.Size(23, 25), {
 							 offset: new window.BMap.Size(10, 25),
 							 imageOffset: new window.BMap.Size(0, 0 - parseInt(data[i].cat) * 25)   // 设置图片偏移
 						 });
@@ -178,6 +179,33 @@ MetronicApp.controller('GEOInfoController', [
 						data: {},
 						success: function(data) {
 						 if (data.success && data.data.length>0) {
+								//
+								points = data.data;
+								listPoints(data.data);
+						 }
+						},
+						error: function(xhr, data, status) {
+							//  layer.msg('请检查网络');
+						}
+					});
+				}
+
+				// 根据cat获取地理列表
+				function getAllCatPoint(id){
+					var params = {
+						cat:id
+					}
+					$.ajax({
+						url: Metronic.host + 'geographyInfo/getCatPointAll',
+						type: 'GET',
+						dataType: 'json',
+						xhrFields: {
+						 withCredentials: true
+						},
+						crossDomain: true,
+						data: {data:JSON.stringify(params)},
+						success: function(data) {
+						 if (data.success) {
 								//
 								points = data.data;
 								listPoints(data.data);
@@ -265,6 +293,17 @@ MetronicApp.controller('GEOInfoController', [
 							//  layer.msg('请检查网络');
 						}
 					});
+				})
+
+				// 筛选按钮事件
+				$('#btns a').click(function(e){
+					console.log($(e.target).parents('a').index(),888)
+					var index = $(e.target).parents('a').index();
+					if(index == 0){
+						getAllPoint();
+					}else{
+						getAllCatPoint(index-1);
+					}
 
 				})
 
