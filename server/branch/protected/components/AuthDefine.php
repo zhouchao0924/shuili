@@ -145,6 +145,19 @@ class AuthDefine {
         }
         if($role == AuthDefine::AUTH_NORMAL){
             return AuthDefine::$commonLink;
+        }elseif ($role ==AuthDefine::AUTH_ADMIN){
+            $tree = array();
+
+            foreach (AuthDefine::$commonLink as $value){
+                $tree[] = $value;
+            }
+            foreach (AuthDefine::$baseInfoLink as $value){
+                $tree[] = $value;
+            }
+            foreach (AuthDefine::$articleInfoLink as $value){
+                $tree[] = $value;
+            }
+            return $tree;
         }else{
             $tree = array();
 
