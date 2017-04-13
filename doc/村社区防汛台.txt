@@ -50,6 +50,7 @@
         list: [
             {
                 id: string //id,
+                village: string//村社区
                 post: string //岗位,
                 leader: string //责任人,
                 job: string //责任人职务,
