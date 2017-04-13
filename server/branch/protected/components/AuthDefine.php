@@ -118,7 +118,7 @@ class AuthDefine {
             "name"=>"基本情况",
             "childrenList"=>array(
                 array(
-                    "name"=>"账户管理",
+                    "name"=>"基本信息",
                     "url"=>"#/InformationManagement",
                     "childrenList"=>array(),
                 ),
@@ -131,7 +131,7 @@ class AuthDefine {
             "name"=>"档案信息",
             "childrenList"=>array(
                 array(
-                    "name"=>"账户管理",
+                    "name"=>"档案信息",
                     "url"=>"#/FileInformationManagement",
                     "childrenList"=>array(),
                 ),
