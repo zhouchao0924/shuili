@@ -62,7 +62,7 @@ class AuthDefine {
                     "childrenList"=>array(),
                 ),
                 array(
-                    "name"=>"山洪灾害",
+                    "name"=>"防汛防台",
                     "url"=>"#/MountainTorrentDisaster",
                     "childrenList"=>array(),
                 ),
