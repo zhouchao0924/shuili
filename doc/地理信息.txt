@@ -74,7 +74,7 @@
     url:/geographyInfo/getCatPointAll
     method:get
     request:{
-        "cat": int /
+        "cat": int //分类 与response返回数据cat相同
     }
     response:[
         {
