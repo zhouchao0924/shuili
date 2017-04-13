@@ -10,6 +10,10 @@ class GeographyInfoModel{
     CONST CAT_RIVER_WAY = 1;//河道
     CONST CAT_SLUICE = 2;//水闸
     CONST CAT_PUMPING = 3;//泵站
+    CONST CAT_RIVER_ADMIN=4;//河长制
+    CONST CAT_FLOOD =5;//防汛防台
+    CONST CAT_FARM = 6; //农田水利
+    CONST CAT_DRINKING = 7;//农民饮用水
 
     public function addPoint($params){
         $cols = array(
@@ -144,5 +148,35 @@ class GeographyInfoModel{
        return WpGeographyInfoDao::getInstance("WpGeographyInfo");
     }
 
+    public function getCatPointAll($cat,$streetId){
+        $conditions = array(
+            "and",
+            "del_flag=:delFlag",
+            "street_id=:streetId",
+            "cat=:cat",
+        );
+        $params = array(
+            ":delFlag"=>0,
+            ":streetId"=>$streetId,
+            ":cat"=>$cat
+        );
 
+        $list = WpGeographyPointsDao::getInstance("WpGeographyPoints")->select("*",$conditions,$params,true);
+        if(empty($list)){
+            return array();
+        }
+
+        $data = array();
+        foreach ($list as $row){
+            $data[] = array(
+                'id'=>$row['id'],
+                'cat'=>$row['cat'],
+                'name'=>$row['name'],
+                'longitude'=>$row['longitude'],
+                'latitude'=>$row['latitude'],
+                'createTime'=>$row['create_time'],
+            );
+        }
+        return $data;
+    }
 }

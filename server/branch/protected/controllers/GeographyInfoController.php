@@ -12,7 +12,7 @@ class GeographyInfoController extends Controller{
         $name = isset($params['name'])?trim($params['name']):"";
         $longitude = isset($params['longitude'])?doubleval($params['longitude']):0;
         $latitude = isset($params['latitude'])?doubleval($params['latitude']):0;
-        if($cat > GeographyInfoModel::CAT_PUMPING || empty($name) || $latitude < 0 || $longitude < 0){
+        if($cat > GeographyInfoModel::CAT_DRINKING || empty($name) || $latitude < 0 || $longitude < 0){
             return $this->renderBadParamsAjaxResponse();
         }
         $client = new ClientComponent();
@@ -115,4 +115,27 @@ class GeographyInfoController extends Controller{
 
     }
 
+    /**
+     * 获取cat分类所有point
+     * @return string
+     */
+    public function actionGetCatPointAll(){
+        $params = $this->getAjaxRequestParam();
+        $cat = isset($params['cat'])?intval($params['cat']):-1;
+        if($cat < GeographyInfoModel::CAT_RESERVOIR || $cat > GeographyInfoModel::CAT_DRINKING){
+            return $this->renderBadParamsAjaxResponse();
+        }
+        $client = new ClientComponent();
+        $userInfo = $client->getUserInfo();
+        if(empty($userInfo)){
+            return $this->renderUserNotLoginAjaxResponse();
+        }
+        $areaId = $client->getCurrentArea();
+        if($areaId <= 0){
+            return $this->renderAjaxResponse($this->getAjaxResponse(false,"no area id",ErrorCode::ERROR_COMMON_ERROR,array()));
+        }
+        $geographyModel = new GeographyInfoModel();
+        $data = $geographyModel->getCatPointAll($cat,$areaId);
+        return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,$data));
+    }
 }
