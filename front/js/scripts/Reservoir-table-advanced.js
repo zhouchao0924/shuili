@@ -113,6 +113,8 @@ var ReservoirAdvanced1 = function() {
 								})
 								var editfullimg = $('<a href="" data-toggle="modal" data-target=".bs-fullimg-modal-lg">编辑全景图</a>');
 								editfullimg.unbind('click').bind('click', function(e) {
+									$scope.url = rowData[33];
+									$scope.$apply();
 									$scope.fullImageOK = function() {
 										var params = {
 											id: rowData[34],
@@ -151,6 +153,8 @@ var ReservoirAdvanced1 = function() {
 								})
 								var UpImage = $('<a href="" data-toggle="modal" data-target=".bs-UpImage-modal-lg">上传图片 </a>');
 								UpImage.unbind('click').bind('click', function(e) {
+									$scope.imgUrlList = rowData[32];
+									$scope.$apply();
 									$scope.UpLoadImage = function() {
 										var params = {
 											id: rowData[34],
@@ -350,6 +354,8 @@ var ReservoirAdvanced2 = function() {
 								})
 								var UpImage = $('<a href="" data-toggle="modal" data-target=".bs-UpImage-modal-lg">上传图片 </a>');
 								UpImage.unbind('click').bind('click', function(e) {
+									$scope.imgUrlList = rowData[26];
+									$scope.$apply();
 									$scope.UpLoadImage = function() {
 										var params = {
 											id: rowData[0],
@@ -542,6 +548,8 @@ var ReservoirAdvanced3 = function() {
 								})
 								var editfullimg = $('<a href="" data-toggle="modal" data-target=".bs-fullimg-modal-lg">编辑全景图</a>');
 								editfullimg.unbind('click').bind('click', function(e) {
+									$scope.url = rowData[19];
+									$scope.$apply();
 									$scope.fullImageOK = function() {
 										var params = {
 											id: rowData[18],

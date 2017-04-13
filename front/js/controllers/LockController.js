@@ -29,8 +29,12 @@ MetronicApp.controller('LockController', [
 			$scope.imgUrl = '';
 			$scope.imgUrlList = [];
 			$scope.addimage = function() {
-				obj = angular.copy($scope.imgUrl);
-				$scope.imgUrlList.push(obj);
+				if ($scope.imgUrlList.length < 3) {
+					obj = angular.copy($scope.imgUrl);
+					$scope.imgUrlList.push(obj);
+				} else {
+					layer.msg('最多只能上传三张图片');
+				}
 			};
 		});
 	}

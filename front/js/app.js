@@ -82,6 +82,9 @@ MetronicApp.controller('HeaderController', [
 	'$rootScope',
 	function($scope, $rootScope) {
 		$scope.$on('$includeContentLoaded', function() {
+			if (window.localStorage.UserdataMenuList) {
+				$scope.orgName = window.localStorage.orgName;
+			}
 			Layout.initHeader(); // init header
 		});
 	}

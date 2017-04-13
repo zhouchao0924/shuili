@@ -90,8 +90,8 @@ MetronicApp.controller('GEOInfoController', [
 
 				mp.addEventListener("click",function(e){
 					// layer.msg(e.point.lng + "," + e.point.lat);
-					// curlon = e.point.lng;
-					// curlat = e.point.lat;
+					curlon = e.point.lng;
+					curlat = e.point.lat;
 					console.log(e,8888);
 					if(e.overlay){
 						curlon = e.overlay.point.lng;
@@ -231,7 +231,7 @@ MetronicApp.controller('GEOInfoController', [
 					// 塞值
 					$('#eTitle').val($scope.pointdetail.title);
 					$('#eBold').val($scope.pointdetail.isBold);
-					articleUm.setContent($scope.pointdetail.content);
+					$scope.pointdetail.content?articleUm.setContent($scope.pointdetail.content):undefined;
 					$('#modaledit').modal('show');
 					$('#modalview').modal('hide');
 				});

@@ -36,7 +36,7 @@ MetronicApp.controller('YYTownController', [
 				}
 			});
 			//设置管理区域
-			$scope.setCurrentArea = function(id) {
+			$scope.setCurrentArea = function(id, name) {
 				$.ajax({
 					url: Metronic.host + '/user/setCurrentArea',
 					type: 'GET',
@@ -51,6 +51,7 @@ MetronicApp.controller('YYTownController', [
 					success: function(datas) {
 						if (datas.success) {
 							window.localStorage.UserdataMenuList = window.localStorage.Userdata;
+							window.localStorage.orgName = name;
 							location.reload();
 							window.location.href = '#/BasicInformation';
 						}

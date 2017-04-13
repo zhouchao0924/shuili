@@ -96,6 +96,8 @@ var LockAdvanced = function() {
 								})
 								var UpImage = $('<a href="" data-toggle="modal" data-target=".bs-UpImage-modal-lg">上传图片 </a>');
 								UpImage.unbind('click').bind('click', function(e) {
+									$scope.imgUrlList = rowData[17];
+									$scope.$apply();
 									$scope.UpLoadImage = function() {
 										var params = {
 											id: rowData[0],

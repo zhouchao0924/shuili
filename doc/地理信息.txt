@@ -2,7 +2,7 @@
     url:/geographyInfo/addPoint
     method:get
     request:{
-        'cat' int //0 山塘水库，1 河道，2 水闸 3 泵站,
+        'cat' int //0 山塘水库，1 河道，2 水闸 3 泵站,4 河长制，5 防汛防台，6 农田水利，7 农民饮用水
         'name' string //名称,
         'longitude' double //经度,
         'latitude' double //纬度
@@ -18,7 +18,7 @@
     response:[
         {
         'id' int  //id 删除 点击获取详细信息等
-        'cat' int //0 山塘水库，1 河道，2 水闸 3 泵站,
+        'cat' int //0 山塘水库，1 河道，2 水闸 3 泵站,4 河长制，5 防汛防台，6 农田水利，7 农民饮用水
         'name' string //名称,
         'longitude' double //经度,
         'latitude' double //纬度
