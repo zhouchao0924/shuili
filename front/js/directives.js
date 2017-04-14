@@ -1902,7 +1902,8 @@ MetronicApp.directive('tableTab', [
 		'$ocLazyLoad',
 		'dateFilter',
 		'qiniu',
-		function($compile, $ocLazyLoad, dateFilter, qiniu) {
+		'$rootScope',
+		function($compile, $ocLazyLoad, dateFilter, qiniu, $rootScope) {
 			var isloaded = $ocLazyLoad.load({
 				insertBefore: '#ng_load_plugins_before',
 				files: [
@@ -1925,7 +1926,6 @@ MetronicApp.directive('tableTab', [
 							var file = elem.find('.fileupload')[0]
 							if (file.files.length) {
 								qiniu(file, Metronic.host + scope.ngUrl).then(function(data) {
-									ctrl.$setViewValue(data);
 									location.reload();
 								})
 							}
@@ -1974,4 +1974,4 @@ MetronicApp.directive('tableTab', [
 				}
 			};
 		}
-	]);
+	]);;
