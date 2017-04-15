@@ -612,6 +612,31 @@ MetronicApp.config([
 					}
 				]
 			}
+		}).state('ManageArea', {
+			url: "/ManageArea/:id",
+			templateUrl: "views/ManageArea.html?v=" + MetronicApp.version,
+			data: {
+				pageTitle: '可查看乡镇'
+			},
+			controller: "ManageAreaController",
+			resolve: {
+				deps: [
+					'$ocLazyLoad',
+					function($ocLazyLoad) {
+						return $ocLazyLoad.load({
+							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
+							files: [
+								'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/all.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=' + MetronicApp.version,
+								'js/controllers/ManageAreaController.js?v=' + MetronicApp.version
+							]
+						});
+					}
+				]
+			}
 		}).state('CityManagement', {
 			url: "/CityManagement",
 			templateUrl: "views/CityManagement.html?v=" + MetronicApp.version,

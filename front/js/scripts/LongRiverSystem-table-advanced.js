@@ -280,12 +280,11 @@ var LongRiverSystemAdvanced3 = function() {
 							$.each(datas.data.list || [], function(i, n) {
 								var temp = [
 									n.id,
-									n.job,
-									n.village,
-									n.owner.name,
-									n.owner.post,
-									n.owner.cell,
-									n.desc
+									n.name,
+									n.detecionPosition,
+									n.latitudeLongitude,
+									"",
+									n.image
 								];
 								arr.push(temp);
 							});
