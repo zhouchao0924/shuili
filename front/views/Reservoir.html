@@ -1,15 +1,3 @@
-<h3 class="page-title">
-	{{$state.current.data.pageTitle}}
-</h3>
-<div class="page-bar">
-	<ul class="page-breadcrumb">
-		<li>
-			<i class="fa fa-home"></i>
-			<a href="javascript:;">{{$state.current.data.pageTitle}}</a>
-		</li>
-	</ul>
-</div>
-<!-- END PAGE HEADER-->
 <!-- BEGIN MAIN CONTENT -->
 <div class="row">
 	<div class="col-md-12">
@@ -26,16 +14,16 @@
 			<div class="portlet-body">
 				<ul id="Tabs" class="nav nav-tabs">
 					<li class="active" type="table" style="width:200px;text-align:center;">
-						<a href="#shuiku" data-toggle="tab">
+						<a href="#shuiku" data-toggle="tab" ng-click="RemeberTab(0)">
 							水库</a>
 					</li>
 					<li type="chart" style="width:200px;text-align:center;">
-						<a href="#shantang" data-toggle="tab">
+						<a href="#shantang" data-toggle="tab" ng-click="RemeberTab(1)">
 							山塘
 						</a>
 					</li>
 					<li type="chart" style="width:200px;text-align:center;">
-						<a href="#xiaoshuidian" data-toggle="tab">
+						<a href="#xiaoshuidian" data-toggle="tab" ng-click="RemeberTab(2)">
 							小水电
 						</a>
 					</li>
@@ -55,9 +43,9 @@
 											<button class="btn default" type="button" ng-click="emptyData1()">重置</button>
 										</div>
 										<div class="col-md-4">
-											<a href="" class="btn blue" ng-click="DownLoad1()">
+											<a href="" class="btn blue" ng-click="DownLoad1()" button-show>
 												导出样表</a>
-											<a href="" data-toggle="modal" data-target=".bs-shuiku-modal-lg" class="btn blue">
+											<a href="" data-toggle="modal" data-target=".bs-shuiku-modal-lg" class="btn blue" button-show>
 												数据导入</a>
 										</div>
 									</div>
@@ -208,9 +196,9 @@
 											<button class="btn default" type="button" ng-click="emptyData2()">重置</button>
 										</div>
 										<div class="col-md-4">
-											<a href="" class="btn blue" ng-click="DownLoad2()">
+											<a href="" class="btn blue" ng-click="DownLoad2()" button-show>
 												导出样表</a>
-											<a href="" data-toggle="modal" data-target=".bs-shantang-modal-lg" class="btn blue">
+											<a href="" data-toggle="modal" data-target=".bs-shantang-modal-lg" class="btn blue" button-show>
 												数据导入</a>
 										</div>
 									</div>
@@ -337,9 +325,9 @@
 											<button class="btn default" type="button" ng-click="emptyData3()">重置</button>
 										</div>
 										<div class="col-md-4">
-											<a href="" class="btn blue" ng-click="DownLoad3()">
+											<a href="" class="btn blue" ng-click="DownLoad3()" button-show>
 												导出样表</a>
-											<a href="" data-toggle="modal" data-target=".bs-xiaoshuidian-modal-lg" class="btn blue">
+											<a href="" data-toggle="modal" data-target=".bs-xiaoshuidian-modal-lg" class="btn blue" button-show>
 												数据导入</a>
 										</div>
 									</div>

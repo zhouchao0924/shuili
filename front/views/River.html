@@ -1,15 +1,3 @@
-<h3 class="page-title">
-	{{$state.current.data.pageTitle}}
-</h3>
-<div class="page-bar">
-	<ul class="page-breadcrumb">
-		<li>
-			<i class="fa fa-home"></i>
-			<a href="javascript:;">{{$state.current.data.pageTitle}}</a>
-		</li>
-	</ul>
-</div>
-<!-- END PAGE HEADER-->
 <!-- BEGIN MAIN CONTENT -->
 <div class="row">
 	<div class="col-md-12">
@@ -36,9 +24,9 @@
 								<button class="btn default" type="button" ng-click="emptyData()">重置</button>
 							</div>
 							<div class="col-md-4">
-								<a href="" class="btn blue" ng-click="DownLoad1()">
+								<a href="" class="btn blue" ng-click="DownLoad1()" button-show>
 									导出样表</a>
-								<a href="" data-toggle="modal" data-target=".bs-hedao-modal-lg" class="btn blue">
+								<a href="" data-toggle="modal" data-target=".bs-hedao-modal-lg" class="btn blue" button-show>
 									数据导入</a>
 							</div>
 						</div>

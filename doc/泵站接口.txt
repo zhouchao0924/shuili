@@ -40,6 +40,9 @@
                 'extend'://'备注',
                 'image'://[],
                 'create_time'://'',
+		‘speed’://转速
+		‘yangchen’：//扬程
+		‘softStart’：//软启动型号
         },
             ...
         ]

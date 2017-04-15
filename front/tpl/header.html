@@ -1,8 +1,8 @@
 <!-- BEGIN HEADER INNER -->
 <div class="page-header-inner">
 	<!-- BEGIN LOGO -->
-	<div >
-		<h3 style="display:inline-block;color:white;margin:10px 0 0 20px;" class="logo-default">{{orgName}}乡镇水利信息云平台</h3>
+	<div class="page-logo" style="width:500px;">
+		<h2 style="display:inline-block;color:white;margin:10px 0 0 0;" class="logo-default">{{orgName}}乡镇水利信息云平台</h2>
 		<!-- <div class="menu-toggler sidebar-toggler"> -->
 		<!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
 		<!-- </div> -->
@@ -25,7 +25,11 @@
 	<a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"></a>
 	<!-- END RESPONSIVE MENU TOGGLER -->
 	<!-- BEGIN TOP NAVIGATION MENU -->
+	<!-- <div class="page-logo" style="width:350px;"></div> -->
 	<div class="top-menu">
+		<h5 style="display:inline-block;color:white;margin:17px 10px 0 30px;">当前乡镇：{{orgName}}
+			<a href="#/YYTown" style="color:orange;margin:17px 10px 0 30px;">查看其他乡镇</a>
+		</h5>
 		<ul class="nav navbar-nav pull-right">
 			<!-- BEGIN USER LOGIN DROPDOWN -->
 			<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
@@ -36,12 +40,12 @@
 					<i class="fa fa-angle-down"></i>
 				</a>
 				<ul class="dropdown-menu dropdown-menu-default">
-					<li>
+					<!-- <li>
 						<a href="change_password.html">
 							<i class="icon-key"></i>
 							修改密码
 						</a>
-					</li>
+					</li> -->
 					<li id="quit" ng-click="quit()">
 						<a href="javascript:;">
 							<i class="icon-logout"></i>

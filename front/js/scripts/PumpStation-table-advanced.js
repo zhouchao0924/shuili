@@ -98,7 +98,7 @@ var PumpStationAdvanced = function() {
 								img.unbind('click').bind('click', function(e) {
 									Shuffling(rowData[21]);
 								})
-								var UpImage = $('<a href="" data-toggle="modal" data-target=".bs-UpImage-modal-lg">上传图片 </a>');
+								var UpImage = $('<a href="" data-toggle="modal" data-target=".bs-UpImage-modal-lg" button-show>上传图片 </a>');
 								UpImage.unbind('click').bind('click', function(e) {
 									$scope.imgUrlList = rowData[21];
 									$scope.$apply();
