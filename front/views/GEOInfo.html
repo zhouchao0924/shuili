@@ -1,207 +1,206 @@
 <style media="screen">
-	.box{
+	.box {
 		position: relative;
 	}
-	#mapcontainer{
-		width:100%;
+	#mapcontainer {
+		width: 100%;
 		height: 500px;
 	}
-	.toplabel{
+	.toplabel {
 		position: absolute;
-		top:0;
-		left:0;
-		height:30px;
-		width:100%;
+		top: 0;
+		left: 0;
+		height: 30px;
+		width: 100%;
 		background: rgba(0,0,0,0.7);
 	}
-	.t-left{
+	.t-left {
 		font-size: 18px;
-		color:#fff;
+		color: #fff;
 		float: left;
 		margin-left: 20px;
 		line-height: 30px;
 	}
-	.t-r{
+	.t-r {
 		line-height: 30px;
 		float: right;
 		margin-right: 20px;
 	}
-  .detail .title{
-    font-size:24px;
-		color:#333;
-  }
-  .detail .sub-title{
-    margin-top: 15px;
-    font-size:13px;
-		color:#666;
-    border-bottom: 1px solid #ccc;
-    margin-bottom: 10px;
-  }
-  .detail .content{
-    font-size:13px;
-    color:#666;
-  }
-	.label-hcz{
-		background-color:#6e4af5;
+	.detail .title {
+		font-size: 24px;
+		color: #333;
 	}
-	.label-fxft{
-		background-color:#f54ae7;
+	.detail .sub-title {
+		margin-top: 15px;
+		font-size: 13px;
+		color: #666;
+		border-bottom: 1px solid #ccc;
+		margin-bottom: 10px;
 	}
-	.label-ntsl{
-		background-color:#ffef00;
+	.detail .content {
+		font-size: 13px;
+		color: #666;
 	}
-	.label-nmyys{
-		background-color:#4af54e;
+	.label-hcz {
+		background-color: #6e4af5;
+	}
+	.label-fxft {
+		background-color: #f54ae7;
+	}
+	.label-ntsl {
+		background-color: #ffef00;
+	}
+	.label-nmyys {
+		background-color: #4af54e;
 	}
 </style>
-
-<h3 class="page-title">
-	{{$state.current.data.pageTitle}}
-</h3>
-<div class="page-bar">
-	<ul class="page-breadcrumb">
-		<li>
-			<i class="fa fa-home"></i>
-			<a href="javascript:;">{{$state.current.data.pageTitle}}</a>
-		</li>
-	</ul>
-</div>
-
 <div class="box">
-	<div id="mapcontainer">
-
-	</div>
+	<div id="mapcontainer"></div>
 	<div class="toplabel">
 		<div class="t-left">
 			<span>马渚镇地理信息</span>
 		</div>
 		<div class="t-r" id="btns">
-			<a href="javascript:;"><span class="label label-sm">全部</span></a>
-			<a href="javascript:;"><span class="label label-sm label-success">水库山塘</span></a>
-			<a href="javascript:;"><span class="label label-sm label-info">河道</span></a>
-			<a href="javascript:;"><span class="label label-sm label-danger">水闸</span></a>
-			<a href="javascript:;"><span class="label label-sm label-warning">泵站</span></a>
-			<a href="javascript:;"><span class="label label-sm label-hcz">河长制</span></a>
-			<a href="javascript:;"><span class="label label-sm label-fxft">防汛防台</span></a>
-			<a href="javascript:;"><span class="label label-sm label-ntsl">农田水利</span></a>
-			<a href="javascript:;"><span class="label label-sm label-nmyys">农民饮用水</span></a>
+			<a href="javascript:;">
+				<span class="label label-sm">全部</span>
+			</a>
+			<a href="javascript:;">
+				<span class="label label-sm label-success">水库山塘</span>
+			</a>
+			<a href="javascript:;">
+				<span class="label label-sm label-info">河道</span>
+			</a>
+			<a href="javascript:;">
+				<span class="label label-sm label-danger">水闸</span>
+			</a>
+			<a href="javascript:;">
+				<span class="label label-sm label-warning">泵站</span>
+			</a>
+			<a href="javascript:;">
+				<span class="label label-sm label-hcz">河长制</span>
+			</a>
+			<a href="javascript:;">
+				<span class="label label-sm label-fxft">防汛防台</span>
+			</a>
+			<a href="javascript:;">
+				<span class="label label-sm label-ntsl">农田水利</span>
+			</a>
+			<a href="javascript:;">
+				<span class="label label-sm label-nmyys">农民饮用水</span>
+			</a>
 		</div>
 	</div>
 </div>
-
 <div id="modaladd" class="modal fade bs-modify-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exchangeModalLabel">
- <div class="modal-dialog">
-  <div class="modal-content">
-   <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-     <span aria-hidden="true">&times;</span>
-    </button>
-    <h4 class="modal-title" id="gridSystemModalLabel">确认添加后，添加小图标到地图界面。
-点击小图标编辑该你而信息。</h4>
-   </div>
-   <div class="modal-body">
-    <div class="container-fluid">
-     <div class="row">
-      <div class="form-group col-md-12">
-       <label class="control-label col-md-3">名称:</label>
-       <div class="col-md-5 cates">
-        <input type="text" class="form-control" id="name"/>
-       </div>
-      </div>
-      <div class="form-group col-md-12">
-       <label class="control-label col-md-3">类型:</label>
-       <div class="col-md-5 cates">
-				 <select class="layout-option form-control input-sm" id="cat">
- 					<option value="0">水库山塘</option>
- 					<option value="1">河道</option>
-					<option value="2">水闸</option>
-					<option value="3">泵站</option>
-					<option value="4">河长制</option>
-					<option value="5">防汛防台</option>
-					<option value="6">农田水利</option>
-					<option value="7">农民饮用水</option>
- 				</select>
-       </div>
-		 </div>
-    </div>
-   </div>
-  </div>
-  <div class="modal-footer">
-   <button type="button" id="makesure" class="btn btn-primary">确定添加</button>
-	 <button type="button" id="cancel" class="btn btn-default">取消</button>
-  </div>
- </div>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="gridSystemModalLabel">确认添加后，添加小图标到地图界面。 点击小图标编辑该你而信息。</h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label class="control-label col-md-3">名称:</label>
+							<div class="col-md-5 cates">
+								<input type="text" class="form-control" id="name"/>
+							</div>
+						</div>
+						<div class="form-group col-md-12">
+							<label class="control-label col-md-3">类型:</label>
+							<div class="col-md-5 cates">
+								<select class="layout-option form-control input-sm" id="cat">
+									<option value="0">水库山塘</option>
+									<option value="1">河道</option>
+									<option value="2">水闸</option>
+									<option value="3">泵站</option>
+									<option value="4">河长制</option>
+									<option value="5">防汛防台</option>
+									<option value="6">农田水利</option>
+									<option value="7">农民饮用水</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="makesure" class="btn btn-primary">确定添加</button>
+				<button type="button" id="cancel" class="btn btn-default">取消</button>
+			</div>
+		</div>
+	</div>
 </div>
-</div>
-
-
 <div id="modalview" class="modal fade bs-modify-modal-lg" tabindex="1" role="dialog2" aria-labelledby="exchangeModalLabel">
- <div class="modal-dialog" style="width:80%;">
-  <div class="modal-content">
-   <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-     <span aria-hidden="true">&times;</span>
-    </button>
-    <h4 class="modal-title"></h4>
-   </div>
-   <div class="modal-body">
-    <div class="container-fluid">
-			<div class="detail">
- 		   <div class="title">
- 		     <span>{{pointdetail.title}}</span>
- 		   </div>
- 		   <div class="sub-title">
- 		     <span>{{pointdetail.updateTime}}</span>
- 		   </div>
- 		   <div class="content" ng-bind-html="pointdetail.content"></div>
- 		 	</div>
-    </div>
-   </div>
-   <div class="modal-footer">
-   	<button type="button" id="edit" class="btn btn-primary">编辑</button>
-	 	<button type="button" id="cancel2" data-dismiss="modal" class="btn btn-default">关闭</button>
-   </div>
- </div>
+	<div class="modal-dialog" style="width:80%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title"></h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="detail">
+						<div class="title">
+							<span>{{pointdetail.title}}</span>
+						</div>
+						<div class="sub-title">
+							<span>{{pointdetail.updateTime}}</span>
+						</div>
+						<div class="content" ng-bind-html="pointdetail.content"></div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="edit" class="btn btn-primary">编辑</button>
+				<button type="button" id="cancel2" data-dismiss="modal" class="btn btn-default">关闭</button>
+			</div>
+		</div>
+	</div>
 </div>
-</div>
-
-
 <div id="modaledit" class="modal fade bs-modify-modal-lg" tabindex="2" role="dialog3">
- <div class="modal-dialog" style="width:80%;">
-  <div class="modal-content">
-   <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-     <span aria-hidden="true">&times;</span>
-    </button>
-    <h4 class="modal-title"></h4>
-   </div>
-   <div class="modal-body">
-		 <div class="container-fluid">
-      <div class="row">
-       <div class="form-group col-md-12">
-        <label class="control-label col-md-1">标题:</label>
-        <div class="col-md-9 cates">
-         <input type="text" class="form-control" id="eTitle"/>
-        </div>
-       </div>
-			 <div class="form-group col-md-12">
-        <label class="control-label col-md-1"></label>
-        <div class="col-md-9 cates">
-					<label>
- 				 		<input type="checkbox" id="eBold" name="eBold"> 标题加粗 </label>
-        </div>
-       </div>
-       <div class="form-group col-md-12">
-        <label class="control-label col-md-1">详情:</label>
-        <div class="col-md-9 cates">
-					<script type="text/plain" id="new-editor" style="width:700px;height:400px;"></script>
-        </div>
-			 </div>
- 		 </div>
-   </div>
-   <div class="modal-footer">
-	   <button type="button" id="save" class="btn btn-primary">保存</button>
-		 <button type="button" id="cancel3" data-dismiss="modal" class="btn btn-default">关闭</button>
-   </div>
- </div>
-</div>
+	<div class="modal-dialog" style="width:80%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title"></h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label class="control-label col-md-1">标题:</label>
+							<div class="col-md-9 cates">
+								<input type="text" class="form-control" id="eTitle"/>
+							</div>
+						</div>
+						<div class="form-group col-md-12">
+							<label class="control-label col-md-1"></label>
+							<div class="col-md-9 cates">
+								<label>
+									<input type="checkbox" id="eBold" name="eBold">
+									标题加粗
+								</label>
+							</div>
+						</div>
+						<div class="form-group col-md-12">
+							<label class="control-label col-md-1">详情:</label>
+							<div class="col-md-9 cates">
+								<script type="text/plain" id="new-editor" style="width:700px;height:400px;"></script>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="save" class="btn btn-primary">保存</button>
+					<button type="button" id="cancel3" data-dismiss="modal" class="btn btn-default">关闭</button>
+				</div>
+			</div>
+		</div>

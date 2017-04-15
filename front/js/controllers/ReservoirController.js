@@ -19,9 +19,9 @@ MetronicApp.controller('ReservoirController', [
 			$rootScope.settings.layout.pageBodySolid = false;
 			$rootScope.settings.layout.pageSidebarClosed = false;
 			//初始化所有表格
-			ReservoirAdvanced1.init($scope, $compile, Shuffling);
-			ReservoirAdvanced2.init($scope, $compile, Shuffling);
-			ReservoirAdvanced3.init($scope, $compile, Shuffling);
+			ReservoirAdvanced1.init($scope, $compile, Shuffling, $rootScope);
+			ReservoirAdvanced2.init($scope, $compile, Shuffling, $rootScope);
+			ReservoirAdvanced3.init($scope, $compile, Shuffling, $rootScope);
 			//清空搜索数据
 			$scope.emptyData1 = function() {
 				$scope.text1 = '';
@@ -62,6 +62,34 @@ MetronicApp.controller('ReservoirController', [
 					layer.msg('最多只能上传三张图片');
 				}
 			};
+			//记住TAB页
+			$scope.RemeberTab = function(Num) {
+				window.localStorage.RemeberTab = Num;
+			}
+			if (window.localStorage.RemeberTab) {
+				if (window.localStorage.RemeberTab == 0) {
+					$('.nav-tabs li:first-child').addClass('active');
+					$('.nav-tabs li:nth-child(2)').removeClass('active');
+					$('.nav-tabs li:nth-child(3)').removeClass('active');
+					$('#shuiku').addClass('active');
+					$('#shantang').removeClass('active');
+					$('#xiaoshuidian').removeClass('active');
+				} else if (window.localStorage.RemeberTab == 1) {
+					$('.nav-tabs li:nth-child(2)').addClass('active');
+					$('.nav-tabs li:first-child').removeClass('active');
+					$('.nav-tabs li:nth-child(3)').removeClass('active');
+					$('#shantang').addClass('active');
+					$('#shuiku').removeClass('active');
+					$('#xiaoshuidian').removeClass('active');
+				} else if (window.localStorage.RemeberTab == 2) {
+					$('.nav-tabs li:nth-child(3)').addClass('active');
+					$('.nav-tabs li:first-child').removeClass('active');
+					$('.nav-tabs li:nth-child(2)').removeClass('active');
+					$('#xiaoshuidian').addClass('active');
+					$('#shantang').removeClass('active');
+					$('#shuiku').removeClass('active');
+				}
+			}
 		});
 	}
 ]);
