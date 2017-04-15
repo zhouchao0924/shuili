@@ -24,3 +24,23 @@
         ]
     }
     response:{}
+
+3. 更新用户信息
+    url: /user/updateUser
+    method: get
+    request: {
+        "userId" int //被查看的用户id
+        "userName" int //用户名称
+        "password" int //密码
+        "desc" int //描述
+        "roleId" int //较色id
+    }
+    response:{}
+
+4. 删除用户信息
+    url: /user/deleteUser
+    method: get
+    request: {
+        "userId" int //用户id
+    }
+    response:{}
