@@ -24,6 +24,17 @@ MetronicApp.controller('LongRiverSystemController', [
 			LongRiverSystemAdvanced3.init($scope, $compile, Shuffling);
 			LongRiverSystemAdvanced4.init($scope, $compile, Shuffling);
 			LongRiverSystemAdvanced5.init($scope, $compile, Shuffling);
+			//上传图片
+			$scope.imgUrl = '';
+			$scope.imgUrlList = [];
+			$scope.addimage = function() {
+				if ($scope.imgUrlList.length < 3) {
+					obj = angular.copy($scope.imgUrl);
+					$scope.imgUrlList.push(obj);
+				} else {
+					layer.msg('最多只能上传三张图片');
+				}
+			};
 			//清空搜索数据
 			$scope.emptyData1 = function() {
 				$scope.text1 = '';

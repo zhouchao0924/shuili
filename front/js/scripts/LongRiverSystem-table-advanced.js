@@ -68,7 +68,8 @@ var LongRiverSystemAdvanced1 = function() {
 									n.position,
 									n.contactInfo,
 									n.police,
-									n.policeContactInfo
+									n.policeContactInfo,
+									""
 								];
 								arr.push(temp);
 							});
@@ -78,6 +79,40 @@ var LongRiverSystemAdvanced1 = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
+							table.find('tbody tr td:last-child').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var deletex = $('<a href="javascript:;" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
+								deletex.click(function() {
+									var params = {
+										id: rowData[0],
+										serviceType: 7
+									};
+									layer.confirm('确定要删除该行数据信息吗？', function(index) {
+										$.ajax({
+											url: Metronic.host + 'table/deleteItem',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													oTable.fnDraw();
+												}
+											}
+										});
+										layer.close(index);
+									})
+								});
+								$(this).append($compile(deletex)($scope));
+							});
 						} else {
 							layer.msg(datas.message);
 							Metronic.unblockUI();
@@ -178,6 +213,7 @@ var LongRiverSystemAdvanced2 = function() {
 									n.rainwaterSewageOutlet,
 									n.outletNum,
 									n.image,
+									"",
 									""
 								];
 								arr.push(temp);
@@ -188,6 +224,40 @@ var LongRiverSystemAdvanced2 = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
+							table.find('tbody tr td:last-child').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var deletex = $('<a href="javascript:;" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
+								deletex.click(function() {
+									var params = {
+										id: rowData[0],
+										serviceType: 8
+									};
+									layer.confirm('确定要删除该行数据信息吗？', function(index) {
+										$.ajax({
+											url: Metronic.host + 'table/deleteItem',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													oTable.fnDraw();
+												}
+											}
+										});
+										layer.close(index);
+									})
+								});
+								$(this).append($compile(deletex)($scope));
+							});
 						} else {
 							layer.msg(datas.message);
 							Metronic.unblockUI();
@@ -284,6 +354,8 @@ var LongRiverSystemAdvanced3 = function() {
 									n.detecionPosition,
 									n.latitudeLongitude,
 									"",
+									"",
+									"",
 									n.image
 								];
 								arr.push(temp);
@@ -294,6 +366,80 @@ var LongRiverSystemAdvanced3 = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
+							table.find('tbody tr td:nth-child(6)').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var img = $('<a href=""> 查看 </a>');
+								img.unbind('click').bind('click', function(e) {
+									Shuffling(rowData[7]);
+								})
+								var UpImage = $('<a href="" data-toggle="modal" data-target=".bs-UpImage-modal-lg" button-show>上传图片 </a>');
+								UpImage.unbind('click').bind('click', function(e) {
+									$scope.imgUrlList = rowData[7];
+									$scope.$apply();
+									$scope.UpLoadImage = function() {
+										var params = {
+											id: rowData[0],
+											url: $scope.imgUrlList,
+											serviceType: 9
+										};
+										$.ajax({
+											url: Metronic.host + 'attachment/updateImage',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													location.reload();
+												}
+											}
+										});
+									}
+								})
+								$(this).append($compile(img)($scope)).append($compile(UpImage)($scope));
+							});
+							table.find('tbody tr td:last-child').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var deletex = $('<a href="javascript:;" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
+								deletex.click(function() {
+									var params = {
+										id: rowData[0],
+										serviceType: 9
+									};
+									layer.confirm('确定要删除该行数据信息吗？', function(index) {
+										$.ajax({
+											url: Metronic.host + 'table/deleteItem',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													oTable.fnDraw();
+												}
+											}
+										});
+										layer.close(index);
+									})
+								});
+								$(this).append($compile(deletex)($scope));
+							});
 						} else {
 							layer.msg(datas.message);
 							Metronic.unblockUI();
@@ -402,6 +548,40 @@ var LongRiverSystemAdvanced4 = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
+							table.find('tbody tr td:last-child').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var deletex = $('<a href="javascript:;" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
+								deletex.click(function() {
+									var params = {
+										id: rowData[0],
+										serviceType: 10
+									};
+									layer.confirm('确定要删除该行数据信息吗？', function(index) {
+										$.ajax({
+											url: Metronic.host + 'table/deleteItem',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													oTable.fnDraw();
+												}
+											}
+										});
+										layer.close(index);
+									})
+								});
+								$(this).append($compile(deletex)($scope));
+							});
 						} else {
 							layer.msg(datas.message);
 							Metronic.unblockUI();
@@ -513,6 +693,40 @@ var LongRiverSystemAdvanced5 = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
+							table.find('tbody tr td:last-child').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var deletex = $('<a href="javascript:;" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
+								deletex.click(function() {
+									var params = {
+										id: rowData[0],
+										serviceType: 11
+									};
+									layer.confirm('确定要删除该行数据信息吗？', function(index) {
+										$.ajax({
+											url: Metronic.host + 'table/deleteItem',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													oTable.fnDraw();
+												}
+											}
+										});
+										layer.close(index);
+									})
+								});
+								$(this).append($compile(deletex)($scope));
+							});
 						} else {
 							layer.msg(datas.message);
 							Metronic.unblockUI();

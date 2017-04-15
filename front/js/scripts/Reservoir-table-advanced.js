@@ -524,8 +524,10 @@ var ReservoirAdvanced3 = function() {
 									n.ownership,
 									n.extend,
 									"",
+									"",
 									n.manager.username,
 									n.manager.phone,
+									"",
 									n.id,
 									n.fullImage
 								];
@@ -537,6 +539,40 @@ var ReservoirAdvanced3 = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
+							table.find('tbody tr td:nth-child(20)').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var deletex = $('<a href="javascript:;" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
+								deletex.click(function() {
+									var params = {
+										id: rowData[20],
+										serviceType: 3
+									};
+									layer.confirm('确定要删除该行数据信息吗？', function(index) {
+										$.ajax({
+											url: Metronic.host + 'table/deleteItem',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													oTable.fnDraw();
+												}
+											}
+										});
+										layer.close(index);
+									})
+								});
+								$(this).append($compile(deletex)($scope));
+							});
 							table.find('tbody tr td:nth-child(16)').each(function(i, n) {
 								var rowData = table.api().row(i).data();
 								if (!rowData) {
@@ -544,15 +580,15 @@ var ReservoirAdvanced3 = function() {
 								}
 								var fullimg = $('<a href="" data-toggle="modal" data-target=".bs-fullimgshow-modal-lg"> 查看 </a>');
 								fullimg.unbind('click').bind('click', function(e) {
-									$('#fullimage').attr('src', rowData[19])
+									$('#fullimage').attr('src', rowData[21])
 								})
 								var editfullimg = $('<a href="" data-toggle="modal" data-target=".bs-fullimg-modal-lg" button-show>编辑全景图</a>');
 								editfullimg.unbind('click').bind('click', function(e) {
-									$scope.url = rowData[19];
+									$scope.url = rowData[21];
 									$scope.$apply();
 									$scope.fullImageOK = function() {
 										var params = {
-											id: rowData[18],
+											id: rowData[20],
 											url: $scope.url,
 											serviceType: 3
 										};

@@ -75,6 +75,7 @@ var LockAdvanced = function() {
 									n.managerPhone,
 									"",
 									n.extend,
+									"",
 									n.image
 								];
 								arr.push(temp);
@@ -85,6 +86,40 @@ var LockAdvanced = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
+							table.find('tbody tr td:nth-child(18)').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var deletex = $('<a href="javascript:;" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
+								deletex.click(function() {
+									var params = {
+										id: rowData[0],
+										serviceType: 5
+									};
+									layer.confirm('确定要删除该行数据信息吗？', function(index) {
+										$.ajax({
+											url: Metronic.host + 'table/deleteItem',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													oTable.fnDraw();
+												}
+											}
+										});
+										layer.close(index);
+									})
+								});
+								$(this).append($compile(deletex)($scope));
+							});
 							table.find('tbody tr td:nth-child(16)').each(function(i, n) {
 								var rowData = table.api().row(i).data();
 								if (!rowData) {
@@ -92,11 +127,11 @@ var LockAdvanced = function() {
 								}
 								var img = $('<a href=""> 查看 </a>');
 								img.unbind('click').bind('click', function(e) {
-									Shuffling(rowData[17]);
+									Shuffling(rowData[18]);
 								})
 								var UpImage = $('<a href="" data-toggle="modal" data-target=".bs-UpImage-modal-lg" button-show>上传图片 </a>');
 								UpImage.unbind('click').bind('click', function(e) {
-									$scope.imgUrlList = rowData[17];
+									$scope.imgUrlList = rowData[18];
 									$scope.$apply();
 									$scope.UpLoadImage = function() {
 										var params = {
