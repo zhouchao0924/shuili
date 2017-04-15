@@ -223,4 +223,37 @@ class UserModel {
             $dao->baseInsert($cols);
         }
     }
+
+    public function updateUser($userId,$name,$password,$roleId,$desc){
+        $cols = array(
+            "name"=>$name,
+            "password"=>$this->genPassword($password),
+            "desc"=>$desc,
+            "role_id"=>$roleId,
+        );
+        $conditions = array(
+            "and",
+            "id=:id",
+            "del_flag=0",
+        );
+        $params = array(
+            "id"=>$userId,
+        );
+        $this->getUserDao()->update($cols,$conditions,$params);
+    }
+
+    public function deleteUser($userId){
+        $cols = array(
+            "del_flag"=>1,
+        );
+        $conditions = array(
+            "and",
+            "id=:id",
+            "del_flag=0",
+        );
+        $params = array(
+            "id"=>$userId,
+        );
+        $this->getUserDao()->update($cols,$conditions,$params);
+    }
 }

@@ -321,4 +321,55 @@ class UserController extends Controller{
         OperatorLogModel::addLog($superInfo['userId'],$superInfo['userName'],"编辑管理员".$userInfo['name']."管理地区信息");
         return $this->renderAjaxResponse($this->getAjaxResponse(true,"success",ErrorCode::SUCCESS,array()));
     }
+
+    public function actionUpdateUser(){
+        $params = $this->getAjaxRequestParam();
+        $upUserId = isset($params['userId'])&&!empty($params['userId'])?trim($params['userId']):"";
+        $name = isset($params['userName'])&&!empty($params['userName'])?trim($params['userName']):"";
+        $password = isset($params['password'])&&!empty($params['password'])?trim($params['password']):"";
+        $desc = isset($params['desc'])&&!empty($params['desc'])?trim($params['desc']):"";
+        $roleId = isset($params['roleId'])&&!empty($params['roleId'])?intval($params['roleId']):0;
+
+        if(!CommonComponent::checkUserNameFormat($name)
+            || !CommonComponent::checkUserPasswordFormat($password)
+            || !AuthDefine::isAuthRoleId($roleId)){
+            return $this->renderAjaxResponse($this->getAjaxResponse(false,"参数错误",ErrorCode::ERROR_PARAMS,array()));
+        }
+        $component = new ClientComponent();
+        $userId = $component->getUserId();
+        if($userId <= 0){
+            return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户未登录",ErrorCode::ERROR_USER_NOT_LOGIN,array()));
+        }
+        $userModel = new UserModel();
+        $eInfo = $userModel->getUserById($upUserId);
+        if(empty($eInfo)){
+            return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户不存在",ErrorCode::ERROR_COMMON_ERROR,array()));
+        }
+        $userModel->updateUser($upUserId,$name,$password,$roleId,$desc);
+        $userInfo = $component->getUserInfo();
+        OperatorLogModel::addLog($userInfo['userId'],$userInfo['userName'],"修改管理员".$eInfo['name']."信息");
+
+        return $this->renderAjaxResponse($this->getAjaxResponse(true,"操作成功",ErrorCode::SUCCESS,array()));
+    }
+
+    public function actionDeleteUser(){
+        $params = $this->getAjaxRequestParam();
+        $delUserId = isset($params['userId'])&&!empty($params['userId'])?trim($params['userId']):"";
+
+        $component = new ClientComponent();
+        $userId = $component->getUserId();
+        if($userId <= 0){
+            return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户未登录",ErrorCode::ERROR_USER_NOT_LOGIN,array()));
+        }
+        $userModel = new UserModel();
+        $eInfo = $userModel->getUserById($delUserId);
+        if(empty($eInfo)){
+            return $this->renderAjaxResponse($this->getAjaxResponse(false,"用户不存在",ErrorCode::ERROR_COMMON_ERROR,array()));
+        }
+        $userModel->deleteUser($delUserId);
+        $userInfo = $component->getUserInfo();
+        OperatorLogModel::addLog($userInfo['userId'],$userInfo['userName'],"删除用户".$eInfo['name']);
+
+        return $this->renderAjaxResponse($this->getAjaxResponse(true,"操作成功",ErrorCode::SUCCESS,array()));
+    }
 }

@@ -113,7 +113,9 @@ class Controller extends CController
      */
     private $actionAuth = array(
             "user"=>array(
-                'adduser'=>AuthDefine::AUTH_ADMIN,
+                'adduser'=>AuthDefine::AUTH_SUPER,
+                'updateuser'=>AuthDefine::AUTH_SUPER,
+                'deleteuser'=>AuthDefine::AUTH_SUPER,
             ),
     );
 
