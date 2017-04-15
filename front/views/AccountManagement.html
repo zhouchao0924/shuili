@@ -68,7 +68,7 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title" id="gridSystemModalLabel">增加管理员</h4>
+				<h4 class="modal-title" id="gridSystemModalLabel">新增账户</h4>
 			</div>
 			<div class="modal-body">
 				<div class="container-fluid">
@@ -115,6 +115,65 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" id="makesure" class="btn btn-primary" ng-click="addmanagers()">确定保存</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 编辑账号 -->
+<div class="modal fade bs-edit-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exchangeModalLabel">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="gridSystemModalLabel">编辑账户</h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="row">
+						<form id="articleForm1" action="#" class="form-horizontal" enctype="multipart/form-data">
+							<div class="form-group col-md-12">
+								<label class="control-label col-md-3">登录名:</label>
+								<div class="col-md-5 cates">
+									<input type="text" class="form-control" name="userName" ng-model="AccountDetail[1]"/>
+								</div>
+							</div>
+							<div class="form-group col-md-12">
+								<label class="control-label col-md-3">密码:</label>
+								<div class="col-md-5 cates">
+									<input type="password" class="form-control" name="password" id="mpassword" ng-model="mpassword"/>
+								</div>
+							</div>
+							<div class="form-group col-md-12">
+								<label class="control-label col-md-3">确认密码:</label>
+								<div class="col-md-5 cates">
+									<input type="password" class="form-control" name="mresetpassword"/>
+								</div>
+							</div>
+							<div class="form-group col-md-12">
+								<label class="control-label col-md-3">选择角色:</label>
+								<div class="col-md-5 cates">
+									<select class="form-control" name="roleId" ng-model="AccountDetail[6]">
+										<option value="">请选择</option>
+										<option value="0">普通用户</option>
+										<option value="1">管理员</option>
+										<option value="2">超级管理员</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group col-md-12">
+								<label class="control-label col-md-3">备注信息:</label>
+								<div class="col-md-5 cates">
+									<textarea type="text" class="form-control" name="desc" ng-model="AccountDetail[5]"></textarea>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="makesure2" class="btn btn-primary">确定保存</button>
 			</div>
 		</div>
 	</div>

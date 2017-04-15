@@ -21,7 +21,11 @@ MetronicApp.controller('GEOInfoController', [
 
 			var role = $rootScope.adminID;//0普通 1管理员 2超级管理员
 
-			// $('#mapcontainer').height(document.documentElement.clientHeight*0.8);
+			// alert(window.document.documentElement.clientHeight);
+			$('#mapcontainer').height(window.document.documentElement.clientHeight);
+			$(window).resize(function(e){
+				$('#mapcontainer').height(window.document.documentElement.clientHeight);
+			});
 
 			var curlat = 0;
 			var curlon = 0;
