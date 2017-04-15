@@ -21,6 +21,7 @@ class WaterQualityDescExcelTemplateConfig extends ExcelTemplateConfig{
         'n'=>'总氮（以N记）',
         'other'=>'其他',
         'conclusion'=>'结论',
+        'remarks'=>'备注',
     );
 
     protected $printExtraItem = array(
