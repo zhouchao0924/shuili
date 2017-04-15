@@ -84,41 +84,39 @@ MetronicApp.controller('HeaderController', [
 		$scope.$on('$includeContentLoaded', function() {
 			if (window.localStorage.UserdataMenuList !== 'null') {
 				$scope.orgName = window.localStorage.orgName;
+				$rootScope.orgName = window.localStorage.orgName;
 			}
 			function launchFullscreen(element) {
-			  if(element.requestFullscreen) {
-			    element.requestFullscreen();
-			  } else if(element.mozRequestFullScreen) {
-			    element.mozRequestFullScreen();
-			  } else if(element.webkitRequestFullscreen) {
-			    element.webkitRequestFullscreen();
-			  } else if(element.msRequestFullscreen) {
-			    element.msRequestFullscreen();
-			  }
+				if (element.requestFullscreen) {
+					element.requestFullscreen();
+				} else if (element.mozRequestFullScreen) {
+					element.mozRequestFullScreen();
+				} else if (element.webkitRequestFullscreen) {
+					element.webkitRequestFullscreen();
+				} else if (element.msRequestFullscreen) {
+					element.msRequestFullscreen();
+				}
 				$('#fullimagen').height(window.document.documentElement.clientHeight);
 			}
-
-			$(window).resize(function(e){
-				if(!checkFull()){
-				//要执行的动作
+			$(window).resize(function(e) {
+				if (!checkFull()) {
+					//要执行的动作
 					$('#fullimagen').height(520);
 				}
 			})
-
-			function checkFull(){
-				var isFull =  document.fullscreenEnabled || window.fullScreen || document.webkitIsFullScreen || document.msFullscreenEnabled;
-
+			function checkFull() {
+				var isFull = document.fullscreenEnabled || window.fullScreen || document.webkitIsFullScreen || document.msFullscreenEnabled;
 				//to fix : false || undefined == undefined
-				if(isFull === undefined) isFull = false;
+				if (isFull === undefined)
+					isFull = false;
 				return isFull;
 			}
-			$('#fullscreen').click(function(e){
+			$('#fullscreen').click(function(e) {
 				launchFullscreen($('#fullimagen')[0]);
 			});
-
-			$('#geo').click(function(e){
+			$('#geo').click(function(e) {
 				$('.bs-geoshow-modal-lg').modal('show');
-				$('#fullimagen').attr('src','#/GEOInfo');
+				$('#fullimagen').attr('src', '#/GEOInfo');
 			})
 			Layout.initHeader(); // init header
 		});

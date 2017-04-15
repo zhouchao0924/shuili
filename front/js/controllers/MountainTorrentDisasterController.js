@@ -24,6 +24,9 @@ MetronicApp.controller('MountainTorrentDisasterController', [
 			MountainTorrentDisasterAdvanced3.init($scope, $compile, Shuffling);
 			MountainTorrentDisasterAdvanced4.init($scope, $compile, Shuffling);
 			MountainTorrentDisasterAdvanced5.init($scope, $compile, Shuffling);
+			MountainTorrentDisasterAdvanced6.init($scope, $compile, Shuffling);
+			MountainTorrentDisasterAdvanced7.init($scope, $compile, Shuffling);
+			MountainTorrentDisasterAdvanced8.init($scope, $compile, Shuffling);
 			//清空搜索数据
 			$scope.emptyData1 = function() {
 				$scope.text1 = '';
