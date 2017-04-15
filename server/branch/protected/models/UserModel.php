@@ -29,6 +29,7 @@ class UserModel {
             "password"=>$this->genPassword($password),
             "desc"=>$desc,
             "role_id"=>$roleId,
+            "create_time"=>date("Y-m-d H:i:s")
         );
         $this->getUserDao()->baseInsert($cols);
         return ErrorCode::SUCCESS;
