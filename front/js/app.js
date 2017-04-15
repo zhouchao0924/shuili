@@ -82,7 +82,7 @@ MetronicApp.controller('HeaderController', [
 	'$rootScope',
 	function($scope, $rootScope) {
 		$scope.$on('$includeContentLoaded', function() {
-			if (window.localStorage.UserdataMenuList) {
+			if (window.localStorage.UserdataMenuList !== 'null') {
 				$scope.orgName = window.localStorage.orgName;
 			}
 			Layout.initHeader(); // init header
@@ -96,7 +96,7 @@ MetronicApp.controller('SidebarController', [
 	function($scope, $rootScope) {
 		$scope.$on('$includeContentLoaded', function() {
 			// 首先渲染侧边栏
-			if (window.localStorage.UserdataMenuList) {
+			if (window.localStorage.UserdataMenuList !== 'null') {
 				var b = JSON.parse(window.localStorage.UserdataMenuList);
 				$rootScope.adminID = b.roleId;
 				$scope.MenuList = b.UserdataMenuList;

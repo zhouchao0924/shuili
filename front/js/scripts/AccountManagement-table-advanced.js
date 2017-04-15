@@ -81,12 +81,12 @@ var AccountManagementAdvanced = function() {
 								reset.unbind('click').bind('click', function(e) {
 									$('#makesure3').unbind('click').bind('click', function(e) {
 										var params = {
-											adminId: rowData[0],
+											userId: rowData[0],
 											password: $("#newpassword").val()
 										};
 										$.ajax({
-											url: Metronic.host + 'boss/update/password',
-											type: 'POST',
+											url: Metronic.host + 'user/resetPassword',
+											type: 'GET',
 											dataType: 'json',
 											xhrFields: {
 												withCredentials: true
@@ -107,7 +107,7 @@ var AccountManagementAdvanced = function() {
 										});
 									});
 								});
-								$(n).append(reset);
+								$(n).append($compile(reset)($scope));
 							});
 							table.find('tbody tr td:nth-child(5)').each(function(i, n) {
 								var rowData = table.api().row(i).data();
