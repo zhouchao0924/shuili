@@ -39,6 +39,7 @@
         'manager'=>array(
             'username'=>'姓名',
             'phone'=>'手机号',
+            'adminImage'=> url
             },
             ...
         ]
