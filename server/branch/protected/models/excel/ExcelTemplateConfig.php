@@ -209,6 +209,14 @@ abstract class ExcelTemplateConfig{
                         }
                     }
                 }
+                $adminImage = $this->getAdminImageColName();
+                if(!empty($adminImage) && isset($value[$adminImage])){
+                    $appendColName = $this->getAdminImageColAppendCol();
+                    if(!empty($appendColName)){
+                        $uk = $this->formatKey($appendColName);
+                        $tmp[$appendColName][$uk] = $value[$adminImage];
+                    }
+                }
                 $data['list'][] = $tmp;
             }
         }
@@ -316,5 +324,33 @@ abstract class ExcelTemplateConfig{
 
     public function getStreetIdColName(){
         return "street_id";
+    }
+
+    public function getAdminImageColName(){
+        return "";
+    }
+
+    public function getAdminImageColAppendCol(){
+        return "";
+    }
+
+    public function updateAdminImage($imageUrl,$id,$userId,$userName){
+        $colName = $this->getAdminImageColName();
+        if(empty($colName)){
+            throw new Exception("无效操作");
+        }
+        $cols = array(
+            $colName=>$imageUrl,
+        );
+        $conditions = array(
+            "and",
+            "id = :id",
+            "del_flag = 0",
+        );
+        $params = array(
+            ":id"=>$id
+        );
+        $this->getDao()->update($cols,$conditions,$params);
+        OperatorLogModel::addLog($userId,$userName,"更新".$this->getTemplateName()."管理责任人照片,数据id:".$id);
     }
 }
