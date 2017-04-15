@@ -82,7 +82,7 @@ MetronicApp.controller('HeaderController', [
 	'$rootScope',
 	function($scope, $rootScope) {
 		$scope.$on('$includeContentLoaded', function() {
-			if (window.localStorage.UserdataMenuList) {
+			if (window.localStorage.UserdataMenuList !== 'null') {
 				$scope.orgName = window.localStorage.orgName;
 			}
 			Layout.initHeader(); // init header
@@ -96,7 +96,7 @@ MetronicApp.controller('SidebarController', [
 	function($scope, $rootScope) {
 		$scope.$on('$includeContentLoaded', function() {
 			// 首先渲染侧边栏
-			if (window.localStorage.UserdataMenuList) {
+			if (window.localStorage.UserdataMenuList !== 'null') {
 				var b = JSON.parse(window.localStorage.UserdataMenuList);
 				$rootScope.adminID = b.roleId;
 				$scope.MenuList = b.UserdataMenuList;
@@ -607,6 +607,31 @@ MetronicApp.config([
 								'assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=' + MetronicApp.version,
 								'js/scripts/AccountManagement-table-advanced.js?v=' + MetronicApp.version,
 								'js/controllers/AccountManagementController.js?v=' + MetronicApp.version
+							]
+						});
+					}
+				]
+			}
+		}).state('ManageArea', {
+			url: "/ManageArea/:id",
+			templateUrl: "views/ManageArea.html?v=" + MetronicApp.version,
+			data: {
+				pageTitle: '可查看乡镇'
+			},
+			controller: "ManageAreaController",
+			resolve: {
+				deps: [
+					'$ocLazyLoad',
+					function($ocLazyLoad) {
+						return $ocLazyLoad.load({
+							name: 'MetronicApp', insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
+							files: [
+								'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css?v=' + MetronicApp.version,
+								'assets/global/plugins/datatables/all.min.js?v=' + MetronicApp.version,
+								'assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=' + MetronicApp.version,
+								'js/controllers/ManageAreaController.js?v=' + MetronicApp.version
 							]
 						});
 					}

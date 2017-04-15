@@ -77,16 +77,16 @@ var AccountManagementAdvanced = function() {
 								if (!rowData) {
 									return false;
 								}
-								var reset = $('<a href="javascript:;" data-toggle="modal" data-target=".bs-modify-modal-lg" class="btn btn-xs green"><i class="fa fa-edit"></i> 重置 </a>');
+								var reset = $('<a href="" data-toggle="modal" data-target=".bs-modify-modal-lg" class="btn btn-xs green"><i class="fa fa-edit"></i> 重置 </a>');
 								reset.unbind('click').bind('click', function(e) {
 									$('#makesure3').unbind('click').bind('click', function(e) {
 										var params = {
-											adminId: rowData[0],
+											userId: rowData[0],
 											password: $("#newpassword").val()
 										};
 										$.ajax({
-											url: Metronic.host + 'boss/update/password',
-											type: 'POST',
+											url: Metronic.host + 'user/resetPassword',
+											type: 'GET',
 											dataType: 'json',
 											xhrFields: {
 												withCredentials: true
@@ -107,16 +107,16 @@ var AccountManagementAdvanced = function() {
 										});
 									});
 								});
-								$(n).append(reset);
+								$(n).append($compile(reset)($scope));
 							});
 							table.find('tbody tr td:nth-child(5)').each(function(i, n) {
 								var rowData = table.api().row(i).data();
 								if (!rowData) {
 									return false;
 								}
-								var edit = $('<a href="javascript:;" data-toggle="modal" data-target=".bs-edit-modal-lg" class="btn btn-xs green"><i class="fa fa-edit"></i> 编辑 </a>');
-								var deletex = $('<a href="javascript:;" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
-								var manage = $('<a href="javascript:;"  data-toggle="modal"  ng-click="seeorg(' + rowData[0] + ')"  data-target=".bs-manage-modal-lg"  class="btn btn-xs grey-cascade"><i class="fa fa-settings"></i> 可查看乡镇 </a>');
+								var edit = $('<a href="" data-toggle="modal" data-target=".bs-edit-modal-lg" class="btn btn-xs green"><i class="fa fa-edit"></i> 编辑 </a>');
+								var deletex = $('<a href="" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
+								var manage = $('<a href=""  class="btn btn-xs grey-cascade"><i class="fa fa-settings"></i> 可查看乡镇 </a>');
 								edit.unbind('click').bind('click', function(e) {
 									$.ajax({
 										url: Metronic.host + 'boss/admin/info',
@@ -177,61 +177,7 @@ var AccountManagementAdvanced = function() {
 									});
 								});
 								manage.unbind('click').bind('click', function(e) {
-									$.ajax({
-										url: Metronic.host + 'boss/search/org',
-										type: 'POST',
-										dataType: 'json',
-										xhrFields: {
-											withCredentials: true
-										},
-										crossDomain: true,
-										data: {
-											data: JSON.stringify({adminId: rowData[0]})
-										},
-										success: function(datas) {
-											if (datas.success) {
-												//console.log(datas, '获取管理机构');
-												$scope.$apply(function() {
-													$scope.orgs = datas.data;
-													$.each($scope.orgs, function(i, n) {
-														if (n.manager === 1) {
-															$scope.selected.push(n.orgId);
-														}
-													});
-												});
-											} else {
-												layer.msg(datas.message);
-											}
-										}
-									});
-									$('#bindOrg').unbind('click').bind('click', function(e) {
-										var params = {
-											userId: rowData[0],
-											orgIdList: $scope.selected
-										};
-										$.ajax({
-											url: Metronic.host + 'boss/user/bindOrg',
-											type: 'POST',
-											dataType: 'json',
-											xhrFields: {
-												withCredentials: true
-											},
-											crossDomain: true,
-											data: {
-												data: JSON.stringify(params)
-											},
-											success: function(datas) {
-												if (datas.success) {
-													layer.msg('添加管理机构成功');
-													//console.log(datas, '管理员绑定管理机构');
-													location.reload();
-												} else {
-													layer.msg(datas.message);
-													Metronic.unblockUI();
-												}
-											}
-										});
-									});
+									window.location.href = "#/ManageArea/" + rowData[0]
 								});
 								deletex.click(function() {
 									var params = {
@@ -297,4 +243,4 @@ var AccountManagementAdvanced = function() {
 			//console.log('me 2');
 		}
 	};
-}();
+}()

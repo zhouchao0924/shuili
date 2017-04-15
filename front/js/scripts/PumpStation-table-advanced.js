@@ -65,9 +65,12 @@ var PumpStationAdvanced = function() {
 									n.outsideRivers,
 									n.catchmentArea,
 									n.flow,
+									n.speed,
+									n.yangchen,
 									n.installedPower,
 									n.pumpingStation,
 									n.pumpingStationNum,
+									n.softStart,
 									n.manufacturer,
 									n.gateForm,
 									n.sluicesNum,
@@ -89,18 +92,18 @@ var PumpStationAdvanced = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
-							table.find('tbody tr td:nth-child(19)').each(function(i, n) {
+							table.find('tbody tr td:nth-child(22)').each(function(i, n) {
 								var rowData = table.api().row(i).data();
 								if (!rowData) {
 									return false;
 								}
 								var img = $('<a href=""> 查看 </a>');
 								img.unbind('click').bind('click', function(e) {
-									Shuffling(rowData[21]);
+									Shuffling(rowData[24]);
 								})
 								var UpImage = $('<a href="" data-toggle="modal" data-target=".bs-UpImage-modal-lg" button-show>上传图片 </a>');
 								UpImage.unbind('click').bind('click', function(e) {
-									$scope.imgUrlList = rowData[21];
+									$scope.imgUrlList = rowData[24];
 									$scope.$apply();
 									$scope.UpLoadImage = function() {
 										var params = {

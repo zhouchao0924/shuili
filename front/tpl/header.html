@@ -31,7 +31,7 @@
 			<a href="#/YYTown" style="color:orange;margin:17px 10px 0 30px;">查看其他乡镇</a>
 		</h5>
 		<h5 style="display:inline-block;color:white;margin:17px 10px 0 30px;">
-			<a href="javascript:;" data-toggle="modal"  data-target=".bs-geoshow-modal-lg" style="color:orange;margin:17px 10px 0 30px;">地理信息</a>
+			<a href="javascript:;" data-toggle="modal" data-target=".bs-geoshow-modal-lg" style="color:orange;margin:17px 10px 0 30px;" ng-show="orgName">地理信息</a>
 		</h5>
 		<ul class="nav navbar-nav pull-right">
 			<!-- BEGIN USER LOGIN DROPDOWN -->
@@ -63,7 +63,6 @@
 	<!-- END TOP NAVIGATION MENU -->
 </div>
 <!-- END HEADER INNER -->
-
 <div class="modal fade bs-geoshow-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exchangeModalLabel">
 	<div class="modal-dialog" style="width:80%;">
 		<div class="modal-content" style="height:600px;">
