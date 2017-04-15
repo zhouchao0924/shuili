@@ -15,9 +15,11 @@ MetronicApp.controller('GEOInfoController', [
 			$rootScope.settings.layout.pageSidebarClosed = false;
 			// ArchiveAdvanced.init($scope, $compile, Shuffling);
 
-			$('.page-header').hide();
-			$('.page-sidebar').hide();
-			$('.page-footer').hide();
+			$('.page-header').remove();
+			$('.page-sidebar').remove();
+			$('.page-footer').remove();
+
+			var role = $rootScope.adminID;//0普通 1管理员 2超级管理员
 
 			// $('#mapcontainer').height(document.documentElement.clientHeight*0.8);
 
@@ -143,6 +145,9 @@ MetronicApp.controller('GEOInfoController', [
 						}
 
 					}else{
+						if(role == 0){
+							return false;
+						}
 						$('#modaladd').modal('show');
 					}
 				});
