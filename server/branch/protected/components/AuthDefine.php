@@ -76,21 +76,21 @@ class AuthDefine {
                     "url"=>"#/Archive",
                     "childrenList"=>array(),
                 ),
-                array(
-                    "name"=>"视频监控",
-                    "url"=>"#/VideoMonitoring",
-                    "childrenList"=>array(),
-                ),
-                array(
-                    "name"=>"实时水位",
-                    "url"=>"#/WaterLevel",
-                    "childrenList"=>array(),
-                ),
-                array(
-                    "name"=>"雨情",
-                    "url"=>"#/RainfallRegime",
-                    "childrenList"=>array(),
-                )
+//                array(
+//                    "name"=>"视频监控",
+//                    "url"=>"#/VideoMonitoring",
+//                    "childrenList"=>array(),
+//                ),
+//                array(
+//                    "name"=>"实时水位",
+//                    "url"=>"#/WaterLevel",
+//                    "childrenList"=>array(),
+//                ),
+//                array(
+//                    "name"=>"雨情",
+//                    "url"=>"#/RainfallRegime",
+//                    "childrenList"=>array(),
+//                )
             )
         ),
     );
