@@ -213,7 +213,7 @@ abstract class ExcelTemplateConfig{
                 if(!empty($adminImage) && isset($value[$adminImage])){
                     $appendColName = $this->getAdminImageColAppendCol();
                     if(!empty($appendColName)){
-                        $uk = $this->formatKey($appendColName);
+                        $uk = $this->formatKey($adminImage);
                         $tmp[$appendColName][$uk] = $value[$adminImage];
                     }
                 }
