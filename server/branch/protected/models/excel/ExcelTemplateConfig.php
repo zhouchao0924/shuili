@@ -125,7 +125,13 @@ abstract class ExcelTemplateConfig{
     public abstract function getDao();
 
     public function data2Db($extra = array()){
-        return $this->getDao()->transactionInsert($this->data, $extra);
+        $result = $this->getDao()->transactionInsert($this->data, $extra);
+        if($result){
+            $client = new ClientComponent();
+            $userInfo = $client->getUserInfo();
+            OperatorLogModel::addLog($userInfo['userId'],$userInfo['userName'],"导入".$this->getTemplateName()."记录");
+        }
+        return $result;
     }
 
     private function getTotalCount($searchText, $streetId){
