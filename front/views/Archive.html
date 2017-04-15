@@ -115,6 +115,26 @@
 								</a>
 							</div>
 						</div>
+						<div class="list">
+							<ul ng-repeat="n in lists">
+								<li>
+									<a href="#/BasicDetail/{{n.id}}">
+										<div class="">
+											<img class="leftimg" src="{{n.titleImgUrl}}" alt=""/>
+											<div class="rightbox">
+												<div class="r-title">
+													<span>{{n.title}}</span>
+												</div>
+												<div class="r-content">{{n.desc}}</div>
+												<div class="r-footer">
+													<span>{{n.updateTime}}</span>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+							</ul>
+						</div>
 					</div>
 					<div id="record" class="form-horizontal tab-pane ">
 						<div class="portlet-body">
