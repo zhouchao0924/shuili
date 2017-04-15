@@ -57,7 +57,7 @@ MetronicApp.controller('GEOInfoController', [
 
 			// layer.msg(1);
 			window.initialize = function(){
-			  var mp = new window.BMap.Map('mapcontainer',{mapType:BMAP_SATELLITE_MAP});
+			  var mp = new window.BMap.Map('mapcontainer',{mapType:BMAP_HYBRID_MAP});
 				// 获取当前经纬度
 				$.ajax({
 					url: Metronic.host + 'user/GetCurrentAreaLocation',
@@ -294,6 +294,35 @@ MetronicApp.controller('GEOInfoController', [
 						}
 					});
 				})
+
+				// 删除事件
+				$('#delete').click(function(e){
+					var params = {
+						id:curid
+					}
+					$.ajax({
+						url: Metronic.host + 'geographyInfo/deletePoint',
+						type: 'GET',
+						dataType: 'json',
+						xhrFields: {
+						 withCredentials: true
+						},
+						crossDomain: true,
+						data: {data:JSON.stringify(params)},
+						success: function(data) {
+						 if (data.success) {
+								//
+								getAllPoint();
+								$('#modalview').modal('hide');
+						 }else{
+
+						 }
+						},
+						error: function(xhr, data, status) {
+							//  layer.msg('请检查网络');
+						}
+					});
+				});
 
 				// 筛选按钮事件
 				$('#btns a').click(function(e){
