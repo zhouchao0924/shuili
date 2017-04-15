@@ -29,7 +29,7 @@ class GeographyInfoModel{
             'add_user_name'=>$params['userName'],
             'create_time'=>date("Y-m-d H:i:s")
         );
-        WpGeographyPointsDao::getInstance("WpGeographyPoints")->baseInsert($cols);
+        return WpGeographyPointsDao::getInstance("WpGeographyPoints")->baseInsert($cols);
     }
 
     public function getPointAll($streetId){

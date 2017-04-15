@@ -1902,7 +1902,8 @@ MetronicApp.directive('tableTab', [
 		'$ocLazyLoad',
 		'dateFilter',
 		'qiniu',
-		function($compile, $ocLazyLoad, dateFilter, qiniu) {
+		'$rootScope',
+		function($compile, $ocLazyLoad, dateFilter, qiniu, $rootScope) {
 			var isloaded = $ocLazyLoad.load({
 				insertBefore: '#ng_load_plugins_before',
 				files: [
@@ -1925,7 +1926,6 @@ MetronicApp.directive('tableTab', [
 							var file = elem.find('.fileupload')[0]
 							if (file.files.length) {
 								qiniu(file, Metronic.host + scope.ngUrl).then(function(data) {
-									ctrl.$setViewValue(data);
 									location.reload();
 								})
 							}
@@ -1960,3 +1960,18 @@ MetronicApp.directive('tableTab', [
 			};
 		}
 	]);
+	//权限控制按钮隐藏显示
+	MetronicApp.directive('sidebarShow', [
+		'$rootScope',
+		function($rootScope) {
+			return {
+				restrict: 'A',
+				link: function(scope, elem, attrs, ctrl) {
+					var b = JSON.parse(window.localStorage.Userdata);
+					if (b.roleId == 0 || b.roleId == 1) {
+						elem.css('display', 'none');
+					}
+				}
+			};
+		}
+	]);;

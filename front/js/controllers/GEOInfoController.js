@@ -15,6 +15,12 @@ MetronicApp.controller('GEOInfoController', [
 			$rootScope.settings.layout.pageSidebarClosed = false;
 			// ArchiveAdvanced.init($scope, $compile, Shuffling);
 
+			$('.page-header').hide();
+			$('.page-sidebar').hide();
+			$('.page-footer').hide();
+
+			// $('#mapcontainer').height(document.documentElement.clientHeight*0.8);
+
 			var curlat = 0;
 			var curlon = 0;
 			var curid = undefined;
@@ -57,7 +63,10 @@ MetronicApp.controller('GEOInfoController', [
 
 			// layer.msg(1);
 			window.initialize = function(){
-			  var mp = new window.BMap.Map('mapcontainer',{mapType:BMAP_SATELLITE_MAP});
+			  var mp = new window.BMap.Map('mapcontainer',{mapType:BMAP_HYBRID_MAP});
+				mp.addControl(new BMap.NavigationControl());
+				mp.addControl(new BMap.ScaleControl());
+				mp.addControl(new BMap.OverviewMapControl());
 				// 获取当前经纬度
 				$.ajax({
 					url: Metronic.host + 'user/GetCurrentAreaLocation',
@@ -162,7 +171,19 @@ MetronicApp.controller('GEOInfoController', [
 						//
 						// 	}
 						// });
+						var color=['#45B6AF','#89C4F4','#F3565D','#dfba49','#6e4af5','#f54ae7','#ffef00','#4af54e'];
+						var label = new window.BMap.Label(data[i].name,{offset:new window.BMap.Size(20,-10)});
+						label.setStyle({
+							 color : color[data[i].cat],
+							 fontSize : "12px",
+							 height : "20px",
+							 lineHeight : "20px",
+							 fontFamily:"微软雅黑",
+							 border:"1px solid "+color[data[i].cat]
+						 });
+						marker.setLabel(label);
 						mp.addOverlay(marker);
+
 					}
 				}
 
@@ -294,6 +315,35 @@ MetronicApp.controller('GEOInfoController', [
 						}
 					});
 				})
+
+				// 删除事件
+				$('#delete').click(function(e){
+					var params = {
+						id:curid
+					}
+					$.ajax({
+						url: Metronic.host + 'geographyInfo/deletePoint',
+						type: 'GET',
+						dataType: 'json',
+						xhrFields: {
+						 withCredentials: true
+						},
+						crossDomain: true,
+						data: {data:JSON.stringify(params)},
+						success: function(data) {
+						 if (data.success) {
+								//
+								getAllPoint();
+								$('#modalview').modal('hide');
+						 }else{
+
+						 }
+						},
+						error: function(xhr, data, status) {
+							//  layer.msg('请检查网络');
+						}
+					});
+				});
 
 				// 筛选按钮事件
 				$('#btns a').click(function(e){

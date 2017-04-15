@@ -17,9 +17,11 @@ class WaterQualityDescExcelTemplateConfig extends ExcelTemplateConfig{
         'turbidity'=>'浊度',
         'cdo'=>'化学需氧量（cdo）',
         'nh3n'=>'氨氮（NH3-N）',
+        'p'=>'总磷（以P记）',
         'n'=>'总氮（以N记）',
         'other'=>'其他',
         'conclusion'=>'结论',
+        'remarks'=>'备注',
     );
 
     protected $printExtraItem = array(
