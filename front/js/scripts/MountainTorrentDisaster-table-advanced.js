@@ -75,23 +75,12 @@ var MountainTorrentDisasterAdvanced1 = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
-							table.find('tbody tr td:nth-child(4)').each(function(i, n) {
-								var rowData = table.api().row(i).data();
-								if (!rowData) {
-									return false;
-								}
-								var see = $('<a href="javascript:;"> 查看 </a>');
-								var edit = $('<a href="">  编辑</a>');
-								see.click(function(event) {});
-								$(this).append(see).append(edit);
-							});
 							table.find('tbody tr td:nth-child(5)').each(function(i, n) {
 								var rowData = table.api().row(i).data();
 								if (!rowData) {
 									return false;
 								}
-								var see = $('<a href="javascript:;"> 查看 </a>');
-								see.click(function(event) {});
+								var see = $('<a href="javascript:; ng-click="to3()"> 查看 </a>');
 								$(this).append(see);
 							});
 							table.find('tbody tr td:nth-child(6)').each(function(i, n) {

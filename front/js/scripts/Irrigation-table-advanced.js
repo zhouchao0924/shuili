@@ -59,7 +59,6 @@ var IrrigationAdvanced = function() {
 							$.each(datas.data.list || [], function(i, n) {
 								var temp = [
 									n.cat,
-									"",
 									n.name,
 									n.location,
 									n.buildArea,
@@ -70,7 +69,8 @@ var IrrigationAdvanced = function() {
 									n.desc,
 									"",
 									n.id,
-									n.image
+									n.image,
+									n.projectImage
 								];
 								arr.push(temp);
 							});
@@ -80,22 +80,22 @@ var IrrigationAdvanced = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
-							table.find('tbody tr td:nth-child(9)').each(function(i, n) {
+							table.find('tbody tr td:nth-child(8)').each(function(i, n) {
 								var rowData = table.api().row(i).data();
 								if (!rowData) {
 									return false;
 								}
 								var img = $('<a href=""> 查看 </a>');
 								img.unbind('click').bind('click', function(e) {
-									Shuffling(rowData[12]);
+									Shuffling(rowData[11]);
 								})
 								var UpImage = $('<a href="" data-toggle="modal" data-target=".bs-UpImage-modal-lg" button-show>上传图片 </a>');
 								UpImage.unbind('click').bind('click', function(e) {
-									$scope.imgUrlList = rowData[12];
+									$scope.imgUrlList = rowData[11];
 									$scope.$apply();
 									$scope.UpLoadImage = function() {
 										var params = {
-											id: rowData[11],
+											id: rowData[10],
 											url: $scope.imgUrlList,
 											serviceType: 18
 										};
@@ -128,7 +128,7 @@ var IrrigationAdvanced = function() {
 								var deletex = $('<a href="javascript:;" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
 								deletex.click(function() {
 									var params = {
-										id: rowData[11],
+										id: rowData[10],
 										serviceType: 18
 									};
 									layer.confirm('确定要删除该行数据信息吗？', function(index) {
@@ -153,6 +153,46 @@ var IrrigationAdvanced = function() {
 									})
 								});
 								$(this).append(deletex);
+							});
+							table.find('tbody tr td:nth-child(7)').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var img = $('<a href=""> 查看 </a>');
+								img.unbind('click').bind('click', function(e) {
+									Shuffling(rowData[12]);
+								})
+								var UpImage = $('<a href="" data-toggle="modal" data-target=".bs-UpImage-modal-lg" button-show>上传图片 </a>');
+								UpImage.unbind('click').bind('click', function(e) {
+									$scope.imgUrlList = rowData[12];
+									$scope.$apply();
+									$scope.UpLoadImage = function() {
+										var params = {
+											id: rowData[10],
+											url: $scope.imgUrlList,
+											serviceType: 18
+										};
+										$.ajax({
+											url: Metronic.host + 'attachment/updateProjectImage',
+											type: 'post',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													location.reload();
+												}
+											}
+										});
+									}
+								})
+								$(this).append($compile(img)($scope)).append($compile(UpImage)($scope));
 							});
 						} else {
 							layer.msg(datas.message);
