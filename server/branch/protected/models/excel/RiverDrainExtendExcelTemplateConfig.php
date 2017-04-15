@@ -33,7 +33,7 @@ class RiverDrainExtendExcelTemplateConfig extends ExcelTemplateConfig{
 
     public function getExampleExcelFileName()
     {
-        return "河道排水统计模板.xlsx";
+        return "入河排污口统计模板.xlsx";
     }
 
     public function getSearchTextTableColName()
