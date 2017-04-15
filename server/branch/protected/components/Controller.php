@@ -475,6 +475,7 @@ class Controller extends CController
             return array();
         }
         return array(
+            "name"=>$_FILES['efile']['name'],
             "fileFullPath"=>$_FILES['efile']['tmp_name'],
             "type"=>$_FILES['efile']['type'],
             "size"=>$_FILES['efile']['size']
