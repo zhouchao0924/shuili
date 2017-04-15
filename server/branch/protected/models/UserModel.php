@@ -135,6 +135,7 @@ class UserModel {
     public function getUserTotal(){
         $conditions = array(
             "and",
+            "role_id != 2",
             "del_flag = 0",
         );
         $params = array(
@@ -150,6 +151,7 @@ class UserModel {
         $limit = $limit > 0 ? $limit : 0;
         $conditions = array(
             "and",
+            "role_id != 2",
             "del_flag = 0",
         );
         $params = array(
