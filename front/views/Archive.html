@@ -73,6 +73,9 @@
 		bottom: 0;
 		left: 0;
 	}
+	a {
+		text-decoration: none;
+	}
 </style>
 <!-- END PAGE HEADER-->
 <!-- BEGIN MAIN CONTENT -->
@@ -102,62 +105,14 @@
 				</ul>
 				<div class="tab-content">
 					<div id="dangan" class="form-horizontal tab-pane active">
-						<div class="portlet-body">
-							<div class="banner">
-								<div class="imgbox">
-									<img class="img" src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=514880938,3245699621&fm=80&w=179&h=119&img.JPEG" alt=""/>
+						<div class="banner">
+							<div class="imgbox" ng-repeat="n in tops">
+								<a href="#/BasicDetail/{{n.id}}">
+									<img class="img" src="{{n.titleImgUrl}}" alt=""/>
 									<div class="label">
-										<span>马渚镇水利信息云平台正式对外发布</span>
+										<span>{{n.title}}</span>
 									</div>
-								</div>
-								<div class="imgbox">
-									<img class="img" src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=514880938,3245699621&fm=80&w=179&h=119&img.JPEG" alt=""/>
-									<div class="label">
-										<span>马渚镇水利信息云平台正式对外发布</span>
-									</div>
-								</div>
-								<div class="imgbox">
-									<img class="img" src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=514880938,3245699621&fm=80&w=179&h=119&img.JPEG" alt=""/>
-									<div class="label">
-										<span>马渚镇水利信息云平台正式对外发布</span>
-									</div>
-								</div>
-							</div>
-							<div class="list">
-								<ul>
-									<li>
-										<div class="">
-											<img class="leftimg" src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=514880938,3245699621&fm=80&w=179&h=119&img.JPEG" alt=""/>
-											<div class="rightbox">
-												<div class="r-title">
-													<span>马渚镇水利信息云平台正式对外发布</span>
-												</div>
-												<div class="r-content">
-													这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要
-												</div>
-												<div class="r-footer">
-													<span>1分钟前</span>
-												</div>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="">
-											<img class="leftimg" src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=514880938,3245699621&fm=80&w=179&h=119&img.JPEG" alt=""/>
-											<div class="rightbox">
-												<div class="r-title">
-													<span>马渚镇水利信息云平台正式对外发布</span>
-												</div>
-												<div class="r-content">
-													这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要这里是内容摘要
-												</div>
-												<div class="r-footer">
-													<span>1分钟前</span>
-												</div>
-											</div>
-										</div>
-									</li>
-								</ul>
+								</a>
 							</div>
 						</div>
 					</div>
