@@ -38,12 +38,11 @@ var ArchiveAdvanced = function() {
 			"serverSide": true,
 			"ajax": function(data, callback, settings) {
 				var params = {
-					page: data.start / data.length + 1,
-					text: $scope.text
+					page: data.start / data.length + 1
 				};
 				Metronic.blockUI({message: '<div style="background:rgba(0,0,0,0.3);padding:10px;font-size:16px;font-weight:bold;color:#fff;">正在加载...</div>', textOnly: true});
 				$.ajax({
-					url: Metronic.host + 'riverway/getList',
+					url: Metronic.host + 'log/getLog',
 					type: 'GET',
 					dataType: 'json',
 					xhrFields: {
@@ -57,26 +56,7 @@ var ArchiveAdvanced = function() {
 						if (datas.success) {
 							var arr = [];
 							$.each(datas.data.list || [], function(i, n) {
-								var temp = [
-									n.id,
-									n.name,
-									n.level,
-									n.start,
-									n.end,
-									n.length,
-									n.currentSituation.width,
-									n.currentSituation.bottomHeight,
-									n.currentSituation.damHeight,
-									n.currentSituation.waterArea,
-									n.planSituation.width,
-									n.planSituation.bottomHeight,
-									n.planSituation.damHeight,
-									n.planSituation.waterArea,
-									n.manageRank,
-									n.fullImage,
-									n.image,
-									n.desc
-								];
+								var temp = [n.userName, n.createTime, n.desc];
 								arr.push(temp);
 							});
 							var d = {
@@ -85,17 +65,6 @@ var ArchiveAdvanced = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
-							table.find('tbody tr td:last-child').each(function(i, n) {
-								var rowData = table.api().row(i).data();
-								if (!rowData) {
-									return false;
-								}
-								var edit = $('<a href="javascript:;" class="btn btn-xs blue"><i class="fa fa-edit"></i> 编辑 </a>');
-								edit.click(function(event) {
-									window.location.href = '#/edit-artist/' + rowData[0] + '/' + rowData[6];
-								});
-								$(this).append(edit);
-							});
 						} else {
 							layer.msg(datas.message);
 							Metronic.unblockUI();
