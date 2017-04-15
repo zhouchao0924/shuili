@@ -531,14 +531,20 @@ var LongRiverSystemAdvanced4 = function() {
 							var arr = [];
 							$.each(datas.data.list || [], function(i, n) {
 								var temp = [
-									n.id,
-									n.village,
-									n.networkName,
-									n.networkType,
-									n.owner.name,
-									n.owner.post,
-									n.owner.cell,
-									n.desc
+									n.time,
+									n.detecionPosition,
+									n.latitudeLongitude,
+									n.temperature,
+									n.ph,
+									n.turbidity,
+									n.cdo,
+									n.nh3n,
+									n.p,
+									n.n,
+									n.other,
+									n.conclusion,
+									n.remarks,
+									""
 								];
 								arr.push(temp);
 							});
@@ -679,11 +685,19 @@ var LongRiverSystemAdvanced5 = function() {
 									n.riverName,
 									n.pollutionSource,
 									n.village,
-									n.dischargeMode,
+									n.dischargeMode.lianxu,
+									n.dischargeMode.jianxian,
+									n.inRiverMode.lianxu,
+									n.inRiverMode.guandao,
+									n.inRiverMode.bangzhan,
+									n.inRiverMode.hanzha,
+									n.inRiverMode.qianshe,
+									n.inRiverMode.qita,
 									n.treatmentMethod,
+									"",
 									n.remarks,
-									n.image,
-									""
+									"",
+									n.image
 								];
 								arr.push(temp);
 							});
