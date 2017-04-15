@@ -58,6 +58,9 @@ MetronicApp.controller('GEOInfoController', [
 			// layer.msg(1);
 			window.initialize = function(){
 			  var mp = new window.BMap.Map('mapcontainer',{mapType:BMAP_HYBRID_MAP});
+				mp.addControl(new BMap.NavigationControl());
+				mp.addControl(new BMap.ScaleControl());
+				mp.addControl(new BMap.OverviewMapControl());
 				// 获取当前经纬度
 				$.ajax({
 					url: Metronic.host + 'user/GetCurrentAreaLocation',
@@ -162,7 +165,19 @@ MetronicApp.controller('GEOInfoController', [
 						//
 						// 	}
 						// });
+						var color=['#45B6AF','#89C4F4','#F3565D','#dfba49','#6e4af5','#f54ae7','#ffef00','#4af54e'];
+						var label = new window.BMap.Label(data[i].name,{offset:new window.BMap.Size(20,-10)});
+						label.setStyle({
+							 color : color[data[i].cat],
+							 fontSize : "12px",
+							 height : "20px",
+							 lineHeight : "20px",
+							 fontFamily:"微软雅黑",
+							 border:"1px solid "+color[data[i].cat]
+						 });
+						marker.setLabel(label);
 						mp.addOverlay(marker);
+
 					}
 				}
 
