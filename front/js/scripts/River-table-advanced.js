@@ -76,6 +76,7 @@ var RiverAdvanced = function() {
 									"",
 									"",
 									n.desc,
+									"",
 									n.image,
 									n.fullImage
 								];
@@ -87,6 +88,40 @@ var RiverAdvanced = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
+							table.find('tbody tr td:nth-child(19)').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var deletex = $('<a href="javascript:;" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
+								deletex.click(function() {
+									var params = {
+										id: rowData[0],
+										serviceType: 4
+									};
+									layer.confirm('确定要删除该行数据信息吗？', function(index) {
+										$.ajax({
+											url: Metronic.host + 'table/deleteItem',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													oTable.fnDraw();
+												}
+											}
+										});
+										layer.close(index);
+									})
+								});
+								$(this).append($compile(deletex)($scope));
+							});
 							table.find('tbody tr td:nth-child(17)').each(function(i, n) {
 								var rowData = table.api().row(i).data();
 								if (!rowData) {
@@ -94,11 +129,11 @@ var RiverAdvanced = function() {
 								}
 								var img = $('<a href=""> 查看 </a>');
 								img.unbind('click').bind('click', function(e) {
-									Shuffling(rowData[18]);
+									Shuffling(rowData[19]);
 								})
 								var UpImage = $('<a href="" data-toggle="modal" data-target=".bs-UpImage-modal-lg" button-show>上传图片 </a>');
 								UpImage.unbind('click').bind('click', function(e) {
-									$scope.imgUrlList = rowData[18];
+									$scope.imgUrlList = rowData[19];
 									$scope.$apply();
 									$scope.UpLoadImage = function() {
 										var params = {
@@ -134,11 +169,11 @@ var RiverAdvanced = function() {
 								}
 								var fullimg = $('<a href="" data-toggle="modal" data-target=".bs-fullimgshow-modal-lg"> 查看 </a>');
 								fullimg.unbind('click').bind('click', function(e) {
-									$('#fullimage').attr('src', rowData[19])
+									$('#fullimage').attr('src', rowData[20])
 								})
 								var editfullimg = $('<a href="" data-toggle="modal" data-target=".bs-fullimg-modal-lg" button-show>编辑全景图</a>');
 								editfullimg.unbind('click').bind('click', function(e) {
-									$scope.url = rowData[19];
+									$scope.url = rowData[20];
 									$scope.$apply();
 									$scope.fullImageOK = function() {
 										var params = {

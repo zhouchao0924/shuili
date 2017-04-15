@@ -64,6 +64,7 @@ var MountainTorrentDisasterAdvanced1 = function() {
 									"",
 									"",
 									"",
+									"",
 									""
 								];
 								arr.push(temp);
@@ -102,7 +103,7 @@ var MountainTorrentDisasterAdvanced1 = function() {
 								see.click(function(event) {});
 								$(this).append(see);
 							});
-							table.find('tbody tr td:last-child').each(function(i, n) {
+							table.find('tbody tr td:nth-child(7)').each(function(i, n) {
 								var rowData = table.api().row(i).data();
 								if (!rowData) {
 									return false;
@@ -110,6 +111,40 @@ var MountainTorrentDisasterAdvanced1 = function() {
 								var see = $('<a href="javascript:;"> 查看 </a>');
 								see.click(function(event) {});
 								$(this).append(see);
+							});
+							table.find('tbody tr td:last-child').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var deletex = $('<a href="javascript:;" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
+								deletex.click(function() {
+									var params = {
+										id: rowData[0],
+										serviceType: 12
+									};
+									layer.confirm('确定要删除该行数据信息吗？', function(index) {
+										$.ajax({
+											url: Metronic.host + 'table/deleteItem',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													oTable.fnDraw();
+												}
+											}
+										});
+										layer.close(index);
+									})
+								});
+								$(this).append($compile(deletex)($scope));
 							});
 						} else {
 							layer.msg(datas.message);
@@ -209,7 +244,8 @@ var MountainTorrentDisasterAdvanced2 = function() {
 									n.job,
 									n.cell,
 									n.uptime,
-									n.desc
+									n.desc,
+									""
 								];
 								arr.push(temp);
 							});
@@ -219,6 +255,40 @@ var MountainTorrentDisasterAdvanced2 = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
+							table.find('tbody tr td:last-child').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var deletex = $('<a href="javascript:;" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
+								deletex.click(function() {
+									var params = {
+										id: rowData[0],
+										serviceType: 13
+									};
+									layer.confirm('确定要删除该行数据信息吗？', function(index) {
+										$.ajax({
+											url: Metronic.host + 'table/deleteItem',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													oTable.fnDraw();
+												}
+											}
+										});
+										layer.close(index);
+									})
+								});
+								$(this).append($compile(deletex)($scope));
+							});
 						} else {
 							layer.msg(datas.message);
 							Metronic.unblockUI();
@@ -316,7 +386,8 @@ var MountainTorrentDisasterAdvanced3 = function() {
 									n.owner.name,
 									n.owner.post,
 									n.owner.cell,
-									n.desc
+									n.desc,
+									""
 								];
 								arr.push(temp);
 							});
@@ -326,6 +397,40 @@ var MountainTorrentDisasterAdvanced3 = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
+							table.find('tbody tr td:last-child').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var deletex = $('<a href="javascript:;" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
+								deletex.click(function() {
+									var params = {
+										id: rowData[0],
+										serviceType: 14
+									};
+									layer.confirm('确定要删除该行数据信息吗？', function(index) {
+										$.ajax({
+											url: Metronic.host + 'table/deleteItem',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													oTable.fnDraw();
+												}
+											}
+										});
+										layer.close(index);
+									})
+								});
+								$(this).append($compile(deletex)($scope));
+							});
 						} else {
 							layer.msg(datas.message);
 							Metronic.unblockUI();
@@ -424,7 +529,8 @@ var MountainTorrentDisasterAdvanced4 = function() {
 									n.owner.name,
 									n.owner.post,
 									n.owner.cell,
-									n.desc
+									n.desc,
+									""
 								];
 								arr.push(temp);
 							});
@@ -434,6 +540,40 @@ var MountainTorrentDisasterAdvanced4 = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
+							table.find('tbody tr td:last-child').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var deletex = $('<a href="javascript:;" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
+								deletex.click(function() {
+									var params = {
+										id: rowData[0],
+										serviceType: 15
+									};
+									layer.confirm('确定要删除该行数据信息吗？', function(index) {
+										$.ajax({
+											url: Metronic.host + 'table/deleteItem',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													oTable.fnDraw();
+												}
+											}
+										});
+										layer.close(index);
+									})
+								});
+								$(this).append($compile(deletex)($scope));
+							});
 						} else {
 							layer.msg(datas.message);
 							Metronic.unblockUI();
@@ -542,7 +682,8 @@ var MountainTorrentDisasterAdvanced5 = function() {
 									n.transferLocation.secureVerify,
 									n.transferLocation.manager,
 									n.transferLocation.cell,
-									n.desc
+									n.desc,
+									""
 								];
 								arr.push(temp);
 							});
@@ -552,6 +693,40 @@ var MountainTorrentDisasterAdvanced5 = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
+							table.find('tbody tr td:last-child').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var deletex = $('<a href="javascript:;" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
+								deletex.click(function() {
+									var params = {
+										id: rowData[0],
+										serviceType: 16
+									};
+									layer.confirm('确定要删除该行数据信息吗？', function(index) {
+										$.ajax({
+											url: Metronic.host + 'table/deleteItem',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													oTable.fnDraw();
+												}
+											}
+										});
+										layer.close(index);
+									})
+								});
+								$(this).append($compile(deletex)($scope));
+							});
 						} else {
 							layer.msg(datas.message);
 							Metronic.unblockUI();
