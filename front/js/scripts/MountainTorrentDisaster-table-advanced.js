@@ -370,8 +370,8 @@ var MountainTorrentDisasterAdvanced3 = function() {
 							$.each(datas.data.list || [], function(i, n) {
 								var temp = [
 									n.id,
-									n.job,
 									n.village,
+									n.job,
 									n.owner.name,
 									n.owner.post,
 									n.owner.cell,
