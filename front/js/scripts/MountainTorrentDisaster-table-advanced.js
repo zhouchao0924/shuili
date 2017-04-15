@@ -80,26 +80,24 @@ var MountainTorrentDisasterAdvanced1 = function() {
 								if (!rowData) {
 									return false;
 								}
-								var see = $('<a href="javascript:; ng-click="to3()"> 查看 </a>');
-								$(this).append(see);
+								var see3 = $('<a href="javascript:;" ng-click="to3(' + rowData[2] + ')"> 查看 </a>');
+								$(this).append($compile(see3)($scope));
 							});
 							table.find('tbody tr td:nth-child(6)').each(function(i, n) {
 								var rowData = table.api().row(i).data();
 								if (!rowData) {
 									return false;
 								}
-								var see = $('<a href="javascript:;"> 查看 </a>');
-								see.click(function(event) {});
-								$(this).append(see);
+								var see4 = $('<a href="javascript:;" ng-click="to4(' + rowData[2] + ')"> 查看 </a>');
+								$(this).append($compile(see4)($scope));
 							});
 							table.find('tbody tr td:nth-child(7)').each(function(i, n) {
 								var rowData = table.api().row(i).data();
 								if (!rowData) {
 									return false;
 								}
-								var see = $('<a href="javascript:;"> 查看 </a>');
-								see.click(function(event) {});
-								$(this).append(see);
+								var see5 = $('<a href="javascript:;" ng-click="to5(' + rowData[2] + ')"> 查看 </a>');
+								$(this).append($compile(see5)($scope));
 							});
 							table.find('tbody tr td:last-child').each(function(i, n) {
 								var rowData = table.api().row(i).data();
