@@ -529,7 +529,8 @@ var ReservoirAdvanced3 = function() {
 									n.manager.phone,
 									"",
 									n.id,
-									n.fullImage
+									n.fullImage,
+									n.manager.adminImage
 								];
 								arr.push(temp);
 							});
@@ -539,7 +540,7 @@ var ReservoirAdvanced3 = function() {
 								recordsFiltered: datas.data.totalCount
 							};
 							callback(d);
-							table.find('tbody tr td:nth-child(20)').each(function(i, n) {
+							table.find('tbody tr td:last-child').each(function(i, n) {
 								var rowData = table.api().row(i).data();
 								if (!rowData) {
 									return false;
@@ -612,6 +613,59 @@ var ReservoirAdvanced3 = function() {
 									}
 								})
 								$(this).append($compile(fullimg)($scope)).append($compile(editfullimg)($scope));
+							});
+							table.find('tbody tr td:nth-child(17)').each(function(i, n) {
+								var rowData = table.api().row(i).data();
+								if (!rowData) {
+									return false;
+								}
+								var Adminimg = $('<a href=""> 查看 </a>');
+								Adminimg.unbind('click').bind('click', function(e) {
+									var layerImageJson = {
+										"title": "", //相册标题
+										"id": "", //相册id
+										"start": 0, //初始显示的图片序号，默认0
+										"data": [
+											{ //相册包含的图片，数组格式
+												"alt": "",
+												"pid": "", //图片id
+												"src": rowData[22],
+												"thumb": "" //缩略图地址
+											}
+										]
+									};
+									layer.photos({photos: layerImageJson, anim: 5});
+								})
+								var UpAdminImage = $('<a href="" data-toggle="modal" data-target=".bs-updateAdminImage-modal-lg" button-show>上传图片 </a>');
+								UpAdminImage.unbind('click').bind('click', function(e) {
+									$scope.updateAdminImage = rowData[22];
+									$scope.$apply();
+									$scope.UpLoadAdminImage = function() {
+										var params = {
+											id: rowData[20],
+											url: $scope.updateAdminImage,
+											serviceType: 3
+										};
+										$.ajax({
+											url: Metronic.host + 'attachment/updateAdminImage',
+											type: 'GET',
+											dataType: 'json',
+											xhrFields: {
+												withCredentials: true
+											},
+											crossDomain: true,
+											data: {
+												data: JSON.stringify(params)
+											},
+											success: function(datas) {
+												if (datas.success) {
+													location.reload();
+												}
+											}
+										});
+									}
+								})
+								$(this).append($compile(Adminimg)($scope)).append($compile(UpAdminImage)($scope));
 							});
 						} else {
 							layer.msg(datas.message);
