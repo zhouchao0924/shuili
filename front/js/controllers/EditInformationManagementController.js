@@ -107,6 +107,27 @@ MetronicApp.controller('EditInformationManagementController', [
 					layer.msg('请检查网络');
 				}
 			});
+			// 底部按钮悬浮
+			(function() {
+				var operateArea = $('.form-actions'),
+					formBody = operateArea.prev(),
+					wh = $(window).height();
+				operateArea.width(operateArea.parent().width() - 20);
+				if (formBody[0].getBoundingClientRect().bottom > wh) {
+					operateArea.css({'position': 'fixed'})
+				}
+				$(window).on('scroll resize', function(e) {
+					if (e.type == 'resize') {
+						wh = $(window).height();
+						operateArea.width(operateArea.parent().width() - 20);
+					}
+					if (formBody[0].getBoundingClientRect().bottom > wh) {
+						operateArea.css({'position': 'fixed'})
+					} else {
+						operateArea.css({'position': 'static'})
+					}
+				})
+			})();
 			$scope.addnews = function() {
 				var validate = $("#articleForm").validate(validate_filed);
 				if (!validate.form()) {

@@ -62,7 +62,8 @@ var AccountManagementAdvanced = function() {
 									"******",
 									n.createTime,
 									"",
-									n.desc
+									n.desc,
+									n.roleId
 								];
 								arr.push(temp);
 							});
@@ -118,29 +119,8 @@ var AccountManagementAdvanced = function() {
 								var deletex = $('<a href="" class="btn btn-xs red"><i class="fa fa-trash"></i> 删除 </a>');
 								var manage = $('<a href=""  class="btn btn-xs grey-cascade"><i class="fa fa-settings"></i> 可查看乡镇 </a>');
 								edit.unbind('click').bind('click', function(e) {
-									$.ajax({
-										url: Metronic.host + 'boss/admin/info',
-										type: 'GET',
-										dataType: 'json',
-										xhrFields: {
-											withCredentials: true
-										},
-										crossDomain: true,
-										data: {
-											data: JSON.stringify({adminId: rowData[0]})
-										},
-										success: function(datas) {
-											if (datas.success) {
-												$scope.$apply(function() {
-													$scope.mlogInName = datas.data.loginName;
-													$scope.mrealName = datas.data.realName;
-													$scope.editrole = datas.data.roleId;
-												});
-											} else {
-												layer.msg(datas.message);
-											}
-										}
-									});
+									$scope.AccountDetail = rowData;
+									$scope.$apply();
 									$('#makesure2').unbind('click').bind('click', function(e) {
 										var validate = $("#articleForm1").validate(validate_filed);
 										if (!validate.form()) {
@@ -148,13 +128,13 @@ var AccountManagementAdvanced = function() {
 										}
 										var params = {
 											userId: rowData[0],
-											logInName: $scope.mlogInName,
-											realName: $scope.mrealName,
+											userName: $scope.AccountDetail[1],
 											password: $scope.mpassword,
-											roleId: $scope.editrole
+											desc: $scope.AccountDetail[5],
+											roleId: $scope.AccountDetail[6]
 										};
 										$.ajax({
-											url: Metronic.host + 'boss/admin/update',
+											url: Metronic.host + 'user/updateUser',
 											type: 'GET',
 											dataType: 'json',
 											xhrFields: {
@@ -179,13 +159,13 @@ var AccountManagementAdvanced = function() {
 								manage.unbind('click').bind('click', function(e) {
 									window.location.href = "#/ManageArea/" + rowData[0]
 								});
-								deletex.click(function() {
+								deletex.unbind('click').bind('click', function(e) {
 									var params = {
 										userId: rowData[0]
 									};
-									if (confirm('确定删除此管理员')) {
+									layer.confirm('确定要删除此账户？', function(index) {
 										$.ajax({
-											url: Metronic.host + 'boss/admin/del',
+											url: Metronic.host + 'user/deleteUser',
 											type: 'GET',
 											dataType: 'json',
 											xhrFields: {
@@ -197,14 +177,14 @@ var AccountManagementAdvanced = function() {
 											},
 											success: function(datas) {
 												if (datas.success) {
-													//console.log(datas, "删除成功");
 													oTable.fnDraw();
 												}
 											}
 										});
-									}
+										layer.close(index);
+									})
 								});
-								$(n).append(edit).append(deletex).append($compile(manage)($scope));
+								$(n).append($compile(edit)($scope)).append($compile(deletex)($scope)).append($compile(manage)($scope));
 								$scope.$apply();
 							});
 						} else if (datas.code == 50001) {

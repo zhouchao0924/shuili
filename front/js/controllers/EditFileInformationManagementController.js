@@ -13,6 +13,27 @@ MetronicApp.controller('EditFileInformationManagementController', [
 			$rootScope.settings.layout.pageBodySolid = false;
 			$rootScope.settings.layout.pageSidebarClosed = false;
 			// var um = UM.getEditor('new-editor');
+			// 底部按钮悬浮
+			(function() {
+				var operateArea = $('.form-actions'),
+					formBody = operateArea.prev(),
+					wh = $(window).height();
+				operateArea.width(operateArea.parent().width() - 20);
+				if (formBody[0].getBoundingClientRect().bottom > wh) {
+					operateArea.css({'position': 'fixed'})
+				}
+				$(window).on('scroll resize', function(e) {
+					if (e.type == 'resize') {
+						wh = $(window).height();
+						operateArea.width(operateArea.parent().width() - 20);
+					}
+					if (formBody[0].getBoundingClientRect().bottom > wh) {
+						operateArea.css({'position': 'fixed'})
+					} else {
+						operateArea.css({'position': 'static'})
+					}
+				})
+			})();
 			// 开始表单数据处理
 			var validate_filed = {
 				errorElement: 'span', //default input error message container
