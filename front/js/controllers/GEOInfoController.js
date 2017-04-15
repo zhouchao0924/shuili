@@ -15,6 +15,12 @@ MetronicApp.controller('GEOInfoController', [
 			$rootScope.settings.layout.pageSidebarClosed = false;
 			// ArchiveAdvanced.init($scope, $compile, Shuffling);
 
+			$('.page-header').hide();
+			$('.page-sidebar').hide();
+			$('.page-footer').hide();
+
+			// $('#mapcontainer').height(document.documentElement.clientHeight*0.8);
+
 			var curlat = 0;
 			var curlon = 0;
 			var curid = undefined;

@@ -1,10 +1,20 @@
 <style media="screen">
+.page-header-fixed .page-container{
+	margin:0;
+	overflow: hidden;
+}
+.page-content-wrapper .page-content{
+	padding:0 !important;
+	margin:0;
+	overflow: hidden;
+}
 	.box {
 		position: relative;
+		overflow: hidden;
 	}
 	#mapcontainer {
 		width: 100%;
-		height: 500px;
+		height: 515px;
 	}
 	#mapcontainer label{max-width:none;}
 	.toplabel {
@@ -59,7 +69,7 @@
 	<div id="mapcontainer"></div>
 	<div class="toplabel">
 		<div class="t-left">
-			<span>马渚镇地理信息</span>
+			<span>地理信息</span>
 		</div>
 		<div class="t-r" id="btns">
 			<a href="javascript:;">
