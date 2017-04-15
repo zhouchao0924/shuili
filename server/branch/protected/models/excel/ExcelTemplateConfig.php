@@ -300,13 +300,13 @@ abstract class ExcelTemplateConfig{
         return "";
     }
 
-    public function updateProjectImage($imageUrl,$id,$userId,$userName){
+    public function updateProjectImage($imageArray,$id,$userId,$userName){
         $colName = $this->getProjectImageColName();
         if(empty($colName)){
             throw new Exception("无效操作");
         }
         $cols = array(
-            $colName=>$imageUrl,
+            $colName=>json_encode($imageArray),
         );
         $conditions = array(
             "and",

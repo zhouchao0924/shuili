@@ -131,7 +131,7 @@ class AttachmentController extends Controller{
     public function actionUpdateProjectImage(){
         $params = $this->getAjaxRequestParam();
         $id = (isset($params['id']))?intval($params['id']):0;
-        $url = (isset($params['url']) && !empty($params['url']))?trim($params['url']):"";
+        $url = (isset($params['url']) && is_array($params['url']) && !empty($params['url']))?$params['url']:array();
         $serviceType = isset($params['serviceType'])?intval($params['serviceType']):-1;
         if($id <= 0 || empty($url) || !isset(ExcelTemplateModel::$excelTypeMAP[$serviceType]) || empty(ExcelTemplateModel::$excelTypeMAP[$serviceType])){
             return $this->renderBadParamsAjaxResponse();
